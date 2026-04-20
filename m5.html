@@ -706,10 +706,10 @@ var srcs=FONTI[path]||[];
 /* ── CSS ─────────────────────────────────────────── */
 var s=document.createElement('style');
 s.textContent=[
-  '.rbmenu-btn{position:fixed;top:8px;right:14px;z-index:9001;width:36px;height:36px;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:5px;padding:6px}',
-  '.rbmenu-btn span{display:block;height:1.5px;background:#F1EFED;border-radius:1px;transition:all .4s cubic-bezier(0.16,1,0.3,1);transform-origin:right center}',
+  '.rbmenu-btn{position:fixed;top:8px;right:14px;z-index:9001;width:36px;height:36px;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:5px;padding:6px;opacity:1}',
+  '.rbmenu-btn span{display:block;height:1.5px;background:#F1EFED;border-radius:1px;transition:all .4s cubic-bezier(0.16,1,0.3,1);transform-origin:right center;opacity:1}',
   '.rbmenu-btn.light span{background:#1E1410}',
-  '.rbmenu-btn.in-tb{position:relative!important;top:auto!important;right:auto!important;width:32px!important;height:32px!important;padding:5px!important;flex-shrink:0!important}',
+  '.rbmenu-btn.in-tb{position:relative!important;top:auto!important;right:auto!important;width:32px!important;height:32px!important;padding:5px!important;flex-shrink:0!important;opacity:1!important;visibility:visible!important}',
   '.rbmenu-btn .l1{width:20px}.rbmenu-btn .l2{width:14px}.rbmenu-btn .l3{width:20px}',
   '.rbmenu-btn.open .l1{width:20px;transform:translateY(6.5px) rotate(-45deg)}',
   '.rbmenu-btn.open .l2{opacity:0;width:0}',
@@ -765,8 +765,7 @@ var btn=document.createElement('button');
 btn.className='rbmenu-btn';
 btn.setAttribute('aria-label','Apri menu');
 btn.innerHTML='<span class="l1"></span><span class="l2"></span><span class="l3"></span>';
-var bg=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
-if(bg&&(bg.indexOf('#F')===0||bg.indexOf('#f')===0)){btn.classList.add('light');}
+/* topbar always dark — hamburger lines always light */
 var _tbr=document.querySelector('.tb-r');
 if(_tbr){btn.classList.add('in-tb');_tbr.appendChild(btn);}
 else{document.body.appendChild(btn);}
