@@ -606,7 +606,7 @@ gsap.fromTo("#finale",{opacity:0,y:20},{opacity:1,y:0,duration:.85,ease:"power3.
 
 var MODULES = [
   {id:'m0',code:'00',label:'Executive Summary',sub:'Il gap · La proposta',url:'m0.html',color:'#C8A88D'},
-  {id:'m0',code:'01',label:'Executive Summary',sub:'Roma 2026 · OTA · Social discovery',url:'m1.html',color:'#755847'},
+  {id:'m0',code:'01',label:'Mercato',sub:'Roma 2026 · OTA · Social discovery',url:'m1.html',color:'#755847'},
   {id:'m2',code:'02',label:'Competitor Map',sub:'Hoxton · Chapter · Mama · Generator',url:'m2.html',color:'#9a7d6a'},
   {id:'m3',code:'03',label:'Voce del Cliente',sub:'VOC · 14 account · Gap critico',url:'m3.html',color:'#C4ACA5'},
   {id:'m4',code:'04',label:'Personas',sub:'4 profili · Trigger · Social behavior',url:'m4.html',color:'#a08470'},
@@ -623,7 +623,7 @@ var s = document.createElement('style');
 s.textContent = [
   '.rbmenu-btn{position:fixed;top:14px;right:16px;z-index:9001;width:44px;height:44px;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:5px;padding:8px}',
   '.rbmenu-btn span{display:block;height:1.5px;background:#F1EFED;border-radius:1px;transition:all .45s cubic-bezier(0.16,1,0.3,1);transform-origin:right center}',
-  '.rbmenu-btn.light span{background:#1E1410}',
+  '.rbmenu-btn.light span{background:#1E1410}'+'.rbmenu-btn.in-tb{position:relative!important;top:auto!important;right:auto!important;width:36px!important;height:36px!important;padding:5px!important;flex-shrink:0}',
   '.rbmenu-btn .l1{width:22px}.rbmenu-btn .l2{width:16px}.rbmenu-btn .l3{width:22px}',
   '.rbmenu-btn.open .l1{width:22px;transform:translateY(6.5px) rotate(-45deg)}',
   '.rbmenu-btn.open .l2{opacity:0;width:0}',
@@ -685,7 +685,9 @@ var isLight = bgCol && bgCol.indexOf('#F') === 0;
 if(isLight) btn.classList.add('light');
 btn.setAttribute('aria-label','Apri menu');
 btn.innerHTML = '<span class="l1"></span><span class="l2"></span><span class="l3"></span>';
-document.body.appendChild(btn);
+var _tbr=document.querySelector('.tb-r');
+if(_tbr){btn.classList.add('in-tb');_tbr.appendChild(btn);}
+else{document.body.appendChild(btn);}
 
 /* overlay */
 var ov = document.createElement('div');

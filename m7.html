@@ -1518,7 +1518,9 @@ var bg=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim(
 if(bg&&bg.indexOf('#F')===0)btn.classList.add('light');
 btn.setAttribute('aria-label','Apri menu');
 btn.innerHTML='<span class="l1"></span><span class="l2"></span><span class="l3"></span>';
-document.body.appendChild(btn);
+var _tbr=document.querySelector('.tb-r');
+if(_tbr){btn.classList.add('in-tb');_tbr.appendChild(btn);}
+else{document.body.appendChild(btn);}
 var ov=document.createElement('div');ov.className='rbmenu-overlay';
 var ih='';
 for(var i=0;i<M.length;i++){
