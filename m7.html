@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M7: Brainstorming Strategico · BZAR Hotels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{--bg:#F1EFED;--ink:#755847;--brand:#C8A88D;--rose:#C4ACA5;--dark:#1E1410;--mid:#9a7d6a;--go:#5a7a4a;--warn:#c0572a}
+body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;font-size:15px;line-height:1.65;overflow-x:hidden;padding-top:52px;padding-bottom:48px;cursor:none}
+@media(hover:none){body{cursor:auto}#cur{display:none}}
+#cur{position:fixed;width:8px;height:8px;background:var(--brand);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:multiply;transition:width .18s,height .18s}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:800;height:52px;background:var(--dark);display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem 0 1.5rem;border-bottom:.5px solid rgba(200,168,141,.1)}
+.tb-l{display:flex;align-items:center;gap:.75rem}
+.tb-brand{font-family:"Afacad Flux",sans-serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.tb-sep{width:.5px;height:16px;background:rgba(255,255,255,.15)}
+.tb-rlogo{height:13px;filter:invert(1);opacity:.6}
+.tb-c{font-family:"Poppins",sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.2);position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap}
+@media(max-width:680px){.tb-c{display:none}}
+.tb-r{display:flex;align-items:center;gap:.75rem}
+.tb-date{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+.tb-conf{font-size:9px;letter-spacing:.14em;text-transform:uppercase;border:.5px solid rgba(200,168,141,.28);color:rgba(200,168,141,.45);padding:3px 8px;border-radius:3px}
+/* HERO */
+.hero{min-height:100svh;display:grid;grid-template-rows:1fr auto;padding:5.5rem 1.5rem 2.5rem;position:relative;overflow:hidden}
+.hero-noise{position:absolute;inset:0;pointer-events:none;opacity:.018;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px}
+.hero-ghost{position:absolute;right:-2%;top:50%;transform:translateY(-50%);font-family:"Afacad Flux",sans-serif;font-size:clamp(18rem,44vw,40rem);font-weight:700;line-height:1;color:rgba(117,88,71,.04);pointer-events:none;user-select:none;letter-spacing:-.07em}
+.hero-body{display:flex;flex-direction:column;justify-content:center}
+.hero-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--brand);display:flex;align-items:center;gap:.75rem;margin-bottom:2rem}
+.hero-tag::before{content:"";width:28px;height:1px;background:var(--brand)}
+.hero-h1{font-family:"Afacad Flux",sans-serif;font-size:clamp(2.8rem,8vw,6.5rem);font-weight:400;line-height:1.02;letter-spacing:-.035em;max-width:820px}
+.hero-h1 em{font-style:italic;font-weight:300;color:var(--ink)}
+.hero-sub{margin-top:1.75rem;font-size:14px;color:var(--mid);max-width:480px;line-height:1.8}
+.hero-counts{display:flex;gap:2.5rem;margin-top:2.5rem;flex-wrap:wrap}
+.hc-v{font-family:"Afacad Flux",sans-serif;font-size:clamp(2rem,4.5vw,3rem);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.03em}
+.hc-l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-top:.2rem}
+.hero-foot{padding-top:1.5rem}
+.hero-scroll{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(117,88,71,.3);display:flex;align-items:center;gap:.5rem}
+.hero-scroll::after{content:"";width:48px;height:1px;background:rgba(200,168,141,.22)}
+/* SEZIONI */
+.sec{padding:4.5rem 1.5rem;border-top:.5px solid rgba(117,88,71,.1)}
+.sec.bg-alt{background:#FDFCFA}
+.s-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);margin-bottom:.5rem}
+.s-h{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.9rem,4vw,3rem);font-weight:400;line-height:1.08;letter-spacing:-.02em;margin-bottom:.75rem}
+.s-lead{font-size:14px;color:var(--mid);max-width:540px;line-height:1.8}
+
+/* ═══ HOTEL SECTION: IMMERSIVA ═══ */
+.hs{padding:5rem 1.5rem;border-top:.5px solid rgba(117,88,71,.1);position:relative;overflow:hidden}
+.hs:nth-child(even){background:#FDFCFA}
+.hs-ghost{position:absolute;right:-1%;top:50%;transform:translateY(-50%);font-family:"Afacad Flux",sans-serif;font-size:clamp(12rem,30vw,28rem);font-weight:700;line-height:1;color:rgba(117,88,71,.035);pointer-events:none;user-select:none;letter-spacing:-.07em}
+/* Header hotel */
+.hs-header{display:grid;grid-template-columns:auto 1fr auto;gap:1rem 2rem;align-items:start;margin-bottom:2.5rem}
+@media(max-width:640px){.hs-header{grid-template-columns:1fr;gap:1rem}}
+.hs-num{font-family:"Afacad Flux",sans-serif;font-size:3.5rem;font-weight:300;color:rgba(117,88,71,.15);line-height:1;letter-spacing:-.05em;flex-shrink:0}
+.hs-meta{}
+.hs-type{font-size:9px;letter-spacing:.14em;text-transform:uppercase;font-family:"Poppins",sans-serif;font-weight:500;margin-bottom:.35rem}
+.hs-type.hotel{color:var(--ink)}
+.hs-type.fb{color:#9a6b3a}
+.hs-type.launch{color:var(--go)}
+.hs-name{font-family:"Afacad Flux",sans-serif;font-size:clamp(2rem,5vw,3.8rem);font-weight:400;line-height:1.05;letter-spacing:-.03em;color:var(--dark)}
+.hs-include{font-size:12px;color:var(--mid);margin-top:.35rem}
+/* Paradox box */
+.hs-paradox{background:var(--dark);border-radius:14px;padding:1.75rem 2rem;margin-bottom:2.5rem;position:relative;overflow:hidden;opacity:0}
+.hs-paradox::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(200,168,141,.07) 0%,transparent 65%);pointer-events:none}
+.hp-label{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(200,168,141,.4);margin-bottom:.5rem;font-family:"Poppins",sans-serif}
+.hp-text{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.1rem,3vw,1.8rem);color:rgba(241,239,237,.88);font-weight:300;line-height:1.3}
+.hp-text em{font-style:italic;color:var(--brand)}
+.hp-data{display:flex;gap:2rem;margin-top:1.25rem;flex-wrap:wrap}
+.hp-d{display:flex;flex-direction:column}
+.hp-dv{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:300;color:var(--brand);line-height:1;letter-spacing:-.03em}
+.hp-dl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.4);font-family:"Poppins",sans-serif;margin-top:.2rem}
+.hp-badge{display:inline-flex;align-items:center;gap:.4rem;padding:.4rem 1rem;border-radius:99px;font-size:10px;font-family:"Poppins",sans-serif;margin-top:1.25rem}
+.hp-badge.gap{background:rgba(192,87,42,.15);color:#e07050}
+.hp-badge.win{background:rgba(90,122,74,.15);color:#78aa58}
+.hp-badge.ok{background:rgba(200,168,141,.12);color:var(--brand)}
+/* Narrativa centrale */
+.hs-narr{margin-bottom:2.5rem;opacity:0}
+.hn-label{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);margin-bottom:.6rem;font-family:"Poppins",sans-serif}
+.hn-headline{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.6rem,4vw,2.8rem);font-weight:400;line-height:1.1;letter-spacing:-.025em;color:var(--dark);border-left:3px solid var(--brand);padding-left:1.25rem;margin-bottom:.75rem}
+.hn-body{font-size:13.5px;color:var(--mid);line-height:1.8;max-width:600px;padding-left:calc(1.25rem + 3px)}
+/* Grid 3 col */
+.hs-grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(117,88,71,.08);border-radius:12px;overflow:hidden;margin-bottom:2.5rem;opacity:0}
+@media(max-width:640px){.hs-grid3{grid-template-columns:1fr}}
+.hg3-col{background:var(--bg);padding:1.25rem}
+.hs:nth-child(even) .hg3-col{background:#FDFCFA}
+.hg3-label{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);margin-bottom:.6rem;font-family:"Poppins",sans-serif;font-weight:500}
+.hg3-content{font-size:12.5px;color:var(--dark);line-height:1.65}
+.hg3-content strong{font-weight:500;color:var(--ink)}
+.hg3-pill{display:inline-flex;align-items:center;gap:.3rem;font-size:9px;letter-spacing:.06em;padding:2px 8px;border-radius:99px;font-family:"Poppins",sans-serif;margin:2px 2px 0 0}
+/* 5 idee contenuto */
+.hs-idee{margin-bottom:2.5rem}
+.hi-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:1.25rem;opacity:0}
+.hi-title{font-family:"Afacad Flux",sans-serif;font-size:1.35rem;font-weight:500;color:var(--dark)}
+.hi-sub{font-size:12px;color:var(--mid)}
+.hi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+@media(max-width:900px){.hi-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.hi-grid{grid-template-columns:1fr}}
+.hi-card{background:#FDFCFA;border:.5px solid rgba(117,88,71,.1);border-radius:10px;padding:1rem;opacity:0;position:relative;overflow:hidden}
+.hs:nth-child(even) .hi-card{background:var(--bg)}
+.hi-n{font-family:"Afacad Flux",sans-serif;font-size:2rem;font-weight:300;color:rgba(117,88,71,.1);line-height:1;margin-bottom:.4rem}
+.hi-format{font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);font-family:"Poppins",sans-serif;margin-bottom:.3rem}
+.hi-idea{font-family:"Afacad Flux",sans-serif;font-size:.95rem;font-weight:500;color:var(--dark);line-height:1.2;margin-bottom:.35rem}
+.hi-desc{font-size:11px;color:var(--mid);line-height:1.55}
+.hi-tag{position:absolute;top:.7rem;right:.7rem;font-size:8px;letter-spacing:.06em;padding:2px 6px;border-radius:99px;font-family:"Poppins",sans-serif}
+.hi-tag.reel{background:rgba(107,143,168,.12);color:#4a7a98}
+.hi-tag.story{background:rgba(200,168,141,.12);color:var(--ink)}
+.hi-tag.ugc{background:rgba(90,122,74,.12);color:var(--go)}
+.hi-tag.static{background:rgba(117,88,71,.08);color:var(--mid)}
+/* CANALI BAR */
+.hs-canali{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.5rem;opacity:0}
+.hs-can{font-size:10px;font-family:"Afacad Flux",sans-serif;border:.5px solid rgba(117,88,71,.2);padding:.3rem .85rem;border-radius:99px;color:var(--ink)}
+.hs-can.priority{background:var(--dark);color:var(--brand);border-color:var(--dark)}
+
+/* F&B accordion (secondari) */
+.fb-section{padding:3.5rem 1.5rem;border-top:.5px solid rgba(117,88,71,.1)}
+.fb-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+@media(max-width:640px){.fb-grid{grid-template-columns:1fr}}
+.fb-card{background:#FDFCFA;border:.5px solid rgba(117,88,71,.12);border-radius:12px;overflow:hidden;opacity:0}
+.fb-top{padding:1.25rem 1.5rem;cursor:pointer;display:grid;grid-template-columns:auto 1fr auto;gap:.75rem;align-items:center;transition:background .2s}
+.fb-top:hover{background:rgba(117,88,71,.03)}
+.fb-badge{font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:99px;font-family:"Poppins",sans-serif;font-weight:500;white-space:nowrap}
+.fb-badge.fb{background:rgba(154,107,58,.12);color:#9a6b3a}
+.fb-badge.launch{background:rgba(90,122,74,.12);color:var(--go)}
+.fb-name{font-family:"Afacad Flux",sans-serif;font-size:1.1rem;font-weight:500;color:var(--dark)}
+.fb-sub{font-size:11px;color:var(--mid);margin-top:2px}
+.fb-arrow{font-size:12px;color:var(--mid);transition:transform .3s}
+.fb-card.open .fb-arrow{transform:rotate(180deg)}
+.fb-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(0.16,1,0.3,1)}
+.fb-card.open .fb-body{max-height:800px}
+.fb-inner{padding:0 1.5rem 1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem;border-top:.5px solid rgba(117,88,71,.07)}
+@media(max-width:480px){.fb-inner{grid-template-columns:1fr}}
+.fb-col-l{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem;font-family:"Poppins",sans-serif;font-weight:500;margin-top:1rem}
+.fb-insight{font-family:"Afacad Flux",sans-serif;font-size:.92rem;font-style:italic;font-weight:300;color:var(--dark);line-height:1.4}
+.fb-idea-title{font-family:"Afacad Flux",sans-serif;font-size:.95rem;font-weight:500;color:var(--dark);line-height:1.2;margin-bottom:.35rem}
+.fb-idea-body{font-size:12px;color:var(--mid);line-height:1.6}
+.fb-formats{display:flex;flex-direction:column;gap:.3rem;margin-top:.5rem}
+.fb-fmt{font-size:11.5px;color:var(--dark);display:flex;gap:.35rem;line-height:1.5}
+.fb-fmt::before{content:"92";color:var(--brand);flex-shrink:0;margin-top:1px}
+.fb-badge-gap{display:inline-flex;align-items:center;gap:.4rem;background:rgba(192,87,42,.08);border:.5px solid rgba(192,87,42,.2);border-radius:6px;padding:.3rem .65rem;margin-top:.5rem;font-size:10px;color:#c0572a;font-family:"Poppins",sans-serif}
+.fb-badge-win{display:inline-flex;align-items:center;gap:.4rem;background:rgba(90,122,74,.08);border:.5px solid rgba(90,122,74,.2);border-radius:6px;padding:.3rem .65rem;margin-top:.5rem;font-size:10px;color:var(--go);font-family:"Poppins",sans-serif}
+
+/* MODELLO OPERATIVO */
+.mo-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+@media(max-width:580px){.mo-grid{grid-template-columns:1fr}}
+.mo-card{background:#FDFCFA;border:.5px solid rgba(117,88,71,.12);border-radius:12px;padding:1.5rem;opacity:0}
+.mo-icon{font-size:1.4rem;margin-bottom:.6rem}
+.mo-title{font-family:"Afacad Flux",sans-serif;font-size:1.05rem;font-weight:500;color:var(--dark);margin-bottom:.4rem}
+.mo-body{font-size:12px;color:var(--mid);line-height:1.7}
+.mo-body strong{color:var(--dark);font-weight:500}
+
+/* FASI AVVIO, generiche */
+.fasi{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:2rem;position:relative}
+@media(max-width:640px){.fasi{grid-template-columns:1fr 1fr}}
+@media(max-width:380px){.fasi{grid-template-columns:1fr}}
+.fasi::before{content:"";position:absolute;top:18px;left:24px;right:24px;height:1px;background:rgba(117,88,71,.12);z-index:0}
+@media(max-width:640px){.fasi::before{display:none}}
+.fase{padding:1rem .75rem;position:relative;opacity:0}
+.fase-dot{width:10px;height:10px;border-radius:50%;background:var(--brand);margin-bottom:.85rem;position:relative;z-index:1}
+.fase-n{font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:rgba(117,88,71,.38);font-family:"Poppins",sans-serif;margin-bottom:.3rem}
+.fase-title{font-family:"Afacad Flux",sans-serif;font-size:.95rem;font-weight:500;color:var(--dark);margin-bottom:.4rem;line-height:1.2}
+.fase-body{font-size:11px;color:var(--mid);line-height:1.6}
+
+/* FREQ */
+.freq-row{display:grid;grid-template-columns:170px 1fr 80px;gap:.75rem 1.25rem;align-items:center;padding:.8rem 0;border-bottom:.5px solid rgba(117,88,71,.08)}
+.freq-row:last-child{border-bottom:none}
+.freq-label{font-family:"Afacad Flux",sans-serif;font-size:.9rem;font-weight:500;color:var(--dark)}
+.freq-sub{font-size:10px;color:var(--mid)}
+.freq-bar-wrap{height:6px;background:rgba(117,88,71,.08);border-radius:99px;overflow:hidden}
+.freq-bar{height:100%;border-radius:99px;width:0}
+.freq-val{font-size:11px;color:var(--mid);text-align:right;font-family:"Poppins",sans-serif}
+
+/* KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem}
+@media(max-width:640px){.kpi-grid{grid-template-columns:1fr}}
+.kpi-card{background:#FDFCFA;border:.5px solid rgba(117,88,71,.12);border-radius:12px;padding:1.25rem;opacity:0}
+.kpi-period{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);font-family:"Poppins",sans-serif;margin-bottom:.5rem}
+.kpi-metric{font-family:"Afacad Flux",sans-serif;font-size:1.15rem;font-weight:500;color:var(--dark);margin-bottom:.25rem;line-height:1.2}
+.kpi-desc{font-size:11.5px;color:var(--mid);line-height:1.55}
+.kpi-pill{display:inline-block;font-size:9px;letter-spacing:.08em;padding:2px 8px;border-radius:99px;font-family:"Poppins",sans-serif;margin-top:.5rem}
+.kpi-qual{background:rgba(200,168,141,.12);color:var(--ink)}
+.kpi-quant{background:rgba(90,122,74,.1);color:var(--go)}
+
+/* RECAP */
+#recap{background:var(--dark);color:var(--bg);padding:4.5rem 1.5rem;border-top:.5px solid rgba(200,168,141,.1)}
+.re-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(200,168,141,.38);margin-bottom:2.5rem}
+.re-pills{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-bottom:3rem}
+@media(max-width:520px){.re-pills{grid-template-columns:1fr;gap:1.5rem}}
+.rp{border-top:.5px solid rgba(200,168,141,.18);padding-top:1rem}
+.rp-v{font-family:"Afacad Flux",sans-serif;font-size:clamp(2.2rem,5vw,3.5rem);font-weight:300;color:var(--brand);line-height:1;letter-spacing:-.03em}
+.rp-u{font-size:12px;color:rgba(200,168,141,.45)}
+.rp-l{font-size:12px;color:rgba(255,255,255,.28);margin-top:.3rem;line-height:1.4}
+.re-ins{border-top:.5px solid rgba(255,255,255,.07);padding-top:1.75rem;margin-bottom:2.5rem}
+.re-ins-h{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,168,141,.38);margin-bottom:.6rem}
+.re-ins-t{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.1rem,3vw,1.5rem);line-height:1.4;max-width:600px;color:rgba(241,239,237,.75);font-weight:300}
+.re-note{font-size:13px;color:rgba(200,168,141,.35);line-height:1.65;margin-top:1.5rem;border-top:.5px solid rgba(200,168,141,.08);padding-top:1.25rem}
+
+
+/* ═══ MAPPA SINAPTICA ═══ */
+.sin-wrap{margin-top:3.5rem;background:var(--dark);border-radius:18px;overflow:hidden;position:relative}
+.sin-wrap::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(200,168,141,.05) 0%,transparent 65%);pointer-events:none}
+.sin-header{padding:1.5rem 2rem 1rem;border-bottom:.5px solid rgba(200,168,141,.08)}
+.sin-title{font-family:"Afacad Flux",sans-serif;font-size:.95rem;font-weight:500;color:rgba(200,168,141,.6);letter-spacing:.04em}
+.sin-sub{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.28);font-family:"Poppins",sans-serif;margin-top:2px}
+.sin-body{display:grid;grid-template-columns:1fr 1.15fr 1fr;min-height:320px;position:relative}
+@media(max-width:640px){.sin-body{grid-template-columns:1fr;min-height:auto}}
+.sin-col{padding:1.5rem}
+.sin-col-who{border-right:.5px solid rgba(200,168,141,.07)}
+.sin-col-what{border-right:.5px solid rgba(200,168,141,.07)}
+.sin-col-label{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(200,168,141,.3);font-family:"Poppins",sans-serif;margin-bottom:1rem}
+/* Persona buttons */
+.sin-persona{border:none;background:rgba(255,255,255,.04);border-radius:10px;padding:.85rem 1rem;cursor:pointer;text-align:left;width:100%;margin-bottom:.5rem;display:flex;align-items:center;gap:.75rem;border:.5px solid rgba(255,255,255,.06);transition:all .25s;position:relative;overflow:hidden}
+.sin-persona:hover{background:rgba(255,255,255,.07)}
+.sin-persona.active{border-color:var(--p-color,var(--brand))!important;background:rgba(var(--p-rgb,200,168,141),.12)!important}
+.sin-persona.active::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--p-color,var(--brand))}
+.sin-p-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.sin-p-name{font-family:"Afacad Flux",sans-serif;font-size:.95rem;font-weight:500;color:rgba(241,239,237,.8);line-height:1.1}
+.sin-p-role{font-size:9px;color:rgba(241,239,237,.3);font-family:"Poppins",sans-serif;margin-top:1px}
+.sin-p-badge{margin-left:auto;font-size:8px;letter-spacing:.06em;padding:2px 7px;border-radius:99px;font-family:"Poppins",sans-serif;flex-shrink:0}
+.sin-p-badge.pri{background:rgba(var(--p-rgb,200,168,141),.2);color:var(--p-color,var(--brand))}
+.sin-p-badge.sec{background:rgba(255,255,255,.06);color:rgba(241,239,237,.3)}
+/* Strategy panel */
+.sin-strategy{opacity:0;transform:translateY(8px);transition:all .35s cubic-bezier(0.16,1,0.3,1)}
+.sin-strategy.show{opacity:1;transform:translateY(0)}
+.sin-s-empty{display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;gap:.5rem;opacity:.3}
+.sin-s-empty-icon{font-size:2rem}
+.sin-s-empty-t{font-size:11px;color:rgba(241,239,237,.4);font-family:"Poppins",sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.sin-pillars{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1rem}
+.sin-pillar{font-size:10px;padding:4px 10px;border-radius:6px;font-family:"Poppins",sans-serif;font-weight:500;border:.5px solid}
+.sin-channels{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem}
+.sin-chan{font-size:10px;padding:4px 10px;border-radius:6px;font-family:"Poppins",sans-serif;background:rgba(255,255,255,.06);color:rgba(241,239,237,.6);border:.5px solid rgba(255,255,255,.08)}
+.sin-chan.priority{background:rgba(200,168,141,.12);color:var(--brand);border-color:rgba(200,168,141,.25)}
+.sin-content-idea{font-family:"Afacad Flux",sans-serif;font-size:.95rem;font-style:italic;font-weight:300;color:rgba(241,239,237,.65);line-height:1.45;border-left:2px solid;padding-left:.75rem;margin-top:.5rem}
+.sin-s-label{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(200,168,141,.35);font-family:"Poppins",sans-serif;margin-bottom:.4rem}
+/* Objective panel */
+.sin-obj{opacity:0;transform:translateY(8px);transition:all .4s cubic-bezier(0.16,1,0.3,1) .08s;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:.75rem}
+.sin-obj.show{opacity:1;transform:translateY(0)}
+.sin-obj-circle{width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;border:2px solid;position:relative}
+.sin-obj-circle::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:1px solid;opacity:.25}
+.sin-obj-phase{font-size:9px;letter-spacing:.12em;text-transform:uppercase;font-family:"Poppins",sans-serif;color:rgba(241,239,237,.35)}
+.sin-obj-name{font-family:"Afacad Flux",sans-serif;font-size:1.3rem;font-weight:500;color:rgba(241,239,237,.88);line-height:1.1}
+.sin-obj-kpi{font-size:10px;font-family:"Poppins",sans-serif;color:rgba(241,239,237,.3);line-height:1.5}
+/* SVG connectors overlay */
+.sin-svg-overlay{position:absolute;inset:0;pointer-events:none;z-index:0}
+
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<header class="topbar">
+  <div class="tb-l">
+    <span class="tb-brand">BZAR Hotels</span>
+    <div class="tb-sep"></div>
+    <img src="https://www.ribrainstudio.com/wp-content/uploads/2025/01/Logo_ribrain_Nero.svg" alt="Ribrain" class="tb-rlogo">
+  </div>
+  <span class="tb-c">Cruscotto Strategico &middot; Brainstorming Strategico</span>
+  <div class="tb-r">
+    <span class="tb-date">Aprile 2026</span>
+    <span class="tb-conf">Confidenziale</span>
+  </div>
+</header>
+<section class="hero">
+  <div class="hero-noise" aria-hidden="true"></div>
+  <div class="hero-ghost" aria-hidden="true">M7</div>
+  <div class="hero-body">
+    <div class="hero-tag" id="htag">M7 &mdash; Brainstorming Strategico</div>
+    <h1 class="hero-h1">
+      <span id="hl1">Non una strategia generica.</span><br>
+      <span id="hl2">Un’idea specifica</span><br>
+      <span id="hl3"><em>per ogni struttura.</em></span>
+    </h1>
+    <p class="hero-sub" id="hsub">Questo modulo è progettato per essere navigato insieme, non letto da soli. Cinque hotel esplosi in dettaglio. Ogni paradosso, ogni narrativa, ogni idea concreta di contenuto.</p>
+    <div class="hero-counts" id="hcounts">
+      <div><div class="hc-v">5</div><div class="hc-l">hotel nel dettaglio</div></div>
+      <div><div class="hc-v">5</div><div class="hc-l">F&amp;B outlet</div></div>
+      <div><div class="hc-v">25</div><div class="hc-l">idee di contenuto</div></div>
+      <div><div class="hc-v">1</div><div class="hc-l">apertura giugno</div></div>
+    </div>
+  </div>
+  <div class="hero-foot"><div class="hero-scroll" aria-hidden="true">Scorri</div></div>
+</section>
+
+<!-- RECAP STRATEGICO -->
+<section class="sec bg-alt" id="s-strategia">
+  <div class="s-tag">Prima di tutto</div>
+  <h2 class="s-h">La logica del piano.<br>Perché ci muoviamo così.</h2>
+  <p class="s-lead">Non si attivano tutti gli account insieme. Non si produce lo stesso contenuto per tutti. Non si parte con la stessa frequenza su ogni struttura. Ecco la logica che sta dietro ogni decisione.</p>
+
+  <!-- TRE LIVELLI -->
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:2.5rem;border-radius:14px;overflow:hidden" id="tre-livelli">
+    <div style="background:var(--dark);padding:1.75rem 1.5rem;position:relative;overflow:hidden;opacity:0" id="lv1">
+      <div style="position:absolute;top:-10px;right:.5rem;font-family:'Afacad Flux',sans-serif;font-size:5rem;font-weight:700;color:rgba(200,168,141,.06);line-height:1">A</div>
+      <div style="font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(200,168,141,.4);font-family:'Poppins',sans-serif;margin-bottom:.6rem">Livello A · Priorità massima</div>
+      <div style="font-family:'Afacad Flux',sans-serif;font-size:1.2rem;font-weight:500;color:rgba(241,239,237,.9);margin-bottom:.75rem">Hotel principali<br>con narrativa esplosa</div>
+      <div style="font-size:12px;color:rgba(241,239,237,.38);line-height:1.7">Viminale · Condominio Monti · Dimora Coppelle · Adoro · La Griffe. Questi cinque profili ricevono strategia completa, shooting dedicato, frequenza piena. Sono le vetrine del gruppo.</div>
+      <div style="margin-top:1rem;display:flex;flex-direction:column;gap:.3rem">
+        <div style="font-size:10px;color:rgba(200,168,141,.6);display:flex;align-items:center;gap:.4rem"><span style="color:var(--brand)">→</span> 3-4 post/settimana</div>
+        <div style="font-size:10px;color:rgba(200,168,141,.6);display:flex;align-items:center;gap:.4rem"><span style="color:var(--brand)">→</span> Stories quotidiane</div>
+        <div style="font-size:10px;color:rgba(200,168,141,.6);display:flex;align-items:center;gap:.4rem"><span style="color:var(--brand)">→</span> Shooting Snacky dedicato</div>
+      </div>
+    </div>
+    <div style="background:#FDFCFA;padding:1.75rem 1.5rem;position:relative;overflow:hidden;opacity:0;border:.5px solid rgba(117,88,71,.1)" id="lv2">
+      <div style="position:absolute;top:-10px;right:.5rem;font-family:'Afacad Flux',sans-serif;font-size:5rem;font-weight:700;color:rgba(117,88,71,.05);line-height:1">B</div>
+      <div style="font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);font-family:'Poppins',sans-serif;margin-bottom:.6rem">Livello B · F&B standalone</div>
+      <div style="font-family:'Afacad Flux',sans-serif;font-size:1.2rem;font-weight:500;color:var(--dark);margin-bottom:.75rem">Outlet con voce propria<br>ma frequenza ridotta</div>
+      <div style="font-size:12px;color:var(--mid);line-height:1.7">Spritzeria · Osteria Oliva · Moderno Bakery · A Mano (lancio). Ogni outlet ha una direzione editoriale precisa, ma la frequenza è calibrata sul budget. Qualità prima del volume.</div>
+      <div style="margin-top:1rem;display:flex;flex-direction:column;gap:.3rem">
+        <div style="font-size:10px;color:var(--mid);display:flex;align-items:center;gap:.4rem"><span style="color:var(--brand)">→</span> 2-3 post/settimana</div>
+        <div style="font-size:10px;color:var(--mid);display:flex;align-items:center;gap:.4rem"><span style="color:var(--brand)">→</span> Stories 4-5x/settimana</div>
+        <div style="font-size:10px;color:var(--mid);display:flex;align-items:center;gap:.4rem"><span style="color:var(--brand)">→</span> Shooting condiviso con hotel</div>
+      </div>
+    </div>
+    <div style="background:#FDFCFA;padding:1.75rem 1.5rem;position:relative;overflow:hidden;opacity:0;border:.5px solid rgba(117,88,71,.1)" id="lv3">
+      <div style="position:absolute;top:-10px;right:.5rem;font-family:'Afacad Flux',sans-serif;font-size:5rem;font-weight:700;color:rgba(117,88,71,.05);line-height:1">C</div>
+      <div style="font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);font-family:'Poppins',sans-serif;margin-bottom:.6rem">Livello C · Integrati o da valutare</div>
+      <div style="font-family:'Afacad Flux',sans-serif;font-size:1.2rem;font-weight:500;color:var(--dark);margin-bottom:.75rem">Outlet embedded<br>e strutture toscane</div>
+      <div style="font-size:12px;color:var(--mid);line-height:1.7">Elisia · La Collegiata · Il Castello di Leonina. Gli outlet embedded vivono inizialmente nel canale dell'hotel. Le strutture toscane richiedono una decisione separata in call.</div>
+      <div style="margin-top:1rem;display:flex;flex-direction:column;gap:.3rem">
+        <div style="font-size:10px;color:var(--mid);display:flex;align-items:center;gap:.4rem"><span style="color:var(--brand)">→</span> Integrati nel canale hotel</div>
+        <div style="font-size:10px;color:var(--mid);display:flex;align-items:center;gap:.4rem"><span style="color:var(--brand)">→</span> Identità separata in futuro</div>
+        <div style="font-size:10px;color:var(--mid);display:flex;align-items:center;gap:.4rem"><span style="color:var(--brand)">→</span> Frequenza stagionale</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- L'ACCORPAMENTO -->
+  <div style="margin-top:3rem;display:grid;grid-template-columns:1fr 1fr;gap:1.25rem" id="accorp-wrap">
+    <div style="background:#FDFCFA;border:.5px solid rgba(117,88,71,.12);border-radius:14px;padding:1.75rem;opacity:0" id="acc1">
+      <div style="font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);font-family:'Poppins',sans-serif;margin-bottom:.6rem">La logica dell'accorpamento</div>
+      <div style="font-family:'Afacad Flux',sans-serif;font-size:1.25rem;font-weight:500;color:var(--dark);line-height:1.2;margin-bottom:.75rem">Gli outlet embedded non sono account separati. Sono <em>momenti</em> dello stesso racconto.</div>
+      <div style="font-size:12.5px;color:var(--mid);line-height:1.75">Condominio Monti non è un hotel + una spritzeria + un'osteria. È un indirizzo con tre momenti della giornata. La mattina è dell'hotel, l'aperitivo è di Spritzeria, la cena è dell'Osteria. Una narrativa unica, tre voci distinte dentro lo stesso canale editoriale.</div>
+      <div style="margin-top:1rem;font-size:12.5px;color:var(--mid);line-height:1.75">Stesso ragionamento per Dimora Coppelle + A Mano, e per Hotel Adoro + Elisia. <strong style="color:var(--dark)">Un indirizzo = una grammatica editoriale</strong>, poi ogni outlet ha il suo spazio e la sua voce dentro quella grammatica.</div>
+    </div>
+    <div style="background:#FDFCFA;border:.5px solid rgba(117,88,71,.12);border-radius:14px;padding:1.75rem;opacity:0" id="acc2">
+      <div style="font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);font-family:'Poppins',sans-serif;margin-bottom:.6rem">Il sistema grammaticale BZAR</div>
+      <div style="font-family:'Afacad Flux',sans-serif;font-size:1.25rem;font-weight:500;color:var(--dark);line-height:1.2;margin-bottom:.75rem">Una grammatica madre.<br>Tante identità figlie.</div>
+      <div style="font-size:12.5px;color:var(--mid);line-height:1.75">BZAR Hotels è la grammatica comune: tono, motion language, tipografia, approccio al contenuto. Ogni struttura è libera di usare la propria palette, il proprio cast, i propri riti editoriali. <strong style="color:var(--dark)">Se tutto sembra uguale, il gruppo si appiattisce. Se tutto sembra scollegato, il gruppo scompare.</strong></div>
+      <!-- Visual: tre strutture con linee che convergono verso BZAR -->
+      <div style="margin-top:1.25rem;display:flex;flex-direction:column;gap:.45rem">
+        <div style="display:flex;align-items:center;gap:.6rem;font-size:11.5px;color:var(--dark)"><span style="width:8px;height:8px;border-radius:50%;background:var(--ink);flex-shrink:0;display:block"></span>Viminale, eccellenza dimessa, warm</div>
+        <div style="display:flex;align-items:center;gap:.6rem;font-size:11.5px;color:var(--dark)"><span style="width:8px;height:8px;border-radius:50%;background:#9a7d6a;flex-shrink:0;display:block"></span>Condominio Monti, quartiere, comunità, ritmo</div>
+        <div style="display:flex;align-items:center;gap:.6rem;font-size:11.5px;color:var(--dark)"><span style="width:8px;height:8px;border-radius:50%;background:#755847;flex-shrink:0;display:block"></span>Dimora Coppelle, silenzio, architettura, dettaglio</div>
+        <div style="display:flex;align-items:center;gap:.6rem;font-size:11.5px;color:var(--dark)"><span style="width:8px;height:8px;border-radius:50%;background:#C8A88D;flex-shrink:0;display:block"></span>La Griffe, attitudine, stile, manifesto</div>
+        <div style="margin-top:.3rem;padding-top:.75rem;border-top:.5px solid rgba(117,88,71,.1);font-size:10px;color:var(--mid);font-style:italic">Tutte BZAR. Nessuna uguale all'altra.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DA DOVE SI INIZIA -->
+  <div style="background:var(--dark);border-radius:14px;padding:1.75rem 2rem;margin-top:1.25rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;opacity:0" id="start-box">
+    <div style="flex:1;min-width:240px">
+      <div style="font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(200,168,141,.4);font-family:'Poppins',sans-serif;margin-bottom:.5rem">Da dove si inizia</div>
+      <div style="font-family:'Afacad Flux',sans-serif;font-size:1.4rem;font-weight:400;color:rgba(241,239,237,.88);line-height:1.25">Viminale per primo. Perché è il paradosso più forte e il più facile da raccontare.</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:.5rem;flex-shrink:0">
+      <div style="display:flex;align-items:center;gap:.6rem;font-size:12px;color:rgba(241,239,237,.45)"><span style="width:6px;height:6px;border-radius:50%;background:var(--brand);flex-shrink:0"></span>#1 Roma su TA, già certificato</div>
+      <div style="display:flex;align-items:center;gap:.6rem;font-size:12px;color:rgba(241,239,237,.45)"><span style="width:6px;height:6px;border-radius:50%;background:var(--brand);flex-shrink:0"></span>678 follower, nessun rumore da correggere</div>
+      <div style="display:flex;align-items:center;gap:.6rem;font-size:12px;color:rgba(241,239,237,.45)"><span style="width:6px;height:6px;border-radius:50%;background:var(--brand);flex-shrink:0"></span>Il paradosso è già il contenuto</div>
+    </div>
+  </div>
+</section>
+
+<section class="hs" id="hs-1">
+  <div class="hs-ghost" aria-hidden="true">hs-h1</div>
+  <div class="hs-header">
+    <div class="hs-num">01</div>
+    <div class="hs-meta">
+      <div class="hs-type hotel">Hotel · Roma</div>
+      <div class="hs-name">Hotel Viminale</div>
+      
+    </div>
+  </div>
+  <div class="hs-paradox" id="hp1">
+    <div class="hp-label">Il paradosso più grande del cruscotto</div>
+    <div class="hp-text"><em>#1 a Roma su TripAdvisor tra 1.153 strutture ricettive.</em> 678 follower su Instagram. Il prodotto è già certificato dal mercato. La reputazione OTA è eccellente. Ma quasi nessuno lo sa sui social.</div>
+    <div class="hp-data"><div class="hp-d"><div class="hp-dv">#1</div><div class="hp-dl">Roma · TA 1153 strutture</div></div>
+<div class="hp-d"><div class="hp-dv">678</div><div class="hp-dl">follower Instagram</div></div>
+<div class="hp-d"><div class="hp-dv">0</div><div class="hp-dl">strategia social attuale</div></div></div>
+    <div class="hp-badge gap">⚠ Gap massimo: qualità certificata vs invisibilità digitale totale</div>
+  </div>
+  <div class="hs-narr" id="hn1">
+    <div class="hn-label">Narrativa centrale</div>
+    <div class="hn-headline">"Il più amato di Roma non lo racconta ancora."</div>
+    <div class="hn-body">Il Viminale non ha bisogno di convincere nessuno della qualità del prodotto: TripAdvisor l’ha già fatto per loro, tra 1.153 concorrenti. La narrazione non è “siamo bravi”, è “finalmente puoi vederlo”. Il paradosso è il contenuto: ogni post parte dal gap tra reputazione reale e visibilità digitale. Il tono è quello di chi è già sicuro di sé, non si vanta, si mostra. Un underdog premium che smette di essere silenzioso.</div>
+  </div>
+  <div class="hs-grid3" id="hg1">
+    <div class="hg3-col"><div class="hg3-label">Tono di voce</div><div class="hg3-content"><strong>Warm, autentico, sicuro.</strong> Non lusso ostentato, eccellenza dimessa che finalmente parla. Le caption non dichiarano qualità: la mostrano attraverso dettagli, persone, gesti quotidiani. Niente aggettivi vuoti. Niente "excellence" o "luxury".</div></div>
+    <div class="hg3-col"><div class="hg3-label">Personas target</div><div class="hg3-content"><span class="hg3-pill" style="background:rgba(117,88,71,.1);color:#755847">&#x25cf; Olivia</span> scoperta visiva da IG<br><span class="hg3-pill" style="background:rgba(154,125,106,.12);color:#7a5d4a">&#x25cf; Katharina</span> conferma qualità pre-prenotazione<br><span class="hg3-pill" style="background:rgba(138,158,122,.12);color:#5a8a4a">&#x25cf; Sophie</span> rassicurazione pratica<br><br>Il Viminale deve parlare a chi già sta cercando il meglio, non a chi deve essere convinto.</div></div>
+    <div class="hg3-col"><div class="hg3-label">Il volto da trovare</div><div class="hg3-content">Chi risponde alle recensioni ogni mattina. Chi prepara la colazione. <strong>Due persone ricorrenti</strong>, non dirigenti, il volto operativo dell’eccellenza quotidiana. Il tasso di risposta alle recensioni è già una notizia editoriale.</div></div>
+  </div>
+  <div class="hs-idee">
+    <div class="hi-header" id="hih1">
+      <div class="hi-title">5 idee di contenuto per partire</div>
+      <div class="hi-sub">Formati, concept, esecuzione concreta</div>
+    </div>
+    <div class="hi-grid"><div class="hi-card" id="hic1">
+  <div class="hi-tag reel">Reel</div>
+  <div class="hi-n">01</div>
+  <div class="hi-format">Reel · 30-45 sec</div>
+  <div class="hi-idea">Un anno a 5 stelle, cosa dice davvero la gente</div>
+  <div class="hi-desc">Montaggio di estratti di recensioni reali in formato testuale animato, con immagini degli spazi. Nessuna voce, solo musica e testo. Ending: "#1 Roma. Non lo diciamo noi."</div>
+</div>
+<div class="hi-card" id="hic2">
+  <div class="hi-tag story">Stories</div>
+  <div class="hi-n">02</div>
+  <div class="hi-format">Staff story</div>
+  <div class="hi-idea">Il gesto che fa la differenza, con [nome]</div>
+  <div class="hi-desc">Ogni settimana uno staff member racconta in 20 secondi una cosa che fa sempre, che gli ospiti non vedono. Il concierge che prepara la lista personalizzata. La cameriera che nota i dettagli. Personaggi fissi.</div>
+</div>
+<div class="hi-card" id="hic3">
+  <div class="hi-tag reel">Reel</div>
+  <div class="hi-n">03</div>
+  <div class="hi-format">Location content</div>
+  <div class="hi-idea">Colle Viminale, il quartiere che non ti aspetti</div>
+  <div class="hi-desc">Il Viminale si racconta attraverso il suo quartiere. Tre consigli non ovvi, un bar nascosto, un mercato mattutino. Il contenuto per Olivia e Katharina che vogliono vivere Roma da insider.</div>
+</div>
+<div class="hi-card" id="hic4">
+  <div class="hi-tag reel">Reel</div>
+  <div class="hi-n">04</div>
+  <div class="hi-format">Social proof</div>
+  <div class="hi-idea">La colazione delle 7:30</div>
+  <div class="hi-desc">Un rituale fisso: la preparazione della colazione raccontata dall’interno. Chi arriva per primo, cosa prepara, come si mette in scena il tavolo. Il quotidiano come spettacolo.</div>
+</div>
+<div class="hi-card" id="hic5">
+  <div class="hi-tag ugc">UGC</div>
+  <div class="hi-n">05</div>
+  <div class="hi-format">UGC</div>
+  <div class="hi-idea">Ospiti che tornano, e dicono perché</div>
+  <div class="hi-desc">Attivazione UGC: chi soggiorna al Viminale è già convinto della qualità. Si tratta di trasformare quella soddisfazione in contenuto condivisibile. Mini-interviste in uscita, storie di ritorno.</div>
+</div></div>
+  </div>
+  <div class="hs-canali" id="hcan1">
+    <strong style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-family:Poppins,sans-serif;color:var(--mid)">Canali:</strong>
+    <div class="hs-can priority">Instagram</div><div class="hs-can priority">TikTok</div><div class="hs-can">Google Business</div><div class="hs-can">Facebook</div>
+  </div>
+  <!-- MAPPA SINAPTICA HOTEL VIMINALE -->
+  <div class="sin-wrap" id="sin-hs-1" style="opacity:0;margin-top:3.5rem">
+    <div class="sin-header">
+      <div class="sin-title">Mappa Sinaptica &mdash; Hotel Viminale</div>
+      <div class="sin-sub">Seleziona una persona per vedere la strategia specifica</div>
+    </div>
+    <div class="sin-body">
+      <div class="sin-col sin-col-who">
+        <div class="sin-col-label">Chi &middot; Persona target</div>
+        <button class="sin-persona" id="hs-1-p-kath"
+  style="--p-color:#9a7d6a;--p-rgb:154,125,106"
+  onclick="sinActivate('hs-1','p-kath')"
+  data-hotel="hs-1" data-persona="p-kath">
+  <span class="sin-p-dot" style="background:#9a7d6a"></span>
+  <span><span class="sin-p-name">Katharina</span><br><span class="sin-p-role">58 · Coppia · Qualità-first</span></span>
+  <span class="sin-p-badge pri">Primaria</span>
+</button><button class="sin-persona" id="hs-1-p-oliv"
+  style="--p-color:#755847;--p-rgb:117,88,71"
+  onclick="sinActivate('hs-1','p-oliv')"
+  data-hotel="hs-1" data-persona="p-oliv">
+  <span class="sin-p-dot" style="background:#755847"></span>
+  <span><span class="sin-p-name">Olivia</span><br><span class="sin-p-role">38 · Globetrotter · Visual-first</span></span>
+  <span class="sin-p-badge sec">Secondaria</span>
+</button><button class="sin-persona" id="hs-1-p-soph"
+  style="--p-color:#8a9e7a;--p-rgb:138,158,122"
+  onclick="sinActivate('hs-1','p-soph')"
+  data-hotel="hs-1" data-persona="p-soph">
+  <span class="sin-p-dot" style="background:#8a9e7a"></span>
+  <span><span class="sin-p-name">Sophie</span><br><span class="sin-p-role">41 · Famiglia · Utilitaria</span></span>
+  <span class="sin-p-badge sec">Terziaria</span>
+</button>
+      </div>
+      <div class="sin-col sin-col-what" id="hs-1-what">
+        <div class="sin-col-label">Cosa &amp; Dove &middot; Strategia</div>
+        <div class="sin-s-empty" id="hs-1-empty"><div class="sin-s-empty-icon">&#x2192;</div><div class="sin-s-empty-t">Seleziona una persona</div></div><div class="sin-strategy" id="hs-1-p-kath-strat"
+  style="display:none">
+  <div class="sin-s-label">Pillars attivati</div>
+  <div class="sin-pillars"><span class="sin-pillar" style="background:rgba(154,125,106,.2);color:#9a7d6a;border-color:#9a7d6a40">Qualità tangibile</span><span class="sin-pillar" style="background:rgba(154,125,106,.15);color:#9a7d6a;border-color:#9a7d6a40">Rassicurazione</span><span class="sin-pillar" style="background:rgba(154,125,106,.15);color:#9a7d6a;border-color:#9a7d6a40">Recensioni reali</span></div>
+  <div class="sin-s-label">Canali chiave</div>
+  <div class="sin-channels"><span class="sin-chan  priority">Instagram</span><span class="sin-chan  priority">Google Business</span><span class="sin-chan">Facebook</span></div>
+  <div class="sin-s-label">Contenuto pilota</div>
+  <div class="sin-content-idea" style="border-color:#9a7d6a;color:rgba(241,239,237,.75)">"Il sito dice #1. Le recensioni lo confermano. Noi ti mostriamo perché."</div>
+</div><div class="sin-strategy" id="hs-1-p-oliv-strat"
+  style="display:none">
+  <div class="sin-s-label">Pillars attivati</div>
+  <div class="sin-pillars"><span class="sin-pillar" style="background:rgba(117,88,71,.2);color:#755847;border-color:#75584740">Staff stories</span><span class="sin-pillar" style="background:rgba(117,88,71,.15);color:#755847;border-color:#75584740">Location insider</span><span class="sin-pillar" style="background:rgba(117,88,71,.15);color:#755847;border-color:#75584740">#1 paradox</span></div>
+  <div class="sin-s-label">Canali chiave</div>
+  <div class="sin-channels"><span class="sin-chan  priority">Instagram</span><span class="sin-chan  priority">TikTok</span><span class="sin-chan">Pinterest</span></div>
+  <div class="sin-s-label">Contenuto pilota</div>
+  <div class="sin-content-idea" style="border-color:#755847;color:rgba(241,239,237,.75)">"Non cercavi il Viminale. Ma adesso non puoi non volerci dormire."</div>
+</div><div class="sin-strategy" id="hs-1-p-soph-strat"
+  style="display:none">
+  <div class="sin-s-label">Pillars attivati</div>
+  <div class="sin-pillars"><span class="sin-pillar" style="background:rgba(138,158,122,.2);color:#8a9e7a;border-color:#8a9e7a40">Praticità</span><span class="sin-pillar" style="background:rgba(138,158,122,.15);color:#8a9e7a;border-color:#8a9e7a40">Chiarezza info</span></div>
+  <div class="sin-s-label">Canali chiave</div>
+  <div class="sin-channels"><span class="sin-chan  priority">Instagram</span><span class="sin-chan">Facebook</span></div>
+  <div class="sin-s-label">Contenuto pilota</div>
+  <div class="sin-content-idea" style="border-color:#8a9e7a;color:rgba(241,239,237,.75)">"Centro storico, colazione, quartiere tranquillo. Tutto quello che serve."</div>
+</div>
+      </div>
+      <div class="sin-col sin-col-why" id="hs-1-why">
+        <div class="sin-col-label">Perch&eacute; &middot; Obiettivo</div>
+        <div class="sin-obj" id="hs-1-obj-empty" style="display:flex;align-items:center;justify-content:center;height:100%"><div style="opacity:.2;font-size:2.5rem;text-align:center">&#x25cb;</div></div>
+        <div class="sin-obj" id="hs-1-p-kath-obj" style="display:none">
+  <div class="sin-obj-circle" style="background:rgba(154,125,106,.1);border-color:#9a7d6a;color:#9a7d6a">🏆</div>
+  <div>
+    <div class="sin-obj-phase">Conversione</div>
+    <div class="sin-obj-name" style="color:#9a7d6a">Prenotazione diretta</div>
+    <div class="sin-obj-kpi">Direct booking rate · Riduzione OTA</div>
+  </div>
+</div><div class="sin-obj" id="hs-1-p-oliv-obj" style="display:none">
+  <div class="sin-obj-circle" style="background:rgba(117,88,71,.1);border-color:#755847;color:#755847">📍</div>
+  <div>
+    <div class="sin-obj-phase">Awareness</div>
+    <div class="sin-obj-name" style="color:#755847">Scoperta organica</div>
+    <div class="sin-obj-kpi">Reach · Follower qualificati</div>
+  </div>
+</div><div class="sin-obj" id="hs-1-p-soph-obj" style="display:none">
+  <div class="sin-obj-circle" style="background:rgba(138,158,122,.1);border-color:#8a9e7a;color:#8a9e7a">👨‍👩‍👧</div>
+  <div>
+    <div class="sin-obj-phase">Consideration</div>
+    <div class="sin-obj-name" style="color:#8a9e7a">Rassicurazione family</div>
+    <div class="sin-obj-kpi">Click link bio · Richieste info DM</div>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hs" id="hs-2">
+  <div class="hs-ghost" aria-hidden="true">hs-h2</div>
+  <div class="hs-header">
+    <div class="hs-num">02</div>
+    <div class="hs-meta">
+      <div class="hs-type hotel">Hotel + F&B ×2 · Roma</div>
+      <div class="hs-name">Condominio Monti</div>
+      <div class="hs-include">include Spritzeria Monti + Osteria Oliva</div>
+    </div>
+  </div>
+  <div class="hs-paradox" id="hp2">
+    <div class="hp-label">Due voci, storie opposte</div>
+    <div class="hp-text">Dentro lo stesso indirizzo vivono <em>due realtà sociali completamente diverse</em>: Spritzeria ha 35.000 follower e un rating OTA mediocre. Osteria ha pubblicato oltre 1.130 post e raccoglie 789 follower. L’hotel li contiene entrambi senza una narrativa unificante.</div>
+    <div class="hp-data"><div class="hp-d"><div class="hp-dv">35K</div><div class="hp-dl">Spritzeria · follower IG</div></div>
+<div class="hp-d"><div class="hp-dv">3.5</div><div class="hp-dl">Spritzeria · rating TA</div></div>
+<div class="hp-d"><div class="hp-dv">1.130+</div><div class="hp-dl">Osteria · post pubblicati</div></div>
+<div class="hp-d"><div class="hp-dv">789</div><div class="hp-dl">Osteria · follower totali</div></div></div>
+    <div class="hp-badge gap">⚠ Audience senza conversion (Spritz) + Volume senza identità (Osteria)</div>
+  </div>
+  <div class="hs-narr" id="hn2">
+    <div class="hn-label">Narrativa centrale</div>
+    <div class="hn-headline">"Un quartiere intero in un solo indirizzo."</div>
+    <div class="hn-body">Monti è già un brand per chi vive Roma. Il Condominio deve diventare il punto di accesso a quel quartiere, non solo un hotel con due outlet annessi. La narrativa è territoriale: la mattina al Condominio, l’aperitivo in Spritzeria, la cena all’Osteria. Tre momenti di una stessa giornata romana. Questo unifica le tre voci senza appiattirle. Spritzeria resta Spritzeria, ma con una direction chiara verso la conversione. Osteria smette di postare volume e inizia a costruire identità.</div>
+  </div>
+  <div class="hs-grid3" id="hg2">
+    <div class="hg3-col"><div class="hg3-label">Tono di voce</div><div class="hg3-content"><strong>Territoriale, autentico, di quartiere.</strong> Non l’hotel che è a Monti, l’hotel che è Monti. Le caption usano il nome del quartiere, dei vicoli, dei personaggi locali. Il tono è quello di chi abita, non di chi ospita.</div></div>
+    <div class="hg3-col"><div class="hg3-label">Priorità operativa</div><div class="hg3-content"><strong>Spritzeria:</strong> non più contenuto ma contenuto diverso. Bridging dall’hype visivo alla visita reale. UGC activation e behind the scenes.<br><br><strong>Osteria:</strong> <em>stop</em> al posting di volume. Reset visivo completo. 2 post/settimana di qualità con filo narrativo.</div></div>
+    <div class="hg3-col"><div class="hg3-label">Il volto da trovare</div><div class="hg3-content">Un barista di Spritzeria con personalità riconoscibile. Uno chef o un produttore per l’Osteria. <strong>Personaggi fissi</strong> che diventino l’anima editoriale dei due outlet, come Gardener Joe per The Newt.</div></div>
+  </div>
+  <div class="hs-idee">
+    <div class="hi-header" id="hih2">
+      <div class="hi-title">5 idee di contenuto per partire</div>
+      <div class="hi-sub">Formati, concept, esecuzione concreta</div>
+    </div>
+    <div class="hi-grid"><div class="hi-card" id="hic1">
+  <div class="hi-tag reel">Reel</div>
+  <div class="hi-n">01</div>
+  <div class="hi-format">Reel · serie</div>
+  <div class="hi-idea">24h al Condominio Monti, dall’alba all’aperitivo</div>
+  <div class="hi-desc">Serie settimanale che racconta un’intera giornata: la preparazione del Condominio, il primo ospite, il pranzo, l’aperitivo, la cena. Ogni episodio è autosufficiente ma costruisce il mondo del posto.</div>
+</div>
+<div class="hi-card" id="hic2">
+  <div class="hi-tag story">Stories</div>
+  <div class="hi-n">02</div>
+  <div class="hi-format">Story · Spritzeria</div>
+  <div class="hi-idea">La preparazione del Negroni, ogni giovedì</div>
+  <div class="hi-desc">Format fisso su Spritzeria: il giovedì sera, preparazione del cocktail della settimana. Il barista come personaggio, non come dipendente. Targeting verso i 35K già acquisiti per convertire in visita.</div>
+</div>
+<div class="hi-card" id="hic3">
+  <div class="hi-tag reel">Reel</div>
+  <div class="hi-n">03</div>
+  <div class="hi-format">Reel · Osteria</div>
+  <div class="hi-idea">L’ingrediente di stagione, reset editoriale</div>
+  <div class="hi-desc">Nuovo formato per Osteria Oliva: un produttore, un ingrediente, un piatto. Reset visivo completo rispetto agli 1.130 post precedenti. Palette nuova, ritmo nuovo, voce nuova.</div>
+</div>
+<div class="hi-card" id="hic4">
+  <div class="hi-tag ugc">UGC</div>
+  <div class="hi-n">04</div>
+  <div class="hi-format">UGC</div>
+  <div class="hi-idea">I vicini di Monti ci portano qui</div>
+  <div class="hi-desc">Attivazione community locale: residenti di Monti come voice editoriale. Chi abita in quartiere da anni, cosa ordina, perché torna. UGC autentico che vale più di qualsiasi paid content.</div>
+</div>
+<div class="hi-card" id="hic5">
+  <div class="hi-tag static">ADV Meta</div>
+  <div class="hi-n">05</div>
+  <div class="hi-format">ADV · Meta</div>
+  <div class="hi-idea">Da follower a ospite: Spritzeria</div>
+  <div class="hi-desc">Campagna retargeting su Meta: i 35K follower di Spritzeria sono già un’audience calda. ADV con offerta specifica (es. aperitivo + sconto prenotazione hotel) per convertire fan in clienti paganti.</div>
+</div></div>
+  </div>
+  <div class="hs-canali" id="hcan2">
+    <strong style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-family:Poppins,sans-serif;color:var(--mid)">Canali:</strong>
+    <div class="hs-can priority">Instagram</div><div class="hs-can priority">TikTok</div><div class="hs-can">Facebook</div><div class="hs-can">Meta ADV</div>
+  </div>
+  <!-- MAPPA SINAPTICA CONDOMINIO MONTI -->
+  <div class="sin-wrap" id="sin-hs-2" style="opacity:0;margin-top:3.5rem">
+    <div class="sin-header">
+      <div class="sin-title">Mappa Sinaptica &mdash; Condominio Monti</div>
+      <div class="sin-sub">Seleziona una persona per vedere la strategia specifica</div>
+    </div>
+    <div class="sin-body">
+      <div class="sin-col sin-col-who">
+        <div class="sin-col-label">Chi &middot; Persona target</div>
+        <button class="sin-persona" id="hs-2-p-leo"
+  style="--p-color:#6b8fa8;--p-rgb:107,143,168"
+  onclick="sinActivate('hs-2','p-leo')"
+  data-hotel="hs-2" data-persona="p-leo">
+  <span class="sin-p-dot" style="background:#6b8fa8"></span>
+  <span><span class="sin-p-name">Leo</span><br><span class="sin-p-role">29 · Creativo · TikTok-first</span></span>
+  <span class="sin-p-badge pri">Primario (Spritzeria)</span>
+</button><button class="sin-persona" id="hs-2-p-oliv"
+  style="--p-color:#755847;--p-rgb:117,88,71"
+  onclick="sinActivate('hs-2','p-oliv')"
+  data-hotel="hs-2" data-persona="p-oliv">
+  <span class="sin-p-dot" style="background:#755847"></span>
+  <span><span class="sin-p-name">Olivia</span><br><span class="sin-p-role">38 · Globetrotter · Visual-first</span></span>
+  <span class="sin-p-badge pri">Primaria (Hotel)</span>
+</button><button class="sin-persona" id="hs-2-p-soph"
+  style="--p-color:#8a9e7a;--p-rgb:138,158,122"
+  onclick="sinActivate('hs-2','p-soph')"
+  data-hotel="hs-2" data-persona="p-soph">
+  <span class="sin-p-dot" style="background:#8a9e7a"></span>
+  <span><span class="sin-p-name">Sophie</span><br><span class="sin-p-role">41 · Famiglia · Google-first</span></span>
+  <span class="sin-p-badge sec">Secondaria (Osteria)</span>
+</button>
+      </div>
+      <div class="sin-col sin-col-what" id="hs-2-what">
+        <div class="sin-col-label">Cosa &amp; Dove &middot; Strategia</div>
+        <div class="sin-s-empty" id="hs-2-empty"><div class="sin-s-empty-icon">&#x2192;</div><div class="sin-s-empty-t">Seleziona una persona</div></div><div class="sin-strategy" id="hs-2-p-leo-strat"
+  style="display:none">
+  <div class="sin-s-label">Pillars attivati</div>
+  <div class="sin-pillars"><span class="sin-pillar" style="background:rgba(107,143,168,.2);color:#6b8fa8;border-color:#6b8fa840">Hype → Conversion</span><span class="sin-pillar" style="background:rgba(107,143,168,.15);color:#6b8fa8;border-color:#6b8fa840">UGC activation</span><span class="sin-pillar" style="background:rgba(107,143,168,.15);color:#6b8fa8;border-color:#6b8fa840">ADV retargeting</span></div>
+  <div class="sin-s-label">Canali chiave</div>
+  <div class="sin-channels"><span class="sin-chan  priority">TikTok</span><span class="sin-chan  priority">Instagram</span><span class="sin-chan  priority">Meta ADV</span></div>
+  <div class="sin-s-label">Contenuto pilota</div>
+  <div class="sin-content-idea" style="border-color:#6b8fa8;color:rgba(241,239,237,.75)">"35K ti seguono. Adesso vengono anche."</div>
+</div><div class="sin-strategy" id="hs-2-p-oliv-strat"
+  style="display:none">
+  <div class="sin-s-label">Pillars attivati</div>
+  <div class="sin-pillars"><span class="sin-pillar" style="background:rgba(117,88,71,.2);color:#755847;border-color:#75584740">24h Condominio</span><span class="sin-pillar" style="background:rgba(117,88,71,.15);color:#755847;border-color:#75584740">Territorio Monti</span><span class="sin-pillar" style="background:rgba(117,88,71,.15);color:#755847;border-color:#75584740">Micro-rituali</span></div>
+  <div class="sin-s-label">Canali chiave</div>
+  <div class="sin-channels"><span class="sin-chan  priority">Instagram</span><span class="sin-chan">TikTok</span><span class="sin-chan">Pinterest</span></div>
+  <div class="sin-s-label">Contenuto pilota</div>
+  <div class="sin-content-idea" style="border-color:#755847;color:rgba(241,239,237,.75)">"Non stai a Monti. Vivi a Monti."</div>
+</div><div class="sin-strategy" id="hs-2-p-soph-strat"
+  style="display:none">
+  <div class="sin-s-label">Pillars attivati</div>
+  <div class="sin-pillars"><span class="sin-pillar" style="background:rgba(138,158,122,.2);color:#8a9e7a;border-color:#8a9e7a40">Editorial reset</span><span class="sin-pillar" style="background:rgba(138,158,122,.15);color:#8a9e7a;border-color:#8a9e7a40">Ingrediente + storia</span></div>
+  <div class="sin-s-label">Canali chiave</div>
+  <div class="sin-channels"><span class="sin-chan  priority">Instagram</span><span class="sin-chan">Facebook</span></div>
+  <div class="sin-s-label">Contenuto pilota</div>
+  <div class="sin-content-idea" style="border-color:#8a9e7a;color:rgba(241,239,237,.75)">"Il piatto giusto, la storia giusta. Meno post, più senso."</div>
+</div>
+      </div>
+      <div class="sin-col sin-col-why" id="hs-2-why">
+        <div class="sin-col-label">Perch&eacute; &middot; Obiettivo</div>
+        <div class="sin-obj" id="hs-2-obj-empty" style="display:flex;align-items:center;justify-content:center;height:100%"><div style="opacity:.2;font-size:2.5rem;text-align:center">&#x25cb;</div></div>
+        <div class="sin-obj" id="hs-2-p-leo-obj" style="display:none">
+  <div class="sin-obj-circle" style="background:rgba(107,143,168,.1);border-color:#6b8fa8;color:#6b8fa8">🔄</div>
+  <div>
+    <div class="sin-obj-phase">Conversione F&B</div>
+    <div class="sin-obj-name" style="color:#6b8fa8">Visita Spritzeria</div>
+    <div class="sin-obj-kpi">Visite fisiche · Rating TA migliorato</div>
+  </div>
+</div><div class="sin-obj" id="hs-2-p-oliv-obj" style="display:none">
+  <div class="sin-obj-circle" style="background:rgba(117,88,71,.1);border-color:#755847;color:#755847">🏨</div>
+  <div>
+    <div class="sin-obj-phase">Awareness + Booking</div>
+    <div class="sin-obj-name" style="color:#755847">Hotel + F&B cross-sell</div>
+    <div class="sin-obj-kpi">Follower hotel · Prenotazioni dirette</div>
+  </div>
+</div><div class="sin-obj" id="hs-2-p-soph-obj" style="display:none">
+  <div class="sin-obj-circle" style="background:rgba(138,158,122,.1);border-color:#8a9e7a;color:#8a9e7a">🍽️</div>
+  <div>
+    <div class="sin-obj-phase">Identità</div>
+    <div class="sin-obj-name" style="color:#8a9e7a">Brand Osteria ricostruito</div>
+    <div class="sin-obj-kpi">Engagement rate · Follower qualificati</div>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hs" id="hs-3">
+  <div class="hs-ghost" aria-hidden="true">hs-h3</div>
+  <div class="hs-header">
+    <div class="hs-num">03</div>
+    <div class="hs-meta">
+      <div class="hs-type hotel">Hotel + F&B · Roma</div>
+      <div class="hs-name">Dimora Coppelle</div>
+      <div class="hs-include">include A Mano (apertura giugno 2026)</div>
+    </div>
+  </div>
+  <div class="hs-paradox" id="hp3">
+    <div class="hp-label">Il secondo paradosso del cruscotto</div>
+    <div class="hp-text"><em>5.0 su TripAdvisor. 172 follower su Instagram.</em> Il rating più alto del campione, la visibilità più bassa. A Mano, che apre a giugno, è un moltiplicatore: porta un outlet F&B nuovo in uno dei profili più silenziosamente eccellenti del gruppo.</div>
+    <div class="hp-data"><div class="hp-d"><div class="hp-dv">5.0</div><div class="hp-dl">rating TripAdvisor</div></div>
+<div class="hp-d"><div class="hp-dv">172</div><div class="hp-dl">follower Instagram</div></div>
+<div class="hp-d"><div class="hp-dv">Giu '26</div><div class="hp-dl">apertura A Mano</div></div></div>
+    <div class="hp-badge gap">⚠ Lusso silenzioso, da amplificare con urgenza prima dell’apertura A Mano</div>
+  </div>
+  <div class="hs-narr" id="hn3">
+    <div class="hn-label">Narrativa centrale</div>
+    <div class="hn-headline">"Il segreto meglio tenuto di Roma. Stiamo per condividerlo."</div>
+    <div class="hn-body">La Dimora non ha bisogno di hype. Ha bisogno di essere vista. Il 5.0 di TA è il punto di partenza narrativo, non si parte da zero, si parte da un prodotto già eccellente che semplicemente non è mai stato raccontato bene. Il tono è calmo, editoriale, da architettura d’interni: dettagli, luci, atmosfera. A Mano diventa il momento attivo di questa storia, l’apertura a giugno è un evento editoriale da costruire con anticipo, con teaser e day-one content.</div>
+  </div>
+  <div class="hs-grid3" id="hg3">
+    <div class="hg3-col"><div class="hg3-label">Tono di voce</div><div class="hg3-content"><strong>Lento, architettonico, sensoriale.</strong> Niente hype, niente promozioni. Il feed è come sfogliare un libro d’architettura, ogni immagine ha una composizione precisa, ogni caption è breve e non spiega ciò che si vede. Il target primario è Katharina: 45-65, coppia, qualità-first, niente eccitazione forzata.</div></div>
+    <div class="hg3-col"><div class="hg3-label">Fasi del lancio A Mano</div><div class="hg3-content"><strong>Prima:</strong> teaser settimanali da 4 settimane prima, il nome, lo spazio, le mani che lavorano. <strong>Launch day:</strong> Reel del primo giorno in tempo reale. <strong>Dopo:</strong> la prima settimana come serie, cosa abbiamo imparato, chi sono i primi ospiti.</div></div>
+    <div class="hg3-col"><div class="hg3-label">Il volto da trovare</div><div class="hg3-content">Un ospite ricorrente (non testimonial, conversazione). Il team di A Mano durante la preparazione. <strong>Nessuna figura dirigenziale</strong>, la Dimora parla attraverso dettagli e atmosfera, non attraverso volti corporate.</div></div>
+  </div>
+  <div class="hs-idee">
+    <div class="hi-header" id="hih3">
+      <div class="hi-title">5 idee di contenuto per partire</div>
+      <div class="hi-sub">Formati, concept, esecuzione concreta</div>
+    </div>
+    <div class="hi-grid"><div class="hi-card" id="hic1">
+  <div class="hi-tag reel">Reel</div>
+  <div class="hi-n">01</div>
+  <div class="hi-format">Reel · atmosfera</div>
+  <div class="hi-idea">Room at 9pm, un walkthrough notturno</div>
+  <div class="hi-desc">La Dimora di notte: luci basse, tessuti, dettagli architettonici. 30 secondi senza voce, solo musica ambient. Il lusso che non urla. Format ripetibile ogni mese con stagione diversa.</div>
+</div>
+<div class="hi-card" id="hic2">
+  <div class="hi-tag static">Carosello</div>
+  <div class="hi-n">02</div>
+  <div class="hi-format">Content · paradox</div>
+  <div class="hi-idea">"172 follower. 5.0 su TripAdvisor.", il claim editoriale</div>
+  <div class="hi-desc">Il paradosso diventa il primo post della nuova era. Un’immagine dello spazio con il dato scritto grande. La dichiarazione che qualcosa sta cambiando. Momento di rottura rispetto al passato.</div>
+</div>
+<div class="hi-card" id="hic3">
+  <div class="hi-tag story">Stories</div>
+  <div class="hi-n">03</div>
+  <div class="hi-format">Pre-launch</div>
+  <div class="hi-idea">A Mano si presenta, teaser weekly</div>
+  <div class="hi-desc">Quattro settimane prima dell’apertura: ogni settimana un dettaglio di A Mano. Il nome. Le mani che lavorano. Lo spazio. Il menu. Ogni post costruisce attesa senza rivelare tutto.</div>
+</div>
+<div class="hi-card" id="hic4">
+  <div class="hi-tag reel">Reel</div>
+  <div class="hi-n">04</div>
+  <div class="hi-format">Location</div>
+  <div class="hi-idea">Coppelle, il rione che non conosci</div>
+  <div class="hi-desc">Il quartiere intorno alla Dimora: vicoli, fontane, palazzi storici. Content che aiuta Katharina e Olivia a “vedere” Roma da un punto di vista insolito. Location as character.</div>
+</div>
+<div class="hi-card" id="hic5">
+  <div class="hi-tag static">Post</div>
+  <div class="hi-n">05</div>
+  <div class="hi-format">Partnership</div>
+  <div class="hi-idea">Cultura romana a casa BZAR</div>
+  <div class="hi-desc">Collaborazione con un contenuto culturale locale: una galleria d’arte del rione, un artigiano storico, un ristorante di vicinato. La Dimora come porta d’accesso alla cultura autentica.</div>
+</div></div>
+  </div>
+  <div class="hs-canali" id="hcan3">
+    <strong style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-family:Poppins,sans-serif;color:var(--mid)">Canali:</strong>
+    <div class="hs-can priority">Instagram</div><div class="hs-can">Facebook</div><div class="hs-can">Google Business</div>
+  </div>
+  <!-- MAPPA SINAPTICA DIMORA COPPELLE -->
+  <div class="sin-wrap" id="sin-hs-3" style="opacity:0;margin-top:3.5rem">
+    <div class="sin-header">
+      <div class="sin-title">Mappa Sinaptica &mdash; Dimora Coppelle</div>
+      <div class="sin-sub">Seleziona una persona per vedere la strategia specifica</div>
+    </div>
+    <div class="sin-body">
+      <div class="sin-col sin-col-who">
+        <div class="sin-col-label">Chi &middot; Persona target</div>
+        <button class="sin-persona" id="hs-3-p-kath"
+  style="--p-color:#9a7d6a;--p-rgb:154,125,106"
+  onclick="sinActivate('hs-3','p-kath')"
+  data-hotel="hs-3" data-persona="p-kath">
+  <span class="sin-p-dot" style="background:#9a7d6a"></span>
+  <span><span class="sin-p-name">Katharina</span><br><span class="sin-p-role">58 · Coppia · Qualità-first</span></span>
+  <span class="sin-p-badge pri">Primaria</span>
+</button><button class="sin-persona" id="hs-3-p-oliv"
+  style="--p-color:#755847;--p-rgb:117,88,71"
+  onclick="sinActivate('hs-3','p-oliv')"
+  data-hotel="hs-3" data-persona="p-oliv">
+  <span class="sin-p-dot" style="background:#755847"></span>
+  <span><span class="sin-p-name">Olivia</span><br><span class="sin-p-role">38 · Globetrotter · Visual-first</span></span>
+  <span class="sin-p-badge sec">Secondaria</span>
+</button>
+      </div>
+      <div class="sin-col sin-col-what" id="hs-3-what">
+        <div class="sin-col-label">Cosa &amp; Dove &middot; Strategia</div>
+        <div class="sin-s-empty" id="hs-3-empty"><div class="sin-s-empty-icon">&#x2192;</div><div class="sin-s-empty-t">Seleziona una persona</div></div><div class="sin-strategy" id="hs-3-p-kath-strat"
+  style="display:none">
+  <div class="sin-s-label">Pillars attivati</div>
+  <div class="sin-pillars"><span class="sin-pillar" style="background:rgba(154,125,106,.2);color:#9a7d6a;border-color:#9a7d6a40">Lusso silenzioso</span><span class="sin-pillar" style="background:rgba(154,125,106,.15);color:#9a7d6a;border-color:#9a7d6a40">Walkthrough lenti</span><span class="sin-pillar" style="background:rgba(154,125,106,.15);color:#9a7d6a;border-color:#9a7d6a40">Atmosfera serale</span></div>
+  <div class="sin-s-label">Canali chiave</div>
+  <div class="sin-channels"><span class="sin-chan  priority">Instagram</span><span class="sin-chan  priority">Google Business</span><span class="sin-chan">YouTube</span></div>
+  <div class="sin-s-label">Contenuto pilota</div>
+  <div class="sin-content-idea" style="border-color:#9a7d6a;color:rgba(241,239,237,.75)">"5.0 su TripAdvisor. Adesso finalmente lo vedono anche i 172 che seguono."</div>
+</div><div class="sin-strategy" id="hs-3-p-oliv-strat"
+  style="display:none">
+  <div class="sin-s-label">Pillars attivati</div>
+  <div class="sin-pillars"><span class="sin-pillar" style="background:rgba(117,88,71,.2);color:#755847;border-color:#75584740">Architettura + dettagli</span><span class="sin-pillar" style="background:rgba(117,88,71,.15);color:#755847;border-color:#75584740">A Mano launch</span><span class="sin-pillar" style="background:rgba(117,88,71,.15);color:#755847;border-color:#75584740">Rione Coppelle</span></div>
+  <div class="sin-s-label">Canali chiave</div>
+  <div class="sin-channels"><span class="sin-chan  priority">Instagram</span><span class="sin-chan">Pinterest</span></div>
+  <div class="sin-s-label">Contenuto pilota</div>
+  <div class="sin-content-idea" style="border-color:#755847;color:rgba(241,239,237,.75)">"Il segreto meglio tenuto di Roma. Stai per scoprirlo."</div>
+</div>
+      </div>
+      <div class="sin-col sin-col-why" id="hs-3-why">
+        <div class="sin-col-label">Perch&eacute; &middot; Obiettivo</div>
+        <div class="sin-obj" id="hs-3-obj-empty" style="display:flex;align-items:center;justify-content:center;height:100%"><div style="opacity:.2;font-size:2.5rem;text-align:center">&#x25cb;</div></div>
+        <div class="sin-obj" id="hs-3-p-kath-obj" style="display:none">
+  <div class="sin-obj-circle" style="background:rgba(154,125,106,.1);border-color:#9a7d6a;color:#9a7d6a">🌙</div>
+  <div>
+    <div class="sin-obj-phase">Trust building</div>
+    <div class="sin-obj-name" style="color:#9a7d6a">Booking diretto Over-50</div>
+    <div class="sin-obj-kpi">Follower qualificati · Direct booking 45-65</div>
+  </div>
+</div><div class="sin-obj" id="hs-3-p-oliv-obj" style="display:none">
+  <div class="sin-obj-circle" style="background:rgba(117,88,71,.1);border-color:#755847;color:#755847">✨</div>
+  <div>
+    <div class="sin-obj-phase">Scoperta</div>
+    <div class="sin-obj-name" style="color:#755847">Awareness segmento premium</div>
+    <div class="sin-obj-kpi">Reach · Saves · Profilo visite</div>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hs" id="hs-4">
+  <div class="hs-ghost" aria-hidden="true">hs-h4</div>
+  <div class="hs-header">
+    <div class="hs-num">04</div>
+    <div class="hs-meta">
+      <div class="hs-type hotel">Hotel + F&B · Roma</div>
+      <div class="hs-name">Hotel Adoro</div>
+      <div class="hs-include">include Elisia</div>
+    </div>
+  </div>
+  <div class="hs-paradox" id="hp4">
+    <div class="hp-label">Un nome che è già una promessa</div>
+    <div class="hp-text"><em>Adoro. Elisia.</em> Due nomi con carattere, entrambi suggeriscono un’identità precisa. Il posizionamento specifico va affinato insieme, ma la direzione è chiara: un hotel con un outlet F&B che ha una voce propria, non ancillare.</div>
+    <div class="hp-data"><div class="hp-d"><div class="hp-dv">2</div><div class="hp-dl">brand con nome forte</div></div>
+<div class="hp-d"><div class="hp-dv">1</div><div class="hp-dl">rito da costruire</div></div></div>
+    <div class="hp-badge ok">→ Identità forte da valorizzare, strategia da costruire insieme</div>
+  </div>
+  <div class="hs-narr" id="hn4">
+    <div class="hn-label">Narrativa centrale</div>
+    <div class="hn-headline">"Elisia ha un rito. L’Adoro ha un personaggio."</div>
+    <div class="hn-body">La prima domanda operativa per l’Adoro è semplice: qual è il momento del giorno di Elisia? La risposta a quella domanda è il calendario editoriale per i prossimi sei mesi. Se è un brunch outlet, l’editorial direction è il mattino romano. Se è un cocktail bar, il tramonto. Se è cucina di cena, la scena della sera. Una volta definito il rito proprietario di Elisia, l’hotel Adoro diventa il contesto che lo amplifica.</div>
+  </div>
+  <div class="hs-grid3" id="hg4">
+    <div class="hg3-col"><div class="hg3-label">Tono di voce</div><div class="hg3-content"><strong>Da definire con Francesco.</strong> Il nome Elisia è contemporaneo, ha un’eleganza senza essere austero. L’Hotel Adoro suggerisce calore, passione, qualcosa di personale. Direzione probabile: <em>lifestyle urbano romano con cura artigianale</em>.</div></div>
+    <div class="hg3-col"><div class="hg3-label">Il rito da costruire</div><div class="hg3-content">Ogni outlet di successo ha un <strong>rito proprietario</strong> (benchmark M6: Spaghettata di Mezzanotte di 10_11). Elisia deve avere il suo. Da definire in call: <em>cosa può fare Elisia che nessun altro outlet di Roma può fare esattamente così?</em></div></div>
+    <div class="hg3-col"><div class="hg3-label">Domande per la call</div><div class="hg3-content">Elisia: colazione, brunch, cena o cocktail bar? Qual è il piatto o il drink che già funziona? C’è uno staff member con personalità forte? L’hotel Adoro: chi è il suo ospite tipico? Ha spazi fotografabili (terrazza, cortile)?</div></div>
+  </div>
+  <div class="hs-idee">
+    <div class="hi-header" id="hih4">
+      <div class="hi-title">5 idee di contenuto per partire</div>
+      <div class="hi-sub">Formati, concept, esecuzione concreta</div>
+    </div>
+    <div class="hi-grid"><div class="hi-card" id="hic1">
+  <div class="hi-tag story">Stories</div>
+  <div class="hi-n">01</div>
+  <div class="hi-format">Story · format</div>
+  <div class="hi-idea">Elisia alle 18:30, il momento fisso</div>
+  <div class="hi-desc">Format settimanale: ogni settimana allo stesso orario, la preparazione del momento-chiave di Elisia. Il pubblico sa quando aspettarsi il contenuto. La ripetizione costruisce abitudine e attesa.</div>
+</div>
+<div class="hi-card" id="hic2">
+  <div class="hi-tag reel">Reel</div>
+  <div class="hi-n">02</div>
+  <div class="hi-format">Reel</div>
+  <div class="hi-idea">Il rito di Elisia, da definire</div>
+  <div class="hi-desc">Il contenuto pilota più importante: il Reel che definisce cosa è Elisia. Non una presentazione, un’esperienza compressa in 30 secondi. Richiede brief post-call.</div>
+</div>
+<div class="hi-card" id="hic3">
+  <div class="hi-tag story">Stories</div>
+  <div class="hi-n">03</div>
+  <div class="hi-format">Staff</div>
+  <div class="hi-idea">Il volto di Elisia, introduzione seriale</div>
+  <div class="hi-desc">Chi è la persona che incarna Elisia? Quel volto diventa il personaggio ricorrente dell’account. Presentazione in tre parti: chi sei, cosa fai, cosa ti piace di questo posto.</div>
+</div>
+<div class="hi-card" id="hic4">
+  <div class="hi-tag reel">Reel</div>
+  <div class="hi-n">04</div>
+  <div class="hi-format">Hotel</div>
+  <div class="hi-idea">Hotel Adoro, perché questa città, perché qui</div>
+  <div class="hi-desc">Content di posizionamento per l’hotel: cosa rende il soggiorno all’Adoro diverso da un qualsiasi boutique hotel romano. Il punto di differenziazione specifico da trovare insieme.</div>
+</div>
+<div class="hi-card" id="hic5">
+  <div class="hi-tag static">ADV Meta</div>
+  <div class="hi-n">05</div>
+  <div class="hi-format">ADV</div>
+  <div class="hi-idea">Retargeting su chi ha visitato il sito BZAR</div>
+  <div class="hi-desc">Campagna ADV per l’Adoro mirata a chi ha già visitato bzarhotels.it senza prenotare. Contenuto che mostra ciò che non si è visto sul sito: il lato umano e sensoriale.</div>
+</div></div>
+  </div>
+  <div class="hs-canali" id="hcan4">
+    <strong style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-family:Poppins,sans-serif;color:var(--mid)">Canali:</strong>
+    <div class="hs-can priority">Instagram</div><div class="hs-can">TikTok</div><div class="hs-can">Meta ADV</div>
+  </div>
+  <!-- MAPPA SINAPTICA HOTEL ADORO -->
+  <div class="sin-wrap" id="sin-hs-4" style="opacity:0;margin-top:3.5rem">
+    <div class="sin-header">
+      <div class="sin-title">Mappa Sinaptica &mdash; Hotel Adoro</div>
+      <div class="sin-sub">Seleziona una persona per vedere la strategia specifica</div>
+    </div>
+    <div class="sin-body">
+      <div class="sin-col sin-col-who">
+        <div class="sin-col-label">Chi &middot; Persona target</div>
+        <button class="sin-persona" id="hs-4-p-leo"
+  style="--p-color:#6b8fa8;--p-rgb:107,143,168"
+  onclick="sinActivate('hs-4','p-leo')"
+  data-hotel="hs-4" data-persona="p-leo">
+  <span class="sin-p-dot" style="background:#6b8fa8"></span>
+  <span><span class="sin-p-name">Leo</span><br><span class="sin-p-role">29 · Creativo · TikTok-first</span></span>
+  <span class="sin-p-badge pri">Primario</span>
+</button><button class="sin-persona" id="hs-4-p-oliv"
+  style="--p-color:#755847;--p-rgb:117,88,71"
+  onclick="sinActivate('hs-4','p-oliv')"
+  data-hotel="hs-4" data-persona="p-oliv">
+  <span class="sin-p-dot" style="background:#755847"></span>
+  <span><span class="sin-p-name">Olivia</span><br><span class="sin-p-role">38 · Globetrotter · Visual-first</span></span>
+  <span class="sin-p-badge sec">Secondaria</span>
+</button>
+      </div>
+      <div class="sin-col sin-col-what" id="hs-4-what">
+        <div class="sin-col-label">Cosa &amp; Dove &middot; Strategia</div>
+        <div class="sin-s-empty" id="hs-4-empty"><div class="sin-s-empty-icon">&#x2192;</div><div class="sin-s-empty-t">Seleziona una persona</div></div><div class="sin-strategy" id="hs-4-p-leo-strat"
+  style="display:none">
+  <div class="sin-s-label">Pillars attivati</div>
+  <div class="sin-pillars"><span class="sin-pillar" style="background:rgba(107,143,168,.2);color:#6b8fa8;border-color:#6b8fa840">Elisia rito fisso</span><span class="sin-pillar" style="background:rgba(107,143,168,.15);color:#6b8fa8;border-color:#6b8fa840">Urban lifestyle</span><span class="sin-pillar" style="background:rgba(107,143,168,.15);color:#6b8fa8;border-color:#6b8fa840">Mobile-first</span></div>
+  <div class="sin-s-label">Canali chiave</div>
+  <div class="sin-channels"><span class="sin-chan  priority">TikTok</span><span class="sin-chan  priority">Instagram</span><span class="sin-chan">Meta ADV</span></div>
+  <div class="sin-s-label">Contenuto pilota</div>
+  <div class="sin-content-idea" style="border-color:#6b8fa8;color:rgba(241,239,237,.75)">"Work. Aperitivo. Dormi qui. Non in quest'ordine."</div>
+</div><div class="sin-strategy" id="hs-4-p-oliv-strat"
+  style="display:none">
+  <div class="sin-s-label">Pillars attivati</div>
+  <div class="sin-pillars"><span class="sin-pillar" style="background:rgba(117,88,71,.2);color:#755847;border-color:#75584740">Elisia experience</span><span class="sin-pillar" style="background:rgba(117,88,71,.15);color:#755847;border-color:#75584740">Editorial lifestyle</span></div>
+  <div class="sin-s-label">Canali chiave</div>
+  <div class="sin-channels"><span class="sin-chan  priority">Instagram</span><span class="sin-chan">Pinterest</span></div>
+  <div class="sin-s-label">Contenuto pilota</div>
+  <div class="sin-content-idea" style="border-color:#755847;color:rgba(241,239,237,.75)">"Elisia esiste da sola. L'Adoro la amplifica."</div>
+</div>
+      </div>
+      <div class="sin-col sin-col-why" id="hs-4-why">
+        <div class="sin-col-label">Perch&eacute; &middot; Obiettivo</div>
+        <div class="sin-obj" id="hs-4-obj-empty" style="display:flex;align-items:center;justify-content:center;height:100%"><div style="opacity:.2;font-size:2.5rem;text-align:center">&#x25cb;</div></div>
+        <div class="sin-obj" id="hs-4-p-leo-obj" style="display:none">
+  <div class="sin-obj-circle" style="background:rgba(107,143,168,.1);border-color:#6b8fa8;color:#6b8fa8">⚡</div>
+  <div>
+    <div class="sin-obj-phase">Conversione mobile</div>
+    <div class="sin-obj-name" style="color:#6b8fa8">Booking sito diretto</div>
+    <div class="sin-obj-kpi">Traffico mobile · Booking rate da social</div>
+  </div>
+</div><div class="sin-obj" id="hs-4-p-oliv-obj" style="display:none">
+  <div class="sin-obj-circle" style="background:rgba(117,88,71,.1);border-color:#755847;color:#755847">🍸</div>
+  <div>
+    <div class="sin-obj-phase">Cross-sell</div>
+    <div class="sin-obj-name" style="color:#755847">Hotel + F&B Elisia</div>
+    <div class="sin-obj-kpi">F&B revenue · Repeat visit</div>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hs" id="hs-5">
+  <div class="hs-ghost" aria-hidden="true">hs-h5</div>
+  <div class="hs-header">
+    <div class="hs-num">05</div>
+    <div class="hs-meta">
+      <div class="hs-type hotel">Hotel · Roma</div>
+      <div class="hs-name">Hotel La Griffe</div>
+      
+    </div>
+  </div>
+  <div class="hs-paradox" id="hp5">
+    <div class="hp-label">Il nome più interessante del gruppo</div>
+    <div class="hp-text"><em>La Griffe.</em> Firma. Stile. Attitudine. Non è un nome generico, è già una dichiarazione di posizionamento. Il profilo è quello su cui abbiamo meno dati nel cruscotto, ma su cui la nostra intuizione è più forte.</div>
+    <div class="hp-data"><div class="hp-d"><div class="hp-dv">Griffe</div><div class="hp-dl">= firma, stile, identità</div></div>
+<div class="hp-d"><div class="hp-dv">?</div><div class="hp-dl">posizionamento da affinare</div></div></div>
+    <div class="hp-badge ok">→ Il nome è già un manifesto editoriale, da esplorare insieme</div>
+  </div>
+  <div class="hs-narr" id="hn5">
+    <div class="hn-label">Narrativa centrale</div>
+    <div class="hn-headline">"Un hotel che non ha bisogno di spiegare cosa è. Il nome lo fa già."</div>
+    <div class="hn-body">La Griffe ha un vantaggio raro: un nome che comunica prima ancora che il contenuto parli. La direzione creativa che intravediamo è quella di un hotel con attitudine, non fashion in senso esplicito, ma con un senso del gusto e dello stile molto preciso. Il profilo Instagram deve essere immediatamente riconoscibile come "diverso" dagli altri hotel del gruppo, pur rimanendo nel sistema BZAR. La prima call su La Griffe dovrebbe rispondere a una sola domanda: <em>chi è l’ospite che sceglie La Griffe e non Viminale?</em></div>
+  </div>
+  <div class="hs-grid3" id="hg5">
+    <div class="hg3-col"><div class="hg3-label">Tono di voce ipotizzato</div><div class="hg3-content"><strong>Editoriale, con attitudine.</strong> Più tagliente degli altri hotel del gruppo. Le caption sono brevi, quasi da moda. Le immagini hanno composizione precisa, niente casualità. Il feed deve sembrare la cover di una rivista di viaggio premium.</div></div>
+    <div class="hg3-col"><div class="hg3-label">Ipotesi di posizionamento</div><div class="hg3-content">Un ospite più giovane rispetto alla Dimora, più style-conscious di Viminale. <strong>Leo e Olivia</strong> come target primari. Chi sceglie La Griffe vuole dire qualcosa sul proprio gusto con la scelta di dove dormire.</div></div>
+    <div class="hg3-col"><div class="hg3-label">Da chiarire con Francesco</div><div class="hg3-content">Gli spazi fotografabili, ci sono elementi visivi forti (lobby, terrazze, dettagli di design)? Il tipo di ospite attuale. Eventuali collaborazioni con brand fashion o culturali già in corso. Budget e ambizioni per questo specifico profilo.</div></div>
+  </div>
+  <div class="hs-idee">
+    <div class="hi-header" id="hih5">
+      <div class="hi-title">5 idee di contenuto per partire</div>
+      <div class="hi-sub">Formati, concept, esecuzione concreta</div>
+    </div>
+    <div class="hi-grid"><div class="hi-card" id="hic1">
+  <div class="hi-tag static">Post</div>
+  <div class="hi-n">01</div>
+  <div class="hi-format">Feed · editoriale</div>
+  <div class="hi-idea">La Griffe, il feed come rivista</div>
+  <div class="hi-desc">Ogni immagine è trattata come una copertina. Composizione precisa, palette rigorosa. Il feed guarda in un colpo d’occhio. Nessuna immagine deve “stare bene”, deve essere necessaria.</div>
+</div>
+<div class="hi-card" id="hic2">
+  <div class="hi-tag reel">Reel</div>
+  <div class="hi-n">02</div>
+  <div class="hi-format">Reel · manifesto</div>
+  <div class="hi-idea">Check-in differente, cosa significa soggiornare qui</div>
+  <div class="hi-desc">Il primo Reel di una nuova era: 20 secondi, niente voce, solo immagini e musica. L’arrivo, la camera, un dettaglio inaspettato. Ending con il logo La Griffe. Statement piece.</div>
+</div>
+<div class="hi-card" id="hic3">
+  <div class="hi-tag static">Collab</div>
+  <div class="hi-n">03</div>
+  <div class="hi-format">Collaborazione</div>
+  <div class="hi-idea">Guest edit con un brand culturale romano</div>
+  <div class="hi-desc">Collaborazione con un fotografo, un designer o un artista romano: produce contenuto per La Griffe per una settimana. Cross-audience, credibilità editoriale, originalità garantita.</div>
+</div>
+<div class="hi-card" id="hic4">
+  <div class="hi-tag story">Stories</div>
+  <div class="hi-n">04</div>
+  <div class="hi-format">Staff</div>
+  <div class="hi-idea">La persona che cura il dettaglio</div>
+  <div class="hi-desc">Chi è il membro dello staff che meglio incarna lo stile di La Griffe? Il concierge con gusto impeccabile, il responsabile F&B con una cura maniacale. Quel personaggio è il volto del profilo.</div>
+</div>
+<div class="hi-card" id="hic5">
+  <div class="hi-tag reel">TikTok</div>
+  <div class="hi-n">05</div>
+  <div class="hi-format">TikTok</div>
+  <div class="hi-idea">"Perché si chiama La Griffe", origin story</div>
+  <div class="hi-desc">Il primo contenuto TikTok: la storia del nome. Breve, curioso, memorabile. Funziona perché è una domanda che sorge naturale. E perché risponderla correttamente definisce tutto il tono del profilo.</div>
+</div></div>
+  </div>
+  <div class="hs-canali" id="hcan5">
+    <strong style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-family:Poppins,sans-serif;color:var(--mid)">Canali:</strong>
+    <div class="hs-can priority">Instagram</div><div class="hs-can priority">TikTok</div><div class="hs-can">Facebook</div>
+  </div>
+  <!-- MAPPA SINAPTICA HOTEL LA GRIFFE -->
+  <div class="sin-wrap" id="sin-hs-5" style="opacity:0;margin-top:3.5rem">
+    <div class="sin-header">
+      <div class="sin-title">Mappa Sinaptica &mdash; Hotel La Griffe</div>
+      <div class="sin-sub">Seleziona una persona per vedere la strategia specifica</div>
+    </div>
+    <div class="sin-body">
+      <div class="sin-col sin-col-who">
+        <div class="sin-col-label">Chi &middot; Persona target</div>
+        <button class="sin-persona" id="hs-5-p-leo"
+  style="--p-color:#6b8fa8;--p-rgb:107,143,168"
+  onclick="sinActivate('hs-5','p-leo')"
+  data-hotel="hs-5" data-persona="p-leo">
+  <span class="sin-p-dot" style="background:#6b8fa8"></span>
+  <span><span class="sin-p-name">Leo</span><br><span class="sin-p-role">29 · Creativo · TikTok-first</span></span>
+  <span class="sin-p-badge pri">Primario</span>
+</button><button class="sin-persona" id="hs-5-p-oliv"
+  style="--p-color:#755847;--p-rgb:117,88,71"
+  onclick="sinActivate('hs-5','p-oliv')"
+  data-hotel="hs-5" data-persona="p-oliv">
+  <span class="sin-p-dot" style="background:#755847"></span>
+  <span><span class="sin-p-name">Olivia</span><br><span class="sin-p-role">38 · Globetrotter · Visual-first</span></span>
+  <span class="sin-p-badge pri">Primaria</span>
+</button>
+      </div>
+      <div class="sin-col sin-col-what" id="hs-5-what">
+        <div class="sin-col-label">Cosa &amp; Dove &middot; Strategia</div>
+        <div class="sin-s-empty" id="hs-5-empty"><div class="sin-s-empty-icon">&#x2192;</div><div class="sin-s-empty-t">Seleziona una persona</div></div><div class="sin-strategy" id="hs-5-p-leo-strat"
+  style="display:none">
+  <div class="sin-s-label">Pillars attivati</div>
+  <div class="sin-pillars"><span class="sin-pillar" style="background:rgba(107,143,168,.2);color:#6b8fa8;border-color:#6b8fa840">Manifesto culturale</span><span class="sin-pillar" style="background:rgba(107,143,168,.15);color:#6b8fa8;border-color:#6b8fa840">Origin story</span><span class="sin-pillar" style="background:rgba(107,143,168,.15);color:#6b8fa8;border-color:#6b8fa840">Creator collab</span></div>
+  <div class="sin-s-label">Canali chiave</div>
+  <div class="sin-channels"><span class="sin-chan  priority">TikTok</span><span class="sin-chan  priority">Instagram</span></div>
+  <div class="sin-s-label">Contenuto pilota</div>
+  <div class="sin-content-idea" style="border-color:#6b8fa8;color:rgba(241,239,237,.75)">"Perché si chiama La Griffe? Il primo video che pubblica risponde a questa domanda."</div>
+</div><div class="sin-strategy" id="hs-5-p-oliv-strat"
+  style="display:none">
+  <div class="sin-s-label">Pillars attivati</div>
+  <div class="sin-pillars"><span class="sin-pillar" style="background:rgba(117,88,71,.2);color:#755847;border-color:#75584740">Feed editoriale</span><span class="sin-pillar" style="background:rgba(117,88,71,.15);color:#755847;border-color:#75584740">Guest edit collab</span><span class="sin-pillar" style="background:rgba(117,88,71,.15);color:#755847;border-color:#75584740">Copertina ogni post</span></div>
+  <div class="sin-s-label">Canali chiave</div>
+  <div class="sin-channels"><span class="sin-chan  priority">Instagram</span><span class="sin-chan">Pinterest</span></div>
+  <div class="sin-s-label">Contenuto pilota</div>
+  <div class="sin-content-idea" style="border-color:#755847;color:rgba(241,239,237,.75)">"Non prenoti solo un hotel. Prenoti una firma."</div>
+</div>
+      </div>
+      <div class="sin-col sin-col-why" id="hs-5-why">
+        <div class="sin-col-label">Perch&eacute; &middot; Obiettivo</div>
+        <div class="sin-obj" id="hs-5-obj-empty" style="display:flex;align-items:center;justify-content:center;height:100%"><div style="opacity:.2;font-size:2.5rem;text-align:center">&#x25cb;</div></div>
+        <div class="sin-obj" id="hs-5-p-leo-obj" style="display:none">
+  <div class="sin-obj-circle" style="background:rgba(107,143,168,.1);border-color:#6b8fa8;color:#6b8fa8">✍️</div>
+  <div>
+    <div class="sin-obj-phase">Positioning</div>
+    <div class="sin-obj-name" style="color:#6b8fa8">Style identity Roma</div>
+    <div class="sin-obj-kpi">Awareness · Share · Profilo visite</div>
+  </div>
+</div><div class="sin-obj" id="hs-5-p-oliv-obj" style="display:none">
+  <div class="sin-obj-circle" style="background:rgba(117,88,71,.1);border-color:#755847;color:#755847">💎</div>
+  <div>
+    <div class="sin-obj-phase">Premium booking</div>
+    <div class="sin-obj-name" style="color:#755847">Community di stile</div>
+    <div class="sin-obj-kpi">Follower qualità · ADR medio</div>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="fb-section" id="s-fb">
+  <div class="s-tag">F&amp;B outlets + Toscana</div>
+  <h2 class="s-h">Le strutture secondarie.<br>Idee concrete, voce propria.</h2>
+  <p class="s-lead" style="margin-bottom:0">Ogni outlet ha una direzione editoriale specifica. Meno spazio dei cinque hotel, non meno attenzione.</p>
+
+  <div class="fb-grid">
+
+    <div class="fb-card" id="fbc1">
+      <div class="fb-top" onclick="toggleFb('fbc1')">
+        <div class="fb-badge fb">F&amp;B outlet</div>
+        <div><div class="fb-name">Spritzeria Monti</div><div class="fb-sub">35K IG · TA 3.5, il caso inverso</div></div>
+        <div class="fb-arrow">▾</div>
+      </div>
+      <div class="fb-body">
+        <div class="fb-inner">
+          <div><div class="fb-col-l">Insight</div>
+            <div class="fb-insight">“Ha l’audience. Non ha la conversione. Bisogna smettere di crescere in follower e iniziare a crescere in clienti.”</div>
+            <div class="fb-badge-gap">⚠ Social forte · OTA debole</div>
+          </div>
+          <div><div class="fb-col-l">Idea + formati</div>
+            <div class="fb-idea-title">Dall’hype alla fiducia</div>
+            <div class="fb-idea-body">Non più contenuto, ma contenuto diverso. Mostrare le persone, il dietro le quinte, i momenti autentici. Attivare i 35K follower per lasciare recensioni reali.</div>
+            <div class="fb-formats">
+              <div class="fb-fmt">Behind the scenes, chi prepara e chi serve</div>
+              <div class="fb-fmt">UGC activation verso TripAdvisor</div>
+              <div class="fb-fmt">Risposta pubblica alle recensioni come content</div>
+              <div class="fb-fmt">ADV retargeting sui follower esistenti</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fb-card" id="fbc2">
+      <div class="fb-top" onclick="toggleFb('fbc2')">
+        <div class="fb-badge fb">F&amp;B outlet</div>
+        <div><div class="fb-name">Osteria Oliva</div><div class="fb-sub">789 follower · 1.130+ post, volume senza identità</div></div>
+        <div class="fb-arrow">▾</div>
+      </div>
+      <div class="fb-body">
+        <div class="fb-inner">
+          <div><div class="fb-col-l">Insight</div>
+            <div class="fb-insight">“Più di 1.130 post. 789 follower. Un follower ogni 1.4 post. Il problema non è la quantità, è l’assenza di un filo narrativo che trattenga.”</div>
+            <div class="fb-badge-gap">⚠ Reset editoriale necessario</div>
+          </div>
+          <div><div class="fb-col-l">Idea + formati</div>
+            <div class="fb-idea-title">Meno è di più. Stop al volume, start all’identità.</div>
+            <div class="fb-idea-body">Reset visivo completo. Nuova palette, nuovo ritmo. 2 post di qualità a settimana. Rubrica fissa: produttore + ingrediente + piatto.</div>
+            <div class="fb-formats">
+              <div class="fb-fmt">Reset visivo: palettea nuova, caption nuova</div>
+              <div class="fb-fmt">Rubrica “L’ingrediente di stagione”</div>
+              <div class="fb-fmt">Chef/staff come voce ricorrente</div>
+              <div class="fb-fmt">Qualità > quantità, meno post, più identità</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fb-card" id="fbc3">
+      <div class="fb-top" onclick="toggleFb('fbc3')">
+        <div class="fb-badge fb">F&amp;B outlet</div>
+        <div><div class="fb-name">Moderno Bakery</div><div class="fb-sub">Roma, il rituale del mattino</div></div>
+        <div class="fb-arrow">▾</div>
+      </div>
+      <div class="fb-body">
+        <div class="fb-inner">
+          <div><div class="fb-col-l">Insight</div>
+            <div class="fb-insight">“Le bakery sono tra i format più performanti sui social food. Il processo produttivo è naturalmente cinematico: lievitazione, forno, vapore. C’è materiale video innato.”</div>
+          </div>
+          <div><div class="fb-col-l">Idea + formati</div>
+            <div class="fb-idea-title">"La mattina di Roma inizia qui."</div>
+            <div class="fb-idea-body">Ownership del momento colazione. Content quasi ASMR: suono del pane, vapore, mani nell’impasto. TikTok-friendly, breve e sensoriale.</div>
+            <div class="fb-formats">
+              <div class="fb-fmt">Process video: pre-alba in cucina, sfornamento</div>
+              <div class="fb-fmt">UGC: la colazione dei clienti reali</div>
+              <div class="fb-fmt">Rubrica stagionale: il prodotto del mese</div>
+              <div class="fb-fmt">Formato verticale 15-30 sec, alta frequenza</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fb-card" id="fbc4">
+      <div class="fb-top" onclick="toggleFb('fbc4')">
+        <div class="fb-badge launch">Apertura giugno 2026</div>
+        <div><div class="fb-name">A Mano</div><div class="fb-sub">Dimora Coppelle, lancio da zero, opportunità unica</div></div>
+        <div class="fb-arrow">▾</div>
+      </div>
+      <div class="fb-body">
+        <div class="fb-inner">
+          <div><div class="fb-col-l">Insight</div>
+            <div class="fb-insight">“Parte da zero. Nessuna eredità sbagliata. Il conto alla rovescia è già il primo contenuto.”</div>
+            <div class="fb-badge-win">✓ Partenza pulita, opportunità massima</div>
+          </div>
+          <div><div class="fb-col-l">Idea + formati</div>
+            <div class="fb-idea-title">Il lancio come evento editoriale in tre atti.</div>
+            <div class="fb-idea-body">Before: teaser settimanali. Launch day: Reel del primo giorno. After: prima settimana come serie. Il nome A Mano è già una direzione creativa.</div>
+            <div class="fb-formats">
+              <div class="fb-fmt">Pre-apertura: teaser 4 settimane prima</div>
+              <div class="fb-fmt">Launch day Reel in real time</div>
+              <div class="fb-fmt">Serie post-apertura: “A Mano si presenta”</div>
+              <div class="fb-fmt">Cross-promotion con Dimora Coppelle</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fb-card" id="fbc5" style="grid-column:span 2">
+      <div class="fb-top" onclick="toggleFb('fbc5')">
+        <div class="fb-badge fb" style="background:rgba(117,88,71,.08);color:var(--mid)">Toscana</div>
+        <div><div class="fb-name">La Collegiata + Il Castello di Leonina</div><div class="fb-sub">Outlet interni senza identità standalone, approccio da definire</div></div>
+        <div class="fb-arrow">▾</div>
+      </div>
+      <div class="fb-body">
+        <div class="fb-inner">
+          <div><div class="fb-col-l">Proposta di approccio</div>
+            <div class="fb-insight">“Contenuto nel canale hotel. Identità separata da valutare nel tempo in base alla domanda.”</div>
+            <div class="fb-idea-body" style="margin-top:.5rem">La Toscana ha un contesto narrativo diverso da Roma, più lento, paesaggistico, esperienziale. Gli outlet interni arricchiscono il racconto dell’hotel senza necessità di account separati nella fase iniziale.</div>
+          </div>
+          <div><div class="fb-col-l">Domande per la call</div>
+            <div class="fb-formats">
+              <div class="fb-fmt">La Collegiata: zona e tipo di ospite prevalente?</div>
+              <div class="fb-fmt">Il Castello: vocazione principale (hotel, eventi, F&amp;B)?</div>
+              <div class="fb-fmt">Stagionalità marcata per le strutture toscane?</div>
+              <div class="fb-fmt">Canale brand Toscana o integrazione in BZAR corporate?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="sec" id="s-modello">
+  <div class="s-tag">Modello operativo</div>
+  <h2 class="s-h">Chi fa cosa.<br>Senza ambiguità.</h2>
+  <p class="s-lead">Bipartito: Ribrain gestisce strategia, content e ADV. Snacky Agency (unit romana di Ribrain) copre la produzione foto e video sul campo.</p>
+  <div class="mo-grid">
+    <div class="mo-card" id="mo1">
+      <div class="mo-icon">&#x1F3AF;</div>
+      <div class="mo-title">Ribrain: Strategia &amp; Content</div>
+      <div class="mo-body">Piano editoriale per ogni account. Copywriting e direzione creativa. Gestione approvazioni con <strong>Francesco Mormile</strong> come referente unico. Reporting periodico pre/post Ribrain con confronto KPI. Gestione campagne ADV (Meta Ads, TikTok Ads) per amplificare i contenuti strategici prioritari.</div>
+    </div>
+    <div class="mo-card" id="mo2">
+      <div class="mo-icon">&#x1F3A5;</div>
+      <div class="mo-title">Snacky Agency: Produzione</div>
+      <div class="mo-body">Unit romana di Ribrain per produzione video e fotografica. <strong>Shooting programmati per struttura</strong>, frequenza da calibrare con il piano editoriale e il budget. Brief creativo preparato da Ribrain, esecuzione Snacky sul campo. <strong>Voce separata</strong> nel piano economico, non inclusa nel retainer base.</div>
+    </div>
+    <div class="mo-card" id="mo3">
+      <div class="mo-icon">&#x1F4CB;</div>
+      <div class="mo-title">Governance &amp; Approvazioni</div>
+      <div class="mo-body">Referente unico lato BZAR: <strong>Francesco Mormile</strong>. Batch di contenuti per approvazione (non contenuto per contenuto). Strumento condiviso per revisione. Finestre concordate  48h per contenuti standard, 24h per real-time. <em>Nessuna catena di mail.</em></div>
+    </div>
+    <div class="mo-card" id="mo4">
+      <div class="mo-icon">&#x1F4CA;</div>
+      <div class="mo-title">Frequenza, benchmark di mercato</div>
+      <div class="mo-body">Non una frequenza uguale per tutti. <strong>Account prioritari:</strong> 3+ post/settimana + stories quotidiane. <strong>Account secondari:</strong> 2 post/settimana. <strong>Toscana:</strong> frequenza stagionale integrata. <br><em>Il volume esatto si calibra con il budget approvato.</em></div>
+    </div>
+  </div>
+
+  <div style="margin-top:2.5rem">
+    <div class="s-tag">Benchmark frequenza · settore hospitality boutique</div>
+    <div id="freqChart" style="margin-top:1rem">
+      <div class="freq-row">
+        <div><div class="freq-label">Hotel boutique</div><div class="freq-sub">account principale</div></div>
+        <div class="freq-bar-wrap"><div class="freq-bar" data-w="70" style="background:var(--ink)"></div></div>
+        <div class="freq-val">3-4/sett</div>
+      </div>
+      <div class="freq-row">
+        <div><div class="freq-label">F&amp;B outlet standalone</div><div class="freq-sub">identità forte</div></div>
+        <div class="freq-bar-wrap"><div class="freq-bar" data-w="60" style="background:#9a6b3a"></div></div>
+        <div class="freq-val">3/sett</div>
+      </div>
+      <div class="freq-row">
+        <div><div class="freq-label">F&amp;B embedded</div><div class="freq-sub">outlet in hotel</div></div>
+        <div class="freq-bar-wrap"><div class="freq-bar" data-w="38" style="background:var(--mid)"></div></div>
+        <div class="freq-val">1-2/sett</div>
+      </div>
+      <div class="freq-row">
+        <div><div class="freq-label">Instagram Stories</div><div class="freq-sub">account attivi</div></div>
+        <div class="freq-bar-wrap"><div class="freq-bar" data-w="88" style="background:var(--brand)"></div></div>
+        <div class="freq-val">5-7/sett</div>
+      </div>
+      <div class="freq-row">
+        <div><div class="freq-label">TikTok</div><div class="freq-sub">profili priority</div></div>
+        <div class="freq-bar-wrap"><div class="freq-bar" data-w="48" style="background:#6b5a8a"></div></div>
+        <div class="freq-val">2-3/sett</div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--mid);margin-top:.75rem">Fonte: Hootsuite 2025 · Dining, Hospitality &amp; Tourism benchmark · Engagement rate IG medio: 3.1% post, 2.6% Reel</p>
+  </div>
+</section>
+
+<section class="sec bg-alt" id="s-avvio">
+  <div class="s-tag">Piano di avvio</div>
+  <h2 class="s-h">Le fasi operative.<br>Dalla firma al primo post.</h2>
+  <p class="s-lead">Il processo è strutturato in quattro fasi sequenziali. I tempi esatti si definiscono dopo la firma in base alla disponibilità operativa di entrambe le parti.</p>
+  <div class="fasi" id="fasiList">
+    <div class="fase" id="fase1">
+      <div class="fase-dot"></div>
+      <div class="fase-n">Fase 01</div>
+      <div class="fase-title">Kickoff e allineamento</div>
+      <div class="fase-body">Meeting con Francesco. Accessi agli account social. Raccolta brand kit per struttura. Setup strumenti di collaborazione. Primo brief shooting Snacky.</div>
+    </div>
+    <div class="fase" id="fase2">
+      <div class="fase-dot" style="background:var(--mid)"></div>
+      <div class="fase-n">Fase 02</div>
+      <div class="fase-title">Audit e diagnosi</div>
+      <div class="fase-body">Analisi completa degli account esistenti. Raccolta UGC riutilizzabile. Baseline KPI pre-Ribrain. Analisi competitiva. Opportunità per struttura.</div>
+    </div>
+    <div class="fase" id="fase3">
+      <div class="fase-dot" style="background:#9a6b3a"></div>
+      <div class="fase-n">Fase 03</div>
+      <div class="fase-title">Strategia e contenuti pilota</div>
+      <div class="fase-body">Linee editoriali per ogni struttura. Primo calendario editoriale. Brief shooting dettagliato. Mock-up dei primi post per approvazione Francesco.</div>
+    </div>
+    <div class="fase" id="fase4">
+      <div class="fase-dot" style="background:var(--go)"></div>
+      <div class="fase-n">Fase 04</div>
+      <div class="fase-title">Go live</div>
+      <div class="fase-body">Primo batch contenuti approvati. Primo shooting Snacky sui profili priority. Launch teaser A Mano. Operatività piena su tutti gli account.</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="s-kpi">
+  <div class="s-tag">KPI e misurazione</div>
+  <h2 class="s-h">Come misuriamo.<br>Pre e post Ribrain.</h2>
+  <p class="s-lead">Il successo ha due componenti: una quantitativa (metriche confrontabili) e una qualitativa (allineamento visivo percepito da Francesco). Entrambe contano uguale nei primi mesi.</p>
+  <div class="kpi-grid">
+    <div class="kpi-card" id="kpi1">
+      <div class="kpi-period">Qualitativo · Mesi 1-3</div>
+      <div class="kpi-metric">Allineamento visivo del feed</div>
+      <div class="kpi-desc">Valutazione condivisa con Francesco sulla coerenza estetica rispetto al brand book. Confronto before/after per ogni profilo. Non è un numero, è una conversazione mensile su ciò che si vede.</div>
+      <div class="kpi-pill kpi-qual">Qualitativo</div>
+    </div>
+    <div class="kpi-card" id="kpi2">
+      <div class="kpi-period">Quantitativo · Mesi 1-6</div>
+      <div class="kpi-metric">Engagement rate &gt;3% IG</div>
+      <div class="kpi-desc">Benchmark hospitality boutique: 3.1% post, 2.6% Reel (Hootsuite 2025). Target iniziale 2-4% con crescita progressiva. Misurato per singolo account.</div>
+      <div class="kpi-pill kpi-quant">Quantitativo</div>
+    </div>
+    <div class="kpi-card" id="kpi3">
+      <div class="kpi-period">Quantitativo · Mesi 1-6</div>
+      <div class="kpi-metric">Crescita follower organica</div>
+      <div class="kpi-desc">Baseline dai dati attuali (Viminale 678, Spritzeria 35K, Osteria 789…). Target crescita mensile calibrato su budget ADV disponibile. Qualità del follower, non solo volume.</div>
+      <div class="kpi-pill kpi-quant">Quantitativo</div>
+    </div>
+    <div class="kpi-card" id="kpi4">
+      <div class="kpi-period">Quantitativo · Mesi 3-6</div>
+      <div class="kpi-metric">Traffico social → sito diretto</div>
+      <div class="kpi-desc">Click link in bio, UTM tracking campagne ADV, visite sito da IG/TikTok. Leading indicator della domanda, i segnali che precedono la prenotazione.</div>
+      <div class="kpi-pill kpi-quant">Quantitativo</div>
+    </div>
+    <div class="kpi-card" id="kpi5">
+      <div class="kpi-period">Qualitativo · Ongoing</div>
+      <div class="kpi-metric">Reputazione OTA post-social</div>
+      <div class="kpi-desc">Monitoring rating TA e Booking nel tempo. Ipotesi: visibilità qualificata porta ospiti più allineati al prodotto, il che si traduce in recensioni migliori. Verifica a 6 mesi.</div>
+      <div class="kpi-pill kpi-qual">Qualitativo</div>
+    </div>
+    <div class="kpi-card" id="kpi6">
+      <div class="kpi-period">Quantitativo · Mesi 6+</div>
+      <div class="kpi-metric">Prenotazioni dirette attribuite</div>
+      <div class="kpi-desc">Riduzione % OTA a favore del canale diretto. Misurabile con UTM e attribution. Obiettivo di medio termine: non un KPI di lancio, ma la destinazione finale dell’intero progetto.</div>
+      <div class="kpi-pill kpi-quant">Quantitativo</div>
+    </div>
+  </div>
+</section>
+
+<section id="recap">
+  <div class="re-tag">Sintesi · M7 · Brainstorming Strategico</div>
+  <div class="re-pills">
+    <div class="rp"><div class="rp-v">10</div><div class="rp-u">strutture nel piano</div><div class="rp-l">5 hotel + 5 F&B outlet + apertura A Mano a giugno + 2 strutture toscane</div></div>
+    <div class="rp"><div class="rp-v">4</div><div class="rp-u">fasi operative</div><div class="rp-l">Kickoff → Audit → Strategia → Go live. Tempi da allineare post-firma.</div></div>
+    <div class="rp"><div class="rp-v">1</div><div class="rp-u">referente unico</div><div class="rp-l">Francesco Mormile. Batch di contenuti per approvazione. Nessuna catena di mail.</div></div>
+  </div>
+  <div class="re-ins">
+    <div class="re-ins-h">Il passo successivo</div>
+    <div class="re-ins-t">Hotel Viminale: numero 1 a Roma, quasi nessuno lo sa sui social. È il punto di partenza naturale di tutta la strategia. Da lì si costruisce la grammatica che vale per tutto il gruppo: 5 hotel esplosi, 5 outlet F&B, una grammatica comune, identità figlie diverse.</div>
+  </div>
+  <div class="re-note">Il piano economico, retainer mensile Ribrain + budget produzione Snacky + budget ADV, è il naturale passo successivo a questa conversazione. Non è in questo documento.</div>
+</section>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+var cur=document.getElementById("cur");
+document.addEventListener("mousemove",function(e){gsap.to(cur,{x:e.clientX,y:e.clientY,duration:.1,ease:"none"});});
+document.querySelectorAll("a,button").forEach(function(el){
+  el.addEventListener("mouseenter",function(){gsap.to(cur,{width:18,height:18,duration:.18});});
+  el.addEventListener("mouseleave",function(){gsap.to(cur,{width:8,height:8,duration:.18});});
+});
+// Hero
+var fbT=setTimeout(function(){["htag","hl1","hl2","hl3","hsub","hcounts"].forEach(function(id){var e=document.getElementById(id);if(e)e.style.opacity="1";});},2000);
+gsap.fromTo("#htag",{opacity:0,y:14},{opacity:1,y:0,duration:.8,delay:.2,ease:"power3.out",onComplete:function(){clearTimeout(fbT);}});
+gsap.fromTo("#hl1",{opacity:0,y:28},{opacity:1,y:0,duration:.95,delay:.4,ease:"power3.out"});
+gsap.fromTo("#hl2",{opacity:0,y:28},{opacity:1,y:0,duration:.95,delay:.56,ease:"power3.out"});
+gsap.fromTo("#hl3",{opacity:0,y:28},{opacity:1,y:0,duration:.95,delay:.72,ease:"power3.out"});
+gsap.fromTo("#hsub",{opacity:0,y:18},{opacity:1,y:0,duration:.85,delay:1,ease:"power3.out"});
+gsap.fromTo("#hcounts",{opacity:0,y:14},{opacity:1,y:0,duration:.7,delay:1.25,ease:"power3.out"});
+gsap.fromTo(".hero-ghost",{opacity:0,scale:.93},{opacity:1,scale:1,duration:2,delay:.1,ease:"power2.out"});
+// Sezione strategica
+['#lv1','#lv2','#lv3'].forEach(function(sel,i){
+  var el=document.querySelector(sel);
+  if(!el) return;
+  gsap.fromTo(el,{opacity:0,y:16},{opacity:1,y:0,duration:.7,ease:'power3.out',delay:i*.1,scrollTrigger:{trigger:el,start:'top 86%',once:true}});
+});
+['#acc1','#acc2','#start-box'].forEach(function(sel,i){
+  var el=document.querySelector(sel);
+  if(!el) return;
+  gsap.fromTo(el,{opacity:0,y:14},{opacity:1,y:0,duration:.65,ease:'power3.out',delay:i*.12,scrollTrigger:{trigger:el,start:'top 87%',once:true}});
+});
+// Sezioni generali
+gsap.utils.toArray(".sec,.fb-section,.hs,#recap").forEach(function(el){
+  gsap.fromTo(el,{opacity:0,y:24},{opacity:1,y:0,duration:.85,ease:"power3.out",scrollTrigger:{trigger:el,start:"top 85%",once:true}});
+});
+// Paradox box hotel
+for(var i=1;i<=5;i++){(function(n){
+  var el=document.getElementById("hp"+n);
+  if(el) gsap.fromTo(el,{opacity:0,y:16},{opacity:1,y:0,duration:.7,ease:"power3.out",scrollTrigger:{trigger:el,start:"top 86%",once:true}});
+  var hn=document.getElementById("hn"+n);
+  if(hn) gsap.fromTo(hn,{opacity:0,y:14},{opacity:1,y:0,duration:.65,ease:"power3.out",scrollTrigger:{trigger:hn,start:"top 87%",once:true}});
+  var hg=document.getElementById("hg"+n);
+  if(hg) gsap.fromTo(hg,{opacity:0,y:12},{opacity:1,y:0,duration:.6,ease:"power3.out",scrollTrigger:{trigger:hg,start:"top 87%",once:true}});
+  var hih=document.getElementById("hih"+n);
+  if(hih) gsap.fromTo(hih,{opacity:0},{opacity:1,duration:.5,scrollTrigger:{trigger:hih,start:"top 87%",once:true}});
+  var hcan=document.getElementById("hcan"+n);
+  if(hcan) gsap.fromTo(hcan,{opacity:0},{opacity:1,duration:.5,scrollTrigger:{trigger:hcan,start:"top 90%",once:true}});
+  // idea cards per hotel
+  for(var j=1;j<=5;j++){(function(nn){
+    var ic=document.querySelector("#hs-h"+n+" #hic"+nn)||document.querySelector("#hic"+nn);
+    // iterate all hic elements per hotel section
+  })(j);}
+})(i);}
+// Idea cards - tutte
+document.querySelectorAll(".hi-card").forEach(function(el,i){
+  gsap.fromTo(el,{opacity:0,y:12},{opacity:1,y:0,duration:.6,ease:"power3.out",delay:(i%5)*.08,
+    scrollTrigger:{trigger:el,start:"top 89%",once:true}});
+});
+// FB cards
+document.querySelectorAll(".fb-card").forEach(function(el,i){
+  gsap.fromTo(el,{opacity:0,y:14},{opacity:1,y:0,duration:.65,ease:"power3.out",delay:i*.08,
+    scrollTrigger:{trigger:el,start:"top 88%",once:true}});
+});
+// Modello cards
+document.querySelectorAll(".mo-card").forEach(function(el,i){
+  gsap.fromTo(el,{opacity:0,y:16},{opacity:1,y:0,duration:.65,ease:"power3.out",delay:i*.1,
+    scrollTrigger:{trigger:el,start:"top 87%",once:true}});
+});
+// Freq bars
+ScrollTrigger.create({trigger:"#freqChart",start:"top 80%",once:true,onEnter:function(){
+  document.querySelectorAll(".freq-bar").forEach(function(el,i){
+    gsap.fromTo(el,{width:"0%"},{width:el.getAttribute("data-w")+"%",duration:.9,ease:"power3.out",delay:.1+i*.1});
+  });
+}});
+// Fasi
+document.querySelectorAll(".fase").forEach(function(el,i){
+  gsap.fromTo(el,{opacity:0,y:18},{opacity:1,y:0,duration:.7,ease:"power3.out",delay:i*.12,
+    scrollTrigger:{trigger:el,start:"top 87%",once:true}});
+});
+// KPI
+document.querySelectorAll(".kpi-card").forEach(function(el,i){
+  gsap.fromTo(el,{opacity:0,y:14},{opacity:1,y:0,duration:.65,ease:"power3.out",delay:i*.09,
+    scrollTrigger:{trigger:el,start:"top 88%",once:true}});
+});
+// Recap
+gsap.utils.toArray(".rp").forEach(function(el,i){
+  gsap.fromTo(el,{opacity:0,y:18},{opacity:1,y:0,duration:.7,ease:"power3.out",delay:i*.12,
+    scrollTrigger:{trigger:el,start:"top 88%",once:true}});
+});
+// Toggle FB accordion
+function toggleFb(id){
+  var card=document.getElementById(id);
+  if(!card) return;
+  var isOpen=card.classList.contains("open");
+  document.querySelectorAll(".fb-card.open").forEach(function(c){c.classList.remove("open");});
+  if(!isOpen) card.classList.add("open");
+}
+</script>
+
+<!-- MENU IIFE -->
+<script>
+(function(){
+'use strict';
+var M=[
+  {id:'m0',code:'00',label:'Executive Summary',sub:'Il gap \u00b7 La proposta',url:'m0.html',color:'#C8A88D'},
+  {id:'m1',code:'01',label:'Mercato',sub:'Roma 2026 \u00b7 OTA \u00b7 Social',url:'m1.html',color:'#755847'},
+  {id:'m2',code:'02',label:'Competitor Map',sub:'Hoxton \u00b7 Chapter \u00b7 Mama',url:'m2.html',color:'#9a7d6a'},
+  {id:'m3',code:'03',label:'Voce del Cliente',sub:'VOC \u00b7 14 account \u00b7 Gap',url:'m3.html',color:'#C4ACA5'},
+  {id:'m4',code:'04',label:'Personas',sub:'4 profili \u00b7 Trigger \u00b7 Grammatiche',url:'m4.html',color:'#a08470'},
+  {id:'m7',code:'05',label:'Mappa del Momento',sub:'Perch\u00e9 investire adesso',url:'m5.html',color:'#C8A88D'},
+  {id:'m7',code:'06',label:'Benchmark Creativi',sub:'Il Pellicano \u00b7 Borgo \u00b7 The Pig',url:'m6.html',color:'#755847'},
+  {id:'m7',code:'07',label:'Brainstorming Strategico',sub:'KPI \u00b7 Governance',url:'m7.html',color:'#9a7d6a'}
+];
+var path=window.location.pathname.split('/').pop().replace('.html','')||'m0';
+var cur=M[0];for(var ci=0;ci<M.length;ci++){if(M[ci].id===path){cur=M[ci];break;}}
+var s=document.createElement('style');
+s.textContent='.rbmenu-btn{position:fixed;top:14px;right:16px;z-index:9001;width:44px;height:44px;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:5px;padding:8px}.rbmenu-btn span{display:block;height:1.5px;background:#F1EFED;border-radius:1px;transition:all .45s cubic-bezier(0.16,1,0.3,1);transform-origin:right center}.rbmenu-btn.light span{background:#1E1410}.rbmenu-btn .l1{width:22px}.rbmenu-btn .l2{width:16px}.rbmenu-btn .l3{width:22px}.rbmenu-btn.open .l1{width:22px;transform:translateY(6.5px) rotate(-45deg)}.rbmenu-btn.open .l2{opacity:0;width:0}.rbmenu-btn.open .l3{width:22px;transform:translateY(-6.5px) rotate(45deg)}.rbmenu-overlay{position:fixed;inset:0;z-index:9000;background:#1E1410;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .5s cubic-bezier(0.16,1,0.3,1);overflow:hidden}.rbmenu-overlay.open{opacity:1;pointer-events:auto}.rbmenu-top{display:flex;align-items:center;justify-content:space-between;padding:18px 48px;border-bottom:1px solid rgba(200,168,141,.07);flex-shrink:0}.rbmenu-brand{display:flex;align-items:center;gap:12px}.rbmenu-brand-sep{width:1px;height:16px;background:rgba(200,168,141,.2)}.rbmenu-brand-label{font-family:"Poppins",sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(200,168,141,.3)}.rbmenu-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:24px 48px 36px;overflow-y:auto}.rbmenu-items{list-style:none}.rbmenu-item{border-top:1px solid rgba(200,168,141,.06);opacity:0;transform:translateY(20px);position:relative}.rbmenu-item:last-child{border-bottom:1px solid rgba(200,168,141,.06)}.rbmenu-item a{display:grid;grid-template-columns:48px 1fr auto;gap:0 20px;align-items:center;padding:14px 0;text-decoration:none;color:inherit;position:relative}.rbmenu-item a::after{content:"";position:absolute;bottom:0;left:0;width:0;height:1px;background:#C8A88D;transition:width .5s cubic-bezier(0.16,1,0.3,1);opacity:.3}.rbmenu-item a:hover::after{width:100%}.rmi-code{font-family:"Poppins",sans-serif;font-size:10px;letter-spacing:.12em;color:rgba(200,168,141,.22);line-height:1;transition:color .3s}.rbmenu-item a:hover .rmi-code{color:rgba(200,168,141,.5)}.rmi-left{display:flex;flex-direction:column;gap:3px}.rmi-label{font-family:"Afacad Flux",sans-serif;font-weight:300;font-size:clamp(24px,3.2vw,42px);line-height:1;color:rgba(241,239,237,.65);transition:color .3s;letter-spacing:-.01em}.rbmenu-item a:hover .rmi-label{color:rgba(241,239,237,.9)}.rbmenu-item.active .rmi-label{color:#C8A88D;font-style:italic}.rmi-sub{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.22);transition:color .3s}.rbmenu-item a:hover .rmi-sub{color:rgba(200,168,141,.4)}.rmi-arr{font-size:18px;color:rgba(200,168,141,.18);transition:transform .4s cubic-bezier(0.16,1,0.3,1),color .3s}.rbmenu-item a:hover .rmi-arr{transform:translateX(6px);color:rgba(200,168,141,.5)}.rbmenu-item-active-bar{position:absolute;left:0;top:2px;bottom:2px;width:3px;border-radius:0 2px 2px 0;opacity:.8}.rbmenu-footer{padding:16px 48px;border-top:1px solid rgba(200,168,141,.06);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}.rbmf-left{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.2)}.rbmf-right{display:flex;align-items:center;gap:16px}.rbmf-link{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.25);text-decoration:none;transition:color .3s}.rbmf-link:hover{color:rgba(200,168,141,.6)}.rbmenu-glow{position:absolute;top:50%;right:-10%;transform:translateY(-50%);width:50vw;height:50vw;border-radius:50%;pointer-events:none;opacity:.05;transition:background 1s;filter:blur(80px)}.rbnavbar{position:fixed;bottom:0;left:0;right:0;z-index:8000;background:rgba(30,20,16,.97);backdrop-filter:blur(24px);border-top:1px solid rgba(200,168,141,.07);height:48px;display:flex;align-items:stretch}.rbnavbar-inner{max-width:1440px;margin:0 auto;padding:0 16px;display:flex;align-items:stretch;width:100%}.rbnavbar-brand{display:flex;align-items:center;gap:8px;padding-right:12px;border-right:1px solid rgba(200,168,141,.07);margin-right:2px;flex-shrink:0}.rbnavbar-brand-txt{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(200,168,141,.22);white-space:nowrap}.rbnavbar-items{display:flex;align-items:stretch;flex:1;overflow-x:auto;scrollbar-width:none}.rbnavbar-items::-webkit-scrollbar{display:none}.rbnav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 10px;text-decoration:none;color:inherit;border-right:1px solid rgba(200,168,141,.05);min-width:56px;position:relative;gap:2px;transition:background .2s}.rbnav-item:hover{background:rgba(200,168,141,.05)}.rbnav-item.active{background:rgba(200,168,141,.07)}.rbnav-item-bar{position:absolute;top:0;left:0;right:0;height:2px}.rbnav-code{font-family:"Poppins",sans-serif;font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.28);line-height:1}.rbnav-item.active .rbnav-code{color:rgba(200,168,141,.55)}.rbnav-title{font-family:"Afacad Flux",sans-serif;font-size:9px;font-weight:400;color:rgba(200,168,141,.4);line-height:1;white-space:nowrap}.rbnav-item.active .rbnav-title{color:rgba(200,168,141,.85);font-weight:500}body{padding-bottom:48px !important}@media(max-width:600px){.rbmenu-top,.rbmenu-body,.rbmenu-footer{padding-left:20px;padding-right:20px}.rmi-label{font-size:clamp(20px,5.5vw,32px)}}';
+document.head.appendChild(s);
+var btn=document.createElement('button');btn.className='rbmenu-btn';
+var bg=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
+if(bg&&bg.indexOf('#F')===0)btn.classList.add('light');
+btn.setAttribute('aria-label','Apri menu');
+btn.innerHTML='<span class="l1"></span><span class="l2"></span><span class="l3"></span>';
+document.body.appendChild(btn);
+var ov=document.createElement('div');ov.className='rbmenu-overlay';
+var ih='';
+for(var i=0;i<M.length;i++){
+  var m=M[i],a=m.id===path;
+  ih+='<li class="rbmenu-item'+(a?' active':'')+'">'+
+    (a?'<span class="rbmenu-item-active-bar" style="background:'+m.color+'"></span>':'')+
+    '<a href="'+m.url+'"><span class="rmi-code">'+m.code+'</span>'+
+    '<span class="rmi-left"><span class="rmi-label">'+m.label+'</span><span class="rmi-sub">'+m.sub+'</span></span>'+
+    '<span class="rmi-arr">\u2192</span></a></li>';
+}
+ov.innerHTML='<div class="rbmenu-glow" id="rbglow" style="background:'+cur.color+'"></div>'+
+  '<div class="rbmenu-top"><div class="rbmenu-brand">'+
+  '<span style="font-family:\'Afacad Flux\',sans-serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#C8A88D">BZAR Hotels</span>'+
+  '<div class="rbmenu-brand-sep"></div>'+
+  '<img src="https://www.ribrainstudio.com/wp-content/uploads/2025/01/Logo_ribrain_Nero.svg" style="height:13px;filter:invert(1);opacity:.5" onerror="this.style.display=\'none\'">'+
+  '<div class="rbmenu-brand-sep"></div>'+
+  '<span class="rbmenu-brand-label">Cruscotto Strategico \u00b7 BZAR Hotels</span>'+
+  '</div></div>'+
+  '<div class="rbmenu-body"><ul class="rbmenu-items">'+ih+'</ul></div>'+
+  '<div class="rbmenu-footer"><span class="rbmf-left">Aprile 2026 \u00b7 Ribrain Studio \u00b7 Confidenziale</span>'+
+  '<div class="rbmf-right"><a href="m0.html" class="rbmf-link">Executive Summary</a><a href="m7.html" class="rbmf-link">Brainstorming Strategico \u2192</a></div></div>';
+document.body.appendChild(ov);
+var nb=document.createElement('nav');nb.className='rbnavbar';
+var nh='';
+for(var ni=0;ni<M.length;ni++){
+  var nm=M[ni],na=nm.id===path;
+  nh+='<a href="'+nm.url+'" class="rbnav-item'+(na?' active':'')+'" title="'+nm.label+'">'+
+    (na?'<span class="rbnav-item-bar" style="background:'+nm.color+'"></span>':'')+
+    '<span class="rbnav-code">'+nm.code+'</span><span class="rbnav-title">'+nm.label+'</span></a>';
+}
+nb.innerHTML='<div class="rbnavbar-inner"><div class="rbnavbar-brand">'+
+  '<img src="https://www.ribrainstudio.com/wp-content/uploads/2025/01/Logo_ribrain_Nero.svg" style="height:11px;filter:invert(1);opacity:.3" onerror="this.style.display=\'none\'">'+
+  '<span class="rbnavbar-brand-txt">\u00d7 BZAR</span></div>'+
+  '<div class="rbnavbar-items">'+nh+'</div></div>';
+document.body.appendChild(nb);
+var isOpen=false;
+function openMenu(){isOpen=true;btn.classList.add('open');ov.classList.add('open');btn.setAttribute('aria-label','Chiudi menu');document.body.style.overflow='hidden';
+  var its=ov.querySelectorAll('.rbmenu-item');
+  for(var ii=0;ii<its.length;ii++){(function(el,idx){el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity .5s '+(.07+idx*.055)+'s cubic-bezier(0.16,1,0.3,1),transform .5s '+(.07+idx*.055)+'s cubic-bezier(0.16,1,0.3,1)';setTimeout(function(){el.style.opacity='1';el.style.transform='translateY(0)';},10);})(its[ii],ii);}
+}
+function closeMenu(){isOpen=false;btn.classList.remove('open');ov.classList.remove('open');btn.setAttribute('aria-label','Apri menu');document.body.style.overflow='';}
+btn.addEventListener('click',function(){if(isOpen)closeMenu();else openMenu();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&isOpen)closeMenu();});
+var lis=ov.querySelectorAll('.rbmenu-item');
+for(var gi=0;gi<lis.length;gi++){(function(li,mod){
+  li.addEventListener('mouseenter',function(){var g=document.getElementById('rbglow');if(g)g.style.background=mod.color;});
+  li.addEventListener('mouseleave',function(){var g=document.getElementById('rbglow');if(g)g.style.background=cur.color;});
+})(lis[gi],M[gi]);}
+})();
+</script>
+
+<!-- FONTI IIFE -->
+<script>
+(function(){
+'use strict';
+var SRC=[
+  {label:'ENIT \u2014 Turismo verso l\'Italia, arrivi e presenze 2025',url:'https://www.enit.it/storage/202603/20260313103759_it%20enit%20-%20turismo%20verso%20litalia%20da%20oltreoceano_it.pdf'},
+  {label:'Federalberghi / L\'Agenzia di Viaggi \u2014 Occupazione hotel Roma estate 2025',url:'https://www.lagenziadiviaggimag.it/roma-cresce-loccupazione-degli-hotel-in-estate-i-dati-federalberghi/'},
+  {label:'Barchart \u2014 Rome Hotels Pricing Trends & Demand Forecast 2026',url:'https://www.barchart.com/story/news/36932939/rome-hotels-reveals-booking-market-statistics-pricing-trends-demand-forecast-for-2026'},
+  {label:'Cloudbeds \u2014 A Guide to OTA Commission Rates in 2026',url:'https://www.cloudbeds.com/online-travel-agencies/commissions/'},
+  {label:'TravelQuotidiano \u2014 TikTok supera Instagram nella scelta del viaggio per i giovani',url:'https://www.travelquotidiano.com/mercato_e_tecnologie/tik-tok-supera-instagram/tqid-501494'},
+  {label:'Hospitality Net \u2014 How Hotels Can Harness Social Media to Drive Real Business Value',url:'https://www.hospitalitynet.org/news/4128795/how-hotels-can-harness-social-media-to-drive-real-business-value'}
+];
+var style=document.createElement('style');
+style.textContent='.src-toggle{position:fixed;bottom:56px;right:14px;z-index:7500;display:flex;align-items:center;gap:7px;background:rgba(30,20,16,.92);border:1px solid rgba(200,168,141,.15);backdrop-filter:blur(16px);padding:6px 11px;cursor:pointer;font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.45);transition:all .25s;border-radius:99px}.src-toggle:hover{border-color:rgba(200,168,141,.35);color:rgba(200,168,141,.75)}.src-toggle .st-dot{width:5px;height:5px;border-radius:50%;background:#C8A88D;flex-shrink:0}.src-toggle .st-n{background:rgba(200,168,141,.15);color:#C8A88D;padding:1px 5px;border-radius:10px;font-size:8px}.src-drawer{position:fixed;bottom:48px;left:0;right:0;z-index:7000;background:rgba(30,20,16,.97);backdrop-filter:blur(24px);border-top:1px solid rgba(200,168,141,.1);max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(0.16,1,0.3,1),opacity .4s;opacity:0}.src-drawer.open{max-height:360px;opacity:1}.src-drawer-inner{padding:20px 48px 24px;overflow-y:auto;max-height:320px}.src-drawer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}.src-drawer-title{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,168,141,.32)}.src-drawer-close{background:none;border:none;cursor:pointer;font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.25);transition:color .2s}.src-drawer-close:hover{color:rgba(200,168,141,.65)}.src-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:4px}.src-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid rgba(200,168,141,.06);border-radius:6px}.src-item-num{font-family:"Poppins",sans-serif;font-size:8px;letter-spacing:.1em;color:rgba(200,168,141,.25);flex-shrink:0;padding-top:1px;min-width:18px}.src-item-label{font-size:11px;color:rgba(241,239,237,.6);line-height:1.45;margin-bottom:3px}.src-item-url{font-family:"Poppins",sans-serif;font-size:8px;color:rgba(200,168,141,.4);text-decoration:none;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media(max-width:768px){.src-drawer-inner{padding:16px 20px}.src-list{grid-template-columns:1fr}}';
+document.head.appendChild(style);
+var drawer=document.createElement('div');drawer.className='src-drawer';
+var ih='';
+for(var i=0;i<SRC.length;i++){
+  ih+='<div class="src-item"><span class="src-item-num">'+String(i+1).padStart(2,'0')+'</span>'+
+    '<div><div class="src-item-label">'+SRC[i].label+'</div>'+
+    '<a href="'+SRC[i].url+'" target="_blank" rel="noopener noreferrer" class="src-item-url">'+SRC[i].url+'</a></div></div>';
+}
+drawer.innerHTML='<div class="src-drawer-inner"><div class="src-drawer-head">'+
+  '<span class="src-drawer-title">Fonti \u00b7 '+SRC.length+' riferimenti \u00b7 M5</span>'+
+  '<button class="src-drawer-close" id="srcClose">Chiudi \u2715</button></div>'+
+  '<div class="src-list">'+ih+'</div></div>';
+document.body.appendChild(drawer);
+var toggle=document.createElement('button');toggle.className='src-toggle';
+toggle.innerHTML='<span class="st-dot"></span>Fonti <span class="st-n">'+SRC.length+'</span>';
+document.body.appendChild(toggle);
+var open=false;
+function td(){open=!open;drawer.classList.toggle('open',open);toggle.style.borderColor=open?'rgba(200,168,141,.3)':'';toggle.style.color=open?'rgba(200,168,141,.75)':'';}
+toggle.addEventListener('click',td);
+document.getElementById('srcClose').addEventListener('click',function(){open=true;td();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&open){open=true;td();}});
+})();
+</script>
+
+<script>
+// MAPPA SINAPTICA, logica interattiva
+function sinActivate(hotelId, personaId) {
+  // reset tutti i bottoni di questo hotel
+  document.querySelectorAll('[data-hotel="' + hotelId + '"]').forEach(function(b) {
+    b.classList.remove('active');
+  });
+  // attiva bottone selezionato
+  var btn = document.getElementById(hotelId + '-' + personaId);
+  if (btn) btn.classList.add('active');
+
+  // nascondi empty state
+  var empty = document.getElementById(hotelId + '-empty');
+  if (empty) empty.style.display = 'none';
+
+  // nascondi tutte le strategy di questo hotel
+  document.querySelectorAll('[id^="' + hotelId + '-"][id$="-strat"]').forEach(function(el) {
+    el.style.display = 'none';
+    el.classList.remove('show');
+  });
+  // nascondi tutti gli obj di questo hotel
+  document.querySelectorAll('[id^="' + hotelId + '-"][id$="-obj"]').forEach(function(el) {
+    el.style.display = 'none';
+    el.classList.remove('show');
+  });
+  var objEmpty = document.getElementById(hotelId + '-obj-empty');
+  if (objEmpty) objEmpty.style.display = 'none';
+
+  // mostra strategy persona
+  var strat = document.getElementById(hotelId + '-' + personaId + '-strat');
+  if (strat) {
+    strat.style.display = 'block';
+    setTimeout(function() { strat.classList.add('show'); }, 20);
+  }
+  // mostra obj persona
+  var obj = document.getElementById(hotelId + '-' + personaId + '-obj');
+  if (obj) {
+    obj.style.display = 'flex';
+    setTimeout(function() { obj.classList.add('show'); }, 40);
+  }
+}
+// Scroll trigger per fade-in mappe sinaptiche
+document.querySelectorAll('.sin-wrap').forEach(function(el) {
+  ScrollTrigger.create({
+    trigger: el, start: 'top 82%', once: true,
+    onEnter: function() {
+      gsap.fromTo(el, {opacity:0, y:20}, {opacity:1, y:0, duration:.8, ease:'power3.out'});
+    }
+  });
+});
+</script>
+
+</body>
+</html>
+
+</body>
+</html>
+</body>
+</html>

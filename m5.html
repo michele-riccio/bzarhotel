@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M5: Mappa del Momento · BZAR Hotels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{--bg:#F1EFED;--ink:#755847;--brand:#C8A88D;--rose:#C4ACA5;--dark:#1E1410;--mid:#9a7d6a;--go:#5a8a5a}
+body{background:var(--bg);color:var(--dark);font-family:'Poppins',sans-serif;font-size:15px;line-height:1.65;overflow-x:hidden;padding-top:52px;padding-bottom:48px;cursor:none}
+@media(hover:none){body{cursor:auto}#cur{display:none}}
+#cur{position:fixed;width:8px;height:8px;background:var(--brand);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:multiply;transition:width .18s,height .18s}
+
+.topbar{position:fixed;top:0;left:0;right:0;z-index:800;height:52px;background:var(--dark);display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem 0 1.5rem;border-bottom:.5px solid rgba(200,168,141,.1)}
+.tb-l{display:flex;align-items:center;gap:.75rem}
+.tb-brand{font-family:'Afacad Flux',sans-serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.tb-sep{width:.5px;height:16px;background:rgba(255,255,255,.15)}
+.tb-rlogo{height:13px;filter:invert(1);opacity:.6}
+.tb-c{font-family:'Poppins',sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.2);position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap}
+@media(max-width:680px){.tb-c{display:none}}
+.tb-r{display:flex;align-items:center;gap:.75rem}
+.tb-date{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+.tb-conf{font-size:9px;letter-spacing:.14em;text-transform:uppercase;border:.5px solid rgba(200,168,141,.28);color:rgba(200,168,141,.45);padding:3px 8px;border-radius:3px}
+
+/* HERO */
+.hero{min-height:100svh;display:grid;grid-template-rows:1fr auto;padding:5.5rem 1.5rem 2.5rem;position:relative;overflow:hidden}
+.hero-noise{position:absolute;inset:0;pointer-events:none;opacity:.018;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px}
+.hero-ghost{position:absolute;right:-2%;top:50%;transform:translateY(-50%);font-family:'Afacad Flux',sans-serif;font-size:clamp(18rem,44vw,40rem);font-weight:700;line-height:1;color:rgba(117,88,71,.042);pointer-events:none;user-select:none;letter-spacing:-.07em}
+.hero-body{display:flex;flex-direction:column;justify-content:center}
+.hero-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--brand);display:flex;align-items:center;gap:.75rem;margin-bottom:2rem}
+.hero-tag::before{content:'';width:28px;height:1px;background:var(--brand)}
+.hero-h1{font-family:'Afacad Flux',sans-serif;font-size:clamp(3rem,8.5vw,7rem);font-weight:400;line-height:1.02;letter-spacing:-.035em;max-width:820px}
+.hero-h1 em{font-style:italic;font-weight:300;color:var(--ink)}
+.hero-sub{margin-top:1.75rem;font-size:14px;color:var(--mid);max-width:460px;line-height:1.8}
+/* 3 stats inline */
+.hero-stats{display:flex;gap:2.5rem;margin-top:2.5rem;flex-wrap:wrap}
+.hs{display:flex;flex-direction:column}
+.hs-v{font-family:'Afacad Flux',sans-serif;font-size:clamp(2rem,4.5vw,3rem);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.03em}
+.hs-l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-top:.2rem}
+.hero-foot{padding-top:1.5rem}
+.hero-scroll{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(117,88,71,.3);display:flex;align-items:center;gap:.5rem}
+.hero-scroll::after{content:'';width:48px;height:1px;background:rgba(200,168,141,.22)}
+
+/* SECTIONS */
+.sec{padding:5rem 1.5rem;border-top:.5px solid rgba(117,88,71,.1)}
+.s-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);margin-bottom:.6rem}
+.s-h{font-family:'Afacad Flux',sans-serif;font-size:clamp(2rem,4.5vw,3.2rem);font-weight:400;line-height:1.08;letter-spacing:-.02em;margin-bottom:1rem}
+.s-lead{font-size:14px;color:var(--mid);max-width:520px;line-height:1.8}
+
+/* 4 MOMENT CARDS */
+.moment-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:3rem}
+@media(max-width:620px){.moment-grid{grid-template-columns:1fr}}
+.mc{background:#FDFCFA;border:.5px solid rgba(117,88,71,.12);border-radius:14px;padding:1.5rem;position:relative;overflow:hidden;opacity:0}
+.mc-ghost{position:absolute;top:-10px;right:.5rem;font-family:'Afacad Flux',sans-serif;font-size:5.5rem;font-weight:700;line-height:1;pointer-events:none;user-select:none;letter-spacing:-.06em}
+.mc-tag{font-size:9px;letter-spacing:.14em;text-transform:uppercase;font-family:'Poppins',sans-serif;font-weight:500;margin-bottom:.6rem}
+.mc-val{font-family:'Afacad Flux',sans-serif;font-size:clamp(2.2rem,5vw,3.5rem);font-weight:300;line-height:1;letter-spacing:-.03em;margin-bottom:.35rem}
+.mc-label{font-family:'Afacad Flux',sans-serif;font-size:1rem;font-weight:500;color:var(--dark);margin-bottom:.5rem}
+.mc-desc{font-size:12px;color:var(--mid);line-height:1.6}
+/* readiness meter */
+.mc-meter{margin-top:1rem;height:4px;background:rgba(117,88,71,.1);border-radius:99px;overflow:hidden}
+.mc-meter-fill{height:100%;border-radius:99px;width:0;transition:none}
+.mc-status{display:flex;align-items:center;gap:.4rem;margin-top:.4rem;font-size:9px;letter-spacing:.1em;text-transform:uppercase;font-family:'Poppins',sans-serif}
+.mc-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* CONVERGENCE SVG */
+.conv-wrap{margin-top:3.5rem}
+.conv-svg{width:100%;height:auto;display:block}
+.conv-caption{margin-top:1.5rem;font-family:'Afacad Flux',sans-serif;font-size:clamp(1rem,2.4vw,1.3rem);font-style:italic;font-weight:300;color:var(--dark);border-left:2px solid var(--brand);padding-left:1rem;line-height:1.45;max-width:580px}
+
+/* VERDICT DARK */
+.verdict{background:var(--dark);border-radius:20px;padding:3rem 2rem;margin-top:3.5rem;position:relative;overflow:hidden}
+.verdict::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(200,168,141,.07) 0%,transparent 65%);pointer-events:none}
+.vd-tag{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(200,168,141,.4);margin-bottom:.75rem}
+.vd-t{font-family:'Afacad Flux',sans-serif;font-size:clamp(1.4rem,3.5vw,2.2rem);color:rgba(241,239,237,.85);line-height:1.2;max-width:600px;font-weight:400;margin-bottom:2rem}
+.vd-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:2rem}
+@media(max-width:480px){.vd-nums{grid-template-columns:1fr;gap:1rem}}
+.vd-n{border-top:.5px solid rgba(200,168,141,.18);padding-top:.75rem}
+.vd-nv{font-family:'Afacad Flux',sans-serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:300;color:var(--brand);line-height:1;letter-spacing:-.03em}
+.vd-nu{font-size:11px;color:rgba(200,168,141,.45)}
+.vd-nl{font-size:11px;color:rgba(255,255,255,.28);margin-top:.25rem;line-height:1.4}
+.vd-risk{border-top:.5px solid rgba(255,255,255,.07);padding-top:1.25rem;font-size:13px;color:rgba(241,239,237,.4);line-height:1.65;max-width:580px}
+.vd-risk strong{color:rgba(241,239,237,.7)}
+
+/* RISK SECTION */
+.risk-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2.5rem;align-items:start}
+@media(max-width:580px){.risk-grid{grid-template-columns:1fr}}
+.risk-chart-wrap{}
+.risk-chart-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);margin-bottom:1rem;font-family:'Poppins',sans-serif}
+.risk-svg{width:100%;height:auto;display:block}
+.risk-items{display:flex;flex-direction:column;gap:1.25rem}
+.ri{display:grid;grid-template-columns:28px 1fr;gap:.75rem;align-items:start}
+.ri-n{font-family:'Afacad Flux',sans-serif;font-size:1.5rem;font-weight:300;color:rgba(117,88,71,.2);line-height:1}
+.ri-t{font-family:'Afacad Flux',sans-serif;font-size:.95rem;font-weight:500;color:var(--dark);margin-bottom:.2rem}
+.ri-d{font-size:12px;color:var(--mid);line-height:1.55}
+
+/* RECAP */
+#recap{background:var(--dark);color:var(--bg);padding:4.5rem 1.5rem;border-top:.5px solid rgba(200,168,141,.1)}
+.re-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(200,168,141,.38);margin-bottom:2.5rem}
+.re-pills{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-bottom:3rem}
+@media(max-width:520px){.re-pills{grid-template-columns:1fr;gap:1.5rem}}
+.rp{border-top:.5px solid rgba(200,168,141,.18);padding-top:1rem}
+.rp-v{font-family:'Afacad Flux',sans-serif;font-size:clamp(2.2rem,5vw,3.5rem);font-weight:300;color:var(--brand);line-height:1;letter-spacing:-.03em}
+.rp-u{font-size:12px;color:rgba(200,168,141,.45)}
+.rp-l{font-size:12px;color:rgba(255,255,255,.28);margin-top:.3rem;line-height:1.4}
+.re-ins{border-top:.5px solid rgba(255,255,255,.07);padding-top:1.75rem;margin-bottom:2.5rem}
+.re-ins-h{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,168,141,.38);margin-bottom:.6rem}
+.re-ins-t{font-family:'Afacad Flux',sans-serif;font-size:clamp(1.1rem,3vw,1.5rem);line-height:1.4;max-width:600px;color:rgba(241,239,237,.75);font-weight:300}
+.re-cta{display:inline-flex;align-items:center;gap:.6rem;background:var(--brand);color:var(--dark);padding:.8rem 1.6rem;border-radius:99px;text-decoration:none;font-family:'Afacad Flux',sans-serif;font-size:14px;font-weight:500;transition:background .2s,transform .15s}
+.re-cta:hover{background:#d4b89a;transform:translateY(-1px)}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+
+<header class="topbar">
+  <div class="tb-l">
+    <span class="tb-brand">BZAR Hotels</span>
+    <div class="tb-sep"></div>
+    <img src="https://www.ribrainstudio.com/wp-content/uploads/2025/01/Logo_ribrain_Nero.svg" alt="Ribrain" class="tb-rlogo">
+  </div>
+  <span class="tb-c">Cruscotto Strategico &middot; Mappa del Momento</span>
+  <div class="tb-r">
+    <span class="tb-date">Aprile 2026</span>
+    <span class="tb-conf">Confidenziale</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-noise" aria-hidden="true"></div>
+  <div class="hero-ghost" aria-hidden="true">M5</div>
+  <div class="hero-body">
+    <div class="hero-tag" id="htag">M5 &mdash; Mappa del Momento</div>
+    <h1 class="hero-h1">
+      <span id="hl1">Quattro condizioni.</span><br>
+      <span id="hl2">Tutte al verde.</span><br>
+      <span id="hl3"><em>Solo adesso.</em></span>
+    </h1>
+    <p class="hero-sub" id="hsub">Mercato in crescita, brand pronto, digitale vergine, risorse operative disponibili. Queste quattro finestre si aprono raramente insieme. Quando succede, si chiama finestra strategica.</p>
+    <div class="hero-stats" id="hstats">
+      <div class="hs"><span class="hs-v" id="cnt1">0</span><span class="hs-l">milioni arrivi Roma 2025</span></div>
+      <div class="hs"><span class="hs-v">+11%</span><span class="hs-l">tariffe attese 2026</span></div>
+      <div class="hs"><span class="hs-v">80%</span><span class="hs-l">hospitality aumenta social</span></div>
+    </div>
+  </div>
+  <div class="hero-foot"><div class="hero-scroll" aria-hidden="true">Scorri</div></div>
+</section>
+
+<!-- 4 MOMENTI -->
+<section class="sec" id="s-moments">
+  <div class="s-tag">Le quattro condizioni</div>
+  <h2 class="s-h">Quattro fattori indipendenti.<br>Tutti favorevoli. Tutti adesso.</h2>
+  <p class="s-lead">Ogni condizione sarebbe già un buon motivo da sola. Tutte e quattro insieme definiscono un momento irripetibile.</p>
+
+  <div class="moment-grid">
+
+    <div class="mc" id="mc1">
+      <div class="mc-ghost" style="color:rgba(117,88,71,.05)">01</div>
+      <div class="mc-tag" style="color:#5a8a5a">Momento del Mercato</div>
+      <div class="mc-val" style="color:var(--ink)">+7–11%</div>
+      <div class="mc-label">Tariffe attese 2026</div>
+      <div class="mc-desc">Roma 2025: 7.1M arrivi, record storico. ADR a 256€ (+2% sul 2024). Primo trimestre 2026 già +1.3% sullo stesso periodo 2025. Il mercato non ha mai pagato di più per stare a Roma.</div>
+      <div class="mc-meter"><div class="mc-meter-fill" id="mf1" style="background:#5a8a5a"></div></div>
+      <div class="mc-status"><div class="mc-dot" style="background:#5a8a5a"></div>Domanda alta · tariffe in crescita</div>
+    </div>
+
+    <div class="mc" id="mc2">
+      <div class="mc-ghost" style="color:rgba(117,88,71,.05)">02</div>
+      <div class="mc-tag" style="color:#755847">Momento del Brand</div>
+      <div class="mc-val" style="color:var(--ink)">60+</div>
+      <div class="mc-label">Hotel · Brand Book pronto</div>
+      <div class="mc-desc">Da 16 proprietà nel 2020 a oltre 60 nel 2025. Brand Book 2026 pubblicato, sito multistruttura online, identità unificata pronta. Mai prima d'ora BZAR aveva le fondamenta per comunicare come gruppo coerente.</div>
+      <div class="mc-meter"><div class="mc-meter-fill" id="mf2" style="background:#755847"></div></div>
+      <div class="mc-status"><div class="mc-dot" style="background:#755847"></div>Brand pronto · identità definita</div>
+    </div>
+
+    <div class="mc" id="mc3">
+      <div class="mc-ghost" style="color:rgba(117,88,71,.05)">03</div>
+      <div class="mc-tag" style="color:#6b8fa8">Momento Digitale</div>
+      <div class="mc-val" style="color:var(--ink)">10K</div>
+      <div class="mc-label">Follower · terreno vergine</div>
+      <div class="mc-desc">Il social di BZAR non è ancora "inquinato" da posizionamenti sbagliati o rumore pregresso. Costruire da qui significa scegliere il pubblico giusto, il tono giusto, i contenuti giusti, senza ereditare nulla di sbagliato.</div>
+      <div class="mc-meter"><div class="mc-meter-fill" id="mf3" style="background:#6b8fa8"></div></div>
+      <div class="mc-status"><div class="mc-dot" style="background:#6b8fa8"></div>Costo acquisizione basso · nessun legacy</div>
+    </div>
+
+    <div class="mc" id="mc4">
+      <div class="mc-ghost" style="color:rgba(117,88,71,.05)">04</div>
+      <div class="mc-tag" style="color:#9a7d6a">Momento Operativo</div>
+      <div class="mc-val" style="color:var(--ink)">Mag&nbsp;2026</div>
+      <div class="mc-label">Avvio · inizio alta stagione</div>
+      <div class="mc-desc">Team marketing dedicato già operativo, budget stanziato, processi di approvazione centralizzati. L'avvio a maggio sincronizza la rampa operativa con il picco di domanda estiva, il momento di massima esposizione e traffico.</div>
+      <div class="mc-meter"><div class="mc-meter-fill" id="mf4" style="background:#9a7d6a"></div></div>
+      <div class="mc-status"><div class="mc-dot" style="background:#9a7d6a"></div>Risorse pronte · timing perfetto</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- L'ALLINEAMENTO: CONVERGENCE SVG -->
+<section class="sec" id="s-align">
+  <div class="s-tag">Il pensiero laterale di M5</div>
+  <h2 class="s-h">L'allineamento.<br>Quattro finestre aperte insieme, una volta sola.</h2>
+  <p class="s-lead">Ogni banda mostra quando quel fattore è in condizione ottimale. L'unico punto in cui tutte e quattro si sovrappongono è maggio 2026. Questo è il momento.</p>
+
+  <div class="conv-wrap">
+    <svg class="conv-svg" viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg" id="convSvg" role="img" aria-label="Grafico convergenza: 4 finestre di opportunità che si sovrappongono a maggio 2026">
+
+      <!-- Timeline axis -->
+      <line x1="80" y1="260" x2="580" y2="260" stroke="rgba(117,88,71,.15)" stroke-width=".75"/>
+      <!-- Time labels -->
+      <text x="80" y="275" text-anchor="middle" font-family="Poppins,sans-serif" font-size="8" fill="rgba(117,88,71,.35)" letter-spacing=".06em">2024</text>
+      <text x="210" y="275" text-anchor="middle" font-family="Poppins,sans-serif" font-size="8" fill="rgba(117,88,71,.35)" letter-spacing=".06em">2025</text>
+      <text x="340" y="275" text-anchor="middle" font-family="Poppins,sans-serif" font-size="8" fill="rgba(117,88,71,.35)" letter-spacing=".06em">Gen 2026</text>
+      <text x="440" y="275" text-anchor="middle" font-family="Poppins,sans-serif" font-size="8" fill="rgba(117,88,71,.4)" letter-spacing=".06em" font-weight="500">Mag 2026</text>
+      <text x="540" y="275" text-anchor="middle" font-family="Poppins,sans-serif" font-size="8" fill="rgba(117,88,71,.25)" letter-spacing=".06em">2027</text>
+
+      <!-- Tick marks -->
+      <line x1="80" y1="256" x2="80" y2="264" stroke="rgba(117,88,71,.2)" stroke-width=".5"/>
+      <line x1="210" y1="256" x2="210" y2="264" stroke="rgba(117,88,71,.2)" stroke-width=".5"/>
+      <line x1="340" y1="256" x2="340" y2="264" stroke="rgba(117,88,71,.2)" stroke-width=".5"/>
+      <line x1="440" y1="256" x2="440" y2="264" stroke="rgba(117,88,71,.3)" stroke-width="1"/>
+      <line x1="540" y1="256" x2="540" y2="264" stroke="rgba(117,88,71,.15)" stroke-width=".5"/>
+
+      <!-- Row 1: MERCATO, finestra: 2025 → 2027 (larga) -->
+      <text id="rl1" x="72" y="36" text-anchor="end" font-family="Poppins,sans-serif" font-size="8.5" fill="rgba(117,88,71,.45)" letter-spacing=".04em" opacity="0">Mercato</text>
+      <rect x="80" y="22" width="460" height="22" rx="11" fill="rgba(117,88,71,.06)"/>
+      <rect id="cw1" x="170" y="22" width="0" height="22" rx="11" fill="#5a8a5a" opacity=".75"/>
+
+      <!-- Row 2: BRAND, finestra: fine 2025 → fine 2026 -->
+      <text id="rl2" x="72" y="86" text-anchor="end" font-family="Poppins,sans-serif" font-size="8.5" fill="rgba(117,88,71,.45)" letter-spacing=".04em" opacity="0">Brand</text>
+      <rect x="80" y="72" width="460" height="22" rx="11" fill="rgba(117,88,71,.06)"/>
+      <rect id="cw2" x="280" y="72" width="0" height="22" rx="11" fill="#755847" opacity=".75"/>
+
+      <!-- Row 3: DIGITALE, finestra: ora → crescita (prima che saturazione) -->
+      <text id="rl3" x="72" y="136" text-anchor="end" font-family="Poppins,sans-serif" font-size="8.5" fill="rgba(117,88,71,.45)" letter-spacing=".04em" opacity="0">Digitale</text>
+      <rect x="80" y="122" width="460" height="22" rx="11" fill="rgba(117,88,71,.06)"/>
+      <rect id="cw3" x="200" y="122" width="0" height="22" rx="11" fill="#6b8fa8" opacity=".75"/>
+
+      <!-- Row 4: OPERATIVO, finestra stretta: mag 2026 esatto -->
+      <text id="rl4" x="72" y="186" text-anchor="end" font-family="Poppins,sans-serif" font-size="8.5" fill="rgba(117,88,71,.45)" letter-spacing=".04em" opacity="0">Operativo</text>
+      <rect x="80" y="172" width="460" height="22" rx="11" fill="rgba(117,88,71,.06)"/>
+      <rect id="cw4" x="390" y="172" width="0" height="22" rx="11" fill="#9a7d6a" opacity=".75"/>
+
+      <!-- VERTICAL LINE, maggio 2026 (x=440) -->
+      <line id="now-line" x1="440" y1="8" x2="440" y2="255" stroke="rgba(117,88,71,.0)" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+      <!-- "ORA" indicator -->
+      <rect id="now-pill" x="420" y="2" width="40" height="14" rx="7" fill="var(--brand)" opacity="0"/>
+      <text id="now-text" x="440" y="12" text-anchor="middle" font-family="Poppins,sans-serif" font-size="7.5" fill="#1E1410" font-weight="500" letter-spacing=".06em" opacity="0">ORA</text>
+
+      <!-- OVERLAP INDICATOR, zona dove tutte e 4 si sovrappongono -->
+      <rect id="overlap" x="420" y="22" width="0" height="172" rx="0" fill="rgba(200,168,141,.08)" stroke="rgba(200,168,141,.25)" stroke-width=".75"/>
+    </svg>
+    <p class="conv-caption">La banda più stretta: Operativo, definisce la finestra più precisa: maggio 2026. È il momento in cui tutte le altre condizioni sono ancora al massimo. Prima non era pronto il brand. Dopo si perde il picco estivo. Adesso è il momento esatto.</p>
+  </div>
+</section>
+
+<!-- VERDICT -->
+<section class="sec" id="s-verdict">
+  <div class="s-tag">Il verdict strategico</div>
+  <h2 class="s-h">Non è ottimismo. Sono dati.</h2>
+  <p class="s-lead">Ogni singolo fattore è verificabile con fonti esterne. La convergenza di tutti e quattro non è un'opinione di Ribrain, è la lettura del mercato.</p>
+
+  <div class="verdict">
+    <div class="vd-tag">I tre numeri del momento</div>
+    <div class="vd-t">Il mercato, il comportamento dei consumatori e la competizione si sono allineati per creare una finestra che non si ripresenterà nella stessa forma.</div>
+    <div class="vd-nums">
+      <div class="vd-n" id="vn1">
+        <div class="vd-nv">7.1M</div>
+        <div class="vd-nu">arrivi Roma 2025</div>
+        <div class="vd-nl">Record storico. +2% sul 2024. Il 2026 inizia con +1.3% sul Q1 2025.</div>
+      </div>
+      <div class="vd-n" id="vn2">
+        <div class="vd-nv">38%</div>
+        <div class="vd-nu">Gen Z ispirati da TikTok</div>
+        <div class="vd-nl">Nella scelta della destinazione di viaggio. Solo il 10% da Instagram. Il canale che conta di più non è ancora presidiato.</div>
+      </div>
+      <div class="vd-n" id="vn3">
+        <div class="vd-nv">80%</div>
+        <div class="vd-nu">hospitality aumenta social</div>
+        <div class="vd-nl">Degli operatori del settore pianifica investimenti social crescenti nel 2026. Chi non lo fa parte già in ritardo.</div>
+      </div>
+    </div>
+    <div class="vd-risk"><strong>Il rischio del rimando:</strong> BZAR perderebbe terreno mentre i competitor rafforzano il proprio footprint digitale. Con l'80% degli operatori pronti ad aumentare gli investimenti, chi non agisce adesso rischia di restare indietro, dipendendo sempre più dalle OTA (15-30% commissione) e vedendo sfumare le opportunità di prenotazione diretta e fidelizzazione online.</div>
+  </div>
+</section>
+
+<!-- CONFIGURATORE OTA -->
+<section class="sec" id="s-risk">
+  <div class="s-tag">Il costo reale dell'inazione</div>
+  <h2 class="s-h">Quanto costa ogni mese<br>senza prenotazione diretta?</h2>
+  <p class="s-lead">I valori sono preimpostati con i dati reali di BZAR. Muovi i cursori per vedere il calcolo aggiornarsi in tempo reale.</p>
+
+  <div id="ota-calc">
+    <!-- DISPLAY RISULTATO -->
+    <div class="calc-result" id="calcResult">
+      <div class="cr-top">
+        <div class="cr-label">Commissioni OTA ogni mese</div>
+        <div class="cr-num" id="crMonth">€&nbsp;0</div>
+      </div>
+      <div class="cr-bottom">
+        <div class="cr-sub">
+          <div class="cr-sub-l">All'anno</div>
+          <div class="cr-sub-v" id="crYear">€ 0</div>
+        </div>
+        <div class="cr-divider"></div>
+        <div class="cr-sub">
+          <div class="cr-sub-l">Ogni giorno</div>
+          <div class="cr-sub-v" id="crDay">€ 0</div>
+        </div>
+        <div class="cr-divider"></div>
+        <div class="cr-sub">
+          <div class="cr-sub-l">Ogni ora</div>
+          <div class="cr-sub-v" id="crHour">€ 0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDERS -->
+    <div class="calc-sliders">
+
+      <div class="cs-row">
+        <div class="cs-head">
+          <span class="cs-label">Camere totali</span>
+          <span class="cs-val" id="sv-rooms">2.000</span>
+        </div>
+        <div class="cs-track">
+          <input type="range" class="cs-input" id="sl-rooms" min="500" max="3000" step="50" value="2000">
+          <div class="cs-fill" id="sf-rooms"></div>
+        </div>
+        <div class="cs-range-labels"><span>500</span><span>3.000</span></div>
+      </div>
+
+      <div class="cs-row">
+        <div class="cs-head">
+          <span class="cs-label">Occupancy media</span>
+          <span class="cs-val" id="sv-occ">90%</span>
+        </div>
+        <div class="cs-track">
+          <input type="range" class="cs-input" id="sl-occ" min="50" max="100" step="1" value="90">
+          <div class="cs-fill" id="sf-occ"></div>
+        </div>
+        <div class="cs-range-labels"><span>50%</span><span>100%</span></div>
+      </div>
+
+      <div class="cs-row">
+        <div class="cs-head">
+          <span class="cs-label">ADR media (€/notte)</span>
+          <span class="cs-val" id="sv-adr">256 €</span>
+        </div>
+        <div class="cs-track">
+          <input type="range" class="cs-input" id="sl-adr" min="80" max="600" step="5" value="256">
+          <div class="cs-fill" id="sf-adr"></div>
+        </div>
+        <div class="cs-range-labels"><span>80 €</span><span>600 €</span></div>
+      </div>
+
+      <div class="cs-row">
+        <div class="cs-head">
+          <span class="cs-label">% prenotazioni via OTA</span>
+          <span class="cs-val" id="sv-ota">60%</span>
+        </div>
+        <div class="cs-track">
+          <input type="range" class="cs-input" id="sl-ota" min="10" max="90" step="5" value="60">
+          <div class="cs-fill" id="sf-ota"></div>
+        </div>
+        <div class="cs-range-labels"><span>10%</span><span>90%</span></div>
+      </div>
+
+      <div class="cs-row">
+        <div class="cs-head">
+          <span class="cs-label">Commissione OTA media</span>
+          <span class="cs-val" id="sv-comm">20%</span>
+        </div>
+        <div class="cs-track">
+          <input type="range" class="cs-input" id="sl-comm" min="10" max="30" step="1" value="20">
+          <div class="cs-fill" id="sf-comm"></div>
+        </div>
+        <div class="cs-range-labels"><span>10%</span><span>30%</span></div>
+      </div>
+
+    </div>
+
+    <!-- FORMULA TRASPARENTE -->
+    <div class="calc-formula" id="calcFormula">
+      <div class="cf-label">Come si calcola</div>
+      <div class="cf-eq" id="cfEq"> ×  × € × 30gg ×  ×  = <strong></strong></div>
+      <div class="cf-vars">camere &nbsp;×&nbsp; occupancy &nbsp;×&nbsp; ADR &nbsp;×&nbsp; giorni &nbsp;×&nbsp; % OTA &nbsp;×&nbsp; commissione</div>
+    </div>
+
+    <!-- MESSAGGIO INSIGHT -->
+    <div class="calc-insight" id="calcInsight">
+      <div class="ci-icon">→</div>
+      <div class="ci-text" id="ciText">Con il 10% di prenotazioni spostate da OTA a canale diretto, il risparmio annuo sarebbe di <strong id="ciSaving"></strong>. Il social è lo strumento che costruisce quella preferenza nel tempo.</div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* CONFIGURATORE */
+#ota-calc{margin-top:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start}
+@media(max-width:700px){#ota-calc{grid-template-columns:1fr}}
+
+.calc-result{background:var(--dark);border-radius:18px;padding:2rem;position:relative;overflow:hidden;grid-row:1/3}
+@media(max-width:700px){.calc-result{grid-row:auto}}
+.calc-result::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,rgba(200,168,141,.08) 0%,transparent 65%);pointer-events:none}
+.cr-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,168,141,.4);margin-bottom:.75rem;font-family:'Poppins',sans-serif}
+.cr-num{font-family:'Afacad Flux',sans-serif;font-size:clamp(2.8rem,7vw,5rem);font-weight:300;color:var(--brand);line-height:1;letter-spacing:-.04em;transition:color .2s}
+.cr-bottom{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:.5rem;align-items:center;margin-top:2rem;padding-top:1.25rem;border-top:.5px solid rgba(200,168,141,.12)}
+.cr-divider{width:.5px;height:32px;background:rgba(200,168,141,.15);justify-self:center}
+.cr-sub-l{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.35);font-family:'Poppins',sans-serif;margin-bottom:.25rem}
+.cr-sub-v{font-family:'Afacad Flux',sans-serif;font-size:1.1rem;font-weight:300;color:rgba(241,239,237,.7);line-height:1;transition:none}
+
+.calc-sliders{display:flex;flex-direction:column;gap:1.25rem}
+.cs-row{display:flex;flex-direction:column;gap:.4rem}
+.cs-head{display:flex;justify-content:space-between;align-items:baseline}
+.cs-label{font-size:12px;color:var(--dark);font-family:'Poppins',sans-serif}
+.cs-val{font-family:'Afacad Flux',sans-serif;font-size:1rem;font-weight:500;color:var(--ink)}
+.cs-track{position:relative;height:20px;display:flex;align-items:center}
+.cs-input{width:100%;height:4px;-webkit-appearance:none;appearance:none;background:rgba(117,88,71,.12);border-radius:99px;outline:none;cursor:pointer;position:relative;z-index:2}
+.cs-input::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--ink);cursor:pointer;transition:transform .15s,box-shadow .15s}
+.cs-input::-webkit-slider-thumb:hover{transform:scale(1.2);box-shadow:0 0 0 6px rgba(117,88,71,.12)}
+.cs-input::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--ink);cursor:pointer;border:none}
+.cs-range-labels{display:flex;justify-content:space-between;font-size:9px;color:rgba(117,88,71,.35);font-family:'Poppins',sans-serif}
+
+.calc-formula{background:rgba(117,88,71,.05);border:.5px solid rgba(117,88,71,.1);border-radius:12px;padding:1rem 1.25rem;margin-top:0}
+.cf-label{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);margin-bottom:.5rem;font-family:'Poppins',sans-serif}
+.cf-eq{font-family:'Afacad Flux',sans-serif;font-size:.95rem;color:var(--dark);line-height:1.4}
+.cf-eq strong{color:var(--ink);font-weight:500}
+.cf-vars{font-size:9px;color:rgba(117,88,71,.4);margin-top:.3rem;letter-spacing:.04em;font-family:'Poppins',sans-serif}
+
+.calc-insight{background:#FDFCFA;border:.5px solid rgba(117,88,71,.14);border-radius:12px;padding:1rem 1.25rem;display:flex;gap:.75rem;align-items:flex-start;margin-top:0}
+.ci-icon{font-size:1.1rem;color:var(--brand);flex-shrink:0;margin-top:1px}
+.ci-text{font-size:12px;color:var(--mid);line-height:1.65}
+.ci-text strong{color:var(--ink)}
+</style>
+
+<script>
+(function(){
+  var sliders={
+    rooms:{id:'sl-rooms',valId:'sv-rooms',fillId:'sf-rooms',fmt:function(v){return Number(v).toLocaleString('it-IT');}},
+    occ:  {id:'sl-occ',  valId:'sv-occ',  fillId:'sf-occ',  fmt:function(v){return v+'%';}},
+    adr:  {id:'sl-adr',  valId:'sv-adr',  fillId:'sf-adr',  fmt:function(v){return v+' €';}},
+    ota:  {id:'sl-ota',  valId:'sv-ota',  fillId:'sf-ota',  fmt:function(v){return v+'%';}},
+    comm: {id:'sl-comm', valId:'sv-comm', fillId:'sf-comm', fmt:function(v){return v+'%';}}
+  };
+
+  function fmtEur(n){
+    if(n>=1000000) return '€ '+( n/1000000).toFixed(2).replace('.',',')+' M';
+    if(n>=1000)    return '€ '+(n/1000).toFixed(0)+'.'+String(Math.round((n%1000)/100))+'K';
+    return '€ '+Math.round(n).toLocaleString('it-IT');
+  }
+  function fmtFull(n){
+    return '€ '+Math.round(n).toLocaleString('it-IT');
+  }
+
+  function calc(){
+    var rooms=parseInt(document.getElementById('sl-rooms').value);
+    var occ=parseInt(document.getElementById('sl-occ').value)/100;
+    var adr=parseInt(document.getElementById('sl-adr').value);
+    var otaPct=parseInt(document.getElementById('sl-ota').value)/100;
+    var comm=parseInt(document.getElementById('sl-comm').value)/100;
+
+    var monthly=rooms*occ*adr*30*otaPct*comm;
+    var yearly=monthly*12;
+    var daily=monthly/30;
+    var hourly=daily/24;
+
+    /* animate big number */
+    var crMonth=document.getElementById('crMonth');
+    var prev=crMonth._val||0;
+    if(!crMonth._tween) crMonth._tween=true;
+    var obj={v:prev};
+    if(window._calcTween) window._calcTween.kill();
+    window._calcTween=gsap.to(obj,{v:monthly,duration:.5,ease:'power2.out',onUpdate:function(){
+      crMonth.textContent=fmtEur(obj.v);
+      crMonth._val=obj.v;
+    }});
+
+    document.getElementById('crYear').textContent=fmtEur(yearly);
+    document.getElementById('crDay').textContent=fmtEur(daily);
+    document.getElementById('crHour').textContent=fmtEur(hourly);
+
+    /* formula */
+    document.getElementById('cfEq').innerHTML=
+      rooms.toLocaleString('it-IT')+' &times; '+Math.round(occ*100)+'% &times; '+adr+' € &times; 30gg &times; '+Math.round(otaPct*100)+'% &times; '+Math.round(comm*100)+'% = <strong>'+fmtFull(monthly)+'/mese</strong>';
+
+    /* insight: 10% shift */
+    var saving10=(rooms*occ*adr*365*otaPct*comm)*(0.10);
+    document.getElementById('ciSaving').textContent=fmtFull(saving10)+' all\'anno';
+  }
+
+  function updateFills(){
+    Object.keys(sliders).forEach(function(k){
+      var s=sliders[k];
+      var el=document.getElementById(s.id);
+      var valEl=document.getElementById(s.valId);
+      if(!el||!valEl) return;
+      var pct=((el.value-el.min)/(el.max-el.min))*100;
+      el.style.background='linear-gradient(to right,var(--ink) '+pct+'%,rgba(117,88,71,.12) '+pct+'%)';
+      valEl.textContent=s.fmt(el.value);
+    });
+  }
+
+  Object.keys(sliders).forEach(function(k){
+    var el=document.getElementById(sliders[k].id);
+    if(!el) return;
+    el.addEventListener('input',function(){updateFills();calc();});
+  });
+
+  /* init */
+  updateFills();
+  calc();
+})();
+</script>
+
+<!-- RECAP -->
+<section id="recap">
+  <div class="re-tag">Sintesi &middot; M5 &middot; Mappa del Momento</div>
+  <div class="re-pills">
+    <div class="rp"><div class="rp-v">4</div><div class="rp-u">condizioni allineate</div><div class="rp-l">Mercato · Brand · Digitale · Operativo, tutte al verde nello stesso momento</div></div>
+    <div class="rp"><div class="rp-v">1</div><div class="rp-u">finestra temporale</div><div class="rp-l">Maggio 2026 è il punto di convergenza. Prima mancava il brand. Dopo si perde il picco.</div></div>
+    <div class="rp"><div class="rp-v">0</div><div class="rp-u">buone ragioni per aspettare</div><div class="rp-l">Ogni mese di ritardo è un mese di vantaggio ceduto ai competitor che stanno già investendo</div></div>
+  </div>
+  <div class="re-ins">
+    <div class="re-ins-h">Insight chiave</div>
+    <div class="re-ins-t">Mercato in crescita, brand con identità definita, digitale ancora vergine, risorse operative pronte. Maggio 2026 è il punto di convergenza. Prima mancava il brand book. Dopo si perde il picco dell'estate romana. Adesso è il momento esatto.</div>
+  </div>
+  <a href="m6.html" class="re-cta">Esplora M6 &mdash; Benchmark Creativi &rarr;</a>
+</section>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+var cur=document.getElementById('cur');
+document.addEventListener('mousemove',function(e){gsap.to(cur,{x:e.clientX,y:e.clientY,duration:.1,ease:'none'});});
+document.querySelectorAll('a,button').forEach(function(el){
+  el.addEventListener('mouseenter',function(){gsap.to(cur,{width:18,height:18,duration:.18});});
+  el.addEventListener('mouseleave',function(){gsap.to(cur,{width:8,height:8,duration:.18});});
+});
+
+var fbT=setTimeout(function(){['htag','hl1','hl2','hl3','hsub','hstats'].forEach(function(id){var e=document.getElementById(id);if(e)e.style.opacity='1';});},2000);
+gsap.fromTo('#htag',{opacity:0,y:14},{opacity:1,y:0,duration:.8,delay:.2,ease:'power3.out',onComplete:function(){clearTimeout(fbT);}});
+gsap.fromTo('#hl1',{opacity:0,y:28},{opacity:1,y:0,duration:.95,delay:.4,ease:'power3.out'});
+gsap.fromTo('#hl2',{opacity:0,y:28},{opacity:1,y:0,duration:.95,delay:.56,ease:'power3.out'});
+gsap.fromTo('#hl3',{opacity:0,y:28},{opacity:1,y:0,duration:.95,delay:.72,ease:'power3.out'});
+gsap.fromTo('#hsub',{opacity:0,y:18},{opacity:1,y:0,duration:.85,delay:1,ease:'power3.out'});
+gsap.fromTo('#hstats',{opacity:0,y:14},{opacity:1,y:0,duration:.7,delay:1.25,ease:'power3.out'});
+gsap.fromTo('.hero-ghost',{opacity:0,scale:.93},{opacity:1,scale:1,duration:2,delay:.1,ease:'power2.out'});
+
+/* counter */
+setTimeout(function(){
+  var obj={val:0},el=document.getElementById('cnt1');
+  if(el) gsap.to(obj,{val:7.1,duration:1.8,ease:'power2.out',delay:.6,onUpdate:function(){el.textContent=obj.val.toFixed(1)+'M';}});
+},400);
+
+/* section reveals */
+gsap.utils.toArray('.sec,#recap').forEach(function(el){
+  gsap.fromTo(el,{opacity:0,y:28},{opacity:1,y:0,duration:.85,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 85%',once:true}});
+});
+
+/* moment cards */
+['#mc1','#mc2','#mc3','#mc4'].forEach(function(sel,i){
+  var el=document.querySelector(sel);
+  if(!el) return;
+  ScrollTrigger.create({trigger:el,start:'top 86%',once:true,onEnter:function(){
+    gsap.fromTo(el,{opacity:0,y:20},{opacity:1,y:0,duration:.7,ease:'power3.out',delay:i*.1});
+    var fill=document.getElementById('mf'+(i+1));
+    if(fill) gsap.fromTo(fill,{width:'0%'},{width:'92%',duration:1,ease:'power3.out',delay:.3+i*.08});
+  }});
+});
+
+/* CONVERGENCE SVG */
+ScrollTrigger.create({trigger:'#convSvg',start:'top 70%',once:true,onEnter:function(){
+  var tl=gsap.timeline();
+  // Row labels
+  tl.fromTo(['#rl1','#rl2','#rl3','#rl4'],{opacity:0},{opacity:1,duration:.4,stagger:.1},0);
+  // Windows fill in left to right
+  tl.fromTo('#cw1',{attr:{width:0}},{attr:{width:330},duration:.9,ease:'power3.out'},.2);
+  tl.fromTo('#cw2',{attr:{width:0}},{attr:{width:260},duration:.85,ease:'power3.out'},.35);
+  tl.fromTo('#cw3',{attr:{width:0}},{attr:{width:310},duration:.85,ease:'power3.out'},.5);
+  tl.fromTo('#cw4',{attr:{width:0}},{attr:{width:90},duration:.7,ease:'power3.out'},.65);
+  // Overlap area
+  tl.fromTo('#overlap',{attr:{width:0,x:420}},{attr:{width:60,x:420},duration:.5,ease:'power3.out'},.9);
+  // NOW line
+  tl.fromTo('#now-line',{stroke:'rgba(117,88,71,.0)'},{stroke:'rgba(117,88,71,.4)',duration:.4},1);
+  // NOW pill
+  tl.fromTo('#now-pill',{opacity:0,scale:.8},{opacity:1,scale:1,duration:.35,ease:'back.out(2)'},1.1);
+  tl.fromTo('#now-text',{opacity:0},{opacity:1,duration:.25},1.2);
+}});
+
+/* risk items */
+['#ri1','#ri2','#ri3'].forEach(function(sel,i){
+  var el=document.querySelector(sel);
+  if(!el) return;
+  gsap.fromTo(el,{opacity:0,x:-14},{opacity:1,x:0,duration:.65,ease:'power3.out',delay:i*.1,
+    scrollTrigger:{trigger:el,start:'top 87%',once:true}});
+});
+
+/* verdict numbers */
+['#vn1','#vn2','#vn3'].forEach(function(sel,i){
+  var el=document.querySelector(sel);
+  if(!el) return;
+  gsap.fromTo(el,{opacity:0,y:18},{opacity:1,y:0,duration:.7,ease:'power3.out',delay:i*.12,
+    scrollTrigger:{trigger:el,start:'top 88%',once:true}});
+});
+
+gsap.utils.toArray('.rp').forEach(function(el,i){
+  gsap.fromTo(el,{opacity:0,y:18},{opacity:1,y:0,duration:.7,ease:'power3.out',delay:i*.12,
+    scrollTrigger:{trigger:el,start:'top 88%',once:true}});
+});
+</script>
+
+<!-- MENU IIFE -->
+<script>
+(function(){
+'use strict';
+var M=[
+  {id:'m0',code:'00',label:'Executive Summary',sub:'Il gap \u00b7 La proposta',url:'m0.html',color:'#C8A88D'},
+  {id:'m1',code:'01',label:'Mercato',sub:'Roma 2026 \u00b7 OTA \u00b7 Social',url:'m1.html',color:'#755847'},
+  {id:'m2',code:'02',label:'Competitor Map',sub:'Hoxton \u00b7 Chapter \u00b7 Mama',url:'m2.html',color:'#9a7d6a'},
+  {id:'m3',code:'03',label:'Voce del Cliente',sub:'VOC \u00b7 14 account \u00b7 Gap',url:'m3.html',color:'#C4ACA5'},
+  {id:'m4',code:'04',label:'Personas',sub:'4 profili \u00b7 Trigger \u00b7 Grammatiche',url:'m4.html',color:'#a08470'},
+  {id:'m5',code:'05',label:'Mappa del Momento',sub:'Perch\u00e9 investire adesso',url:'m5.html',color:'#C8A88D'},
+  {id:'m6',code:'06',label:'Benchmark Creativi',sub:'Il Pellicano \u00b7 Borgo \u00b7 The Pig',url:'m6.html',color:'#755847'},
+  {id:'m7',code:'07',label:'Piano Operativo',sub:'KPI \u00b7 Governance',url:'m7.html',color:'#9a7d6a'}
+];
+var path=window.location.pathname.split('/').pop().replace('.html','')||'m0';
+var cur=M[0];for(var ci=0;ci<M.length;ci++){if(M[ci].id===path){cur=M[ci];break;}}
+var s=document.createElement('style');
+s.textContent='.rbmenu-btn{position:fixed;top:14px;right:16px;z-index:9001;width:44px;height:44px;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:5px;padding:8px}.rbmenu-btn span{display:block;height:1.5px;background:#F1EFED;border-radius:1px;transition:all .45s cubic-bezier(0.16,1,0.3,1);transform-origin:right center}.rbmenu-btn.light span{background:#1E1410}.rbmenu-btn .l1{width:22px}.rbmenu-btn .l2{width:16px}.rbmenu-btn .l3{width:22px}.rbmenu-btn.open .l1{width:22px;transform:translateY(6.5px) rotate(-45deg)}.rbmenu-btn.open .l2{opacity:0;width:0}.rbmenu-btn.open .l3{width:22px;transform:translateY(-6.5px) rotate(45deg)}.rbmenu-overlay{position:fixed;inset:0;z-index:9000;background:#1E1410;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .5s cubic-bezier(0.16,1,0.3,1);overflow:hidden}.rbmenu-overlay.open{opacity:1;pointer-events:auto}.rbmenu-top{display:flex;align-items:center;justify-content:space-between;padding:18px 48px;border-bottom:1px solid rgba(200,168,141,.07);flex-shrink:0}.rbmenu-brand{display:flex;align-items:center;gap:12px}.rbmenu-brand-sep{width:1px;height:16px;background:rgba(200,168,141,.2)}.rbmenu-brand-label{font-family:"Poppins",sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(200,168,141,.3)}.rbmenu-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:24px 48px 36px;overflow-y:auto}.rbmenu-items{list-style:none}.rbmenu-item{border-top:1px solid rgba(200,168,141,.06);opacity:0;transform:translateY(20px);position:relative}.rbmenu-item:last-child{border-bottom:1px solid rgba(200,168,141,.06)}.rbmenu-item a{display:grid;grid-template-columns:48px 1fr auto;gap:0 20px;align-items:center;padding:14px 0;text-decoration:none;color:inherit;position:relative}.rbmenu-item a::after{content:"";position:absolute;bottom:0;left:0;width:0;height:1px;background:#C8A88D;transition:width .5s cubic-bezier(0.16,1,0.3,1);opacity:.3}.rbmenu-item a:hover::after{width:100%}.rmi-code{font-family:"Poppins",sans-serif;font-size:10px;letter-spacing:.12em;color:rgba(200,168,141,.22);line-height:1;transition:color .3s}.rbmenu-item a:hover .rmi-code{color:rgba(200,168,141,.5)}.rmi-left{display:flex;flex-direction:column;gap:3px}.rmi-label{font-family:"Afacad Flux",sans-serif;font-weight:300;font-size:clamp(24px,3.2vw,42px);line-height:1;color:rgba(241,239,237,.65);transition:color .3s;letter-spacing:-.01em}.rbmenu-item a:hover .rmi-label{color:rgba(241,239,237,.9)}.rbmenu-item.active .rmi-label{color:#C8A88D;font-style:italic}.rmi-sub{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.22);transition:color .3s}.rbmenu-item a:hover .rmi-sub{color:rgba(200,168,141,.4)}.rmi-arr{font-size:18px;color:rgba(200,168,141,.18);transition:transform .4s cubic-bezier(0.16,1,0.3,1),color .3s}.rbmenu-item a:hover .rmi-arr{transform:translateX(6px);color:rgba(200,168,141,.5)}.rbmenu-item-active-bar{position:absolute;left:0;top:2px;bottom:2px;width:3px;border-radius:0 2px 2px 0;opacity:.8}.rbmenu-footer{padding:16px 48px;border-top:1px solid rgba(200,168,141,.06);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}.rbmf-left{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.2)}.rbmf-right{display:flex;align-items:center;gap:16px}.rbmf-link{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.25);text-decoration:none;transition:color .3s}.rbmf-link:hover{color:rgba(200,168,141,.6)}.rbmenu-glow{position:absolute;top:50%;right:-10%;transform:translateY(-50%);width:50vw;height:50vw;border-radius:50%;pointer-events:none;opacity:.05;transition:background 1s;filter:blur(80px)}.rbnavbar{position:fixed;bottom:0;left:0;right:0;z-index:8000;background:rgba(30,20,16,.97);backdrop-filter:blur(24px);border-top:1px solid rgba(200,168,141,.07);height:48px;display:flex;align-items:stretch}.rbnavbar-inner{max-width:1440px;margin:0 auto;padding:0 16px;display:flex;align-items:stretch;width:100%}.rbnavbar-brand{display:flex;align-items:center;gap:8px;padding-right:12px;border-right:1px solid rgba(200,168,141,.07);margin-right:2px;flex-shrink:0}.rbnavbar-brand-txt{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(200,168,141,.22);white-space:nowrap}.rbnavbar-items{display:flex;align-items:stretch;flex:1;overflow-x:auto;scrollbar-width:none}.rbnavbar-items::-webkit-scrollbar{display:none}.rbnav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 10px;text-decoration:none;color:inherit;border-right:1px solid rgba(200,168,141,.05);min-width:56px;position:relative;gap:2px;transition:background .2s}.rbnav-item:hover{background:rgba(200,168,141,.05)}.rbnav-item.active{background:rgba(200,168,141,.07)}.rbnav-item-bar{position:absolute;top:0;left:0;right:0;height:2px}.rbnav-code{font-family:"Poppins",sans-serif;font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.28);line-height:1}.rbnav-item.active .rbnav-code{color:rgba(200,168,141,.55)}.rbnav-title{font-family:"Afacad Flux",sans-serif;font-size:9px;font-weight:400;color:rgba(200,168,141,.4);line-height:1;white-space:nowrap}.rbnav-item.active .rbnav-title{color:rgba(200,168,141,.85);font-weight:500}body{padding-bottom:48px !important}@media(max-width:600px){.rbmenu-top,.rbmenu-body,.rbmenu-footer{padding-left:20px;padding-right:20px}.rmi-label{font-size:clamp(20px,5.5vw,32px)}}';
+document.head.appendChild(s);
+var btn=document.createElement('button');btn.className='rbmenu-btn';
+var bg=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
+if(bg&&bg.indexOf('#F')===0)btn.classList.add('light');
+btn.setAttribute('aria-label','Apri menu');
+btn.innerHTML='<span class="l1"></span><span class="l2"></span><span class="l3"></span>';
+document.body.appendChild(btn);
+var ov=document.createElement('div');ov.className='rbmenu-overlay';
+var ih='';
+for(var i=0;i<M.length;i++){
+  var m=M[i],a=m.id===path;
+  ih+='<li class="rbmenu-item'+(a?' active':'')+'">'+
+    (a?'<span class="rbmenu-item-active-bar" style="background:'+m.color+'"></span>':'')+
+    '<a href="'+m.url+'"><span class="rmi-code">'+m.code+'</span>'+
+    '<span class="rmi-left"><span class="rmi-label">'+m.label+'</span><span class="rmi-sub">'+m.sub+'</span></span>'+
+    '<span class="rmi-arr">\u2192</span></a></li>';
+}
+ov.innerHTML='<div class="rbmenu-glow" id="rbglow" style="background:'+cur.color+'"></div>'+
+  '<div class="rbmenu-top"><div class="rbmenu-brand">'+
+  '<span style="font-family:\'Afacad Flux\',sans-serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#C8A88D">BZAR Hotels</span>'+
+  '<div class="rbmenu-brand-sep"></div>'+
+  '<img src="https://www.ribrainstudio.com/wp-content/uploads/2025/01/Logo_ribrain_Nero.svg" style="height:13px;filter:invert(1);opacity:.5" onerror="this.style.display=\'none\'">'+
+  '<div class="rbmenu-brand-sep"></div>'+
+  '<span class="rbmenu-brand-label">Cruscotto Strategico \u00b7 BZAR Hotels</span>'+
+  '</div></div>'+
+  '<div class="rbmenu-body"><ul class="rbmenu-items">'+ih+'</ul></div>'+
+  '<div class="rbmenu-footer"><span class="rbmf-left">Aprile 2026 \u00b7 Ribrain Studio \u00b7 Confidenziale</span>'+
+  '<div class="rbmf-right"><a href="m0.html" class="rbmf-link">Executive Summary</a><a href="m7.html" class="rbmf-link">Piano Operativo \u2192</a></div></div>';
+document.body.appendChild(ov);
+var nb=document.createElement('nav');nb.className='rbnavbar';
+var nh='';
+for(var ni=0;ni<M.length;ni++){
+  var nm=M[ni],na=nm.id===path;
+  nh+='<a href="'+nm.url+'" class="rbnav-item'+(na?' active':'')+'" title="'+nm.label+'">'+
+    (na?'<span class="rbnav-item-bar" style="background:'+nm.color+'"></span>':'')+
+    '<span class="rbnav-code">'+nm.code+'</span><span class="rbnav-title">'+nm.label+'</span></a>';
+}
+nb.innerHTML='<div class="rbnavbar-inner"><div class="rbnavbar-brand">'+
+  '<img src="https://www.ribrainstudio.com/wp-content/uploads/2025/01/Logo_ribrain_Nero.svg" style="height:11px;filter:invert(1);opacity:.3" onerror="this.style.display=\'none\'">'+
+  '<span class="rbnavbar-brand-txt">\u00d7 BZAR</span></div>'+
+  '<div class="rbnavbar-items">'+nh+'</div></div>';
+document.body.appendChild(nb);
+var isOpen=false;
+function openMenu(){isOpen=true;btn.classList.add('open');ov.classList.add('open');btn.setAttribute('aria-label','Chiudi menu');document.body.style.overflow='hidden';
+  var its=ov.querySelectorAll('.rbmenu-item');
+  for(var ii=0;ii<its.length;ii++){(function(el,idx){el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity .5s '+(.07+idx*.055)+'s cubic-bezier(0.16,1,0.3,1),transform .5s '+(.07+idx*.055)+'s cubic-bezier(0.16,1,0.3,1)';setTimeout(function(){el.style.opacity='1';el.style.transform='translateY(0)';},10);})(its[ii],ii);}
+}
+function closeMenu(){isOpen=false;btn.classList.remove('open');ov.classList.remove('open');btn.setAttribute('aria-label','Apri menu');document.body.style.overflow='';}
+btn.addEventListener('click',function(){if(isOpen)closeMenu();else openMenu();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&isOpen)closeMenu();});
+var lis=ov.querySelectorAll('.rbmenu-item');
+for(var gi=0;gi<lis.length;gi++){(function(li,mod){
+  li.addEventListener('mouseenter',function(){var g=document.getElementById('rbglow');if(g)g.style.background=mod.color;});
+  li.addEventListener('mouseleave',function(){var g=document.getElementById('rbglow');if(g)g.style.background=cur.color;});
+})(lis[gi],M[gi]);}
+})();
+</script>
+
+<!-- FONTI IIFE -->
+<script>
+(function(){
+'use strict';
+var SRC=[
+  {label:'ENIT \u2014 Turismo verso l\'Italia, arrivi e presenze 2025',url:'https://www.enit.it/storage/202603/20260313103759_it%20enit%20-%20turismo%20verso%20litalia%20da%20oltreoceano_it.pdf'},
+  {label:'Federalberghi / L\'Agenzia di Viaggi \u2014 Occupazione hotel Roma estate 2025',url:'https://www.lagenziadiviaggimag.it/roma-cresce-loccupazione-degli-hotel-in-estate-i-dati-federalberghi/'},
+  {label:'Barchart \u2014 Rome Hotels Pricing Trends & Demand Forecast 2026',url:'https://www.barchart.com/story/news/36932939/rome-hotels-reveals-booking-market-statistics-pricing-trends-demand-forecast-for-2026'},
+  {label:'Cloudbeds \u2014 A Guide to OTA Commission Rates in 2026',url:'https://www.cloudbeds.com/online-travel-agencies/commissions/'},
+  {label:'TravelQuotidiano \u2014 TikTok supera Instagram nella scelta del viaggio per i giovani',url:'https://www.travelquotidiano.com/mercato_e_tecnologie/tik-tok-supera-instagram/tqid-501494'},
+  {label:'Hospitality Net \u2014 How Hotels Can Harness Social Media to Drive Real Business Value',url:'https://www.hospitalitynet.org/news/4128795/how-hotels-can-harness-social-media-to-drive-real-business-value'}
+];
+var style=document.createElement('style');
+style.textContent='.src-toggle{position:fixed;bottom:56px;right:14px;z-index:7500;display:flex;align-items:center;gap:7px;background:rgba(30,20,16,.92);border:1px solid rgba(200,168,141,.15);backdrop-filter:blur(16px);padding:6px 11px;cursor:pointer;font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.45);transition:all .25s;border-radius:99px}.src-toggle:hover{border-color:rgba(200,168,141,.35);color:rgba(200,168,141,.75)}.src-toggle .st-dot{width:5px;height:5px;border-radius:50%;background:#C8A88D;flex-shrink:0}.src-toggle .st-n{background:rgba(200,168,141,.15);color:#C8A88D;padding:1px 5px;border-radius:10px;font-size:8px}.src-drawer{position:fixed;bottom:48px;left:0;right:0;z-index:7000;background:rgba(30,20,16,.97);backdrop-filter:blur(24px);border-top:1px solid rgba(200,168,141,.1);max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(0.16,1,0.3,1),opacity .4s;opacity:0}.src-drawer.open{max-height:360px;opacity:1}.src-drawer-inner{padding:20px 48px 24px;overflow-y:auto;max-height:320px}.src-drawer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}.src-drawer-title{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,168,141,.32)}.src-drawer-close{background:none;border:none;cursor:pointer;font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.25);transition:color .2s}.src-drawer-close:hover{color:rgba(200,168,141,.65)}.src-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:4px}.src-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid rgba(200,168,141,.06);border-radius:6px}.src-item-num{font-family:"Poppins",sans-serif;font-size:8px;letter-spacing:.1em;color:rgba(200,168,141,.25);flex-shrink:0;padding-top:1px;min-width:18px}.src-item-label{font-size:11px;color:rgba(241,239,237,.6);line-height:1.45;margin-bottom:3px}.src-item-url{font-family:"Poppins",sans-serif;font-size:8px;color:rgba(200,168,141,.4);text-decoration:none;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media(max-width:768px){.src-drawer-inner{padding:16px 20px}.src-list{grid-template-columns:1fr}}';
+document.head.appendChild(style);
+var drawer=document.createElement('div');drawer.className='src-drawer';
+var ih='';
+for(var i=0;i<SRC.length;i++){
+  ih+='<div class="src-item"><span class="src-item-num">'+String(i+1).padStart(2,'0')+'</span>'+
+    '<div><div class="src-item-label">'+SRC[i].label+'</div>'+
+    '<a href="'+SRC[i].url+'" target="_blank" rel="noopener noreferrer" class="src-item-url">'+SRC[i].url+'</a></div></div>';
+}
+drawer.innerHTML='<div class="src-drawer-inner"><div class="src-drawer-head">'+
+  '<span class="src-drawer-title">Fonti \u00b7 '+SRC.length+' riferimenti \u00b7 M5</span>'+
+  '<button class="src-drawer-close" id="srcClose">Chiudi \u2715</button></div>'+
+  '<div class="src-list">'+ih+'</div></div>';
+document.body.appendChild(drawer);
+var toggle=document.createElement('button');toggle.className='src-toggle';
+toggle.innerHTML='<span class="st-dot"></span>Fonti <span class="st-n">'+SRC.length+'</span>';
+document.body.appendChild(toggle);
+var open=false;
+function td(){open=!open;drawer.classList.toggle('open',open);toggle.style.borderColor=open?'rgba(200,168,141,.3)':'';toggle.style.color=open?'rgba(200,168,141,.75)':'';}
+toggle.addEventListener('click',td);
+document.getElementById('srcClose').addEventListener('click',function(){open=true;td();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&open){open=true;td();}});
+})();
+</script>
+</body>
+</html>

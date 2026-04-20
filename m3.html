@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M3: Voce del Cliente · BZAR Hotels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{--bg:#F1EFED;--ink:#755847;--brand:#C8A88D;--rose:#C4ACA5;--dark:#1E1410;--mid:#9a7d6a;--spritz:#c0572a}
+body{background:var(--bg);color:var(--dark);font-family:'Poppins',sans-serif;font-size:15px;line-height:1.65;overflow-x:hidden;padding-top:52px;padding-bottom:48px;cursor:none}
+@media(hover:none){body{cursor:auto}#cur{display:none}}
+#cur{position:fixed;width:8px;height:8px;background:var(--brand);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:multiply;transition:width .18s,height .18s}
+
+.topbar{position:fixed;top:0;left:0;right:0;z-index:800;height:52px;background:var(--dark);display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem 0 1.5rem;border-bottom:.5px solid rgba(200,168,141,.1)}
+.tb-l{display:flex;align-items:center;gap:.75rem}
+.tb-brand{font-family:'Afacad Flux',sans-serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.tb-sep{width:.5px;height:16px;background:rgba(255,255,255,.15)}
+.tb-rlogo{height:13px;filter:invert(1);opacity:.6}
+.tb-c{font-family:'Poppins',sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.2);position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap}
+@media(max-width:680px){.tb-c{display:none}}
+.tb-r{display:flex;align-items:center;gap:.75rem}
+.tb-date{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+.tb-conf{font-size:9px;letter-spacing:.14em;text-transform:uppercase;border:.5px solid rgba(200,168,141,.28);color:rgba(200,168,141,.45);padding:3px 8px;border-radius:3px}
+
+/* HERO */
+.hero{min-height:100svh;display:grid;grid-template-rows:1fr auto;padding:5.5rem 1.5rem 2.5rem;position:relative;overflow:hidden}
+.hero-noise{position:absolute;inset:0;pointer-events:none;opacity:.018;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px}
+.hero-ghost{position:absolute;right:-2%;top:50%;transform:translateY(-50%);font-family:'Afacad Flux',sans-serif;font-size:clamp(18rem,48vw,42rem);font-weight:700;line-height:1;color:rgba(117,88,71,.042);pointer-events:none;user-select:none;letter-spacing:-.07em}
+.hero-body{display:flex;flex-direction:column;justify-content:center}
+.hero-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--brand);display:flex;align-items:center;gap:.75rem;margin-bottom:2rem}
+.hero-tag::before{content:'';width:28px;height:1px;background:var(--brand)}
+.hero-h1{font-family:'Afacad Flux',sans-serif;font-size:clamp(3rem,8.5vw,7rem);font-weight:400;line-height:1.02;letter-spacing:-.035em;max-width:820px}
+.hero-h1 em{font-style:italic;font-weight:300;color:var(--ink)}
+.hero-sub{margin-top:1.75rem;font-size:14px;color:var(--mid);max-width:460px;line-height:1.8}
+.hero-stats{display:flex;gap:2.5rem;margin-top:2.5rem;flex-wrap:wrap}
+.hs{display:flex;flex-direction:column}
+.hs-v{font-family:'Afacad Flux',sans-serif;font-size:clamp(2rem,4.5vw,3rem);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.03em}
+.hs-l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-top:.2rem}
+.hero-foot{display:flex;align-items:flex-end;justify-content:flex-start;padding-top:1.5rem}
+.hero-scroll{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(117,88,71,.3);display:flex;align-items:center;gap:.5rem}
+.hero-scroll::after{content:'';width:48px;height:1px;background:rgba(200,168,141,.22)}
+
+/* SECTIONS */
+.sec{padding:5rem 1.5rem;border-top:.5px solid rgba(117,88,71,.1)}
+.s-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);margin-bottom:.6rem}
+.s-h{font-family:'Afacad Flux',sans-serif;font-size:clamp(2rem,4.5vw,3.2rem);font-weight:400;line-height:1.08;letter-spacing:-.02em;margin-bottom:1rem}
+.s-lead{font-size:14px;color:var(--mid);max-width:520px;line-height:1.8}
+
+/* RINGS */
+.rings-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.75rem 1rem;margin-top:3rem}
+@media(max-width:640px){.rings-grid{grid-template-columns:repeat(2,1fr)}}
+.ring-unit{display:flex;flex-direction:column;align-items:center;gap:.55rem;opacity:0}
+.ring-svg{width:100%;max-width:116px;height:auto;overflow:visible}
+.ring-track{fill:none;stroke:rgba(117,88,71,.08);stroke-width:7}
+.ring-quality{fill:none;stroke-width:7;stroke-linecap:round;transform-origin:60px 60px;transform:rotate(-90deg)}
+.ring-name{font-family:'Afacad Flux',sans-serif;font-size:.82rem;font-weight:500;color:var(--dark);text-align:center;line-height:1.2}
+.ring-meta{font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--mid);text-align:center}
+.ring-unit.spritz .ring-name{color:var(--spritz)}
+.rings-legend{display:flex;gap:2rem;margin-top:2rem;flex-wrap:wrap}
+.rl{display:flex;align-items:center;gap:.5rem;font-size:11px;color:var(--mid)}
+.rl-o{width:14px;height:14px;border-radius:50%;border:2.5px solid var(--ink);flex-shrink:0}
+.rl-d{width:9px;height:9px;border-radius:50%;background:var(--brand);flex-shrink:0}
+.rings-caption{margin-top:2rem;font-family:'Afacad Flux',sans-serif;font-size:clamp(1rem,2.4vw,1.3rem);font-style:italic;font-weight:300;color:var(--dark);border-left:2px solid var(--brand);padding-left:1rem;line-height:1.45;max-width:620px}
+
+/* BREAKOUT */
+.breakout{background:var(--dark);padding:5rem 1.5rem;position:relative;overflow:hidden}
+.breakout::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 50%,rgba(200,168,141,.07) 0%,transparent 65%);pointer-events:none}
+.bo-tag{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(200,168,141,.4);margin-bottom:1.5rem}
+.bo-num{font-family:'Afacad Flux',sans-serif;font-size:clamp(5rem,18vw,13rem);font-weight:300;color:var(--brand);line-height:.85;letter-spacing:-.06em}
+.bo-text{font-family:'Afacad Flux',sans-serif;font-size:clamp(1.2rem,3vw,2rem);color:rgba(241,239,237,.55);line-height:1.3;margin-top:1.25rem;font-weight:300;max-width:600px}
+.bo-text strong{color:rgba(241,239,237,.85);font-weight:400}
+.bo-sub{margin-top:1.25rem;font-size:13px;color:rgba(241,239,237,.28);max-width:480px;line-height:1.7}
+
+/* NAMES SCATTER */
+.names-field{position:relative;min-height:260px;margin-top:3rem;overflow:hidden}
+.np{position:absolute;font-family:'Afacad Flux',sans-serif;font-style:italic;color:var(--ink);line-height:1;opacity:0;white-space:nowrap}
+.names-stmt{margin-top:2rem;font-size:14px;color:var(--mid);max-width:500px;line-height:1.75;border-left:2px solid var(--brand);padding-left:1rem}
+.names-stmt strong{color:var(--dark);font-weight:500}
+
+/* SPRITZERIA */
+.spritz-sec{background:#1e0d05;padding:5rem 1.5rem;position:relative;overflow:hidden;border-top:none}
+.spritz-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(192,87,42,.1) 0%,transparent 60%);pointer-events:none}
+.spr-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(192,87,42,.5);margin-bottom:1rem}
+.spr-h{font-family:'Afacad Flux',sans-serif;font-size:clamp(2rem,5vw,3.8rem);font-weight:400;color:rgba(241,239,237,.75);line-height:1.08;letter-spacing:-.025em;margin-bottom:2rem;max-width:700px}
+.spr-h em{font-style:italic;color:var(--spritz)}
+.spr-grid{display:grid;grid-template-columns:180px 1fr;gap:3rem;align-items:center}
+@media(max-width:600px){.spr-grid{grid-template-columns:1fr}}
+.spr-ring-svg{width:100%;height:auto;max-width:160px}
+.spr-ring-label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(192,87,42,.45);margin-top:.6rem;text-align:center;font-family:'Poppins',sans-serif}
+.spr-data-row{margin-bottom:1.25rem}
+.spr-v{font-family:'Afacad Flux',sans-serif;font-size:clamp(2.5rem,7vw,4.5rem);font-weight:300;line-height:1;letter-spacing:-.04em}
+.spr-l{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(241,239,237,.28);margin-top:.2rem;font-family:'Poppins',sans-serif}
+.spr-insight{margin-top:1.75rem;font-size:13px;color:rgba(241,239,237,.32);max-width:420px;line-height:1.7;border-left:2px solid rgba(192,87,42,.3);padding-left:1rem}
+
+/* OLIVA */
+.oliva-ratio{display:flex;align-items:baseline;gap:1.5rem;flex-wrap:wrap;margin-top:3rem;margin-bottom:2rem}
+.o-n{font-family:'Afacad Flux',sans-serif;font-size:clamp(4rem,13vw,9rem);font-weight:300;line-height:.9;letter-spacing:-.04em;color:var(--ink)}
+.o-l{font-size:12px;color:var(--mid);line-height:1.5;max-width:150px}
+.o-div{width:1px;height:72px;background:rgba(117,88,71,.2);flex-shrink:0;align-self:center}
+.dot-grid{display:flex;flex-wrap:wrap;gap:5px;width:100%}
+.dd{width:10px;height:10px;border-radius:50%;background:rgba(117,88,71,.1);flex-shrink:0}
+.dd.on{background:var(--brand)}
+@media(max-width:600px){.dd{width:7px;height:7px}.dot-grid{gap:4px}}
+.dot-caption{margin-top:.9rem;font-size:11px;color:var(--mid);display:flex;align-items:center;gap:.6rem}
+.dot-caption::before{content:'';width:10px;height:10px;border-radius:50%;background:var(--brand);flex-shrink:0}
+.oliva-insight{margin-top:2rem;font-family:'Afacad Flux',sans-serif;font-size:clamp(1rem,2.4vw,1.3rem);font-style:italic;font-weight:300;color:var(--dark);border-left:2px solid var(--brand);padding-left:1rem;line-height:1.45;max-width:560px}
+
+/* PILLARS */
+.pillars-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:.5px solid rgba(117,88,71,.12);border-radius:16px;overflow:hidden;margin-top:2.5rem}
+@media(max-width:580px){.pillars-grid{grid-template-columns:1fr}}
+.pg-card{padding:2rem 1.5rem;border-right:.5px solid rgba(117,88,71,.1);border-bottom:.5px solid rgba(117,88,71,.1);position:relative;overflow:hidden}
+.pg-card:nth-child(2n){border-right:none}
+.pg-card.wide{grid-column:1/-1;border-right:none}
+.pg-card:last-child{border-bottom:none}
+.pg-n{font-family:'Afacad Flux',sans-serif;font-size:4rem;font-weight:300;color:rgba(117,88,71,.055);line-height:1;position:absolute;top:.75rem;right:1rem}
+.pg-tag{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--brand);margin-bottom:.4rem;font-family:'Poppins',sans-serif}
+.pg-t{font-family:'Afacad Flux',sans-serif;font-size:1rem;font-weight:500;color:var(--dark);margin-bottom:.4rem;line-height:1.2}
+.pg-d{font-size:12px;color:var(--mid);line-height:1.65}
+
+/* RECAP */
+#recap{background:var(--dark);color:var(--bg);padding:4.5rem 1.5rem;border-top:.5px solid rgba(200,168,141,.1)}
+.re-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(200,168,141,.38);margin-bottom:2.5rem}
+.re-pills{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-bottom:3rem}
+@media(max-width:520px){.re-pills{grid-template-columns:1fr;gap:1.5rem}}
+.rp{border-top:.5px solid rgba(200,168,141,.18);padding-top:1rem}
+.rp-v{font-family:'Afacad Flux',sans-serif;font-size:clamp(2.2rem,5vw,3.5rem);font-weight:300;color:var(--brand);line-height:1;letter-spacing:-.03em}
+.rp-u{font-size:12px;color:rgba(200,168,141,.45)}
+.rp-l{font-size:12px;color:rgba(255,255,255,.28);margin-top:.3rem;line-height:1.4}
+.re-ins{border-top:.5px solid rgba(255,255,255,.07);padding-top:1.75rem;margin-bottom:2.5rem}
+.re-ins-h{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,168,141,.38);margin-bottom:.6rem}
+.re-ins-t{font-family:'Afacad Flux',sans-serif;font-size:clamp(1.1rem,3vw,1.5rem);line-height:1.4;max-width:600px;color:rgba(241,239,237,.75);font-weight:300}
+.re-cta{display:inline-flex;align-items:center;gap:.6rem;background:var(--brand);color:var(--dark);padding:.8rem 1.6rem;border-radius:99px;text-decoration:none;font-family:'Afacad Flux',sans-serif;font-size:14px;font-weight:500;transition:background .2s,transform .15s}
+.re-cta:hover{background:#d4b89a;transform:translateY(-1px)}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+
+<header class="topbar">
+  <div class="tb-l">
+    <span class="tb-brand">BZAR Hotels</span>
+    <div class="tb-sep"></div>
+    <img src="https://www.ribrainstudio.com/wp-content/uploads/2025/01/Logo_ribrain_Nero.svg" alt="Ribrain" class="tb-rlogo">
+  </div>
+  <span class="tb-c">Cruscotto Strategico &middot; Voce del Cliente</span>
+  <div class="tb-r">
+    <span class="tb-date">Aprile 2026</span>
+    <span class="tb-conf">Confidenziale</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-noise" aria-hidden="true"></div>
+  <div class="hero-ghost" aria-hidden="true">M3</div>
+  <div class="hero-body">
+    <div class="hero-tag" id="htag">M3 &mdash; Voce del Cliente</div>
+    <h1 class="hero-h1">
+      <span id="hl1">L'ospite dice sempre</span><br>
+      <span id="hl2">la stessa cosa.</span><br>
+      <span id="hl3"><em>Nessuno la sta ascoltando.</em></span>
+    </h1>
+    <p class="hero-sub" id="hsub">Oltre 3.700 recensioni analizzate su TripAdvisor, Booking.com e TheFork. Il pattern è univoco: qualità eccellente certificata dagli ospiti, invisibilità digitale totale.</p>
+    <div class="hero-stats" id="hstats">
+      <div class="hs"><span class="hs-v" id="cnt-rec">0</span><span class="hs-l">recensioni analizzate</span></div>
+      <div class="hs"><span class="hs-v">5</span><span class="hs-l">strutture TA &ge; 4.6</span></div>
+      <div class="hs"><span class="hs-v">172</span><span class="hs-l">follower del TA&nbsp;5.0</span></div>
+    </div>
+  </div>
+  <div class="hero-foot"><div class="hero-scroll" aria-hidden="true">Scorri</div></div>
+</section>
+
+<!-- RINGS -->
+<section class="sec" id="s-rings">
+  <div class="s-tag">La visualizzazione del gap</div>
+  <h2 class="s-h">Qualità reale vs voce digitale.<br>Struttura per struttura.</h2>
+  <p class="s-lead">L'anello esterno misura la reputazione OTA, quasi sempre quasi completo. Il cerchio interno misura i follower Instagram. Per la maggior parte delle strutture il centro è quasi vuoto.</p>
+
+  <div class="rings-grid" id="ringsGrid">
+    <!-- circ r=52 → 2πr ≈ 327 -->
+    <div class="ring-unit perfect" id="ru-vim">
+      <svg class="ring-svg" viewBox="0 0 120 120">
+        <circle class="ring-track" cx="60" cy="60" r="52"/>
+        <circle class="ring-quality" cx="60" cy="60" r="52" stroke="#755847" stroke-dasharray="0 327" id="rq-vim"/>
+        <circle cx="60" cy="60" r="0" fill="#C8A88D" opacity=".5" id="rs-vim"/>
+        <text x="60" y="57" text-anchor="middle" font-family="Afacad Flux,sans-serif" font-size="14" font-weight="500" fill="#755847" dominant-baseline="middle">5.0</text>
+        <text x="60" y="70" text-anchor="middle" font-family="Poppins,sans-serif" font-size="7.5" fill="#9a7d6a" dominant-baseline="middle">678 flw</text>
+      </svg>
+      <div class="ring-name">Hotel Viminale</div>
+      <div class="ring-meta">#1 Roma</div>
+    </div>
+    <div class="ring-unit perfect" id="ru-dim">
+      <svg class="ring-svg" viewBox="0 0 120 120">
+        <circle class="ring-track" cx="60" cy="60" r="52"/>
+        <circle class="ring-quality" cx="60" cy="60" r="52" stroke="#755847" stroke-dasharray="0 327" id="rq-dim"/>
+        <circle cx="60" cy="60" r="0" fill="#C8A88D" opacity=".5" id="rs-dim"/>
+        <text x="60" y="57" text-anchor="middle" font-family="Afacad Flux,sans-serif" font-size="14" font-weight="500" fill="#755847" dominant-baseline="middle">5.0</text>
+        <text x="60" y="70" text-anchor="middle" font-family="Poppins,sans-serif" font-size="7.5" fill="#9a7d6a" dominant-baseline="middle">172 flw</text>
+      </svg>
+      <div class="ring-name">Dimora Coppelle</div>
+      <div class="ring-meta">#4 Roma</div>
+    </div>
+    <div class="ring-unit perfect" id="ru-eli">
+      <svg class="ring-svg" viewBox="0 0 120 120">
+        <circle class="ring-track" cx="60" cy="60" r="52"/>
+        <circle class="ring-quality" cx="60" cy="60" r="52" stroke="#755847" stroke-dasharray="0 327" id="rq-eli"/>
+        <circle cx="60" cy="60" r="0" fill="#C8A88D" opacity=".5" id="rs-eli"/>
+        <text x="60" y="57" text-anchor="middle" font-family="Afacad Flux,sans-serif" font-size="14" font-weight="500" fill="#755847" dominant-baseline="middle">5.0</text>
+        <text x="60" y="70" text-anchor="middle" font-family="Poppins,sans-serif" font-size="7.5" fill="#9a7d6a" dominant-baseline="middle">339 flw</text>
+      </svg>
+      <div class="ring-name">Elisia</div>
+      <div class="ring-meta">TheFork 9.5</div>
+    </div>
+    <div class="ring-unit" id="ru-con">
+      <svg class="ring-svg" viewBox="0 0 120 120">
+        <circle class="ring-track" cx="60" cy="60" r="52"/>
+        <circle class="ring-quality" cx="60" cy="60" r="52" stroke="#9a7d6a" stroke-dasharray="0 327" id="rq-con"/>
+        <circle cx="60" cy="60" r="0" fill="#C8A88D" opacity=".5" id="rs-con"/>
+        <text x="60" y="57" text-anchor="middle" font-family="Afacad Flux,sans-serif" font-size="14" font-weight="500" fill="#755847" dominant-baseline="middle">4.6</text>
+        <text x="60" y="70" text-anchor="middle" font-family="Poppins,sans-serif" font-size="7.5" fill="#9a7d6a" dominant-baseline="middle">5.7K flw</text>
+      </svg>
+      <div class="ring-name">Condominio Monti</div>
+      <div class="ring-meta">Travellers' Choice</div>
+    </div>
+    <div class="ring-unit" id="ru-ado">
+      <svg class="ring-svg" viewBox="0 0 120 120">
+        <circle class="ring-track" cx="60" cy="60" r="52"/>
+        <circle class="ring-quality" cx="60" cy="60" r="52" stroke="#9a7d6a" stroke-dasharray="0 327" id="rq-ado"/>
+        <circle cx="60" cy="60" r="0" fill="#C8A88D" opacity=".5" id="rs-ado"/>
+        <text x="60" y="57" text-anchor="middle" font-family="Afacad Flux,sans-serif" font-size="14" font-weight="500" fill="#755847" dominant-baseline="middle">4.6</text>
+        <text x="60" y="70" text-anchor="middle" font-family="Poppins,sans-serif" font-size="7.5" fill="#9a7d6a" dominant-baseline="middle">1.2K flw</text>
+      </svg>
+      <div class="ring-name">Adoro Hotel</div>
+      <div class="ring-meta">Booking 9.1</div>
+    </div>
+    <div class="ring-unit" id="ru-oli">
+      <svg class="ring-svg" viewBox="0 0 120 120">
+        <circle class="ring-track" cx="60" cy="60" r="52"/>
+        <circle class="ring-quality" cx="60" cy="60" r="52" stroke="#9a7d6a" stroke-dasharray="0 327" id="rq-oli"/>
+        <circle cx="60" cy="60" r="0" fill="#C8A88D" opacity=".5" id="rs-oli"/>
+        <text x="60" y="57" text-anchor="middle" font-family="Afacad Flux,sans-serif" font-size="14" font-weight="500" fill="#755847" dominant-baseline="middle">4.2</text>
+        <text x="60" y="70" text-anchor="middle" font-family="Poppins,sans-serif" font-size="7.5" fill="#9a7d6a" dominant-baseline="middle">789 flw</text>
+      </svg>
+      <div class="ring-name">Osteria Oliva</div>
+      <div class="ring-meta">TheFork 8.4</div>
+    </div>
+    <div class="ring-unit" id="ru-mod">
+      <svg class="ring-svg" viewBox="0 0 120 120">
+        <circle class="ring-track" cx="60" cy="60" r="52"/>
+        <circle class="ring-quality" cx="60" cy="60" r="52" stroke="#9a7d6a" stroke-dasharray="0 327" id="rq-mod"/>
+        <circle cx="60" cy="60" r="2" fill="rgba(117,88,71,.12)"/>
+        <text x="60" y="57" text-anchor="middle" font-family="Afacad Flux,sans-serif" font-size="14" font-weight="500" fill="#755847" dominant-baseline="middle">4.6</text>
+        <text x="60" y="70" text-anchor="middle" font-family="Poppins,sans-serif" font-size="7.5" fill="#9a7d6a" dominant-baseline="middle">zero social</text>
+      </svg>
+      <div class="ring-name">Moderno Bar</div>
+      <div class="ring-meta">nessun account</div>
+    </div>
+    <div class="ring-unit spritz" id="ru-spr">
+      <svg class="ring-svg" viewBox="0 0 120 120">
+        <circle class="ring-track" cx="60" cy="60" r="52"/>
+        <circle class="ring-quality" cx="60" cy="60" r="52" stroke="#c0572a" stroke-dasharray="0 327" id="rq-spr"/>
+        <circle cx="60" cy="60" r="0" fill="#c0572a" opacity=".35" id="rs-spr"/>
+        <text x="60" y="57" text-anchor="middle" font-family="Afacad Flux,sans-serif" font-size="14" font-weight="500" fill="#c0572a" dominant-baseline="middle">3.5</text>
+        <text x="60" y="70" text-anchor="middle" font-family="Poppins,sans-serif" font-size="7.5" fill="#c0572a" dominant-baseline="middle">35K flw !</text>
+      </svg>
+      <div class="ring-name">Spritzeria Monti</div>
+      <div class="ring-meta">anomalia</div>
+    </div>
+  </div>
+
+  <div class="rings-legend">
+    <div class="rl"><div class="rl-o"></div>Anello esterno = qualità OTA (pieno = perfetto)</div>
+    <div class="rl"><div class="rl-d"></div>Cerchio interno = follower Instagram</div>
+  </div>
+  <p class="rings-caption">I tre hotel con 5.0 su TripAdvisor hanno in media 396 follower su Instagram. Spritzeria, l'unica struttura con rating mediocre, ne ha 35.000. Il sistema è invertito.</p>
+</section>
+
+<!-- BREAKOUT DARK -->
+<div class="breakout" id="s-breakout">
+  <div class="bo-tag">Il numero che riassume tutto</div>
+  <div class="bo-num" id="bnum">172</div>
+  <div class="bo-text">Follower Instagram di <strong>Dimora Coppelle</strong>  <strong>5.0/5 su TripAdvisor</strong>, #4 su 1.150 hotel a Roma, 9.5/10 su Booking.</div>
+  <div class="bo-sub">La struttura più apprezzata del portfolio non ha voce digitale. Ogni ospite che non la trova online è un'opportunità di advocacy persa nel silenzio.</div>
+</div>
+
+<!-- NAMES SCATTER -->
+<section class="sec" id="s-names">
+  <div class="s-tag">Il contenuto che non esiste ancora</div>
+  <h2 class="s-h">Questi nomi appaiono ogni settimana<br>nelle recensioni.</h2>
+  <div class="names-field" id="namesField">
+    <span class="np" style="font-size:clamp(2.2rem,5.5vw,4rem);font-weight:300;top:0;left:0;opacity:0">Yamish</span>
+    <span class="np" style="font-size:clamp(1.3rem,3.2vw,2.4rem);font-weight:400;top:8%;left:36%;opacity:0">Valeria</span>
+    <span class="np" style="font-size:clamp(1.7rem,4.2vw,3.2rem);font-weight:300;top:40%;left:6%;opacity:0">Fabiana</span>
+    <span class="np" style="font-size:clamp(1.1rem,2.8vw,2rem);font-weight:400;top:14%;left:62%;opacity:0">Lorenzo</span>
+    <span class="np" style="font-size:clamp(1.5rem,3.8vw,2.8rem);font-weight:300;top:56%;left:40%;opacity:0">Federico</span>
+    <span class="np" style="font-size:clamp(.95rem,2.3vw,1.7rem);font-weight:400;top:68%;left:4%;opacity:0">Andrea</span>
+    <span class="np" style="font-size:clamp(.85rem,2vw,1.4rem);font-weight:300;top:74%;left:60%;opacity:0;color:rgba(117,88,71,.35)">Giulio</span>
+    <span class="np" style="font-size:clamp(1rem,2.6vw,1.9rem);font-weight:300;top:30%;left:58%;opacity:0;color:rgba(117,88,71,.48)">Leila</span>
+  </div>
+  <p class="names-stmt"><strong>Nessuno di questi nomi appare mai sui social.</strong> Eppure sono il motivo principale per cui gli ospiti tornano, e lo dichiarano esplicitamente nelle recensioni. Il social non ha ancora capito che il prodotto più vendibile di BZAR si chiama Yamish.</p>
+</section>
+
+<!-- SPRITZERIA ANOMALY -->
+<section class="spritz-sec" id="s-spritz">
+  <div class="spr-tag">L'anomalia del portfolio</div>
+  <h2 class="spr-h">35.000 follower.<br><em>TripAdvisor 3.5.</em><br>Quanto rumore per poco.</h2>
+  <div class="spr-grid">
+    <div>
+      <svg class="spr-ring-svg" viewBox="0 0 160 160" role="img" aria-label="Spritzeria: anello qualità incompleto, cerchio follower pieno">
+        <circle cx="80" cy="80" r="70" fill="none" stroke="rgba(192,87,42,.12)" stroke-width="10"/>
+        <circle cx="80" cy="80" r="70" fill="none" stroke="#c0572a" stroke-width="10" stroke-linecap="round" stroke-dasharray="0 440" id="spr-ring" transform="rotate(-90 80 80)"/>
+        <circle cx="80" cy="80" r="0" fill="#c0572a" opacity=".22" id="spr-inner"/>
+        <text x="80" y="74" text-anchor="middle" font-family="Afacad Flux,sans-serif" font-size="22" fill="#c0572a" font-weight="300" dominant-baseline="middle">3.5</text>
+        <text x="80" y="92" text-anchor="middle" font-family="Poppins,sans-serif" font-size="9" fill="rgba(192,87,42,.5)" letter-spacing=".04em">TripAdvisor</text>
+      </svg>
+      <div class="spr-ring-label">35.000 follower &middot; 124 recensioni</div>
+    </div>
+    <div>
+      <div class="spr-data-row">
+        <div class="spr-v" style="color:rgba(192,87,42,.85)">35K</div>
+        <div class="spr-l">follower Instagram, il profilo BZAR più seguito in assoluto</div>
+      </div>
+      <div class="spr-data-row">
+        <div class="spr-v" style="color:rgba(241,239,237,.28)">3.5/5</div>
+        <div class="spr-l">rating TripAdvisor, spritz a 10-12€ senza stuzzichini, offerta food scarsa</div>
+      </div>
+      <div class="spr-insight">Spritzeria ha costruito hype senza sostanza. Il social ha amplificato l'estetica prima che il prodotto fosse all'altezza. È il rischio opposto rispetto al resto del portfolio: avere voce senza qualità, invece di qualità senza voce.</div>
+    </div>
+  </div>
+</section>
+
+<!-- OSTERIA OLIVA -->
+<section class="sec" id="s-oliva">
+  <div class="s-tag">Il caso Osteria Oliva</div>
+  <h2 class="s-h">1.130 post.<br>789 persone li seguono.</h2>
+  <p class="s-lead">Un post al giorno per tre anni. TheFork 8.4, 720 recensioni TripAdvisor. Un'attività editoriale enorme con risultati minimi. Il problema non è la quantità: è la strategia.</p>
+  <div class="oliva-ratio">
+    <div><div class="o-n">1.130</div><div class="o-l">post pubblicati su Instagram</div></div>
+    <div class="o-div"></div>
+    <div><div class="o-n" style="color:rgba(117,88,71,.3)">789</div><div class="o-l">follower guadagnati</div></div>
+    <div class="o-div"></div>
+    <div><div class="o-n" style="color:rgba(117,88,71,.18);font-size:clamp(3rem,9vw,6.5rem)">0.7</div><div class="o-l">nuovi follower per post</div></div>
+  </div>
+  <div class="dot-grid" id="dotGrid" aria-label="789 dot attivi su 1130 totali"></div>
+  <div class="dot-caption">789 follower (oro) su 1.130 post pubblicati</div>
+  <p class="oliva-insight">Lo stesso impegno, con una logica editoriale, porterebbe risultati radicalmente diversi. La frequenza non sostituisce la strategia.</p>
+</section>
+
+<!-- CONTENT PILLARS -->
+<section class="sec" id="s-pillars">
+  <div class="s-tag">Da VOC a strategia</div>
+  <h2 class="s-h">Cinque content pillar<br>che la VOC già suggerisce.</h2>
+  <div class="pillars-grid">
+    <div class="pg-card" id="pg1"><div class="pg-n">01</div><div class="pg-tag">Staff stories</div><div class="pg-t">Team e volti umani</div><div class="pg-d">Mini-interviste, "un giorno con Yamish", "la mattina di Fabiana". Il brand più vendibile di BZAR ha un nome, mancano solo le riprese.</div></div>
+    <div class="pg-card" id="pg2"><div class="pg-n">02</div><div class="pg-tag">Cucina &amp; rituali</div><div class="pg-t">Colazione, ricette, backstage</div><div class="pg-d">La colazione è il momento più citato in assoluto nelle recensioni. Reel della preparazione, ricette romane, il tiramisu del Condominio Monti, contenuto esistente, mai raccontato.</div></div>
+    <div class="pg-card" id="pg3"><div class="pg-n">03</div><div class="pg-tag">Quartiere</div><div class="pg-t">Roma locale, un rione alla volta</div><div class="pg-d">Monti, Coppelle, Via Appia: ogni struttura ha un quartiere. Mini-guide, itinerari, indirizzi nascosti, scalabile e autentico.</div></div>
+    <div class="pg-card" id="pg4"><div class="pg-n">04</div><div class="pg-tag">Momenti speciali</div><div class="pg-t">Romanticismo, tramonti, eventi</div><div class="pg-d">Elisia e Spritzeria descritte come "atmosfere romantiche". Il rooftop genera entusiasmo spontaneo. Contenuti che mostrano il momento, non il prodotto.</div></div>
+    <div class="pg-card wide" id="pg5"><div class="pg-n">05</div><div class="pg-tag">UGC &amp; testimonianze</div><div class="pg-t">La voce degli ospiti come contenuto</div><div class="pg-d">720 recensioni Osteria Oliva su TripAdvisor. 1.856 per Hotel Viminale su Booking. 73 per Elisia su TheFork. Un archivio di contenuto autentico non sfruttato. Quote grafiche, repost, frasi chiave, il materiale c'è già.</div></div>
+  </div>
+</section>
+
+<!-- RECAP -->
+<section id="recap">
+  <div class="re-tag">Sintesi &middot; M3 &middot; Voce del Cliente</div>
+  <div class="re-pills">
+    <div class="rp"><div class="rp-v">396</div><div class="rp-u">follower medi</div><div class="rp-l">Delle tre strutture con TA 5.0. La qualità non genera automaticamente community</div></div>
+    <div class="rp"><div class="rp-v">0.7</div><div class="rp-u">follower per post</div><div class="rp-l">Il rendimento di Osteria Oliva: 1.130 post per 789 follower. Senza strategia</div></div>
+    <div class="rp"><div class="rp-v">5</div><div class="rp-u">content pillar</div><div class="rp-l">Staff · cucina · quartiere · momenti · UGC, che gli ospiti già chiedono nelle recensioni</div></div>
+  </div>
+  <div class="re-ins">
+    <div class="re-ins-h">Insight chiave</div>
+    <div class="re-ins-t">Hotel Viminale: numero 1 a Roma su TripAdvisor tra 1.153 strutture. 678 follower su Instagram. Dimora Coppelle: 5.0 su TripAdvisor. 172 follower. Il mercato ha già certificato la qualità. I social non lo sanno ancora.</div>
+  </div>
+  <a href="m4.html" class="re-cta">Esplora M4 &mdash; Personas &rarr;</a>
+</section>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* cursor */
+var cur=document.getElementById('cur');
+document.addEventListener('mousemove',function(e){gsap.to(cur,{x:e.clientX,y:e.clientY,duration:.1,ease:'none'});});
+document.querySelectorAll('a,button').forEach(function(el){
+  el.addEventListener('mouseenter',function(){gsap.to(cur,{width:18,height:18,duration:.18});});
+  el.addEventListener('mouseleave',function(){gsap.to(cur,{width:8,height:8,duration:.18});});
+});
+
+/* hero fallback */
+var fbT=setTimeout(function(){['htag','hl1','hl2','hl3','hsub','hstats'].forEach(function(id){var e=document.getElementById(id);if(e)e.style.opacity='1';});},2000);
+gsap.fromTo('#htag',{opacity:0,y:14},{opacity:1,y:0,duration:.8,delay:.2,ease:'power3.out',onComplete:function(){clearTimeout(fbT);}});
+gsap.fromTo('#hl1',{opacity:0,y:28},{opacity:1,y:0,duration:.95,delay:.4,ease:'power3.out'});
+gsap.fromTo('#hl2',{opacity:0,y:28},{opacity:1,y:0,duration:.95,delay:.56,ease:'power3.out'});
+gsap.fromTo('#hl3',{opacity:0,y:28},{opacity:1,y:0,duration:.95,delay:.72,ease:'power3.out'});
+gsap.fromTo('#hsub',{opacity:0,y:18},{opacity:1,y:0,duration:.85,delay:1,ease:'power3.out'});
+gsap.fromTo('#hstats',{opacity:0,y:14},{opacity:1,y:0,duration:.7,delay:1.25,ease:'power3.out'});
+gsap.fromTo('.hero-ghost',{opacity:0,scale:.93},{opacity:1,scale:1,duration:2,delay:.1,ease:'power2.out'});
+
+/* counter */
+setTimeout(function(){
+  var obj={val:0},el=document.getElementById('cnt-rec');
+  if(el) gsap.to(obj,{val:3776,duration:2,ease:'power2.out',delay:.5,onUpdate:function(){el.textContent=Math.round(obj.val).toLocaleString('it-IT');}});
+},600);
+
+/* section reveals */
+gsap.utils.toArray('.sec,.breakout,.spritz-sec,#recap').forEach(function(el){
+  gsap.fromTo(el,{opacity:0,y:28},{opacity:1,y:0,duration:.85,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 85%',once:true}});
+});
+
+/* RINGS */
+var CIRC=327;
+var rings=[
+  {id:'vim',q:1.00,r:21.5},{id:'dim',q:1.00,r:17},{id:'eli',q:1.00,r:19},
+  {id:'con',q:0.92,r:29},{id:'ado',q:0.92,r:23},{id:'oli',q:0.84,r:22},
+  {id:'mod',q:0.92,r:0},{id:'spr',q:0.70,r:35}
+];
+ScrollTrigger.create({trigger:'#ringsGrid',start:'top 72%',once:true,onEnter:function(){
+  rings.forEach(function(d,i){
+    var unit=document.getElementById('ru-'+d.id);
+    var rq=document.getElementById('rq-'+d.id);
+    var rs=document.getElementById('rs-'+d.id);
+    if(unit) gsap.fromTo(unit,{opacity:0,y:16},{opacity:1,y:0,duration:.7,delay:i*.08,ease:'power3.out'});
+    if(rq){
+      var dash=CIRC*d.q;
+      gsap.fromTo(rq,{attr:{'stroke-dasharray':'0 '+CIRC}},{attr:{'stroke-dasharray':dash+' '+(CIRC-dash)},duration:1.4,delay:.1+i*.1,ease:'power3.inOut'});
+    }
+    if(rs && d.r>0){
+      gsap.fromTo(rs,{attr:{r:0}},{attr:{r:d.r},duration:.8,delay:.6+i*.09,ease:'back.out(2)'});
+    }
+  });
+}});
+
+/* breakout */
+ScrollTrigger.create({trigger:'#s-breakout',start:'top 70%',once:true,onEnter:function(){
+  gsap.fromTo('#bnum',{opacity:0,y:40,scale:.88},{opacity:1,y:0,scale:1,duration:1.1,ease:'power3.out'});
+}});
+
+/* names */
+ScrollTrigger.create({trigger:'#s-names',start:'top 70%',once:true,onEnter:function(){
+  document.querySelectorAll('.np').forEach(function(el,i){
+    gsap.fromTo(el,{opacity:0,y:18},{opacity:parseFloat(el.style.opacity||1)||1,y:0,duration:.9,delay:i*.11,ease:'power3.out'});
+  });
+}});
+
+/* spritzeria rings */
+ScrollTrigger.create({trigger:'#s-spritz',start:'top 72%',once:true,onEnter:function(){
+  var c2=440;
+  var sr=document.getElementById('spr-ring');
+  var si=document.getElementById('spr-inner');
+  if(sr) gsap.fromTo(sr,{attr:{'stroke-dasharray':'0 '+c2}},{attr:{'stroke-dasharray':(c2*.70)+' '+(c2*.30)},duration:1.4,ease:'power3.inOut',delay:.2});
+  if(si) gsap.fromTo(si,{attr:{r:0}},{attr:{r:62},duration:1.2,ease:'back.out(1.5)',delay:.5});
+}});
+
+/* dot grid */
+(function(){
+  var grid=document.getElementById('dotGrid');
+  if(!grid) return;
+  var total=1130,active=789,frag=document.createDocumentFragment();
+  for(var i=0;i<total;i++){
+    var d=document.createElement('div');
+    d.className='dd'+(i<active?' on':'');
+    frag.appendChild(d);
+  }
+  grid.appendChild(frag);
+  ScrollTrigger.create({trigger:'#s-oliva',start:'top 70%',once:true,onEnter:function(){
+    gsap.fromTo(grid.querySelectorAll('.dd.on'),{opacity:0,scale:0},{opacity:1,scale:1,duration:.4,stagger:{amount:1.4,from:'start'},ease:'power2.out'});
+    gsap.fromTo(grid.querySelectorAll('.dd:not(.on)'),{opacity:0},{opacity:1,duration:.3,delay:1,stagger:{amount:.8,from:'start'}});
+  }});
+})();
+
+/* pillars */
+gsap.utils.toArray('.pg-card').forEach(function(el,i){
+  gsap.fromTo(el,{opacity:0,y:18},{opacity:1,y:0,duration:.7,ease:'power3.out',delay:i*.1,scrollTrigger:{trigger:el,start:'top 87%',once:true}});
+});
+gsap.utils.toArray('.rp').forEach(function(el,i){
+  gsap.fromTo(el,{opacity:0,y:18},{opacity:1,y:0,duration:.7,ease:'power3.out',delay:i*.12,scrollTrigger:{trigger:el,start:'top 88%',once:true}});
+});
+gsap.utils.toArray('.o-n').forEach(function(el,i){
+  gsap.fromTo(el,{opacity:0,y:30},{opacity:1,y:0,duration:.9,ease:'power3.out',delay:i*.15,scrollTrigger:{trigger:el,start:'top 85%',once:true}});
+});
+</script>
+
+<!-- MENU IIFE -->
+<script>
+(function(){
+'use strict';
+var M=[
+  {id:'m0',code:'00',label:'Executive Summary',sub:'Il gap \u00b7 La proposta',url:'m0.html',color:'#C8A88D'},
+  {id:'m1',code:'01',label:'Mercato',sub:'Roma 2026 \u00b7 OTA \u00b7 Social',url:'m1.html',color:'#755847'},
+  {id:'m2',code:'02',label:'Competitor Map',sub:'Hoxton \u00b7 Chapter \u00b7 Mama',url:'m2.html',color:'#9a7d6a'},
+  {id:'m3',code:'03',label:'Voce del Cliente',sub:'VOC \u00b7 14 account \u00b7 Gap',url:'m3.html',color:'#C4ACA5'},
+  {id:'m4',code:'04',label:'Personas',sub:'4 profili \u00b7 Trigger',url:'m4.html',color:'#a08470'},
+  {id:'m5',code:'05',label:'Mappa del Momento',sub:'Perch\u00e9 investire adesso',url:'m5.html',color:'#C8A88D'},
+  {id:'m6',code:'06',label:'Benchmark Creativi',sub:'Il Pellicano \u00b7 Borgo \u00b7 The Pig',url:'m6.html',color:'#755847'},
+  {id:'m7',code:'07',label:'Piano Operativo',sub:'KPI \u00b7 Governance',url:'m7.html',color:'#9a7d6a'}
+];
+var path=window.location.pathname.split('/').pop().replace('.html','')||'m0';
+var cur=M[0];for(var ci=0;ci<M.length;ci++){if(M[ci].id===path){cur=M[ci];break;}}
+var s=document.createElement('style');
+s.textContent='.rbmenu-btn{position:fixed;top:14px;right:16px;z-index:9001;width:44px;height:44px;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:5px;padding:8px}.rbmenu-btn span{display:block;height:1.5px;background:#F1EFED;border-radius:1px;transition:all .45s cubic-bezier(0.16,1,0.3,1);transform-origin:right center}.rbmenu-btn.light span{background:#1E1410}.rbmenu-btn .l1{width:22px}.rbmenu-btn .l2{width:16px}.rbmenu-btn .l3{width:22px}.rbmenu-btn.open .l1{width:22px;transform:translateY(6.5px) rotate(-45deg)}.rbmenu-btn.open .l2{opacity:0;width:0}.rbmenu-btn.open .l3{width:22px;transform:translateY(-6.5px) rotate(45deg)}.rbmenu-overlay{position:fixed;inset:0;z-index:9000;background:#1E1410;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .5s cubic-bezier(0.16,1,0.3,1);overflow:hidden}.rbmenu-overlay.open{opacity:1;pointer-events:auto}.rbmenu-top{display:flex;align-items:center;justify-content:space-between;padding:18px 48px;border-bottom:1px solid rgba(200,168,141,.07);flex-shrink:0}.rbmenu-brand{display:flex;align-items:center;gap:12px}.rbmenu-brand-sep{width:1px;height:16px;background:rgba(200,168,141,.2)}.rbmenu-brand-label{font-family:"Poppins",sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(200,168,141,.3)}.rbmenu-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:24px 48px 36px;overflow-y:auto}.rbmenu-items{list-style:none}.rbmenu-item{border-top:1px solid rgba(200,168,141,.06);opacity:0;transform:translateY(20px);position:relative}.rbmenu-item:last-child{border-bottom:1px solid rgba(200,168,141,.06)}.rbmenu-item a{display:grid;grid-template-columns:48px 1fr auto;gap:0 20px;align-items:center;padding:14px 0;text-decoration:none;color:inherit;position:relative}.rbmenu-item a::after{content:"";position:absolute;bottom:0;left:0;width:0;height:1px;background:#C8A88D;transition:width .5s cubic-bezier(0.16,1,0.3,1);opacity:.3}.rbmenu-item a:hover::after{width:100%}.rmi-code{font-family:"Poppins",sans-serif;font-size:10px;letter-spacing:.12em;color:rgba(200,168,141,.22);line-height:1;transition:color .3s}.rbmenu-item a:hover .rmi-code{color:rgba(200,168,141,.5)}.rmi-left{display:flex;flex-direction:column;gap:3px}.rmi-label{font-family:"Afacad Flux",sans-serif;font-weight:300;font-size:clamp(24px,3.2vw,42px);line-height:1;color:rgba(241,239,237,.65);transition:color .3s;letter-spacing:-.01em}.rbmenu-item a:hover .rmi-label{color:rgba(241,239,237,.9)}.rbmenu-item.active .rmi-label{color:#C8A88D;font-style:italic}.rmi-sub{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.22);transition:color .3s}.rbmenu-item a:hover .rmi-sub{color:rgba(200,168,141,.4)}.rmi-arr{font-size:18px;color:rgba(200,168,141,.18);transition:transform .4s cubic-bezier(0.16,1,0.3,1),color .3s}.rbmenu-item a:hover .rmi-arr{transform:translateX(6px);color:rgba(200,168,141,.5)}.rbmenu-item-active-bar{position:absolute;left:0;top:2px;bottom:2px;width:3px;border-radius:0 2px 2px 0;opacity:.8}.rbmenu-footer{padding:16px 48px;border-top:1px solid rgba(200,168,141,.06);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}.rbmf-left{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.2)}.rbmf-right{display:flex;align-items:center;gap:16px}.rbmf-link{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.25);text-decoration:none;transition:color .3s}.rbmf-link:hover{color:rgba(200,168,141,.6)}.rbmenu-glow{position:absolute;top:50%;right:-10%;transform:translateY(-50%);width:50vw;height:50vw;border-radius:50%;pointer-events:none;opacity:.05;transition:background 1s;filter:blur(80px)}.rbnavbar{position:fixed;bottom:0;left:0;right:0;z-index:8000;background:rgba(30,20,16,.97);backdrop-filter:blur(24px);border-top:1px solid rgba(200,168,141,.07);height:48px;display:flex;align-items:stretch}.rbnavbar-inner{max-width:1440px;margin:0 auto;padding:0 16px;display:flex;align-items:stretch;width:100%}.rbnavbar-brand{display:flex;align-items:center;gap:8px;padding-right:12px;border-right:1px solid rgba(200,168,141,.07);margin-right:2px;flex-shrink:0}.rbnavbar-brand-txt{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(200,168,141,.22);white-space:nowrap}.rbnavbar-items{display:flex;align-items:stretch;flex:1;overflow-x:auto;scrollbar-width:none}.rbnavbar-items::-webkit-scrollbar{display:none}.rbnav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 10px;text-decoration:none;color:inherit;border-right:1px solid rgba(200,168,141,.05);min-width:56px;position:relative;gap:2px;transition:background .2s}.rbnav-item:hover{background:rgba(200,168,141,.05)}.rbnav-item.active{background:rgba(200,168,141,.07)}.rbnav-item-bar{position:absolute;top:0;left:0;right:0;height:2px}.rbnav-code{font-family:"Poppins",sans-serif;font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.28);line-height:1}.rbnav-item.active .rbnav-code{color:rgba(200,168,141,.55)}.rbnav-title{font-family:"Afacad Flux",sans-serif;font-size:9px;font-weight:400;color:rgba(200,168,141,.4);line-height:1;white-space:nowrap}.rbnav-item.active .rbnav-title{color:rgba(200,168,141,.85);font-weight:500}body{padding-bottom:48px !important}@media(max-width:600px){.rbmenu-top,.rbmenu-body,.rbmenu-footer{padding-left:20px;padding-right:20px}.rmi-label{font-size:clamp(20px,5.5vw,32px)}}';
+document.head.appendChild(s);
+var btn=document.createElement('button');btn.className='rbmenu-btn';
+var bg=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
+if(bg&&bg.indexOf('#F')===0)btn.classList.add('light');
+btn.setAttribute('aria-label','Apri menu');
+btn.innerHTML='<span class="l1"></span><span class="l2"></span><span class="l3"></span>';
+document.body.appendChild(btn);
+var ov=document.createElement('div');ov.className='rbmenu-overlay';
+var ih='';
+for(var i=0;i<M.length;i++){
+  var m=M[i],a=m.id===path;
+  ih+='<li class="rbmenu-item'+(a?' active':'')+'">'+
+    (a?'<span class="rbmenu-item-active-bar" style="background:'+m.color+'"></span>':'')+
+    '<a href="'+m.url+'"><span class="rmi-code">'+m.code+'</span>'+
+    '<span class="rmi-left"><span class="rmi-label">'+m.label+'</span><span class="rmi-sub">'+m.sub+'</span></span>'+
+    '<span class="rmi-arr">\u2192</span></a></li>';
+}
+ov.innerHTML='<div class="rbmenu-glow" id="rbglow" style="background:'+cur.color+'"></div>'+
+  '<div class="rbmenu-top"><div class="rbmenu-brand">'+
+  '<span style="font-family:\'Afacad Flux\',sans-serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#C8A88D">BZAR Hotels</span>'+
+  '<div class="rbmenu-brand-sep"></div>'+
+  '<img src="https://www.ribrainstudio.com/wp-content/uploads/2025/01/Logo_ribrain_Nero.svg" style="height:13px;filter:invert(1);opacity:.5" onerror="this.style.display=\'none\'">'+
+  '<div class="rbmenu-brand-sep"></div>'+
+  '<span class="rbmenu-brand-label">Cruscotto Strategico \u00b7 BZAR Hotels</span>'+
+  '</div></div>'+
+  '<div class="rbmenu-body"><ul class="rbmenu-items">'+ih+'</ul></div>'+
+  '<div class="rbmenu-footer"><span class="rbmf-left">Aprile 2026 \u00b7 Ribrain Studio \u00b7 Confidenziale</span>'+
+  '<div class="rbmf-right"><a href="m0.html" class="rbmf-link">Executive Summary</a><a href="m7.html" class="rbmf-link">Piano Operativo \u2192</a></div></div>';
+document.body.appendChild(ov);
+var nb=document.createElement('nav');nb.className='rbnavbar';
+var nh='';
+for(var ni=0;ni<M.length;ni++){
+  var nm=M[ni],na=nm.id===path;
+  nh+='<a href="'+nm.url+'" class="rbnav-item'+(na?' active':'')+'" title="'+nm.label+'">'+
+    (na?'<span class="rbnav-item-bar" style="background:'+nm.color+'"></span>':'')+
+    '<span class="rbnav-code">'+nm.code+'</span><span class="rbnav-title">'+nm.label+'</span></a>';
+}
+nb.innerHTML='<div class="rbnavbar-inner"><div class="rbnavbar-brand">'+
+  '<img src="https://www.ribrainstudio.com/wp-content/uploads/2025/01/Logo_ribrain_Nero.svg" style="height:11px;filter:invert(1);opacity:.3" onerror="this.style.display=\'none\'">'+
+  '<span class="rbnavbar-brand-txt">\u00d7 BZAR</span></div>'+
+  '<div class="rbnavbar-items">'+nh+'</div></div>';
+document.body.appendChild(nb);
+var isOpen=false;
+function openMenu(){isOpen=true;btn.classList.add('open');ov.classList.add('open');btn.setAttribute('aria-label','Chiudi menu');document.body.style.overflow='hidden';
+  var its=ov.querySelectorAll('.rbmenu-item');
+  for(var ii=0;ii<its.length;ii++){(function(el,idx){el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity .5s '+(.07+idx*.055)+'s cubic-bezier(0.16,1,0.3,1),transform .5s '+(.07+idx*.055)+'s cubic-bezier(0.16,1,0.3,1)';setTimeout(function(){el.style.opacity='1';el.style.transform='translateY(0)';},10);})(its[ii],ii);}
+}
+function closeMenu(){isOpen=false;btn.classList.remove('open');ov.classList.remove('open');btn.setAttribute('aria-label','Apri menu');document.body.style.overflow='';}
+btn.addEventListener('click',function(){if(isOpen)closeMenu();else openMenu();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&isOpen)closeMenu();});
+var lis=ov.querySelectorAll('.rbmenu-item');
+for(var gi=0;gi<lis.length;gi++){(function(li,mod){
+  li.addEventListener('mouseenter',function(){var g=document.getElementById('rbglow');if(g)g.style.background=mod.color;});
+  li.addEventListener('mouseleave',function(){var g=document.getElementById('rbglow');if(g)g.style.background=cur.color;});
+})(lis[gi],M[gi]);}
+})();
+</script>
+
+<!-- FONTI IIFE -->
+<script>
+(function(){
+'use strict';
+var SRC=[
+  {label:'TripAdvisor \u2014 Hotel Viminale Roma \u00b7 #1/1.153 \u00b7 576 recensioni',url:'https://www.tripadvisor.it/Hotel_Review-g187791-d231925-Reviews-Hotel_Viminale-Rome_Lazio.html'},
+  {label:'TripAdvisor \u2014 Dimora Coppelle \u00b7 5.0/5 \u00b7 #4 Roma \u00b7 131 recensioni',url:'https://www.tripadvisor.it/Hotel_Review-g187791-d33749842-Reviews-Dimora_Coppelle-Rome_Lazio.html'},
+  {label:'TripAdvisor \u2014 Osteria Oliva \u00b7 4.2/5 \u00b7 720 recensioni',url:'https://www.tripadvisor.it/Restaurant_Review-g187791-d12238245-Reviews-Osteria_Oliva-Rome_Lazio.html'},
+  {label:'TheFork \u2014 Elisia \u00b7 9.5/10 \u00b7 73 recensioni',url:'https://www.thefork.it/ristorante/elisia-r839764'},
+  {label:'Instagram \u2014 @spritzeria.monti \u00b7 35K follower \u00b7 aprile 2026',url:'https://www.instagram.com/spritzeria.monti/'},
+  {label:'Analisi Social e Reputazione OTA BZAR Hotels \u2014 Ribrain Deep Research, aprile 2026',url:'https://bzarhotels.it/'}
+];
+var style=document.createElement('style');
+style.textContent='.src-toggle{position:fixed;bottom:56px;right:14px;z-index:7500;display:flex;align-items:center;gap:7px;background:rgba(30,20,16,.92);border:1px solid rgba(200,168,141,.15);backdrop-filter:blur(16px);padding:6px 11px;cursor:pointer;font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.45);transition:all .25s;border-radius:99px}.src-toggle:hover{border-color:rgba(200,168,141,.35);color:rgba(200,168,141,.75)}.src-toggle .st-dot{width:5px;height:5px;border-radius:50%;background:#C8A88D;flex-shrink:0}.src-toggle .st-n{background:rgba(200,168,141,.15);color:#C8A88D;padding:1px 5px;border-radius:10px;font-size:8px}.src-drawer{position:fixed;bottom:48px;left:0;right:0;z-index:7000;background:rgba(30,20,16,.97);backdrop-filter:blur(24px);border-top:1px solid rgba(200,168,141,.1);max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(0.16,1,0.3,1),opacity .4s;opacity:0}.src-drawer.open{max-height:360px;opacity:1}.src-drawer-inner{padding:20px 48px 24px;overflow-y:auto;max-height:320px}.src-drawer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}.src-drawer-title{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,168,141,.32)}.src-drawer-close{background:none;border:none;cursor:pointer;font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.25);transition:color .2s}.src-drawer-close:hover{color:rgba(200,168,141,.65)}.src-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:4px}.src-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid rgba(200,168,141,.06);border-radius:6px}.src-item-num{font-family:"Poppins",sans-serif;font-size:8px;letter-spacing:.1em;color:rgba(200,168,141,.25);flex-shrink:0;padding-top:1px;min-width:18px}.src-item-label{font-size:11px;color:rgba(241,239,237,.6);line-height:1.45;margin-bottom:3px}.src-item-url{font-family:"Poppins",sans-serif;font-size:8px;color:rgba(200,168,141,.4);text-decoration:none;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media(max-width:768px){.src-drawer-inner{padding:16px 20px}.src-list{grid-template-columns:1fr}}';
+document.head.appendChild(style);
+var drawer=document.createElement('div');drawer.className='src-drawer';
+var ih='';
+for(var i=0;i<SRC.length;i++){
+  ih+='<div class="src-item"><span class="src-item-num">'+String(i+1).padStart(2,'0')+'</span>'+
+    '<div><div class="src-item-label">'+SRC[i].label+'</div>'+
+    '<a href="'+SRC[i].url+'" target="_blank" rel="noopener noreferrer" class="src-item-url">'+SRC[i].url+'</a></div></div>';
+}
+drawer.innerHTML='<div class="src-drawer-inner"><div class="src-drawer-head">'+
+  '<span class="src-drawer-title">Fonti \u00b7 '+SRC.length+' riferimenti \u00b7 M3</span>'+
+  '<button class="src-drawer-close" id="srcClose">Chiudi \u2715</button></div>'+
+  '<div class="src-list">'+ih+'</div></div>';
+document.body.appendChild(drawer);
+var toggle=document.createElement('button');toggle.className='src-toggle';
+toggle.innerHTML='<span class="st-dot"></span>Fonti <span class="st-n">'+SRC.length+'</span>';
+document.body.appendChild(toggle);
+var open=false;
+function td(){open=!open;drawer.classList.toggle('open',open);toggle.style.borderColor=open?'rgba(200,168,141,.3)':'';toggle.style.color=open?'rgba(200,168,141,.75)':'';}
+toggle.addEventListener('click',td);
+document.getElementById('srcClose').addEventListener('click',function(){open=true;td();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&open){open=true;td();}});
+})();
+</script>
+</body>
+</html>

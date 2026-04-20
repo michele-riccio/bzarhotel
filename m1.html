@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M1: Mercato · BZAR Hotels × Ribrain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --bg:#F1EFED;--ink:#755847;--brand:#C8A88D;--rose:#C4ACA5;
+  --dark:#1E1410;--mid:#9a7d6a;--light:#FDFCFA;
+}
+body{background:var(--bg);color:var(--dark);font-family:'Poppins',sans-serif;font-size:15px;line-height:1.65;overflow-x:hidden;padding-top:52px;padding-bottom:48px;cursor:none}
+@media(hover:none){body{cursor:auto}#cur{display:none}}
+
+/* cursor */
+#cur{position:fixed;width:8px;height:8px;background:var(--brand);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:multiply;transition:width .18s,height .18s}
+
+/* topbar */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:800;height:52px;background:var(--dark);display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem 0 1.5rem;border-bottom:.5px solid rgba(200,168,141,.1)}
+.tb-left{display:flex;align-items:center;gap:.75rem}
+.tb-brand{font-family:'Afacad Flux',sans-serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.tb-sep{width:.5px;height:16px;background:rgba(255,255,255,.15)}
+.tb-rlogo{height:13px;filter:invert(1);opacity:.6}
+.tb-center{font-family:'Poppins',sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.2);position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap}
+@media(max-width:680px){.tb-center{display:none}}
+.tb-right{display:flex;align-items:center;gap:.75rem}
+.tb-date{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+.tb-conf{font-size:9px;letter-spacing:.14em;text-transform:uppercase;border:.5px solid rgba(200,168,141,.28);color:rgba(200,168,141,.45);padding:3px 8px;border-radius:3px}
+
+/* hero */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 1.5rem 3rem;position:relative;overflow:hidden}
+.hero-noise{position:absolute;inset:0;pointer-events:none;opacity:.018;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px}
+.hero-ghost{position:absolute;right:-1%;bottom:-8%;font-family:'Afacad Flux',sans-serif;font-size:clamp(12rem,36vw,30rem);font-weight:700;line-height:.85;color:rgba(117,88,71,.048);pointer-events:none;user-select:none;letter-spacing:-.07em}
+.hero-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--brand);display:flex;align-items:center;gap:.75rem;margin-bottom:1.75rem}
+.hero-tag::before{content:'';width:28px;height:1px;background:var(--brand)}
+.hero-h1{font-family:'Afacad Flux',sans-serif;font-size:clamp(2.8rem,7.5vw,6rem);font-weight:400;line-height:1.04;letter-spacing:-.03em;max-width:760px}
+.hero-h1 em{font-style:italic;color:var(--ink);font-weight:300}
+.hero-sub{font-size:14px;color:var(--mid);max-width:500px;line-height:1.8;margin-top:1.5rem}
+.hero-pills{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
+.hero-pill{font-family:'Afacad Flux',sans-serif;font-size:12px;border:.5px solid rgba(117,88,71,.28);padding:.35rem .9rem;border-radius:99px;color:var(--ink)}
+.hero-pill strong{color:var(--dark)}
+.hero-scroll{position:absolute;bottom:2rem;right:1.5rem;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(117,88,71,.3);writing-mode:vertical-lr;display:flex;align-items:center;gap:.5rem}
+.hero-scroll::after{content:'';width:1px;height:48px;background:rgba(200,168,141,.22)}
+
+/* sections */
+.sec{padding:5rem 1.5rem;border-top:.5px solid rgba(117,88,71,.1)}
+.sec-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);margin-bottom:.6rem}
+.sec-h{font-family:'Afacad Flux',sans-serif;font-size:clamp(1.9rem,4.5vw,3.2rem);font-weight:400;line-height:1.08;letter-spacing:-.02em;margin-bottom:1rem}
+.sec-lead{font-size:14px;color:var(--mid);max-width:540px;line-height:1.8}
+
+/* numeri strip */
+.ns{display:grid;grid-template-columns:repeat(4,1fr);margin-top:3rem;border:.5px solid rgba(117,88,71,.14);border-radius:16px;overflow:hidden}
+@media(max-width:600px){.ns{grid-template-columns:1fr 1fr}}
+.ns-c{padding:1.75rem 1.25rem;border-right:.5px solid rgba(117,88,71,.1)}
+.ns-c:last-child{border-right:none}
+.ns-v{font-family:'Afacad Flux',sans-serif;font-size:clamp(2rem,4.5vw,3.2rem);font-weight:300;line-height:1;color:var(--ink);letter-spacing:-.03em}
+.ns-u{font-size:11px;color:var(--brand);font-family:'Afacad Flux',sans-serif}
+.ns-l{font-size:11px;color:var(--mid);margin-top:.35rem;line-height:1.4}
+
+/* OTA drain */
+.ota-wrap{margin-top:3rem}
+.ota-premise{font-family:'Afacad Flux',sans-serif;font-size:clamp(1.05rem,2.5vw,1.4rem);color:var(--dark);line-height:1.5;max-width:620px;margin-bottom:2.5rem;font-weight:300;font-style:italic;border-left:2px solid var(--brand);padding-left:1rem}
+.ota-meter-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);margin-bottom:.75rem}
+.ota-meter{background:rgba(117,88,71,.08);border-radius:99px;height:12px;overflow:hidden;margin-bottom:.5rem;position:relative}
+.ota-meter-fill{height:100%;border-radius:99px;display:flex;gap:2px}
+.ota-fill-bzar{background:var(--ink);height:100%;border-radius:99px 0 0 99px;width:0;transition:none}
+.ota-fill-ota{background:#c0392b;height:100%;border-radius:0 99px 99px 0;width:0;transition:none;opacity:.8}
+.ota-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--mid)}
+.ota-labels strong{color:var(--dark)}
+.ota-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem}
+@media(max-width:580px){.ota-cards{grid-template-columns:1fr}}
+.ota-card{background:var(--light);border:.5px solid rgba(117,88,71,.14);border-radius:12px;padding:1.25rem 1rem}
+.ota-card-name{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-bottom:.5rem;font-family:'Poppins',sans-serif}
+.ota-card-pct{font-family:'Afacad Flux',sans-serif;font-size:1.5rem;font-weight:300;color:#c0392b;line-height:1}
+.ota-card-desc{font-size:12px;color:var(--mid);margin-top:.35rem;line-height:1.5}
+
+/* social discovery */
+.social-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2.5rem;align-items:start}
+@media(max-width:580px){.social-grid{grid-template-columns:1fr}}
+.social-chart-title{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-bottom:1.25rem}
+.sbar-row{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+.sbar-label{font-size:12px;color:var(--dark);min-width:80px}
+.sbar-track{flex:1;background:rgba(117,88,71,.08);border-radius:99px;height:8px;overflow:hidden}
+.sbar-fill{height:100%;border-radius:99px;width:0}
+.sbar-pct{font-family:'Afacad Flux',sans-serif;font-size:.95rem;font-weight:500;color:var(--ink);min-width:36px;text-align:right}
+.social-insight{background:var(--dark);color:var(--bg);border-radius:16px;padding:2rem 1.75rem}
+.si-label{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(200,168,141,.45);margin-bottom:.65rem}
+.si-text{font-family:'Afacad Flux',sans-serif;font-size:clamp(1.1rem,2.8vw,1.5rem);line-height:1.35;color:rgba(241,239,237,.85);font-weight:300}
+.si-stat{margin-top:1.25rem;display:flex;gap:1.5rem;flex-wrap:wrap}
+.si-s{border-top:.5px solid rgba(200,168,141,.2);padding-top:.75rem;min-width:120px}
+.si-s-v{font-family:'Afacad Flux',sans-serif;font-size:2rem;font-weight:300;color:var(--brand);line-height:1}
+.si-s-l{font-size:11px;color:rgba(241,239,237,.35);margin-top:.2rem;line-height:1.4}
+
+/* stagionalità */
+.season-wrap{margin-top:3rem}
+.season-bars{display:flex;align-items:flex-end;gap:4px;height:160px;padding-bottom:0}
+.sb{flex:1;border-radius:4px 4px 0 0;transform-origin:bottom;transform:scaleY(0);transition:none;position:relative}
+.sb-label{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--mid);white-space:nowrap;letter-spacing:.04em}
+.sb.high{background:var(--ink)}
+.sb.mid{background:var(--brand)}
+.sb.low{background:rgba(117,88,71,.18)}
+.sb.peak{background:#755847;box-shadow:0 0 0 2px rgba(117,88,71,.3)}
+.season-legend{display:flex;gap:1.5rem;margin-top:2.25rem;flex-wrap:wrap}
+.sl-item{display:flex;align-items:center;gap:.5rem;font-size:11px;color:var(--mid)}
+.sl-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.season-note{margin-top:1.5rem;font-family:'Afacad Flux',sans-serif;font-size:clamp(1rem,2.2vw,1.25rem);font-style:italic;font-weight:300;color:var(--dark);border-left:2px solid var(--brand);padding-left:1rem;line-height:1.45;max-width:560px}
+
+/* driver cards */
+.drivers{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem}
+@media(max-width:640px){.drivers{grid-template-columns:1fr 1fr}}
+@media(max-width:420px){.drivers{grid-template-columns:1fr}}
+.dc{background:var(--light);border:.5px solid rgba(117,88,71,.14);border-radius:12px;padding:1.25rem 1rem;position:relative;overflow:hidden}
+.dc::before{content:attr(data-n);position:absolute;right:.75rem;bottom:.5rem;font-family:'Afacad Flux',sans-serif;font-size:3rem;font-weight:700;color:rgba(117,88,71,.05);line-height:1;pointer-events:none}
+.dc-tag{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--brand);margin-bottom:.5rem;font-family:'Poppins',sans-serif}
+.dc-t{font-family:'Afacad Flux',sans-serif;font-size:1rem;font-weight:500;color:var(--dark);margin-bottom:.35rem;line-height:1.2}
+.dc-d{font-size:12px;color:var(--mid);line-height:1.6}
+
+/* callout */
+.callout{background:var(--dark);color:var(--bg);border-radius:20px;padding:2.5rem 2rem;margin-top:3.5rem;position:relative;overflow:hidden}
+.callout::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(200,168,141,.06) 0%,transparent 65%);pointer-events:none}
+.callout-tag{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(200,168,141,.45);margin-bottom:.75rem}
+.callout-t{font-family:'Afacad Flux',sans-serif;font-size:clamp(1.3rem,3.2vw,2rem);color:rgba(241,239,237,.85);line-height:1.25;max-width:600px;font-weight:400}
+.callout-sub{margin-top:.85rem;font-size:13px;color:rgba(241,239,237,.4);max-width:480px;line-height:1.65}
+
+/* recap */
+#recap{background:var(--dark);color:var(--bg);padding:4.5rem 1.5rem;border-top:.5px solid rgba(200,168,141,.1)}
+.re-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(200,168,141,.38);margin-bottom:2.5rem}
+.re-pills{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-bottom:3rem}
+@media(max-width:520px){.re-pills{grid-template-columns:1fr;gap:1.5rem}}
+.rp{border-top:.5px solid rgba(200,168,141,.18);padding-top:1rem}
+.rp-v{font-family:'Afacad Flux',sans-serif;font-size:clamp(2.2rem,5vw,3.5rem);font-weight:300;color:var(--brand);line-height:1;letter-spacing:-.03em}
+.rp-u{font-size:12px;color:rgba(200,168,141,.45)}
+.rp-l{font-size:12px;color:rgba(255,255,255,.28);margin-top:.3rem;line-height:1.4}
+.re-ins{border-top:.5px solid rgba(255,255,255,.07);padding-top:1.75rem;margin-bottom:2.5rem}
+.re-ins-h{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,168,141,.38);margin-bottom:.6rem}
+.re-ins-t{font-family:'Afacad Flux',sans-serif;font-size:clamp(1.1rem,3vw,1.5rem);line-height:1.4;max-width:600px;color:rgba(241,239,237,.75);font-weight:300}
+.re-cta{display:inline-flex;align-items:center;gap:.6rem;background:var(--brand);color:var(--dark);padding:.8rem 1.6rem;border-radius:99px;text-decoration:none;font-family:'Afacad Flux',sans-serif;font-size:14px;font-weight:500;letter-spacing:.02em;transition:background .2s,transform .15s}
+.re-cta:hover{background:#d4b89a;transform:translateY(-1px)}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="tb-left">
+    <span class="tb-brand">BZAR Hotels</span>
+    <div class="tb-sep"></div>
+    <img src="https://www.ribrainstudio.com/wp-content/uploads/2025/01/Logo_ribrain_Nero.svg" alt="Ribrain" class="tb-rlogo">
+  </div>
+  <span class="tb-center">Cruscotto Strategico &middot; Mercato</span>
+  <div class="tb-right">
+    <span class="tb-date">Aprile 2026</span>
+    <span class="tb-conf">Confidenziale</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-noise" aria-hidden="true"></div>
+  <div class="hero-ghost" aria-hidden="true">M1</div>
+  <div class="hero-tag" id="htag">M1 &mdash; Mercato</div>
+  <h1 class="hero-h1">
+    <span id="hl1">Roma batte ogni record.</span><br>
+    <span id="hl2">Il 15-30% di ogni prenotazione</span><br>
+    <span id="hl3"><em>va alle OTA, non a BZAR.</em></span>
+  </h1>
+  <p class="hero-sub" id="hsub">Nel 2025 Roma ha toccato 7.1 milioni di arrivi negli hotel, il massimo storico. Il mercato c'è, la domanda c'è. Il problema è che la maggior parte delle prenotazioni passa per canali che costano tra il 15 e il 30% di commissione. Il social è la via d'uscita.</p>
+  <div class="hero-pills" id="hpills">
+    <div class="hero-pill">Arrivi 2025 <strong>+3.42%</strong></div>
+    <div class="hero-pill">ADR media estate <strong>256€</strong></div>
+    <div class="hero-pill">OTA commissioni <strong>15-30%</strong></div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true">Scorri</div>
+</section>
+
+<!-- NUMERI -->
+<section class="sec" id="s-nums">
+  <div class="sec-tag">Roma 2025-2026</div>
+  <h2 class="sec-h">Il mercato in quattro numeri</h2>
+  <p class="sec-lead">Roma non è una destinazione in crescita. È una destinazione che ha già saturato ogni previsione e continua a battere record.</p>
+  <div class="ns">
+    <div class="ns-c">
+      <div class="ns-v"><span id="cnt-arrivi">0</span></div>
+      <div class="ns-u">milioni</div>
+      <div class="ns-l">arrivi a Roma nel 2025<br>record storico 2025</div>
+    </div>
+    <div class="ns-c">
+      <div class="ns-v">256<span style="font-size:60%;opacity:.6">€</span></div>
+      <div class="ns-u">ADR media estate</div>
+      <div class="ns-l">tariffa media giornaliera<br>+2% su 2024 · previsto +7-11% nel 2026</div>
+    </div>
+    <div class="ns-c">
+      <div class="ns-v"><span id="cnt-occ">0</span><span style="font-size:60%;opacity:.6">%</span></div>
+      <div class="ns-u">occupancy</div>
+      <div class="ns-l">tasso di occupazione hotel<br>previsto 2026 · era 78% in estate 2025</div>
+    </div>
+    <div class="ns-c">
+      <div class="ns-v"><span id="cnt-pres">0</span></div>
+      <div class="ns-u">milioni</div>
+      <div class="ns-l">presenze totali 2025<br>di cui 67.2% turisti stranieri</div>
+    </div>
+  </div>
+</section>
+
+<!-- OTA DRAIN -->
+<section class="sec" id="s-ota">
+  <div class="sec-tag">Il costo invisibile</div>
+  <h2 class="sec-h">Per ogni prenotazione via OTA,<br>BZAR trattiene solo il 70-85%.</h2>
+  <p class="sec-lead">Le OTA sono il canale dominante nel travel. Ma per un gruppo con l'occupancy di BZAR, ogni punto percentuale sottratto alle piattaforme equivale a margine diretto.</p>
+
+  <div class="ota-wrap">
+    <p class="ota-premise">Con 2.000 camere a 90%+ di occupancy e ADR 256€, uno spostamento del 10% di prenotazioni da OTA a canale diretto vale oltre 1.6 milioni di euro l'anno in commissioni risparmiate.</p>
+
+    <div class="ota-meter-label">Distribuzione del ricavo per ogni prenotazione via OTA</div>
+    <div class="ota-meter">
+      <div class="ota-meter-fill">
+        <div class="ota-fill-bzar" id="otaFillBzar"></div>
+        <div class="ota-fill-ota" id="otaFillOta"></div>
+      </div>
+    </div>
+    <div class="ota-labels">
+      <span><strong>~80%</strong> rimane a BZAR</span>
+      <span><strong style="color:#c0392b">~20%</strong> va all'OTA</span>
+    </div>
+
+    <div class="ota-cards">
+      <div class="ota-card">
+        <div class="ota-card-name">Booking.com</div>
+        <div class="ota-card-pct">15-18%</div>
+        <div class="ota-card-desc">Commissione standard per hotel indipendenti e collection. Varia in base a visibilità e programmi preferiti.</div>
+      </div>
+      <div class="ota-card">
+        <div class="ota-card-name">Expedia Group</div>
+        <div class="ota-card-pct">18-25%</div>
+        <div class="ota-card-desc">Commissione tipica che include Hotels.com, Vrbo e altri brand del gruppo. Negoziabile su volumi alti.</div>
+      </div>
+      <div class="ota-card">
+        <div class="ota-card-name">Soglia di rottura</div>
+        <div class="ota-card-pct">~10x</div>
+        <div class="ota-card-desc">Il ROI del social: se un anno di gestione costa ~200K€ e sposta il 10% dal canale OTA, il risparmio supera l'investimento.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL DISCOVERY -->
+<section class="sec" id="s-social">
+  <div class="sec-tag">Il canale che cambia le prenotazioni</div>
+  <h2 class="sec-h">I viaggiatori non cercano su Google.<br>Scoprono su TikTok e Instagram.</h2>
+  <p class="sec-lead">Il funnel di prenotazione si è spostato. La scoperta avviene sui social, la validazione su Google e OTA, la conversione sul sito diretto, se il brand è abbastanza forte.</p>
+
+  <div class="social-grid">
+    <div>
+      <div class="social-chart-title">Come i giovani italiani (16-24) scelgono la destinazione</div>
+      <div class="sbar-row">
+        <div class="sbar-label">TikTok</div>
+        <div class="sbar-track"><div class="sbar-fill" id="sb1" style="background:var(--ink)"></div></div>
+        <div class="sbar-pct" id="sb1p">0%</div>
+      </div>
+      <div class="sbar-row">
+        <div class="sbar-label">Instagram</div>
+        <div class="sbar-track"><div class="sbar-fill" id="sb2" style="background:var(--brand)"></div></div>
+        <div class="sbar-pct" id="sb2p">0%</div>
+      </div>
+      <div class="sbar-row">
+        <div class="sbar-label">Google</div>
+        <div class="sbar-track"><div class="sbar-fill" id="sb3" style="background:var(--rose)"></div></div>
+        <div class="sbar-pct" id="sb3p">0%</div>
+      </div>
+      <div class="sbar-row">
+        <div class="sbar-label">Passaparola</div>
+        <div class="sbar-track"><div class="sbar-fill" id="sb4" style="background:rgba(117,88,71,.25)"></div></div>
+        <div class="sbar-pct" id="sb4p">0%</div>
+      </div>
+      <div style="margin-top:1rem;font-size:11px;color:var(--mid);line-height:1.5">Fonte: ricerca italiana 16-24 anni · TikTok for Business 2025</div>
+    </div>
+    <div class="social-insight">
+      <div class="si-label">Implicazione diretta per BZAR</div>
+      <div class="si-text">Il turista internazionale che viene a Roma nel 2026 ha già deciso dove dormire, o lo deciderà, guardando contenuti su TikTok e Instagram. Se BZAR non è lì, vince Booking.</div>
+      <div class="si-stat">
+        <div class="si-s">
+          <div class="si-s-v">33%</div>
+          <div class="si-s-l">dei viaggiatori Gen Z sceglie la destinazione dai social</div>
+        </div>
+        <div class="si-s">
+          <div class="si-s-v">80%</div>
+          <div class="si-s-l">degli operatori hospitality aumenterà gli investimenti social nel 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAGIONALITÀ -->
+<section class="sec" id="s-season">
+  <div class="sec-tag">La finestra temporale</div>
+  <h2 class="sec-h">Avvio a maggio significa essere pronti per il picco.</h2>
+  <p class="sec-lead">L'estate è il momento in cui il turista prenota, arriva e condivide. Il social deve essere già rodato per amplificare quel momento, non rincorrerlo.</p>
+
+  <div class="season-wrap">
+    <div class="season-bars" id="season-bars">
+      <div class="sb low" data-h="30" style="height:30%"><span class="sb-label">Gen</span></div>
+      <div class="sb low" data-h="28" style="height:28%"><span class="sb-label">Feb</span></div>
+      <div class="sb mid" data-h="52" style="height:52%"><span class="sb-label">Mar</span></div>
+      <div class="sb mid" data-h="65" style="height:65%"><span class="sb-label">Apr</span></div>
+      <div class="sb high" data-h="75" style="height:75%"><span class="sb-label">Mag ←</span></div>
+      <div class="sb high" data-h="85" style="height:85%"><span class="sb-label">Giu</span></div>
+      <div class="sb peak" data-h="100" style="height:100%"><span class="sb-label">Lug</span></div>
+      <div class="sb peak" data-h="100" style="height:100%"><span class="sb-label">Ago</span></div>
+      <div class="sb high" data-h="82" style="height:82%"><span class="sb-label">Set</span></div>
+      <div class="sb mid" data-h="58" style="height:58%"><span class="sb-label">Ott</span></div>
+      <div class="sb low" data-h="38" style="height:38%"><span class="sb-label">Nov</span></div>
+      <div class="sb low" data-h="34" style="height:34%"><span class="sb-label">Dic</span></div>
+    </div>
+    <div class="season-legend">
+      <div class="sl-item"><div class="sl-dot" style="background:var(--ink)"></div>Alta stagione</div>
+      <div class="sl-item"><div class="sl-dot" style="background:var(--ink);box-shadow:0 0 0 2px rgba(117,88,71,.3)"></div>Picco massimo</div>
+      <div class="sl-item"><div class="sl-dot" style="background:var(--brand)"></div>Media stagione</div>
+      <div class="sl-item"><div class="sl-dot" style="background:rgba(117,88,71,.18)"></div>Bassa stagione</div>
+    </div>
+    <p class="season-note">Avvio maggio 2026 significa costruire la community e il feed prima del picco estivo, non durante. Chi parte in agosto sta già rincorrendo.</p>
+  </div>
+</section>
+
+<!-- DRIVER -->
+<section class="sec" id="s-drivers">
+  <div class="sec-tag">Perché il 2026 è diverso</div>
+  <h2 class="sec-h">Tre driver che rendono questo<br>il momento giusto.</h2>
+  <div class="drivers">
+    <div class="dc" data-n="01" id="dc1">
+      <div class="dc-tag">Mercato</div>
+      <div class="dc-t">Post-Giubileo: l'eco dura tutto il 2026</div>
+      <div class="dc-d">I 33 milioni di pellegrini del 2025 hanno esposto Roma in mondovisione. Il 2026 raccoglie i frutti: previsioni di +1.3% di arrivi rispetto al già record 2025.</div>
+    </div>
+    <div class="dc" data-n="02" id="dc2">
+      <div class="dc-tag">Prodotto</div>
+      <div class="dc-t">Brand Book 2026: l'identità è pronta</div>
+      <div class="dc-d">Per la prima volta BZAR ha una grammatica visiva unificata. Palette, font, tono, architettura della collection. Il social può ora raccontare un brand coerente, non un aggregato di hotel.</div>
+    </div>
+    <div class="dc" data-n="03" id="dc3">
+      <div class="dc-tag">Competizione</div>
+      <div class="dc-t">I competitor si stanno muovendo</div>
+      <div class="dc-d">The Hoxton, Chapter Roma, Mama Shelter hanno presidio social attivo. L'80% degli operatori hospitality aumenterà gli investimenti nel 2026. Chi aspetta parte già in ritardo.</div>
+    </div>
+  </div>
+
+  <div class="callout" id="callout">
+    <div class="callout-tag">L'insight centrale di M1</div>
+    <div class="callout-t">BZAR non ha un problema di domanda. Ha un problema di distribuzione. Il social non serve a riempire camere, serve a ridurre il costo per farlo.</div>
+    <div class="callout-sub">Con 90%+ di occupancy già garantita, ogni punto percentuale spostato da OTA a canale diretto vale migliaia di euro in commissioni risparmiate. Il social è lo strumento per costruire quella preferenza.</div>
+  </div>
+</section>
+
+<!-- RECAP -->
+<section id="recap">
+  <div class="re-tag">Sintesi · M1 · Mercato</div>
+  <div class="re-pills">
+    <div class="rp">
+      <div class="rp-v">7.1M</div>
+      <div class="rp-u">arrivi Roma 2025</div>
+      <div class="rp-l">Record storico +3.42%, il 2026 si prevede ulteriore crescita</div>
+    </div>
+    <div class="rp">
+      <div class="rp-v">-20%</div>
+      <div class="rp-u">commissione OTA media</div>
+      <div class="rp-l">Su ogni prenotazione via Booking/Expedia. Fino al -30% su alcuni canali</div>
+    </div>
+    <div class="rp">
+      <div class="rp-v">38%</div>
+      <div class="rp-u">Gen Z ispirata da TikTok</div>
+      <div class="rp-l">Per la scelta della destinazione. Contro il 10% che usa Instagram come primo canale</div>
+    </div>
+  </div>
+  <div class="re-ins">
+    <div class="re-ins-h">Implicazione strategica</div>
+    <div class="re-ins-t">Roma 2025: 7.1 milioni di arrivi negli hotel, ADR a 256 euro, occupancy al 78.6%. La domanda non manca. Il problema è che il 15-30% di ogni prenotazione finisce alle OTA. Il social è l'unico canale che costruisce una preferenza diretta senza commissione.</div>
+  </div>
+  <a href="m2.html" class="re-cta">Esplora M2: Competitor Map →</a>
+</section>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* cursor */
+var cur = document.getElementById('cur');
+document.addEventListener('mousemove', function(e) {
+  gsap.to(cur, {x:e.clientX, y:e.clientY, duration:.1, ease:'none'});
+});
+document.querySelectorAll('a,button').forEach(function(el) {
+  el.addEventListener('mouseenter', function(){gsap.to(cur,{width:18,height:18,duration:.18});});
+  el.addEventListener('mouseleave', function(){gsap.to(cur,{width:8,height:8,duration:.18});});
+});
+
+/* fallback 2s */
+var fbT = setTimeout(function() {
+  ['htag','hl1','hl2','hl3','hsub','hpills'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.style.opacity='1';
+  });
+}, 2000);
+
+/* hero entrance */
+gsap.fromTo('#htag',{opacity:0,y:16},{opacity:1,y:0,duration:.8,delay:.2,ease:'power3.out',onComplete:function(){clearTimeout(fbT);}});
+gsap.fromTo('#hl1',{opacity:0,y:28},{opacity:1,y:0,duration:.95,delay:.4,ease:'power3.out'});
+gsap.fromTo('#hl2',{opacity:0,y:28},{opacity:1,y:0,duration:.95,delay:.56,ease:'power3.out'});
+gsap.fromTo('#hl3',{opacity:0,y:28},{opacity:1,y:0,duration:.95,delay:.72,ease:'power3.out'});
+gsap.fromTo('#hsub',{opacity:0,y:18},{opacity:1,y:0,duration:.85,delay:1,ease:'power3.out'});
+gsap.fromTo('#hpills',{opacity:0,y:14},{opacity:1,y:0,duration:.7,delay:1.2,ease:'power3.out'});
+gsap.fromTo('.hero-ghost',{opacity:0,scale:.93},{opacity:1,scale:1,duration:2,delay:.1,ease:'power2.out'});
+
+/* scroll reveals */
+gsap.utils.toArray('.sec, #recap').forEach(function(el){
+  gsap.fromTo(el,{opacity:0,y:32},{opacity:1,y:0,duration:.85,ease:'power3.out',
+    scrollTrigger:{trigger:el,start:'top 84%',once:true}});
+});
+
+/* counters */
+function counter(id, target, decimals) {
+  var el = document.getElementById(id);
+  if(!el) return;
+  ScrollTrigger.create({trigger:el,start:'top 80%',once:true,onEnter:function(){
+    var obj = {val:0};
+    gsap.to(obj,{val:target,duration:1.8,ease:'power2.out',onUpdate:function(){
+      el.textContent = decimals ? obj.val.toFixed(1) : Math.round(obj.val);
+    }});
+  }});
+}
+counter('cnt-arrivi',7.1,true);
+counter('cnt-occ',78.6,true);
+counter('cnt-pres',52.9,true);
+
+/* OTA meter */
+ScrollTrigger.create({trigger:'#s-ota',start:'top 72%',once:true,onEnter:function(){
+  gsap.fromTo('#otaFillBzar',{width:'0%'},{width:'80%',duration:1.4,ease:'power3.out',delay:.2});
+  gsap.fromTo('#otaFillOta',{width:'0%'},{width:'20%',duration:1.4,ease:'power3.out',delay:.2});
+}});
+
+/* social bars */
+var barData = [
+  {id:'sb1', pidId:'sb1p', pct:38},
+  {id:'sb2', pidId:'sb2p', pct:10},
+  {id:'sb3', pidId:'sb3p', pct:31},
+  {id:'sb4', pidId:'sb4p', pct:21}
+];
+ScrollTrigger.create({trigger:'#s-social',start:'top 72%',once:true,onEnter:function(){
+  barData.forEach(function(b,i){
+    var bar = document.getElementById(b.id);
+    var pLabel = document.getElementById(b.pidId);
+    if(!bar||!pLabel) return;
+    gsap.fromTo(bar,{width:'0%'},{width:b.pct+'%',duration:1.2,ease:'power3.out',delay:i*.12});
+    var obj = {val:0};
+    gsap.to(obj,{val:b.pct,duration:1.2,ease:'power3.out',delay:i*.12,onUpdate:function(){
+      pLabel.textContent = Math.round(obj.val)+'%';
+    }});
+  });
+}});
+
+/* season bars */
+ScrollTrigger.create({trigger:'#season-bars',start:'top 75%',once:true,onEnter:function(){
+  document.querySelectorAll('.sb').forEach(function(bar,i){
+    gsap.fromTo(bar,{scaleY:0},{scaleY:1,duration:.85,ease:'power3.out',delay:i*.05});
+  });
+}});
+
+/* driver cards */
+['#dc1','#dc2','#dc3'].forEach(function(sel,i){
+  var el = document.querySelector(sel);
+  if(!el) return;
+  gsap.fromTo(el,{opacity:0,y:20},{opacity:1,y:0,duration:.7,ease:'power3.out',delay:i*.12,
+    scrollTrigger:{trigger:el,start:'top 87%',once:true}});
+});
+
+/* callout */
+gsap.fromTo('#callout',{opacity:0,y:30},{opacity:1,y:0,duration:.9,ease:'power3.out',
+  scrollTrigger:{trigger:'#callout',start:'top 80%',once:true}});
+
+/* recap pillars */
+gsap.utils.toArray('.rp').forEach(function(el,i){
+  gsap.fromTo(el,{opacity:0,y:18},{opacity:1,y:0,duration:.7,ease:'power3.out',delay:i*.12,
+    scrollTrigger:{trigger:el,start:'top 88%',once:true}});
+});
+</script>
+
+<!-- ══════════════════════════════════════════════════
+     MENU SYSTEM: IIFE (adattato da template RAV)
+══════════════════════════════════════════════════ -->
+<script>
+(function(){
+'use strict';
+
+var MODULES = [
+  {id:'m0',code:'00',label:'Executive Summary',sub:'Il gap · La proposta',url:'m0.html',color:'#C8A88D'},
+  {id:'m1',code:'01',label:'Mercato',sub:'Roma 2026 · OTA · Social discovery',url:'m1.html',color:'#755847'},
+  {id:'m2',code:'02',label:'Competitor Map',sub:'Hoxton · Chapter · Mama · Generator',url:'m2.html',color:'#9a7d6a'},
+  {id:'m3',code:'03',label:'Voce del Cliente',sub:'VOC · 14 account · Gap critico',url:'m3.html',color:'#C4ACA5'},
+  {id:'m4',code:'04',label:'Personas',sub:'4 profili · Trigger · Social behavior',url:'m4.html',color:'#a08470'},
+  {id:'m5',code:'05',label:'Mappa del Momento',sub:'Perché investire adesso',url:'m5.html',color:'#C8A88D'},
+  {id:'m6',code:'06',label:'Benchmark Creativi',sub:'Il Pellicano · Borgo S.Pietro · The Pig',url:'m6.html',color:'#755847'},
+  {id:'m7',code:'07',label:'Piano Operativo',sub:'KPI · Governance · Onboarding',url:'m7.html',color:'#9a7d6a'}
+];
+
+var path = window.location.pathname.split('/').pop().replace('.html','') || 'm0';
+var currentMod = MODULES[0];
+for(var ci=0;ci<MODULES.length;ci++){if(MODULES[ci].id===path){currentMod=MODULES[ci];break;}}
+
+var s = document.createElement('style');
+s.textContent = [
+  '.rbmenu-btn{position:fixed;top:14px;right:16px;z-index:9001;width:44px;height:44px;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:5px;padding:8px}',
+  '.rbmenu-btn span{display:block;height:1.5px;background:#F1EFED;border-radius:1px;transition:all .45s cubic-bezier(0.16,1,0.3,1);transform-origin:right center}',
+  '.rbmenu-btn.light span{background:#1E1410}',
+  '.rbmenu-btn .l1{width:22px}.rbmenu-btn .l2{width:16px}.rbmenu-btn .l3{width:22px}',
+  '.rbmenu-btn.open .l1{width:22px;transform:translateY(6.5px) rotate(-45deg)}',
+  '.rbmenu-btn.open .l2{opacity:0;width:0}',
+  '.rbmenu-btn.open .l3{width:22px;transform:translateY(-6.5px) rotate(45deg)}',
+  '.rbmenu-overlay{position:fixed;inset:0;z-index:9000;background:#1E1410;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .5s cubic-bezier(0.16,1,0.3,1);overflow:hidden}',
+  '.rbmenu-overlay.open{opacity:1;pointer-events:auto}',
+  '.rbmenu-top{display:flex;align-items:center;justify-content:space-between;padding:18px 48px;border-bottom:1px solid rgba(200,168,141,.07);flex-shrink:0}',
+  '.rbmenu-brand{display:flex;align-items:center;gap:12px}',
+  '.rbmenu-brand-sep{width:1px;height:16px;background:rgba(200,168,141,.2)}',
+  '.rbmenu-brand-label{font-family:"Poppins",sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(200,168,141,.3)}',
+  '.rbmenu-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:24px 48px 36px;overflow-y:auto}',
+  '.rbmenu-items{list-style:none}',
+  '.rbmenu-item{border-top:1px solid rgba(200,168,141,.06);opacity:0;transform:translateY(20px);position:relative}',
+  '.rbmenu-item:last-child{border-bottom:1px solid rgba(200,168,141,.06)}',
+  '.rbmenu-item a{display:grid;grid-template-columns:48px 1fr auto;gap:0 20px;align-items:center;padding:14px 0;text-decoration:none;color:inherit;position:relative;overflow:hidden}',
+  '.rbmenu-item a::after{content:"";position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--brand,#C8A88D);transition:width .5s cubic-bezier(0.16,1,0.3,1);opacity:.3}',
+  '.rbmenu-item a:hover::after{width:100%}',
+  '.rmi-code{font-family:"Poppins",monospace;font-size:10px;letter-spacing:.12em;color:rgba(200,168,141,.22);line-height:1;transition:color .3s}',
+  '.rbmenu-item a:hover .rmi-code{color:rgba(200,168,141,.5)}',
+  '.rmi-left{display:flex;flex-direction:column;gap:3px}',
+  '.rmi-label{font-family:"Afacad Flux",Georgia,sans-serif;font-weight:300;font-size:clamp(24px,3.2vw,42px);line-height:1;color:rgba(241,239,237,.65);transition:color .3s;letter-spacing:-.01em}',
+  '.rbmenu-item a:hover .rmi-label{color:rgba(241,239,237,.9)}',
+  '.rbmenu-item.active .rmi-label{color:#C8A88D;font-style:italic}',
+  '.rmi-sub{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.22);transition:color .3s}',
+  '.rbmenu-item a:hover .rmi-sub{color:rgba(200,168,141,.4)}',
+  '.rmi-arr{font-size:18px;color:rgba(200,168,141,.18);transition:transform .4s cubic-bezier(0.16,1,0.3,1),color .3s}',
+  '.rbmenu-item a:hover .rmi-arr{transform:translateX(6px);color:rgba(200,168,141,.5)}',
+  '.rbmenu-item-active-bar{position:absolute;left:0;top:2px;bottom:2px;width:3px;border-radius:0 2px 2px 0;opacity:.8}',
+  '.rbmenu-footer{padding:16px 48px;border-top:1px solid rgba(200,168,141,.06);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}',
+  '.rbmf-left{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.2)}',
+  '.rbmf-right{display:flex;align-items:center;gap:16px}',
+  '.rbmf-link{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.25);text-decoration:none;transition:color .3s}',
+  '.rbmf-link:hover{color:rgba(200,168,141,.6)}',
+  '.rbmenu-glow{position:absolute;top:50%;right:-10%;transform:translateY(-50%);width:50vw;height:50vw;border-radius:50%;pointer-events:none;opacity:.05;transition:background 1s;filter:blur(80px)}',
+  '.rbnavbar{position:fixed;bottom:0;left:0;right:0;z-index:8000;background:rgba(30,20,16,.97);backdrop-filter:blur(24px);border-top:1px solid rgba(200,168,141,.07);height:48px;display:flex;align-items:stretch}',
+  '.rbnavbar-inner{max-width:1440px;margin:0 auto;padding:0 16px;display:flex;align-items:stretch;width:100%}',
+  '.rbnavbar-brand{display:flex;align-items:center;gap:8px;padding-right:12px;border-right:1px solid rgba(200,168,141,.07);margin-right:2px;flex-shrink:0}',
+  '.rbnavbar-brand-txt{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(200,168,141,.22);white-space:nowrap}',
+  '.rbnavbar-items{display:flex;align-items:stretch;flex:1;overflow-x:auto;scrollbar-width:none}',
+  '.rbnavbar-items::-webkit-scrollbar{display:none}',
+  '.rbnav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 10px;text-decoration:none;color:inherit;border-right:1px solid rgba(200,168,141,.05);min-width:56px;position:relative;gap:2px;transition:background .2s}',
+  '.rbnav-item:hover{background:rgba(200,168,141,.05)}',
+  '.rbnav-item.active{background:rgba(200,168,141,.07)}',
+  '.rbnav-item-bar{position:absolute;top:0;left:0;right:0;height:2px}',
+  '.rbnav-code{font-family:"Poppins",sans-serif;font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.28);line-height:1}',
+  '.rbnav-item.active .rbnav-code{color:rgba(200,168,141,.55)}',
+  '.rbnav-title{font-family:"Afacad Flux",sans-serif;font-size:9px;font-weight:400;color:rgba(200,168,141,.4);line-height:1;white-space:nowrap}',
+  '.rbnav-item.active .rbnav-title{color:rgba(200,168,141,.85);font-weight:500}',
+  'body{padding-bottom:48px !important}',
+  '@media(max-width:600px){.rbmenu-top,.rbmenu-body,.rbmenu-footer{padding-left:20px;padding-right:20px}.rmi-label{font-size:clamp(20px,5.5vw,32px)}}'
+].join('\n');
+document.head.appendChild(s);
+
+/* hamburger button */
+var btn = document.createElement('button');
+btn.className = 'rbmenu-btn';
+var bgCol = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
+var isLight = bgCol && bgCol.indexOf('#F') === 0;
+if(isLight) btn.classList.add('light');
+btn.setAttribute('aria-label','Apri menu');
+btn.innerHTML = '<span class="l1"></span><span class="l2"></span><span class="l3"></span>';
+document.body.appendChild(btn);
+
+/* overlay */
+var ov = document.createElement('div');
+ov.className = 'rbmenu-overlay';
+var itemsHtml = '';
+for(var i=0;i<MODULES.length;i++){
+  var m = MODULES[i];
+  var isActive = m.id === path;
+  var activeBar = isActive ? '<span class="rbmenu-item-active-bar" style="background:'+m.color+'"></span>' : '';
+  itemsHtml += '<li class="rbmenu-item'+(isActive?' active':'')+'">'+activeBar+
+    '<a href="'+m.url+'">'+
+    '<span class="rmi-code">'+m.code+'</span>'+
+    '<span class="rmi-left"><span class="rmi-label">'+m.label+'</span><span class="rmi-sub">'+m.sub+'</span></span>'+
+    '<span class="rmi-arr">\u2192</span>'+
+    '</a></li>';
+}
+ov.innerHTML = '<div class="rbmenu-glow" id="rbglow" style="background:'+currentMod.color+'"></div>'+
+  '<div class="rbmenu-top">'+
+  '<div class="rbmenu-brand">'+
+  '<span style="font-family:\'Afacad Flux\',sans-serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#C8A88D">BZAR Hotels</span>'+
+  '<div class="rbmenu-brand-sep"></div>'+
+  '<img src="https://www.ribrainstudio.com/wp-content/uploads/2025/01/Logo_ribrain_Nero.svg" style="height:13px;filter:invert(1);opacity:.5" onerror="this.style.display=\'none\'">'+
+  '<div class="rbmenu-brand-sep"></div>'+
+  '<span class="rbmenu-brand-label">Cruscotto Strategico \u00b7 BZAR Hotels</span>'+
+  '</div></div>'+
+  '<div class="rbmenu-body"><ul class="rbmenu-items" id="rbItems">'+itemsHtml+'</ul></div>'+
+  '<div class="rbmenu-footer">'+
+  '<span class="rbmf-left">Aprile 2026 \u00b7 Ribrain Studio \u00b7 Confidenziale</span>'+
+  '<div class="rbmf-right">'+
+  '<a href="m0.html" class="rbmf-link">Executive Summary</a>'+
+  '<a href="m7.html" class="rbmf-link">Piano Operativo \u2192</a>'+
+  '</div></div>';
+document.body.appendChild(ov);
+
+/* bottom navbar */
+var nb = document.createElement('nav');
+nb.className = 'rbnavbar';
+var navItemsHtml = '';
+for(var ni=0;ni<MODULES.length;ni++){
+  var nm = MODULES[ni];
+  var isNavActive = nm.id === path;
+  var activeTopBar = isNavActive ? '<span class="rbnav-item-bar" style="background:'+nm.color+'"></span>' : '';
+  navItemsHtml += '<a href="'+nm.url+'" class="rbnav-item'+(isNavActive?' active':'')+'" title="'+nm.label+'">'+
+    activeTopBar+'<span class="rbnav-code">'+nm.code+'</span><span class="rbnav-title">'+nm.label+'</span></a>';
+}
+nb.innerHTML = '<div class="rbnavbar-inner">'+
+  '<div class="rbnavbar-brand">'+
+  '<img src="https://www.ribrainstudio.com/wp-content/uploads/2025/01/Logo_ribrain_Nero.svg" style="height:11px;filter:invert(1);opacity:.3" onerror="this.style.display=\'none\'">'+
+  '<span class="rbnavbar-brand-txt">\u00d7 BZAR</span>'+
+  '</div>'+
+  '<div class="rbnavbar-items">'+navItemsHtml+'</div>'+
+  '</div>';
+document.body.appendChild(nb);
+
+/* toggle logic */
+var isOpen = false;
+function openMenu(){
+  isOpen=true; btn.classList.add('open'); ov.classList.add('open');
+  btn.setAttribute('aria-label','Chiudi menu');
+  document.body.style.overflow='hidden';
+  var items = ov.querySelectorAll('.rbmenu-item');
+  for(var ii=0;ii<items.length;ii++){
+    (function(el,idx){
+      el.style.opacity='0'; el.style.transform='translateY(20px)';
+      el.style.transition='opacity .5s '+(.07+idx*.055)+'s cubic-bezier(0.16,1,0.3,1),transform .5s '+(.07+idx*.055)+'s cubic-bezier(0.16,1,0.3,1)';
+      setTimeout(function(){el.style.opacity='1';el.style.transform='translateY(0)';},10);
+    })(items[ii],ii);
+  }
+}
+function closeMenu(){
+  isOpen=false; btn.classList.remove('open'); ov.classList.remove('open');
+  btn.setAttribute('aria-label','Apri menu');
+  document.body.style.overflow='';
+}
+btn.addEventListener('click',function(){if(isOpen)closeMenu();else openMenu();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&isOpen)closeMenu();});
+
+/* glow on hover */
+var lis = ov.querySelectorAll('.rbmenu-item');
+for(var gi=0;gi<lis.length;gi++){
+  (function(li,mod){
+    li.addEventListener('mouseenter',function(){var g=document.getElementById('rbglow');if(g)g.style.background=mod.color;});
+    li.addEventListener('mouseleave',function(){var g=document.getElementById('rbglow');if(g)g.style.background=currentMod.color;});
+  })(lis[gi],MODULES[gi]);
+}
+
+})();
+</script>
+
+<!-- ══════════════════════════════════════════════════
+     FONTI SYSTEM: IIFE (adattato da template RAV)
+══════════════════════════════════════════════════ -->
+<script>
+(function(){
+'use strict';
+
+var PAGE_SOURCES = {
+  m1:[
+    {id:'s1',note:'Turismo Roma 2025 record storico',url:'https://www.comune.roma.it/web/it/notizia/il-2025--il-nuovo-anno-record-del-turismo-di-roma.page',label:'Roma Capitale: Il 2025 è il nuovo anno record del turismo · EBTL'},
+    {id:'s2',note:'Previsioni turismo Roma 2026 post-Giubileo',url:'https://www.ilmessaggero.it/economia/news/roma_dopo_il_giubileo_turismo_2026-9280656.html',label:'Il Messaggero: Roma dopo il Giubileo: turismo 2026 · gennaio 2026'},
+    {id:'s3',note:'Occupancy e ADR hotel Roma estate 2025',url:'https://www.lagenziadiviaggimag.it/roma-cresce-loccupazione-degli-hotel-in-estate-i-dati-federalberghi/',label:'L\'Agenzia di Viaggi Magazine: Occupazione hotel Roma · Federalberghi 2025'},
+    {id:'s4',note:'Commissioni OTA 2026 · Booking Expedia',url:'https://www.cloudbeds.com/online-travel-agencies/commissions/',label:'Cloudbeds: A Guide to OTA Commission Rates in 2026'},
+    {id:'s5',note:'Social media travel discovery Gen Z',url:'https://ads.tiktok.com/business/en/guides/travel-advertising-guide',label:'TikTok for Business: Travel Advertising Guide 2025'},
+    {id:'s6',note:'Turismo Italia 2026 record presenze',url:'https://www.zerosette.it/2026/03/turismo-in-italia-numeri-da-record-2/',label:'Zerosette: Turismo in Italia, numeri da record · marzo 2026'},
+  ]
+};
+
+var page = window.location.pathname.split('/').pop().replace('.html','') || 'm1';
+var sources = PAGE_SOURCES[page] || PAGE_SOURCES['m1'];
+
+var style = document.createElement('style');
+style.textContent = [
+  '.src-toggle{position:fixed;bottom:56px;right:14px;z-index:7500;display:flex;align-items:center;gap:7px;background:rgba(30,20,16,.92);border:1px solid rgba(200,168,141,.15);backdrop-filter:blur(16px);padding:6px 11px;cursor:pointer;font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.45);transition:all .25s;border-radius:99px}',
+  '.src-toggle:hover{border-color:rgba(200,168,141,.35);color:rgba(200,168,141,.75)}',
+  '.src-toggle .st-dot{width:5px;height:5px;border-radius:50%;background:#C8A88D;flex-shrink:0}',
+  '.src-toggle .st-n{background:rgba(200,168,141,.15);color:#C8A88D;padding:1px 5px;border-radius:10px;font-size:8px}',
+  '.src-drawer{position:fixed;bottom:48px;left:0;right:0;z-index:7000;background:rgba(30,20,16,.97);backdrop-filter:blur(24px);border-top:1px solid rgba(200,168,141,.1);max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(0.16,1,0.3,1),opacity .4s;opacity:0}',
+  '.src-drawer.open{max-height:360px;opacity:1}',
+  '.src-drawer-inner{padding:20px 48px 24px;overflow-y:auto;max-height:320px}',
+  '.src-drawer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}',
+  '.src-drawer-title{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,168,141,.32)}',
+  '.src-drawer-close{background:none;border:none;cursor:pointer;font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.25);transition:color .2s}',
+  '.src-drawer-close:hover{color:rgba(200,168,141,.65)}',
+  '.src-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:4px}',
+  '.src-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid rgba(200,168,141,.06);border-radius:6px;transition:background .2s}',
+  '.src-item:hover{background:rgba(200,168,141,.04)}',
+  '.src-item-num{font-family:"Poppins",sans-serif;font-size:8px;letter-spacing:.1em;color:rgba(200,168,141,.25);flex-shrink:0;padding-top:1px;min-width:18px}',
+  '.src-item-label{font-size:11px;color:rgba(241,239,237,.6);line-height:1.45;margin-bottom:3px}',
+  '.src-item-url{font-family:"Poppins",sans-serif;font-size:8px;letter-spacing:.03em;color:rgba(200,168,141,.4);text-decoration:none;transition:color .2s;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
+  '.src-item-url:hover{color:#C8A88D}',
+  '@media(max-width:768px){.src-drawer-inner{padding:16px 20px}.src-list{grid-template-columns:1fr}}'
+].join('\n');
+document.head.appendChild(style);
+
+/* drawer */
+var drawer = document.createElement('div');
+drawer.className = 'src-drawer';
+var itemsHtml = '';
+for(var i=0;i<sources.length;i++){
+  var src = sources[i];
+  itemsHtml += '<div class="src-item">'+
+    '<span class="src-item-num">'+String(i+1).padStart(2,'0')+'</span>'+
+    '<div>'+
+    '<div class="src-item-label">'+src.label+'</div>'+
+    '<a href="'+src.url+'" target="_blank" rel="noopener noreferrer" class="src-item-url">'+src.url+'</a>'+
+    '</div></div>';
+}
+drawer.innerHTML = '<div class="src-drawer-inner">'+
+  '<div class="src-drawer-head">'+
+  '<span class="src-drawer-title">Fonti \u00b7 '+sources.length+' riferimenti \u00b7 '+page.toUpperCase()+'</span>'+
+  '<button class="src-drawer-close" id="srcClose">Chiudi \u2715</button>'+
+  '</div>'+
+  '<div class="src-list">'+itemsHtml+'</div>'+
+  '</div>';
+document.body.appendChild(drawer);
+
+/* toggle button */
+var toggle = document.createElement('button');
+toggle.className = 'src-toggle';
+toggle.innerHTML = '<span class="st-dot"></span>Fonti <span class="st-n">'+sources.length+'</span>';
+document.body.appendChild(toggle);
+
+var open = false;
+function toggleDrawer(){
+  open = !open;
+  drawer.classList.toggle('open',open);
+  toggle.style.borderColor = open ? 'rgba(200,168,141,.3)' : '';
+  toggle.style.color = open ? 'rgba(200,168,141,.75)' : '';
+}
+toggle.addEventListener('click',toggleDrawer);
+document.getElementById('srcClose').addEventListener('click',function(){open=true;toggleDrawer();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&open){open=true;toggleDrawer();}});
+
+})();
+</script>
+
+</body>
+</html>

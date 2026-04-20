@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M4: Personas · BZAR Hotels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{--bg:#F1EFED;--ink:#755847;--brand:#C8A88D;--rose:#C4ACA5;--dark:#1E1410;--mid:#9a7d6a;
+  --p1:#755847;--p2:#8a9e7a;--p3:#6b8fa8;--p4:#9a7d6a}
+body{background:var(--bg);color:var(--dark);font-family:'Poppins',sans-serif;font-size:15px;line-height:1.65;overflow-x:hidden;padding-top:52px;padding-bottom:48px;cursor:none}
+@media(hover:none){body{cursor:auto}#cur{display:none}}
+#cur{position:fixed;width:8px;height:8px;background:var(--brand);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:multiply;transition:width .18s,height .18s}
+
+.topbar{position:fixed;top:0;left:0;right:0;z-index:800;height:52px;background:var(--dark);display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem 0 1.5rem;border-bottom:.5px solid rgba(200,168,141,.1)}
+.tb-l{display:flex;align-items:center;gap:.75rem}
+.tb-brand{font-family:'Afacad Flux',sans-serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.tb-sep{width:.5px;height:16px;background:rgba(255,255,255,.15)}
+.tb-rlogo{height:13px;filter:invert(1);opacity:.6}
+.tb-c{font-family:'Poppins',sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.2);position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap}
+@media(max-width:680px){.tb-c{display:none}}
+.tb-r{display:flex;align-items:center;gap:.75rem}
+.tb-date{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+.tb-conf{font-size:9px;letter-spacing:.14em;text-transform:uppercase;border:.5px solid rgba(200,168,141,.28);color:rgba(200,168,141,.45);padding:3px 8px;border-radius:3px}
+
+/* HERO */
+.hero{min-height:100svh;display:grid;grid-template-rows:1fr auto;padding:5.5rem 1.5rem 2.5rem;position:relative;overflow:hidden}
+.hero-noise{position:absolute;inset:0;pointer-events:none;opacity:.018;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px}
+.hero-ghost{position:absolute;right:-2%;top:50%;transform:translateY(-50%);font-family:'Afacad Flux',sans-serif;font-size:clamp(18rem,48vw,42rem);font-weight:700;line-height:1;color:rgba(117,88,71,.042);pointer-events:none;user-select:none;letter-spacing:-.07em}
+.hero-body{display:flex;flex-direction:column;justify-content:center}
+.hero-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--brand);display:flex;align-items:center;gap:.75rem;margin-bottom:2rem}
+.hero-tag::before{content:'';width:28px;height:1px;background:var(--brand)}
+.hero-h1{font-family:'Afacad Flux',sans-serif;font-size:clamp(3rem,8.5vw,7rem);font-weight:400;line-height:1.02;letter-spacing:-.035em;max-width:820px}
+.hero-h1 em{font-style:italic;font-weight:300;color:var(--ink)}
+.hero-sub{margin-top:1.75rem;font-size:14px;color:var(--mid);max-width:480px;line-height:1.8}
+/* 4 persona pills in hero */
+.hero-personas{display:flex;gap:.6rem;margin-top:2.5rem;flex-wrap:wrap}
+.hp{display:flex;align-items:center;gap:.5rem;padding:.45rem 1rem;border-radius:99px;border:.5px solid rgba(117,88,71,.2);font-family:'Afacad Flux',sans-serif;font-size:13px}
+.hp-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.hero-foot{padding-top:1.5rem}
+.hero-scroll{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(117,88,71,.3);display:flex;align-items:center;gap:.5rem}
+.hero-scroll::after{content:'';width:48px;height:1px;background:rgba(200,168,141,.22)}
+
+/* SEC */
+.sec{padding:5rem 1.5rem;border-top:.5px solid rgba(117,88,71,.1)}
+.s-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);margin-bottom:.6rem}
+.s-h{font-family:'Afacad Flux',sans-serif;font-size:clamp(2rem,4.5vw,3.2rem);font-weight:400;line-height:1.08;letter-spacing:-.02em;margin-bottom:1rem}
+.s-lead{font-size:14px;color:var(--mid);max-width:520px;line-height:1.8}
+
+/* PERSONA CARDS */
+.p-cards{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:3rem}
+@media(max-width:640px){.p-cards{grid-template-columns:1fr}}
+.p-card{border-radius:16px;overflow:hidden;border:.5px solid rgba(117,88,71,.12);background:#FDFCFA;position:relative;transform:translateY(20px);transition:opacity .5s,transform .5s}
+.p-card.visible{opacity:1;transform:translateY(0)}
+.pc-top{padding:1.5rem 1.5rem 1rem;border-bottom:.5px solid rgba(117,88,71,.06);position:relative;overflow:hidden}
+.pc-ghost{position:absolute;top:-12px;right:.6rem;font-family:'Afacad Flux',sans-serif;font-size:6.5rem;font-weight:700;line-height:1;pointer-events:none;user-select:none;letter-spacing:-.06em}
+.pc-accent{height:3px;border-radius:99px;margin-bottom:1rem;width:32px}
+.pc-name{font-family:'Afacad Flux',sans-serif;font-size:1.25rem;font-weight:500;color:var(--dark);line-height:1.1}
+.pc-role{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mid);margin-top:2px;font-family:'Poppins',sans-serif}
+.pc-hl{font-family:'Afacad Flux',sans-serif;font-size:.9rem;font-style:italic;font-weight:300;color:var(--ink);margin-top:.6rem;line-height:1.35}
+.pc-chs{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.75rem}
+.pcc{font-size:9px;letter-spacing:.07em;padding:3px 9px;border-radius:99px;font-family:'Poppins',sans-serif;font-weight:500}
+.pc-body{display:grid;grid-template-columns:1fr 1fr;gap:.65rem 1rem;padding:1rem 1.5rem}
+.pc-il{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);margin-bottom:.3rem;font-family:'Poppins',sans-serif;font-weight:500}
+.pc-it{font-size:11.5px;color:var(--dark);line-height:1.55}
+.pc-ins{border-top:.5px solid rgba(117,88,71,.08);padding:.85rem 1.5rem;font-size:11.5px;color:var(--mid);line-height:1.6;font-style:italic}
+.pc-ins strong{color:var(--dark);font-style:normal}
+
+/* MATRIX */
+.matrix-wrap{margin-top:3.5rem;overflow-x:auto}
+.matrix-table{width:100%;border-collapse:collapse;min-width:520px}
+.matrix-table th{font-family:'Poppins',sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:.5rem .75rem;border-bottom:.5px solid rgba(117,88,71,.15);text-align:left;font-weight:500}
+.matrix-table th:first-child{min-width:140px}
+.matrix-table td{padding:.8rem .75rem;border-bottom:.5px solid rgba(117,88,71,.07);vertical-align:middle}
+.matrix-table tr:last-child td{border-bottom:none}
+.mx-cell{display:flex;align-items:center;justify-content:center;height:32px}
+.mx-dot{border-radius:50%;flex-shrink:0;display:block;transform:scale(0);transition:transform .35s cubic-bezier(.34,1.56,.64,1),opacity .2s}
+.mx-dot.strong{width:20px;height:20px;background:var(--ink)}
+.mx-dot.mid{width:12px;height:12px;background:rgba(117,88,71,.35)}
+.mx-dot.weak{width:6px;height:6px;background:rgba(117,88,71,.14)}
+.mx-dot.show{transform:scale(1)}
+
+/* STICKY PERSONA BAR */
+.pbar{position:fixed;top:52px;left:0;right:0;z-index:400;background:rgba(241,239,237,.97);backdrop-filter:blur(16px);border-bottom:.5px solid rgba(117,88,71,.1);padding:.5rem 1.5rem;display:flex;gap:2rem;align-items:center;transform:translateY(-110%);transition:transform .38s cubic-bezier(.77,0,.18,1)}
+.pbar.show{transform:translateY(0)}
+.pbar-label{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(117,88,71,.32);font-family:'Poppins',sans-serif;flex-shrink:0}
+.pbar-item{display:flex;align-items:center;gap:.4rem;font-size:11px;color:var(--dark);font-family:'Poppins',sans-serif;white-space:nowrap}
+.pbar-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+@media(max-width:560px){.pbar-label{display:none}.pbar{gap:1.25rem}}
+
+/* JOURNEY GRID */
+.jgrid-wrap{margin-top:2.5rem;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.jg{border-collapse:separate;border-spacing:5px;width:100%;min-width:680px}
+.jg-col-head{padding:.5rem .75rem 1rem;vertical-align:bottom;width:22%}
+.jg-ch-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-bottom:.4rem}
+.jg-ch-name{font-family:'Afacad Flux',sans-serif;font-size:1rem;font-weight:500;color:var(--dark);display:block;line-height:1.1}
+.jg-ch-role{font-size:9px;letter-spacing:.07em;text-transform:uppercase;color:var(--mid);font-family:'Poppins',sans-serif;display:block;margin-top:2px}
+.jg-ch-bar{height:2px;border-radius:99px;margin-top:.5rem;width:100%}
+.jg-row-head{vertical-align:middle;padding:.75rem .75rem .75rem 0;width:80px}
+.jg-rh-n{font-family:'Poppins',sans-serif;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:rgba(117,88,71,.3)}
+.jg-rh-l{font-family:'Afacad Flux',sans-serif;font-size:.9rem;font-weight:500;color:var(--ink);line-height:1.1;margin-top:2px}
+.jg-cell{background:#FDFCFA;border-radius:10px;padding:.9rem 1rem;vertical-align:top;border:.5px solid rgba(117,88,71,.1);opacity:0}
+.jg-ch{font-family:'Afacad Flux',sans-serif;font-size:.88rem;font-weight:500;color:var(--dark);line-height:1.2;margin-bottom:.3rem}
+.jg-desc{font-size:11px;color:var(--mid);line-height:1.5}
+.jg-pill{display:inline-block;margin-top:.45rem;font-size:8.5px;letter-spacing:.06em;padding:2px 8px;border-radius:99px;font-family:'Poppins',sans-serif;font-weight:500}
+/* Cell states */
+.jg-cell.risk{background:rgba(107,143,168,.06);border-color:rgba(107,143,168,.28)}
+.jg-cell.risk .jg-ch{color:#4a7a98}
+.jg-cell.win{background:rgba(117,88,71,.05);border-color:rgba(117,88,71,.2)}
+.jg-cell.warn{background:rgba(192,87,42,.05);border-color:rgba(192,87,42,.22)}
+.jg-cell.warn .jg-ch{color:#c0572a}
+.jg-warn-note{font-size:10px;color:#c0572a;margin-top:.4rem;font-family:'Poppins',sans-serif;font-weight:500;display:flex;align-items:center;gap:.3rem}
+.jg-caption{margin-top:1.5rem;font-size:13px;color:var(--mid);line-height:1.65;border-left:2px solid var(--brand);padding-left:.9rem;max-width:580px}
+
+/* PLATFORM SIGNALS */
+.plat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:3rem}
+@media(max-width:580px){.plat-grid{grid-template-columns:1fr}}
+.plat-card{background:#FDFCFA;border:.5px solid rgba(117,88,71,.12);border-radius:14px;padding:1.5rem 1.25rem;position:relative;overflow:hidden}
+.plat-card::before{content:attr(data-num);position:absolute;top:.75rem;right:1rem;font-family:'Afacad Flux',sans-serif;font-size:5rem;font-weight:700;color:rgba(117,88,71,.04);line-height:1}
+.pc-name{font-family:'Afacad Flux',sans-serif;font-size:1.1rem;font-weight:500;color:var(--dark);margin-bottom:.2rem}
+.pc-role{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-bottom:1rem;font-family:'Poppins',sans-serif}
+/* platform signal bars */
+.pc-platforms{display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.25rem}
+.pc-plat-row{display:flex;align-items:center;gap:.75rem}
+.pc-plat-name{font-size:11px;color:var(--dark);min-width:72px;font-family:'Poppins',sans-serif}
+.pc-plat-bar{flex:1;height:5px;background:rgba(117,88,71,.08);border-radius:99px;overflow:hidden}
+.pc-plat-fill{height:100%;border-radius:99px;width:0}
+.pc-divider{height:.5px;background:rgba(117,88,71,.08);margin-bottom:1rem}
+.pc-hook{font-size:12px;color:var(--mid);line-height:1.6;margin-bottom:.75rem}
+.pc-hook::before{content:'"';font-family:'Afacad Flux',sans-serif;font-size:1.5rem;color:var(--brand);line-height:0;vertical-align:-.3em;margin-right:2px}
+.pc-stop{font-size:11px;color:rgba(117,88,71,.5);line-height:1.55}
+.pc-stop::before{content:'Stop: ';font-weight:500;color:rgba(117,88,71,.7)}
+
+/* SAME PRODUCT, 4 CAPTIONS, pensiero laterale */
+.four-voices{background:var(--dark);border-radius:20px;padding:3rem 2rem;margin-top:3.5rem;position:relative;overflow:hidden}
+.four-voices::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,rgba(200,168,141,.06) 0%,transparent 65%);pointer-events:none}
+.fv-tag{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(200,168,141,.4);margin-bottom:.5rem}
+.fv-h{font-family:'Afacad Flux',sans-serif;font-size:clamp(1.5rem,3.5vw,2.2rem);color:rgba(241,239,237,.8);font-weight:400;line-height:1.15;margin-bottom:.4rem}
+.fv-sub{font-size:13px;color:rgba(241,239,237,.3);margin-bottom:2rem;max-width:480px;line-height:1.6}
+.fv-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(200,168,141,.08)}
+@media(max-width:560px){.fv-grid{grid-template-columns:1fr}}
+.fv-cell{background:rgba(30,20,16,.6);padding:1.5rem 1.25rem;position:relative}
+.fv-cell-name{font-size:9px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.5rem;font-family:'Poppins',sans-serif}
+.fv-caption{font-family:'Afacad Flux',sans-serif;font-size:clamp(.95rem,2.2vw,1.1rem);color:rgba(241,239,237,.7);line-height:1.45;font-style:italic;font-weight:300}
+.fv-why{font-size:11px;color:rgba(241,239,237,.28);margin-top:.5rem;line-height:1.5}
+
+/* INSIGHT OPERATIVO */
+.insight-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-top:3rem}
+@media(max-width:580px){.insight-row{grid-template-columns:1fr}}
+.ir-card{border-top:2px solid;padding:1.25rem 0}
+.ir-level{font-size:9px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.6rem;font-family:'Poppins',sans-serif;font-weight:500}
+.ir-t{font-family:'Afacad Flux',sans-serif;font-size:1rem;font-weight:500;color:var(--dark);margin-bottom:.35rem}
+.ir-d{font-size:12px;color:var(--mid);line-height:1.65}
+
+/* PERSONA RECAP VISIVO */
+.persona-recap{display:flex;flex-direction:column;gap:1rem;margin-top:2.5rem}
+.pr-card{border:.5px solid rgba(117,88,71,.12);border-radius:14px;overflow:hidden;background:#FDFCFA;opacity:0;display:grid;grid-template-columns:200px 1fr 180px}
+@media(max-width:720px){.pr-card{grid-template-columns:1fr}}
+.pr-left{padding:1.5rem 1.25rem;border-right:.5px solid rgba(117,88,71,.08);display:flex;flex-direction:column;justify-content:center;gap:.25rem}
+.pr-accent{width:28px;height:3px;border-radius:99px;margin-bottom:.6rem}
+.pr-name{font-family:'Afacad Flux',sans-serif;font-size:1.1rem;font-weight:500;color:var(--dark);line-height:1.1}
+.pr-role{font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--mid);font-family:'Poppins',sans-serif}
+.pr-descr{font-size:11px;color:var(--ink);font-style:italic;margin-top:.5rem;line-height:1.4;font-family:'Afacad Flux',sans-serif;font-weight:300}
+.pr-mid{padding:1.25rem 1.5rem;display:flex;flex-direction:column;justify-content:center;gap:.5rem}
+.pr-dim{display:flex;align-items:center;gap:.75rem}
+.pr-dim-l{font-size:9px;letter-spacing:.05em;text-transform:uppercase;color:var(--mid);min-width:128px;font-family:'Poppins',sans-serif;flex-shrink:0}
+.pr-dim-t{flex:1;height:4px;background:rgba(117,88,71,.08);border-radius:99px;overflow:hidden}
+.pr-dim-f{height:100%;border-radius:99px;width:0}
+.pr-dim-n{font-size:9px;color:var(--mid);min-width:26px;text-align:right;font-family:'Poppins',sans-serif}
+.pr-right{padding:1.25rem;border-left:.5px solid rgba(117,88,71,.08);display:flex;flex-direction:column;justify-content:space-between;gap:.75rem}
+@media(max-width:720px){.pr-right{border-left:none;border-top:.5px solid rgba(117,88,71,.08)}}
+.pr-r-label{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);font-family:'Poppins',sans-serif;font-weight:500}
+.pr-tags{display:flex;flex-direction:column;gap:.3rem}
+.pr-t{font-size:11px;color:var(--dark);font-family:'Afacad Flux',sans-serif;font-weight:500;display:flex;align-items:center;gap:.4rem}
+.pr-t::before{content:'→';color:var(--brand);font-size:.8rem}
+.pr-lever{font-size:11px;color:var(--mid);line-height:1.5;padding-top:.75rem;border-top:.5px solid rgba(117,88,71,.08);font-style:italic}
+.pr-lever strong{color:var(--dark);font-style:normal}
+
+/* RECAP */
+#recap{background:var(--dark);color:var(--bg);padding:4.5rem 1.5rem;border-top:.5px solid rgba(200,168,141,.1)}
+.re-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(200,168,141,.38);margin-bottom:2.5rem}
+.re-pills{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-bottom:3rem}
+@media(max-width:520px){.re-pills{grid-template-columns:1fr;gap:1.5rem}}
+.rp{border-top:.5px solid rgba(200,168,141,.18);padding-top:1rem}
+.rp-v{font-family:'Afacad Flux',sans-serif;font-size:clamp(2.2rem,5vw,3.5rem);font-weight:300;color:var(--brand);line-height:1;letter-spacing:-.03em}
+.rp-u{font-size:12px;color:rgba(200,168,141,.45)}
+.rp-l{font-size:12px;color:rgba(255,255,255,.28);margin-top:.3rem;line-height:1.4}
+.re-ins{border-top:.5px solid rgba(255,255,255,.07);padding-top:1.75rem;margin-bottom:2.5rem}
+.re-ins-h{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,168,141,.38);margin-bottom:.6rem}
+.re-ins-t{font-family:'Afacad Flux',sans-serif;font-size:clamp(1.1rem,3vw,1.5rem);line-height:1.4;max-width:600px;color:rgba(241,239,237,.75);font-weight:300}
+.re-cta{display:inline-flex;align-items:center;gap:.6rem;background:var(--brand);color:var(--dark);padding:.8rem 1.6rem;border-radius:99px;text-decoration:none;font-family:'Afacad Flux',sans-serif;font-size:14px;font-weight:500;transition:background .2s,transform .15s}
+.re-cta:hover{background:#d4b89a;transform:translateY(-1px)}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+
+<header class="topbar">
+  <div class="tb-l">
+    <span class="tb-brand">BZAR Hotels</span>
+    <div class="tb-sep"></div>
+    <img src="https://www.ribrainstudio.com/wp-content/uploads/2025/01/Logo_ribrain_Nero.svg" alt="Ribrain" class="tb-rlogo">
+  </div>
+  <span class="tb-c">Cruscotto Strategico &middot; Personas</span>
+  <div class="tb-r">
+    <span class="tb-date">Aprile 2026</span>
+    <span class="tb-conf">Confidenziale</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-noise" aria-hidden="true"></div>
+  <div class="hero-ghost" aria-hidden="true">M4</div>
+  <div class="hero-body">
+    <div class="hero-tag" id="htag">M4 &mdash; Personas</div>
+    <h1 class="hero-h1">
+      <span id="hl1">Quattro ospiti.</span><br>
+      <span id="hl2">Quattro grammatiche.</span><br>
+      <span id="hl3"><em>Un solo prodotto BZAR.</em></span>
+    </h1>
+    <p class="hero-sub" id="hsub">Non si tratta di creare contenuti diversi per persone diverse. Si tratta di capire che lo stesso rooftop, la stessa colazione, lo stesso staff, raccontati nel modo sbagliato, non convertono nessuno.</p>
+    <div class="hero-personas" id="hpersonas">
+      <div class="hp"><div class="hp-dot" style="background:var(--p1)"></div>Olivia · Globetrotter</div>
+      <div class="hp"><div class="hp-dot" style="background:var(--p2)"></div>Sophie · Famiglia</div>
+      <div class="hp"><div class="hp-dot" style="background:var(--p3)"></div>Leo · Creativo</div>
+      <div class="hp"><div class="hp-dot" style="background:var(--p4)"></div>Katharina · Coppia</div>
+    </div>
+  </div>
+  <div class="hero-foot"><div class="hero-scroll" aria-hidden="true">Scorri</div></div>
+</section>
+
+<!-- PERSONAS -->
+<section class="sec" id="s-personas">
+  <div class="s-tag">I quattro archetipi</div>
+  <h2 class="s-h">Chi sono, cosa vogliono,<br>dove si fanno convincere.</h2>
+  <p class="s-lead">Non segmenti statistici rigidi, archetipi operativi costruiti sui dati travel 2025. Ogni profilo ha un trigger diverso, un punto critico diverso, un contenuto che funziona e uno che fa smettere di seguire.</p>
+
+  <div class="p-cards">
+
+    <!-- OLIVIA -->
+    <div class="p-card" id="pcard1">
+      <div class="pc-top">
+        <div class="pc-ghost" style="color:rgba(117,88,71,.06)">01</div>
+        <div class="pc-accent" style="background:#755847"></div>
+        <div class="pc-name">Olivia Hart</div>
+        <div class="pc-role">38 &middot; Londra &middot; Interior stylist</div>
+        <div class="pc-hl">"Non cerca lusso ostentato, cerca accesso, gusto e la sensazione di vivere la città da insider."</div>
+        <div class="pc-chs">
+          <span class="pcc" style="background:rgba(117,88,71,.12);color:#755847">Instagram</span>
+          <span class="pcc" style="background:rgba(117,88,71,.12);color:#755847">TikTok</span>
+          <span class="pcc" style="background:rgba(117,88,71,.12);color:#755847">Pinterest</span>
+        </div>
+      </div>
+      <div class="pc-body">
+        <div><div class="pc-il">Trigger</div><div class="pc-it">Un'immagine o un creator innesca il desiderio in modo passivo nel feed. Non è una ricerca intenzionale.</div></div>
+        <div><div class="pc-il">Pain point</div><div class="pc-it">Genericità e posa. Ogni hotel uguale agli altri. Pressione promozionale continua senza contesto.</div></div>
+        <div><div class="pc-il">Contenuto chiave</div><div class="pc-it">Mini-serie "48h insider", room tour cinematico, cooking class come rito culturale.</div></div>
+        <div><div class="pc-il">Leva conversione</div><div class="pc-it">Experience inclusa visibile + tariffa diretta migliore + recensioni di qualità.</div></div>
+      </div>
+      <div class="pc-ins"><strong>Insight:</strong> Non prenota mai al primo colpo. Social = innesco. Google + OTA = validazione. Converte solo se la promessa è coerente end-to-end.</div>
+    </div>
+
+    <!-- SOPHIE -->
+    <div class="p-card" id="pcard2">
+      <div class="pc-top">
+        <div class="pc-ghost" style="color:rgba(138,158,122,.07)">02</div>
+        <div class="pc-accent" style="background:#8a9e7a"></div>
+        <div class="pc-name">Sophie Laurent</div>
+        <div class="pc-role">41 &middot; Lione &middot; Marketing manager</div>
+        <div class="pc-hl">"Il criterio è la capacità dell'hotel di far funzionare un city break familiare in poco tempo, con poco stress."</div>
+        <div class="pc-chs">
+          <span class="pcc" style="background:rgba(138,158,122,.15);color:#5a8a4a">Facebook</span>
+          <span class="pcc" style="background:rgba(138,158,122,.15);color:#5a8a4a">Instagram</span>
+          <span class="pcc" style="background:rgba(138,158,122,.15);color:#5a8a4a">YouTube</span>
+        </div>
+      </div>
+      <div class="pc-body">
+        <div><div class="pc-il">Trigger</div><div class="pc-it">Google "family hotel Rome center". I social non avviano la ricerca, arrivano dopo, per rassicurare.</div></div>
+        <div><div class="pc-il">Pain point</div><div class="pc-it">Feed troppo "solo coppie". Nessun segnale family-friendly esplicito. Lusso astratto senza utilità.</div></div>
+        <div><div class="pc-il">Contenuto chiave</div><div class="pc-it">"Roma 48h con bambini senza corse", carousel distanze reali, reel colazione + check-in.</div></div>
+        <div><div class="pc-il">Leva conversione</div><div class="pc-it">Chiarezza su "children welcome" + colazione inclusa + tariffa confrontabile.</div></div>
+      </div>
+      <div class="pc-ins"><strong>Insight:</strong> I social hanno funzione di rassicurazione visiva, non di scoperta. Vince l'hotel che riduce il carico mentale del planner.</div>
+    </div>
+
+    <!-- LEO -->
+    <div class="p-card" id="pcard3">
+      <div class="pc-top">
+        <div class="pc-ghost" style="color:rgba(107,143,168,.07)">03</div>
+        <div class="pc-accent" style="background:#6b8fa8"></div>
+        <div class="pc-name">Leo Navarro</div>
+        <div class="pc-role">29 &middot; Barcellona &middot; Creative strategist</div>
+        <div class="pc-hl">"Vuole un hotel che lavori bene dentro la sua vita ibrida: non troppo business, non troppo leisure."</div>
+        <div class="pc-chs">
+          <span class="pcc" style="background:rgba(107,143,168,.15);color:#4a7a98">TikTok</span>
+          <span class="pcc" style="background:rgba(107,143,168,.15);color:#4a7a98">Instagram</span>
+          <span class="pcc" style="background:rgba(107,143,168,.15);color:#4a7a98">LinkedIn</span>
+        </div>
+      </div>
+      <div class="pc-body">
+        <div><div class="pc-il">Trigger</div><div class="pc-it">Video breve su TikTok → save → profilo. Tutto in 30 secondi. Scoperta velocissima.</div></div>
+        <div><div class="pc-il">Pain point</div><div class="pc-it">Tono corporate. Sito lento o freddo dopo social caldo → OTA immediata. Zero tolleranza all'attrito.</div></div>
+        <div><div class="pc-il">Contenuto chiave</div><div class="pc-it">POV "work from Rome, aperitivo at sunset", creator diary, walkthrough urbano autentico.</div></div>
+        <div><div class="pc-il">Leva conversione</div><div class="pc-it">Sito mobile perfetto che continua l'energia del social. Frictionless booking.</div></div>
+      </div>
+      <div class="pc-ins"><strong>Insight:</strong> La promessa vincente non è "puoi lavorare da noi", è "puoi vivere bene qui anche se devi lavorare un po'". Nel contenuto cambia tutto.</div>
+    </div>
+
+    <!-- KATHARINA -->
+    <div class="p-card" id="pcard4">
+      <div class="pc-top">
+        <div class="pc-ghost" style="color:rgba(154,125,106,.07)">04</div>
+        <div class="pc-accent" style="background:#9a7d6a"></div>
+        <div class="pc-name">Katharina Meier</div>
+        <div class="pc-role">58 &middot; Zurigo &middot; Consulente legale</div>
+        <div class="pc-hl">"Vuole escapismo di qualità, non eccitazione continua. Certezza emotiva prima di qualsiasi altra cosa."</div>
+        <div class="pc-chs">
+          <span class="pcc" style="background:rgba(154,125,106,.15);color:#7a5d4a">Facebook</span>
+          <span class="pcc" style="background:rgba(154,125,106,.15);color:#7a5d4a">Instagram</span>
+          <span class="pcc" style="background:rgba(154,125,106,.15);color:#7a5d4a">YouTube</span>
+        </div>
+      </div>
+      <div class="pc-body">
+        <div><div class="pc-il">Trigger</div><div class="pc-it">Google molto preciso. OTA per confrontare. Poi sito BZAR per capire il tono e il servizio.</div></div>
+        <div><div class="pc-il">Pain point</div><div class="pc-il" style="margin-top:.2rem"></div><div class="pc-it">Giovanilismo e trend-chasing. Account che sembra voler piacere a tutti. Eccesso di dinamismo.</div></div>
+        <div><div class="pc-il">Contenuto chiave</div><div class="pc-it">Video lenti, walkthrough spazi, cucina locale, dettagli architettonici, testimonianze reali.</div></div>
+        <div><div class="pc-il">Leva conversione</div><div class="pc-it">Rassicurazione + qualità tangibile + best rate garantito. La più propensa alla prenotazione diretta.</div></div>
+      </div>
+      <div class="pc-ins"><strong>Insight:</strong> "Escapismo di qualità" non è sorpresa continua, è certezza emotiva. Vogliono sapere in anticipo, fisicamente, come si sentiranno lì.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- STICKY PERSONA BAR (appare quando scorri il funnel) -->
+<div class="pbar" id="pbar" aria-hidden="true">
+  <span class="pbar-label">Personas</span>
+  <div class="pbar-item"><div class="pbar-dot" style="background:#755847"></div>Olivia · Globetrotter</div>
+  <div class="pbar-item"><div class="pbar-dot" style="background:#8a9e7a"></div>Sophie · Famiglia</div>
+  <div class="pbar-item"><div class="pbar-dot" style="background:#6b8fa8"></div>Leo · Creativo</div>
+  <div class="pbar-item"><div class="pbar-dot" style="background:#9a7d6a"></div>Katharina · Coppia</div>
+</div>
+
+<!-- JOURNEY GRID -->
+<section class="sec" id="s-journey">
+  <div class="s-tag">Il percorso verso la prenotazione</div>
+  <h2 class="s-h">Quattro stadi, quattro comportamenti.<br>Ogni cella è un touchpoint reale.</h2>
+  <p class="s-lead">Leggi per riga per capire cosa differenzia le personas in ogni fase. Leggi per colonna per seguire il percorso completo di ciascuna.</p>
+
+  <div class="jgrid-wrap">
+    <table class="jg" id="jgTable">
+      <thead>
+        <tr>
+          <th class="jg-row-head"></th>
+          <!-- Olivia -->
+          <th class="jg-col-head">
+            <div class="jg-ch-dot" style="background:#755847"></div>
+            <span class="jg-ch-name">Olivia</span>
+            <span class="jg-ch-role">Globetrotter · Londra</span>
+            <div class="jg-ch-bar" style="background:#755847"></div>
+          </th>
+          <!-- Sophie -->
+          <th class="jg-col-head">
+            <div class="jg-ch-dot" style="background:#8a9e7a"></div>
+            <span class="jg-ch-name">Sophie</span>
+            <span class="jg-ch-role">Famiglia · Lione</span>
+            <div class="jg-ch-bar" style="background:#8a9e7a"></div>
+          </th>
+          <!-- Leo -->
+          <th class="jg-col-head">
+            <div class="jg-ch-dot" style="background:#6b8fa8"></div>
+            <span class="jg-ch-name">Leo</span>
+            <span class="jg-ch-role">Creativo · Barcellona</span>
+            <div class="jg-ch-bar" style="background:#6b8fa8"></div>
+          </th>
+          <!-- Katharina -->
+          <th class="jg-col-head">
+            <div class="jg-ch-dot" style="background:#9a7d6a"></div>
+            <span class="jg-ch-name">Katharina</span>
+            <span class="jg-ch-role">Coppia · Zurigo</span>
+            <div class="jg-ch-bar" style="background:#9a7d6a"></div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- SCOPERTA -->
+        <tr>
+          <td class="jg-row-head">
+            <div class="jg-rh-n">01</div>
+            <div class="jg-rh-l">Scoperta</div>
+          </td>
+          <td class="jg-cell">
+            <div class="jg-ch">Instagram · TikTok</div>
+            <div class="jg-desc">Un'immagine o un creator innesca il desiderio, non è una ricerca intenzionale. L'ispirazione arriva passivamente nel feed.</div>
+            <span class="jg-pill" style="background:rgba(117,88,71,.1);color:#755847">Passiva · Visual</span>
+          </td>
+          <td class="jg-cell">
+            <div class="jg-ch">Google Search</div>
+            <div class="jg-desc">Cerca attivamente "family hotel Rome center". Il social non è il punto di partenza, è la rassicurazione che arriva dopo.</div>
+            <span class="jg-pill" style="background:rgba(138,158,122,.15);color:#5a8a4a">Intenzionale · Utilitaria</span>
+          </td>
+          <td class="jg-cell">
+            <div class="jg-ch">TikTok · Instagram</div>
+            <div class="jg-desc">Video breve → save → visita profilo. Tutto in meno di 30 secondi. La scoperta è veloce e non lascia spazio a esitazioni.</div>
+            <span class="jg-pill" style="background:rgba(107,143,168,.12);color:#4a7a98">Veloce · Video-first</span>
+          </td>
+          <td class="jg-cell">
+            <div class="jg-ch">Google preciso</div>
+            <div class="jg-desc">Ricerca molto specifica: "boutique hotel centro storico Roma". Sa già cosa vuole, cerca conferma, non ispirazione.</div>
+            <span class="jg-pill" style="background:rgba(154,125,106,.12);color:#7a5d4a">Metodica · High-intent</span>
+          </td>
+        </tr>
+
+        <!-- VALUTAZIONE -->
+        <tr>
+          <td class="jg-row-head">
+            <div class="jg-rh-n">02</div>
+            <div class="jg-rh-l">Valutazione</div>
+          </td>
+          <td class="jg-cell">
+            <div class="jg-ch">Google + OTA + Maps</div>
+            <div class="jg-desc">Verifica zona, reputazione, rapporto qualità-prezzo. Processo lento, può durare giorni. Le recensioni contano molto.</div>
+            <span class="jg-pill" style="background:rgba(117,88,71,.1);color:#755847">Processo lungo</span>
+          </td>
+          <td class="jg-cell">
+            <div class="jg-ch">OTA + Instagram + Maps</div>
+            <div class="jg-desc">OTA per confrontare le tariffe, IG per rassicurazione visiva ("sembra davvero adatto a una famiglia?"). Il passaparola pesa.</div>
+            <span class="jg-pill" style="background:rgba(138,158,122,.15);color:#5a8a4a">Comparazione + Social proof</span>
+          </td>
+          <td class="jg-cell">
+            <div class="jg-ch">Maps + ultime 5 recensioni</div>
+            <div class="jg-desc">Due tap. Legge le ultime 5 recensioni, guarda le foto su Maps. Se tutto è ok, va avanti. Non ha pazienza per processi lunghi.</div>
+            <span class="jg-pill" style="background:rgba(107,143,168,.12);color:#4a7a98">Velocissima · UGC-driven</span>
+          </td>
+          <td class="jg-cell">
+            <div class="jg-ch">OTA + Sito BZAR</div>
+            <div class="jg-desc">Compara su OTA poi torna sul sito per capire il tono, il servizio e le condizioni. La navigazione deve essere estremamente chiara.</div>
+            <span class="jg-pill" style="background:rgba(154,125,106,.12);color:#7a5d4a">Metodica · Qualità-first</span>
+          </td>
+        </tr>
+
+        <!-- INTENZIONE -->
+        <tr>
+          <td class="jg-row-head">
+            <div class="jg-rh-n">03</div>
+            <div class="jg-rh-l">Intenzione</div>
+          </td>
+          <td class="jg-cell">
+            <div class="jg-ch">Cerca le experience incluse</div>
+            <div class="jg-desc">Se city tour e cooking class sono visibili e credibili sul sito, prenota diretto. Se non le trova facilmente, va sull'OTA.</div>
+            <span class="jg-pill" style="background:rgba(117,88,71,.1);color:#755847">Value-driven</span>
+          </td>
+          <td class="jg-cell">
+            <div class="jg-ch">Cerca chiarezza operativa</div>
+            <div class="jg-desc">Vuole segnali espliciti: "children welcome", colazione inclusa, distanze dai punti iconici. L'ambiguità la spinge sull'OTA.</div>
+            <span class="jg-pill" style="background:rgba(138,158,122,.15);color:#5a8a4a">Operativa · Concretezza</span>
+          </td>
+          <td class="jg-cell warn">
+            <div class="jg-ch">Sito mobile, punto critico</div>
+            <div class="jg-desc">Se il sito è lento, freddo o discontinuo rispetto al social, esce immediatamente sull'OTA. Zero tolleranza all'attrito digitale.</div>
+            <div class="jg-warn-note">⚠ Momento di perdita più probabile</div>
+            <span class="jg-pill" style="background:rgba(192,87,42,.1);color:#c0572a">Mobile-first · Frictionless</span>
+          </td>
+          <td class="jg-cell">
+            <div class="jg-ch">Vuole "sentire" il brand</div>
+            <div class="jg-desc">Naviga il sito per capire il tono. Un sito che sembra affidabile e ordinato vale quanto una buona recensione. Il dettaglio conta.</div>
+            <span class="jg-pill" style="background:rgba(154,125,106,.12);color:#7a5d4a">Rassicurazione · Tono</span>
+          </td>
+        </tr>
+
+        <!-- CONVERSIONE -->
+        <tr>
+          <td class="jg-row-head">
+            <div class="jg-rh-n">04</div>
+            <div class="jg-rh-l">Conversione</div>
+          </td>
+          <td class="jg-cell win">
+            <div class="jg-ch">Prenota diretto ✓</div>
+            <div class="jg-desc">Se l'experience inclusa è visibile e la tariffa diretta è migliore rispetto all'OTA. Non si sposta con sconti generici.</div>
+            <span class="jg-pill" style="background:rgba(117,88,71,.12);color:#755847">Alta probabilità diretta</span>
+          </td>
+          <td class="jg-cell win">
+            <div class="jg-ch">Prenota diretto ✓</div>
+            <div class="jg-desc">Con chiarezza su ogni aspetto operativo e benefit espliciti. La semplicità della prenotazione è determinante quanto il prezzo.</div>
+            <span class="jg-pill" style="background:rgba(138,158,122,.18);color:#5a8a4a">Alta probabilità diretta</span>
+          </td>
+          <td class="jg-cell risk">
+            <div class="jg-ch">Diretto o OTA, dipende</div>
+            <div class="jg-desc">Prenota diretto se il sito mobile è eccellente e continua l'energia del social. Qualsiasi attrito → OTA immediata senza rimpianti.</div>
+            <span class="jg-pill" style="background:rgba(107,143,168,.12);color:#4a7a98">Condizionale · Mobile-first</span>
+          </td>
+          <td class="jg-cell win">
+            <div class="jg-ch">Prenota diretto ✓✓</div>
+            <div class="jg-desc">Gli over 55 sono i più inclini alla prenotazione diretta di tutti i profili. BZAR deve essere lì con chiarezza, tariffa migliore e benefit.</div>
+            <span class="jg-pill" style="background:rgba(154,125,106,.15);color:#7a5d4a">Massima probabilità diretta</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="jg-caption">Il momento di perdita più critico per BZAR è Leo nello stadio Intenzione: se il sito mobile non continua l'energia del social, il flusso finisce sull'OTA. E costa il 20%. Ogni euro investito nel sito diretto è un euro non pagato a Booking.</p>
+</section>
+
+<!-- MATRICE CONTENUTO × PERSONA -->
+<section class="sec" id="s-matrix">
+  <div class="s-tag">La matrice operativa</div>
+  <h2 class="s-h">Chi risponde a cosa.<br>In un colpo d'occhio.</h2>
+  <p class="s-lead">Per ogni tipo di contenuto, quanto funziona su ciascuna persona. Leggi per riga (cosa produrre) o per colonna (per chi produrre).</p>
+
+  <div class="matrix-wrap">
+    <table class="matrix-table" id="matrixTable">
+      <thead>
+        <tr>
+          <th>Contenuto</th>
+          <th><span style="display:flex;align-items:center;gap:5px"><span style="width:7px;height:7px;border-radius:50%;background:#755847;display:inline-block"></span>Olivia</span></th>
+          <th><span style="display:flex;align-items:center;gap:5px"><span style="width:7px;height:7px;border-radius:50%;background:#8a9e7a;display:inline-block"></span>Sophie</span></th>
+          <th><span style="display:flex;align-items:center;gap:5px"><span style="width:7px;height:7px;border-radius:50%;background:#6b8fa8;display:inline-block"></span>Leo</span></th>
+          <th><span style="display:flex;align-items:center;gap:5px"><span style="width:7px;height:7px;border-radius:50%;background:#9a7d6a;display:inline-block"></span>Katharina</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div style="font-family:'Afacad Flux',sans-serif;font-size:.9rem;font-weight:500;color:var(--dark)">Staff stories</div><div style="font-size:10px;color:var(--mid)">Yamish, Fabiana, Federico</div></td>
+          <td><div class="mx-cell"><div class="mx-dot strong"></div></div></td>
+          <td><div class="mx-cell"><div class="mx-dot mid"></div></div></td>
+          <td><div class="mx-cell"><div class="mx-dot strong"></div></div></td>
+          <td><div class="mx-cell"><div class="mx-dot strong"></div></div></td>
+        </tr>
+        <tr>
+          <td><div style="font-family:'Afacad Flux',sans-serif;font-size:.9rem;font-weight:500;color:var(--dark)">48h insider / itinerario</div><div style="font-size:10px;color:var(--mid)">Guida locale, quartiere</div></td>
+          <td><div class="mx-cell"><div class="mx-dot strong"></div></div></td>
+          <td><div class="mx-cell"><div class="mx-dot strong"></div></div></td>
+          <td><div class="mx-cell"><div class="mx-dot mid"></div></div></td>
+          <td><div class="mx-cell"><div class="mx-dot mid"></div></div></td>
+        </tr>
+        <tr>
+          <td><div style="font-family:'Afacad Flux',sans-serif;font-size:.9rem;font-weight:500;color:var(--dark)">Colazione / cucina</div><div style="font-size:10px;color:var(--mid)">Rituale, ricette, backstage</div></td>
+          <td><div class="mx-cell"><div class="mx-dot strong"></div></div></td>
+          <td><div class="mx-cell"><div class="mx-dot strong"></div></div></td>
+          <td><div class="mx-cell"><div class="mx-dot weak"></div></div></td>
+          <td><div class="mx-cell"><div class="mx-dot strong"></div></div></td>
+        </tr>
+        <tr>
+          <td><div style="font-family:'Afacad Flux',sans-serif;font-size:.9rem;font-weight:500;color:var(--dark)">POV / work from Rome</div><div style="font-size:10px;color:var(--mid)">Co-working, life hybrid</div></td>
+          <td><div class="mx-cell"><div class="mx-dot weak"></div></div></td>
+          <td><div class="mx-cell"><div class="mx-dot weak"></div></div></td>
+          <td><div class="mx-cell"><div class="mx-dot strong"></div></div></td>
+          <td><div class="mx-cell"><div class="mx-dot weak"></div></div></td>
+        </tr>
+        <tr>
+          <td><div style="font-family:'Afacad Flux',sans-serif;font-size:.9rem;font-weight:500;color:var(--dark)">Rooftop / tramonto</div><div style="font-size:10px;color:var(--mid)">Atmosfera, serenità</div></td>
+          <td><div class="mx-cell"><div class="mx-dot strong"></div></div></td>
+          <td><div class="mx-cell"><div class="mx-dot mid"></div></div></td>
+          <td><div class="mx-cell"><div class="mx-dot mid"></div></div></td>
+          <td><div class="mx-cell"><div class="mx-dot strong"></div></div></td>
+        </tr>
+        <tr>
+          <td><div style="font-family:'Afacad Flux',sans-serif;font-size:.9rem;font-weight:500;color:var(--dark)">Family / children</div><div style="font-size:10px;color:var(--mid)">Kids welcome, practicità</div></td>
+          <td><div class="mx-cell"><div class="mx-dot weak"></div></div></td>
+          <td><div class="mx-cell"><div class="mx-dot strong"></div></div></td>
+          <td><div class="mx-cell"><div class="mx-dot weak"></div></div></td>
+          <td><div class="mx-cell"><div class="mx-dot weak"></div></div></td>
+        </tr>
+        <tr>
+          <td><div style="font-family:'Afacad Flux',sans-serif;font-size:.9rem;font-weight:500;color:var(--dark)">BZAR Experiences</div><div style="font-size:10px;color:var(--mid)">City tour, cooking class</div></td>
+          <td><div class="mx-cell"><div class="mx-dot strong"></div></div></td>
+          <td><div class="mx-cell"><div class="mx-dot strong"></div></div></td>
+          <td><div class="mx-cell"><div class="mx-dot mid"></div></div></td>
+          <td><div class="mx-cell"><div class="mx-dot strong"></div></div></td>
+        </tr>
+        <tr>
+          <td><div style="font-family:'Afacad Flux',sans-serif;font-size:.9rem;font-weight:500;color:var(--dark)">UGC / recensioni</div><div style="font-size:10px;color:var(--mid)">Social proof, quote</div></td>
+          <td><div class="mx-cell"><div class="mx-dot mid"></div></div></td>
+          <td><div class="mx-cell"><div class="mx-dot strong"></div></div></td>
+          <td><div class="mx-cell"><div class="mx-dot strong"></div></div></td>
+          <td><div class="mx-cell"><div class="mx-dot strong"></div></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="display:flex;gap:1.5rem;margin-top:1rem;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:.5rem;font-size:11px;color:var(--mid)"><div style="width:18px;height:18px;border-radius:50%;background:var(--ink)"></div>Funziona molto</div>
+    <div style="display:flex;align-items:center;gap:.5rem;font-size:11px;color:var(--mid)"><div style="width:18px;height:18px;border-radius:50%;background:rgba(117,88,71,.18)"></div>Funziona parzialmente</div>
+    <div style="display:flex;align-items:center;gap:.5rem;font-size:11px;color:var(--mid)"><div style="width:18px;height:18px;border-radius:50%;background:rgba(117,88,71,.06)"></div>Poco rilevante</div>
+  </div>
+
+  <!-- RECAP VISIVO PER PERSONA -->
+  <div style="margin-top:4rem">
+    <div class="s-tag">Ritratto sintetico</div>
+    <h3 style="font-family:'Afacad Flux',sans-serif;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:400;line-height:1.1;letter-spacing:-.02em;margin-bottom:.75rem">Una persona, un profilo.<br>Tutto in un colpo d'occhio.</h3>
+    <p style="font-size:14px;color:var(--mid);max-width:480px;line-height:1.75;margin-bottom:.5rem">Le barre mostrano l'intensità di 5 dimensioni operative. La colonna destra dice cosa produrre e su quale leva fare leva per convertire.</p>
+  </div>
+
+  <div class="persona-recap" id="personaRecap">
+
+    <!-- OLIVIA -->
+    <div class="pr-card" id="prc1">
+      <div class="pr-left">
+        <div class="pr-accent" style="background:#755847"></div>
+        <div class="pr-name">Olivia Hart</div>
+        <div class="pr-role">38 · Globetrotter · Londra</div>
+        <div class="pr-descr">Lenta, visuale, qualità-first. L'ispirazione nasce dai social, la fiducia si costruisce con le recensioni.</div>
+      </div>
+      <div class="pr-mid">
+        <div class="pr-dim">
+          <span class="pr-dim-l">Intensità social</span>
+          <div class="pr-dim-t"><div class="pr-dim-f" data-w="90" style="background:#755847"></div></div>
+          <span class="pr-dim-n">90</span>
+        </div>
+        <div class="pr-dim">
+          <span class="pr-dim-l">Velocità decisione</span>
+          <div class="pr-dim-t"><div class="pr-dim-f" data-w="30" style="background:#755847"></div></div>
+          <span class="pr-dim-n">30</span>
+        </div>
+        <div class="pr-dim">
+          <span class="pr-dim-l">Propensione diretta</span>
+          <div class="pr-dim-t"><div class="pr-dim-f" data-w="75" style="background:#755847"></div></div>
+          <span class="pr-dim-n">75</span>
+        </div>
+        <div class="pr-dim">
+          <span class="pr-dim-l">Sens. al prezzo</span>
+          <div class="pr-dim-t"><div class="pr-dim-f" data-w="35" style="background:#755847"></div></div>
+          <span class="pr-dim-n">35</span>
+        </div>
+        <div class="pr-dim">
+          <span class="pr-dim-l">Peso contenuto</span>
+          <div class="pr-dim-t"><div class="pr-dim-f" data-w="95" style="background:#755847"></div></div>
+          <span class="pr-dim-n">95</span>
+        </div>
+      </div>
+      <div class="pr-right">
+        <div>
+          <div class="pr-r-label">Contenuto prioritario</div>
+          <div class="pr-tags">
+            <div class="pr-t">48h da insider · room tour cinematico</div>
+            <div class="pr-t">Cooking class come rito culturale</div>
+            <div class="pr-t">Concierge con angoli non ovvi</div>
+          </div>
+        </div>
+        <div class="pr-lever">Leva: <strong>experience inclusa visibile + tariffa diretta migliore</strong></div>
+      </div>
+    </div>
+
+    <!-- SOPHIE -->
+    <div class="pr-card" id="prc2">
+      <div class="pr-left">
+        <div class="pr-accent" style="background:#8a9e7a"></div>
+        <div class="pr-name">Sophie Laurent</div>
+        <div class="pr-role">41 · Famiglia · Lione</div>
+        <div class="pr-descr">Utilitaria, pratica, familiare. Parte da Google. Il social rassicura, non convince.</div>
+      </div>
+      <div class="pr-mid">
+        <div class="pr-dim">
+          <span class="pr-dim-l">Intensità social</span>
+          <div class="pr-dim-t"><div class="pr-dim-f" data-w="55" style="background:#8a9e7a"></div></div>
+          <span class="pr-dim-n">55</span>
+        </div>
+        <div class="pr-dim">
+          <span class="pr-dim-l">Velocità decisione</span>
+          <div class="pr-dim-t"><div class="pr-dim-f" data-w="50" style="background:#8a9e7a"></div></div>
+          <span class="pr-dim-n">50</span>
+        </div>
+        <div class="pr-dim">
+          <span class="pr-dim-l">Propensione diretta</span>
+          <div class="pr-dim-t"><div class="pr-dim-f" data-w="70" style="background:#8a9e7a"></div></div>
+          <span class="pr-dim-n">70</span>
+        </div>
+        <div class="pr-dim">
+          <span class="pr-dim-l">Sens. al prezzo</span>
+          <div class="pr-dim-t"><div class="pr-dim-f" data-w="70" style="background:#8a9e7a"></div></div>
+          <span class="pr-dim-n">70</span>
+        </div>
+        <div class="pr-dim">
+          <span class="pr-dim-l">Peso contenuto</span>
+          <div class="pr-dim-t"><div class="pr-dim-f" data-w="65" style="background:#8a9e7a"></div></div>
+          <span class="pr-dim-n">65</span>
+        </div>
+      </div>
+      <div class="pr-right">
+        <div>
+          <div class="pr-r-label">Contenuto prioritario</div>
+          <div class="pr-tags">
+            <div class="pr-t">Roma 48h con bambini senza stress</div>
+            <div class="pr-t">Carousel distanze reali + check-in</div>
+            <div class="pr-t">"Children welcome" esplicito</div>
+          </div>
+        </div>
+        <div class="pr-lever">Leva: <strong>chiarezza operativa + colazione inclusa + tariffa visibile</strong></div>
+      </div>
+    </div>
+
+    <!-- LEO -->
+    <div class="pr-card" id="prc3">
+      <div class="pr-left">
+        <div class="pr-accent" style="background:#6b8fa8"></div>
+        <div class="pr-name">Leo Navarro</div>
+        <div class="pr-role">29 · Creativo · Barcellona</div>
+        <div class="pr-descr">Veloce, mobile, urbano. Decisione in minuti. Zero tolleranza all'attrito digitale.</div>
+      </div>
+      <div class="pr-mid">
+        <div class="pr-dim">
+          <span class="pr-dim-l">Intensità social</span>
+          <div class="pr-dim-t"><div class="pr-dim-f" data-w="95" style="background:#6b8fa8"></div></div>
+          <span class="pr-dim-n">95</span>
+        </div>
+        <div class="pr-dim">
+          <span class="pr-dim-l">Velocità decisione</span>
+          <div class="pr-dim-t"><div class="pr-dim-f" data-w="90" style="background:#6b8fa8"></div></div>
+          <span class="pr-dim-n">90</span>
+        </div>
+        <div class="pr-dim">
+          <span class="pr-dim-l">Propensione diretta</span>
+          <div class="pr-dim-t"><div class="pr-dim-f" data-w="55" style="background:#6b8fa8"></div></div>
+          <span class="pr-dim-n">55</span>
+        </div>
+        <div class="pr-dim">
+          <span class="pr-dim-l">Sens. al prezzo</span>
+          <div class="pr-dim-t"><div class="pr-dim-f" data-w="60" style="background:#6b8fa8"></div></div>
+          <span class="pr-dim-n">60</span>
+        </div>
+        <div class="pr-dim">
+          <span class="pr-dim-l">Peso contenuto</span>
+          <div class="pr-dim-t"><div class="pr-dim-f" data-w="85" style="background:#6b8fa8"></div></div>
+          <span class="pr-dim-n">85</span>
+        </div>
+      </div>
+      <div class="pr-right">
+        <div>
+          <div class="pr-r-label">Contenuto prioritario</div>
+          <div class="pr-tags">
+            <div class="pr-t">POV "work from Rome, aperitivo"</div>
+            <div class="pr-t">Creator diary · walkthrough urbano</div>
+            <div class="pr-t">UGC autentico · niente hotel-speak</div>
+          </div>
+        </div>
+        <div class="pr-lever">Leva: <strong>sito mobile perfetto che continua l'energia del social</strong></div>
+      </div>
+    </div>
+
+    <!-- KATHARINA -->
+    <div class="pr-card" id="prc4">
+      <div class="pr-left">
+        <div class="pr-accent" style="background:#9a7d6a"></div>
+        <div class="pr-name">Katharina Meier</div>
+        <div class="pr-role">58 · Coppia · Zurigo</div>
+        <div class="pr-descr">Metodica, qualità-first, diretta. La più incline alla prenotazione diretta di tutti e quattro.</div>
+      </div>
+      <div class="pr-mid">
+        <div class="pr-dim">
+          <span class="pr-dim-l">Intensità social</span>
+          <div class="pr-dim-t"><div class="pr-dim-f" data-w="45" style="background:#9a7d6a"></div></div>
+          <span class="pr-dim-n">45</span>
+        </div>
+        <div class="pr-dim">
+          <span class="pr-dim-l">Velocità decisione</span>
+          <div class="pr-dim-t"><div class="pr-dim-f" data-w="40" style="background:#9a7d6a"></div></div>
+          <span class="pr-dim-n">40</span>
+        </div>
+        <div class="pr-dim">
+          <span class="pr-dim-l">Propensione diretta</span>
+          <div class="pr-dim-t"><div class="pr-dim-f" data-w="90" style="background:#9a7d6a"></div></div>
+          <span class="pr-dim-n">90</span>
+        </div>
+        <div class="pr-dim">
+          <span class="pr-dim-l">Sens. al prezzo</span>
+          <div class="pr-dim-t"><div class="pr-dim-f" data-w="30" style="background:#9a7d6a"></div></div>
+          <span class="pr-dim-n">30</span>
+        </div>
+        <div class="pr-dim">
+          <span class="pr-dim-l">Peso contenuto</span>
+          <div class="pr-dim-t"><div class="pr-dim-f" data-w="60" style="background:#9a7d6a"></div></div>
+          <span class="pr-dim-n">60</span>
+        </div>
+      </div>
+      <div class="pr-right">
+        <div>
+          <div class="pr-r-label">Contenuto prioritario</div>
+          <div class="pr-tags">
+            <div class="pr-t">Video lenti · walkthrough spazi</div>
+            <div class="pr-t">Cucina locale · atmosfera serale</div>
+            <div class="pr-t">Testimonianze credibili · dettagli</div>
+          </div>
+        </div>
+        <div class="pr-lever">Leva: <strong>rassicurazione + qualità tangibile + best rate garantito</strong></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PERSONA CARDS -->
+<section class="sec" id="s-cards">
+  <div class="s-tag">I quattro profili</div>
+  <h2 class="s-h">Cosa funziona, e cosa fa<br>smettere di seguire.</h2>
+  <p class="s-lead">Per ogni persona: le piattaforme di riferimento, il contenuto che converte, il segnale che fa abbandonare l'account.</p>
+
+  <div class="plat-grid">
+
+    <!-- OLIVIA -->
+    <div class="plat-card" data-num="01" id="pc1">
+      <div class="pc-name">Olivia Hart</div>
+      <div class="pc-role">38 · Londra · Globetrotter sofisticato</div>
+      <div class="pc-platforms">
+        <div class="pc-plat-row">
+          <span class="pc-plat-name">Instagram</span>
+          <div class="pc-plat-bar"><div class="pc-plat-fill" data-w="90" style="background:var(--p1)"></div></div>
+        </div>
+        <div class="pc-plat-row">
+          <span class="pc-plat-name">TikTok</span>
+          <div class="pc-plat-bar"><div class="pc-plat-fill" data-w="70" style="background:var(--p1)"></div></div>
+        </div>
+        <div class="pc-plat-row">
+          <span class="pc-plat-name">Pinterest</span>
+          <div class="pc-plat-bar"><div class="pc-plat-fill" data-w="45" style="background:var(--p1)"></div></div>
+        </div>
+      </div>
+      <div class="pc-divider"></div>
+      <div class="pc-hook">Mini-serie "48 ore da insider", room tour cinematici, rooftop al golden hour, cooking class come rito culturale, non come animazione per turisti.</div>
+      <div class="pc-stop">Genericità e posa. Camera-piscina-colazione senza contesto reale. Pressione promozionale continua.</div>
+    </div>
+
+    <!-- SOPHIE -->
+    <div class="plat-card" data-num="02" id="pc2">
+      <div class="pc-name">Sophie Laurent</div>
+      <div class="pc-role">41 · Lione · Famiglia europea</div>
+      <div class="pc-platforms">
+        <div class="pc-plat-row">
+          <span class="pc-plat-name">Facebook</span>
+          <div class="pc-plat-bar"><div class="pc-plat-fill" data-w="85" style="background:var(--p2)"></div></div>
+        </div>
+        <div class="pc-plat-row">
+          <span class="pc-plat-name">Instagram</span>
+          <div class="pc-plat-bar"><div class="pc-plat-fill" data-w="65" style="background:var(--p2)"></div></div>
+        </div>
+        <div class="pc-plat-row">
+          <span class="pc-plat-name">YouTube</span>
+          <div class="pc-plat-bar"><div class="pc-plat-fill" data-w="55" style="background:var(--p2)"></div></div>
+        </div>
+      </div>
+      <div class="pc-divider"></div>
+      <div class="pc-hook">"Roma in 48 ore con bambini", carousel distanze reali, reel del check-in e della colazione, mini-guide "piace ai bambini, piace anche ai grandi".</div>
+      <div class="pc-stop">Feed troppo "solo coppie" o troppo esclusivo. Nessun segnale family-friendly esplicito. Lusso astratto senza utilità concreta.</div>
+    </div>
+
+    <!-- LEO -->
+    <div class="plat-card" data-num="03" id="pc3">
+      <div class="pc-name">Leo Navarro</div>
+      <div class="pc-role">29 · Barcellona · Giovane professionista creativo</div>
+      <div class="pc-platforms">
+        <div class="pc-plat-row">
+          <span class="pc-plat-name">TikTok</span>
+          <div class="pc-plat-bar"><div class="pc-plat-fill" data-w="95" style="background:var(--p3)"></div></div>
+        </div>
+        <div class="pc-plat-row">
+          <span class="pc-plat-name">Instagram</span>
+          <div class="pc-plat-bar"><div class="pc-plat-fill" data-w="88" style="background:var(--p3)"></div></div>
+        </div>
+        <div class="pc-plat-row">
+          <span class="pc-plat-name">LinkedIn</span>
+          <div class="pc-plat-bar"><div class="pc-plat-fill" data-w="40" style="background:var(--p3)"></div></div>
+        </div>
+      </div>
+      <div class="pc-divider"></div>
+      <div class="pc-hook">POV "work from Rome, aperitivo at sunset", creator diaries, walkthrough quartiere, contenuti girati come racconto urbano. Zero grammatica alberghiera classica.</div>
+      <div class="pc-stop">Tono corporate, perfezione non credibile. Meeting room invece di life compatibility. Sito lento o freddo dopo il social caldo.</div>
+    </div>
+
+    <!-- KATHARINA -->
+    <div class="plat-card" data-num="04" id="pc4">
+      <div class="pc-name">Katharina Meier</div>
+      <div class="pc-role">58 · Zurigo · Coppia leisure</div>
+      <div class="pc-platforms">
+        <div class="pc-plat-row">
+          <span class="pc-plat-name">Facebook</span>
+          <div class="pc-plat-bar"><div class="pc-plat-fill" data-w="75" style="background:var(--p4)"></div></div>
+        </div>
+        <div class="pc-plat-row">
+          <span class="pc-plat-name">Instagram</span>
+          <div class="pc-plat-bar"><div class="pc-plat-fill" data-w="60" style="background:var(--p4)"></div></div>
+        </div>
+        <div class="pc-plat-row">
+          <span class="pc-plat-name">YouTube</span>
+          <div class="pc-plat-bar"><div class="pc-plat-fill" data-w="50" style="background:var(--p4)"></div></div>
+        </div>
+      </div>
+      <div class="pc-divider"></div>
+      <div class="pc-hook">Video lenti e walkthrough degli spazi, racconti di cucina locale, dettagli architettonici, testimonianze credibili. Atmosfera, non hype.</div>
+      <div class="pc-stop">Giovanilismo e inseguire i trend. Account che sembra voler piacere a tutti senza avere un'identità propria. Eccesso di dinamismo visivo.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PENSIERO LATERALE: stesso prodotto, 4 didascalie -->
+<section class="sec" id="s-voices">
+  <div class="s-tag">Il pensiero laterale di M4</div>
+  <h2 class="s-h">Lo stesso rooftop.<br>Quattro modi di raccontarlo.</h2>
+  <p class="s-lead">Il Condominio Monti ha un rooftop. Non serve inventare nulla, serve capire chi si sta guardando in quel momento e scegliere le parole giuste.</p>
+
+  <div class="four-voices">
+    <div class="fv-tag">Asset: Rooftop · Condominio Monti · Roma</div>
+    <div class="fv-h">Un asset. Quattro storie vere.</div>
+    <div class="fv-sub">La versatilità narrativa di BZAR non è un problema creativo, è un vantaggio competitivo. Nessun competitor con un'unica property può farlo.</div>
+    <div class="fv-grid">
+      <div class="fv-cell" id="fvc1">
+        <div class="fv-cell-name" style="color:rgba(200,168,141,.5)">Per Olivia</div>
+        <div class="fv-caption">"Il tramonto su Monti visto da qui è una cosa che Roma ti regala solo se sai dove guardare. Il nostro concierge te lo mostra alle 19:15, prima che arrivi il resto della città."</div>
+        <div class="fv-why">Tono insider, low-key luxury, senso di accesso esclusivo</div>
+      </div>
+      <div class="fv-cell" id="fvc2">
+        <div class="fv-cell-name" style="color:rgba(138,158,122,.6)">Per Sophie</div>
+        <div class="fv-caption">"Dopo una giornata al Colosseo con i bambini, il rooftop è il premio degli adulti. Aperitivo, vista, silenzio. A 5 minuti a piedi dalla camera."</div>
+        <div class="fv-why">Utilità concreta, ricompensa meritata, distanza operativa</div>
+      </div>
+      <div class="fv-cell" id="fvc3">
+        <div class="fv-cell-name" style="color:rgba(107,143,168,.6)">Per Leo</div>
+        <div class="fv-caption">"Ho chiuso il laptop alle 18, sono salito sul rooftop e ho capito perché stavo lavorando da Roma invece che da casa. POV: ogni meeting dovrebbe finire così."</div>
+        <div class="fv-why">Creator voice, work-life integration, shareability immediata</div>
+      </div>
+      <div class="fv-cell" id="fvc4">
+        <div class="fv-cell-name" style="color:rgba(154,125,106,.6)">Per Katharina</div>
+        <div class="fv-caption">"Non volevamo animazione. Volevamo calma. Il rooftop alle otto di sera, le luci di Roma che si accendono lentamente, un bicchiere di vino. Nient'altro."</div>
+        <div class="fv-why">Ritmo lento, certezza emotiva, escapismo di qualità</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 LIVELLI OPERATIVI -->
+<section class="sec" id="s-levels">
+  <div class="s-tag">Le implicazioni operative</div>
+  <h2 class="s-h">Tre livelli su cui il social<br>deve lavorare in simultanea.</h2>
+  <p class="s-lead">Non si sceglie tra aspirazione, prova e conversione. Servono tutte e tre, per tutti e quattro i profili, con enfasi diversa.</p>
+
+  <div class="insight-row">
+    <div class="ir-card" style="border-color:var(--ink)" id="ir1">
+      <div class="ir-level" style="color:var(--ink)">Livello 01 · Aspirazione</div>
+      <div class="ir-t">Far desiderare l'esperienza</div>
+      <div class="ir-d">Cultura, gusto, città, food, service rituals. Il contenuto che accende il desiderio prima ancora che l'ospite sappia dove vuole andare. Diverso per ogni persona: editoriale per Olivia, pratico per Sophie, urbano per Leo, sensoriale per Katharina.</div>
+    </div>
+    <div class="ir-card" style="border-color:var(--brand)" id="ir2">
+      <div class="ir-level" style="color:var(--brand)">Livello 02 · Proof</div>
+      <div class="ir-t">Mostrare la prova reale</div>
+      <div class="ir-d">Dettagli, review logic, benefit, quartieri, room reality, persone. Il contenuto che trasforma il desiderio in fiducia. Per tutti i profili: il 77% dei viaggiatori cerca esperienze autentiche che rispecchino la cultura locale (Booking.com 2025).</div>
+    </div>
+    <div class="ir-card" style="border-color:var(--rose)" id="ir3">
+      <div class="ir-level" style="color:var(--mid)">Livello 03 · Conversione</div>
+      <div class="ir-t">Dare una ragione concreta per prenotare diretto</div>
+      <div class="ir-d">Tariffa migliore, esperienza inclusa, zero frizioni. Per Leo serve un sito mobile-first che continui l'energia del social. Per Katharina serve chiarezza e rassicurazione. Per tutte: la prenotazione diretta deve essere la scelta più semplice.</div>
+    </div>
+  </div>
+</section>
+
+<!-- RECAP -->
+<section id="recap">
+  <div class="re-tag">Sintesi &middot; M4 &middot; Personas</div>
+  <div class="re-pills">
+    <div class="rp"><div class="rp-v">4</div><div class="rp-u">grammatiche editoriali</div><div class="rp-l">Lo stesso prodotto BZAR raccontato in 4 modi diversi per 4 archetipi operativi distinti</div></div>
+    <div class="rp"><div class="rp-v">3</div><div class="rp-u">livelli simultanei</div><div class="rp-l">Aspirazione, Proof, Conversione, il feed BZAR deve lavorarli tutti e tre in ogni modulo</div></div>
+    <div class="rp"><div class="rp-v">1</div><div class="rp-u">vantaggio strutturale</div><div class="rp-l">Nessun competitor con property singola può alternare 4 grammatiche. BZAR con 60+ strutture può</div></div>
+  </div>
+  <div class="re-ins">
+    <div class="re-ins-h">Insight chiave</div>
+    <div class="re-ins-t">Katharina è la più propensa alla prenotazione diretta di tutti e quattro i profili. Leo perde su sito mobile lento: va direttamente sull'OTA. Olivia non prenota mai al primo colpo. Sophie prenota se vede chiarezza. Il social non convince: costruisce la fiducia che porta a prenotare.</div>
+  </div>
+  <a href="m5.html" class="re-cta">Esplora M5 &mdash; Mappa del Momento &rarr;</a>
+</section>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* cursor */
+var cur=document.getElementById('cur');
+document.addEventListener('mousemove',function(e){gsap.to(cur,{x:e.clientX,y:e.clientY,duration:.1,ease:'none'});});
+document.querySelectorAll('a,button').forEach(function(el){
+  el.addEventListener('mouseenter',function(){gsap.to(cur,{width:18,height:18,duration:.18});});
+  el.addEventListener('mouseleave',function(){gsap.to(cur,{width:8,height:8,duration:.18});});
+});
+
+/* fallback */
+var fbT=setTimeout(function(){['htag','hl1','hl2','hl3','hsub','hpersonas'].forEach(function(id){var e=document.getElementById(id);if(e)e.style.opacity='1';});},2000);
+gsap.fromTo('#htag',{opacity:0,y:14},{opacity:1,y:0,duration:.8,delay:.2,ease:'power3.out',onComplete:function(){clearTimeout(fbT);}});
+gsap.fromTo('#hl1',{opacity:0,y:28},{opacity:1,y:0,duration:.95,delay:.4,ease:'power3.out'});
+gsap.fromTo('#hl2',{opacity:0,y:28},{opacity:1,y:0,duration:.95,delay:.56,ease:'power3.out'});
+gsap.fromTo('#hl3',{opacity:0,y:28},{opacity:1,y:0,duration:.95,delay:.72,ease:'power3.out'});
+gsap.fromTo('#hsub',{opacity:0,y:18},{opacity:1,y:0,duration:.85,delay:1,ease:'power3.out'});
+gsap.fromTo('#hpersonas',{opacity:0,y:14},{opacity:1,y:0,duration:.7,delay:1.25,ease:'power3.out'});
+gsap.fromTo('.hero-ghost',{opacity:0,scale:.93},{opacity:1,scale:1,duration:2,delay:.1,ease:'power2.out'});
+
+/* section reveals */
+gsap.utils.toArray('.sec,#recap').forEach(function(el){
+  gsap.fromTo(el,{opacity:0,y:28},{opacity:1,y:0,duration:.85,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 85%',once:true}});
+});
+
+/* MATRIX DOTS: CSS class toggle + setTimeout stagger */
+(function(){
+  var done=false;
+  function showDots(){
+    if(done)return; done=true;
+    var dots=document.querySelectorAll('.mx-dot');
+    dots.forEach(function(d,i){setTimeout(function(){d.classList.add('show');},i*25);});
+  }
+  ScrollTrigger.create({trigger:'#matrixTable',start:'top 88%',once:true,onEnter:showDots});
+  setTimeout(function(){showDots();},1500); /* fallback assoluto */
+})();
+
+/* PCARD animation, sempre visibili, GSAP aggiunge slancio */
+['#pcard1','#pcard2','#pcard3','#pcard4'].forEach(function(sel,i){
+  var el=document.querySelector(sel);
+  if(!el) return;
+  gsap.fromTo(el,{opacity:0,y:22},{opacity:1,y:0,duration:.7,ease:'power3.out',delay:i*.1,
+    scrollTrigger:{trigger:el,start:'top 88%',once:true}});
+});
+
+['#prc1','#prc2','#prc3','#prc4'].forEach(function(sel,i){
+  var el=document.querySelector(sel);
+  if(!el) return;
+  ScrollTrigger.create({trigger:el,start:'top 85%',once:true,onEnter:function(){
+    gsap.fromTo(el,{opacity:0,y:20},{opacity:1,y:0,duration:.7,ease:'power3.out',delay:i*.1});
+    var fills=el.querySelectorAll('.pr-dim-f');
+    fills.forEach(function(f,fi){
+      var w=f.getAttribute('data-w')+'%';
+      gsap.fromTo(f,{width:'0%'},{width:w,duration:.9,ease:'power3.out',delay:.3+fi*.08});
+    });
+  }});
+});
+
+/* STICKY PERSONA BAR */
+var pbar=document.getElementById('pbar');
+if(pbar){
+  ScrollTrigger.create({
+    trigger:'#s-journey',start:'top 52px',end:'bottom top',
+    onEnter:function(){pbar.classList.add('show');},
+    onLeave:function(){pbar.classList.remove('show');},
+    onEnterBack:function(){pbar.classList.add('show');},
+    onLeaveBack:function(){pbar.classList.remove('show');}
+  });
+}
+
+/* JOURNEY GRID, celle che appaiono per riga */
+document.querySelectorAll('.jg-cell').forEach(function(el,i){
+  var row=Math.floor(i/4);
+  gsap.fromTo(el,{opacity:0,y:14},{opacity:1,y:0,duration:.6,ease:'power3.out',
+    delay:(i%4)*.08,
+    scrollTrigger:{trigger:el,start:'top 88%',once:true}
+  });
+});
+
+/* PLATFORM BARS */
+ScrollTrigger.create({trigger:'#s-cards',start:'top 70%',once:true,onEnter:function(){
+  document.querySelectorAll('.pc-plat-fill').forEach(function(el,i){
+    var w=el.getAttribute('data-w')+'%';
+    gsap.fromTo(el,{width:'0%'},{width:w,duration:1,delay:.2+i*.08,ease:'power3.out'});
+  });
+}});
+
+/* persona cards stagger */
+['#pc1','#pc2','#pc3','#pc4'].forEach(function(sel,i){
+  var el=document.querySelector(sel);
+  if(!el) return;
+  gsap.fromTo(el,{opacity:0,y:20},{opacity:1,y:0,duration:.7,ease:'power3.out',delay:i*.1,scrollTrigger:{trigger:el,start:'top 87%',once:true}});
+});
+
+/* four voices cells */
+['#fvc1','#fvc2','#fvc3','#fvc4'].forEach(function(sel,i){
+  var el=document.querySelector(sel);
+  if(!el) return;
+  gsap.fromTo(el,{opacity:0,y:14},{opacity:1,y:0,duration:.7,ease:'power3.out',delay:i*.12,scrollTrigger:{trigger:el,start:'top 85%',once:true}});
+});
+
+/* ir cards */
+['#ir1','#ir2','#ir3'].forEach(function(sel,i){
+  var el=document.querySelector(sel);
+  if(!el) return;
+  gsap.fromTo(el,{opacity:0,y:18},{opacity:1,y:0,duration:.7,ease:'power3.out',delay:i*.12,scrollTrigger:{trigger:el,start:'top 87%',once:true}});
+});
+
+/* recap */
+gsap.utils.toArray('.rp').forEach(function(el,i){
+  gsap.fromTo(el,{opacity:0,y:18},{opacity:1,y:0,duration:.7,ease:'power3.out',delay:i*.12,scrollTrigger:{trigger:el,start:'top 88%',once:true}});
+});
+</script>
+
+<!-- MENU IIFE -->
+<script>
+(function(){
+'use strict';
+var M=[
+  {id:'m0',code:'00',label:'Executive Summary',sub:'Il gap \u00b7 La proposta',url:'m0.html',color:'#C8A88D'},
+  {id:'m1',code:'01',label:'Mercato',sub:'Roma 2026 \u00b7 OTA \u00b7 Social',url:'m1.html',color:'#755847'},
+  {id:'m2',code:'02',label:'Competitor Map',sub:'Hoxton \u00b7 Chapter \u00b7 Mama',url:'m2.html',color:'#9a7d6a'},
+  {id:'m3',code:'03',label:'Voce del Cliente',sub:'VOC \u00b7 14 account \u00b7 Gap',url:'m3.html',color:'#C4ACA5'},
+  {id:'m4',code:'04',label:'Personas',sub:'4 profili \u00b7 Trigger \u00b7 Grammatiche',url:'m4.html',color:'#a08470'},
+  {id:'m5',code:'05',label:'Mappa del Momento',sub:'Perch\u00e9 investire adesso',url:'m5.html',color:'#C8A88D'},
+  {id:'m6',code:'06',label:'Benchmark Creativi',sub:'Il Pellicano \u00b7 Borgo \u00b7 The Pig',url:'m6.html',color:'#755847'},
+  {id:'m7',code:'07',label:'Piano Operativo',sub:'KPI \u00b7 Governance',url:'m7.html',color:'#9a7d6a'}
+];
+var path=window.location.pathname.split('/').pop().replace('.html','')||'m0';
+var cur=M[0];for(var ci=0;ci<M.length;ci++){if(M[ci].id===path){cur=M[ci];break;}}
+var s=document.createElement('style');
+s.textContent='.rbmenu-btn{position:fixed;top:14px;right:16px;z-index:9001;width:44px;height:44px;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:5px;padding:8px}.rbmenu-btn span{display:block;height:1.5px;background:#F1EFED;border-radius:1px;transition:all .45s cubic-bezier(0.16,1,0.3,1);transform-origin:right center}.rbmenu-btn.light span{background:#1E1410}.rbmenu-btn .l1{width:22px}.rbmenu-btn .l2{width:16px}.rbmenu-btn .l3{width:22px}.rbmenu-btn.open .l1{width:22px;transform:translateY(6.5px) rotate(-45deg)}.rbmenu-btn.open .l2{opacity:0;width:0}.rbmenu-btn.open .l3{width:22px;transform:translateY(-6.5px) rotate(45deg)}.rbmenu-overlay{position:fixed;inset:0;z-index:9000;background:#1E1410;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .5s cubic-bezier(0.16,1,0.3,1);overflow:hidden}.rbmenu-overlay.open{opacity:1;pointer-events:auto}.rbmenu-top{display:flex;align-items:center;justify-content:space-between;padding:18px 48px;border-bottom:1px solid rgba(200,168,141,.07);flex-shrink:0}.rbmenu-brand{display:flex;align-items:center;gap:12px}.rbmenu-brand-sep{width:1px;height:16px;background:rgba(200,168,141,.2)}.rbmenu-brand-label{font-family:"Poppins",sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(200,168,141,.3)}.rbmenu-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:24px 48px 36px;overflow-y:auto}.rbmenu-items{list-style:none}.rbmenu-item{border-top:1px solid rgba(200,168,141,.06);opacity:0;transform:translateY(20px);position:relative}.rbmenu-item:last-child{border-bottom:1px solid rgba(200,168,141,.06)}.rbmenu-item a{display:grid;grid-template-columns:48px 1fr auto;gap:0 20px;align-items:center;padding:14px 0;text-decoration:none;color:inherit;position:relative}.rbmenu-item a::after{content:"";position:absolute;bottom:0;left:0;width:0;height:1px;background:#C8A88D;transition:width .5s cubic-bezier(0.16,1,0.3,1);opacity:.3}.rbmenu-item a:hover::after{width:100%}.rmi-code{font-family:"Poppins",sans-serif;font-size:10px;letter-spacing:.12em;color:rgba(200,168,141,.22);line-height:1;transition:color .3s}.rbmenu-item a:hover .rmi-code{color:rgba(200,168,141,.5)}.rmi-left{display:flex;flex-direction:column;gap:3px}.rmi-label{font-family:"Afacad Flux",sans-serif;font-weight:300;font-size:clamp(24px,3.2vw,42px);line-height:1;color:rgba(241,239,237,.65);transition:color .3s;letter-spacing:-.01em}.rbmenu-item a:hover .rmi-label{color:rgba(241,239,237,.9)}.rbmenu-item.active .rmi-label{color:#C8A88D;font-style:italic}.rmi-sub{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.22);transition:color .3s}.rbmenu-item a:hover .rmi-sub{color:rgba(200,168,141,.4)}.rmi-arr{font-size:18px;color:rgba(200,168,141,.18);transition:transform .4s cubic-bezier(0.16,1,0.3,1),color .3s}.rbmenu-item a:hover .rmi-arr{transform:translateX(6px);color:rgba(200,168,141,.5)}.rbmenu-item-active-bar{position:absolute;left:0;top:2px;bottom:2px;width:3px;border-radius:0 2px 2px 0;opacity:.8}.rbmenu-footer{padding:16px 48px;border-top:1px solid rgba(200,168,141,.06);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}.rbmf-left{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.2)}.rbmf-right{display:flex;align-items:center;gap:16px}.rbmf-link{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.25);text-decoration:none;transition:color .3s}.rbmf-link:hover{color:rgba(200,168,141,.6)}.rbmenu-glow{position:absolute;top:50%;right:-10%;transform:translateY(-50%);width:50vw;height:50vw;border-radius:50%;pointer-events:none;opacity:.05;transition:background 1s;filter:blur(80px)}.rbnavbar{position:fixed;bottom:0;left:0;right:0;z-index:8000;background:rgba(30,20,16,.97);backdrop-filter:blur(24px);border-top:1px solid rgba(200,168,141,.07);height:48px;display:flex;align-items:stretch}.rbnavbar-inner{max-width:1440px;margin:0 auto;padding:0 16px;display:flex;align-items:stretch;width:100%}.rbnavbar-brand{display:flex;align-items:center;gap:8px;padding-right:12px;border-right:1px solid rgba(200,168,141,.07);margin-right:2px;flex-shrink:0}.rbnavbar-brand-txt{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(200,168,141,.22);white-space:nowrap}.rbnavbar-items{display:flex;align-items:stretch;flex:1;overflow-x:auto;scrollbar-width:none}.rbnavbar-items::-webkit-scrollbar{display:none}.rbnav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 10px;text-decoration:none;color:inherit;border-right:1px solid rgba(200,168,141,.05);min-width:56px;position:relative;gap:2px;transition:background .2s}.rbnav-item:hover{background:rgba(200,168,141,.05)}.rbnav-item.active{background:rgba(200,168,141,.07)}.rbnav-item-bar{position:absolute;top:0;left:0;right:0;height:2px}.rbnav-code{font-family:"Poppins",sans-serif;font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.28);line-height:1}.rbnav-item.active .rbnav-code{color:rgba(200,168,141,.55)}.rbnav-title{font-family:"Afacad Flux",sans-serif;font-size:9px;font-weight:400;color:rgba(200,168,141,.4);line-height:1;white-space:nowrap}.rbnav-item.active .rbnav-title{color:rgba(200,168,141,.85);font-weight:500}body{padding-bottom:48px !important}@media(max-width:600px){.rbmenu-top,.rbmenu-body,.rbmenu-footer{padding-left:20px;padding-right:20px}.rmi-label{font-size:clamp(20px,5.5vw,32px)}}';
+document.head.appendChild(s);
+var btn=document.createElement('button');btn.className='rbmenu-btn';
+var bg=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
+if(bg&&bg.indexOf('#F')===0)btn.classList.add('light');
+btn.setAttribute('aria-label','Apri menu');
+btn.innerHTML='<span class="l1"></span><span class="l2"></span><span class="l3"></span>';
+document.body.appendChild(btn);
+var ov=document.createElement('div');ov.className='rbmenu-overlay';
+var ih='';
+for(var i=0;i<M.length;i++){
+  var m=M[i],a=m.id===path;
+  ih+='<li class="rbmenu-item'+(a?' active':'')+'">'+
+    (a?'<span class="rbmenu-item-active-bar" style="background:'+m.color+'"></span>':'')+
+    '<a href="'+m.url+'"><span class="rmi-code">'+m.code+'</span>'+
+    '<span class="rmi-left"><span class="rmi-label">'+m.label+'</span><span class="rmi-sub">'+m.sub+'</span></span>'+
+    '<span class="rmi-arr">\u2192</span></a></li>';
+}
+ov.innerHTML='<div class="rbmenu-glow" id="rbglow" style="background:'+cur.color+'"></div>'+
+  '<div class="rbmenu-top"><div class="rbmenu-brand">'+
+  '<span style="font-family:\'Afacad Flux\',sans-serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#C8A88D">BZAR Hotels</span>'+
+  '<div class="rbmenu-brand-sep"></div>'+
+  '<img src="https://www.ribrainstudio.com/wp-content/uploads/2025/01/Logo_ribrain_Nero.svg" style="height:13px;filter:invert(1);opacity:.5" onerror="this.style.display=\'none\'">'+
+  '<div class="rbmenu-brand-sep"></div>'+
+  '<span class="rbmenu-brand-label">Cruscotto Strategico \u00b7 BZAR Hotels</span>'+
+  '</div></div>'+
+  '<div class="rbmenu-body"><ul class="rbmenu-items">'+ih+'</ul></div>'+
+  '<div class="rbmenu-footer"><span class="rbmf-left">Aprile 2026 \u00b7 Ribrain Studio \u00b7 Confidenziale</span>'+
+  '<div class="rbmf-right"><a href="m0.html" class="rbmf-link">Executive Summary</a><a href="m7.html" class="rbmf-link">Piano Operativo \u2192</a></div></div>';
+document.body.appendChild(ov);
+var nb=document.createElement('nav');nb.className='rbnavbar';
+var nh='';
+for(var ni=0;ni<M.length;ni++){
+  var nm=M[ni],na=nm.id===path;
+  nh+='<a href="'+nm.url+'" class="rbnav-item'+(na?' active':'')+'" title="'+nm.label+'">'+
+    (na?'<span class="rbnav-item-bar" style="background:'+nm.color+'"></span>':'')+
+    '<span class="rbnav-code">'+nm.code+'</span><span class="rbnav-title">'+nm.label+'</span></a>';
+}
+nb.innerHTML='<div class="rbnavbar-inner"><div class="rbnavbar-brand">'+
+  '<img src="https://www.ribrainstudio.com/wp-content/uploads/2025/01/Logo_ribrain_Nero.svg" style="height:11px;filter:invert(1);opacity:.3" onerror="this.style.display=\'none\'">'+
+  '<span class="rbnavbar-brand-txt">\u00d7 BZAR</span></div>'+
+  '<div class="rbnavbar-items">'+nh+'</div></div>';
+document.body.appendChild(nb);
+var isOpen=false;
+function openMenu(){isOpen=true;btn.classList.add('open');ov.classList.add('open');btn.setAttribute('aria-label','Chiudi menu');document.body.style.overflow='hidden';
+  var its=ov.querySelectorAll('.rbmenu-item');
+  for(var ii=0;ii<its.length;ii++){(function(el,idx){el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity .5s '+(.07+idx*.055)+'s cubic-bezier(0.16,1,0.3,1),transform .5s '+(.07+idx*.055)+'s cubic-bezier(0.16,1,0.3,1)';setTimeout(function(){el.style.opacity='1';el.style.transform='translateY(0)';},10);})(its[ii],ii);}
+}
+function closeMenu(){isOpen=false;btn.classList.remove('open');ov.classList.remove('open');btn.setAttribute('aria-label','Apri menu');document.body.style.overflow='';}
+btn.addEventListener('click',function(){if(isOpen)closeMenu();else openMenu();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&isOpen)closeMenu();});
+var lis=ov.querySelectorAll('.rbmenu-item');
+for(var gi=0;gi<lis.length;gi++){(function(li,mod){
+  li.addEventListener('mouseenter',function(){var g=document.getElementById('rbglow');if(g)g.style.background=mod.color;});
+  li.addEventListener('mouseleave',function(){var g=document.getElementById('rbglow');if(g)g.style.background=cur.color;});
+})(lis[gi],M[gi]);}
+})();
+</script>
+
+<!-- FONTI IIFE -->
+<script>
+(function(){
+'use strict';
+var SRC=[
+  {label:'BZAR Hotels About Us \u2014 Posizionamento e categoria offerta',url:'https://bzarhotels.it/about-us/'},
+  {label:'Expedia Group \u2014 2025 Traveler Value Index \u00b7 Social e prenotazione diretta',url:'https://www.expediagroup.com/media/media-details/2025/Travel-Priorities-Reinvented'},
+  {label:'DataReportal \u2014 Digital 2025 Italy \u00b7 reach TikTok, Instagram, Facebook, YouTube',url:'https://datareportal.com/reports/digital-2025-italy'},
+  {label:'TikTok for Business \u2014 Travel Advertising Guide 2025 \u00b7 destination storytelling',url:'https://ads.tiktok.com/business/en/guides/travel-advertising-guide'},
+  {label:'Booking.com \u2014 2025 Research \u00b7 77% viaggiatori cerca esperienze autentiche locali',url:'https://news.booking.com/bookingcoms-2025-research-reveals-growing-traveler-awareness'},
+  {label:'Phocuswright \u2014 How US Travelers Plan and Book Lodging 2025 \u00b7 over 55 e prenotazione diretta',url:'https://www.phocuswright.com/Travel-Research/Research-Updates/2025'}
+];
+var style=document.createElement('style');
+style.textContent='.src-toggle{position:fixed;bottom:56px;right:14px;z-index:7500;display:flex;align-items:center;gap:7px;background:rgba(30,20,16,.92);border:1px solid rgba(200,168,141,.15);backdrop-filter:blur(16px);padding:6px 11px;cursor:pointer;font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.45);transition:all .25s;border-radius:99px}.src-toggle:hover{border-color:rgba(200,168,141,.35);color:rgba(200,168,141,.75)}.src-toggle .st-dot{width:5px;height:5px;border-radius:50%;background:#C8A88D;flex-shrink:0}.src-toggle .st-n{background:rgba(200,168,141,.15);color:#C8A88D;padding:1px 5px;border-radius:10px;font-size:8px}.src-drawer{position:fixed;bottom:48px;left:0;right:0;z-index:7000;background:rgba(30,20,16,.97);backdrop-filter:blur(24px);border-top:1px solid rgba(200,168,141,.1);max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(0.16,1,0.3,1),opacity .4s;opacity:0}.src-drawer.open{max-height:360px;opacity:1}.src-drawer-inner{padding:20px 48px 24px;overflow-y:auto;max-height:320px}.src-drawer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}.src-drawer-title{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,168,141,.32)}.src-drawer-close{background:none;border:none;cursor:pointer;font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.25);transition:color .2s}.src-drawer-close:hover{color:rgba(200,168,141,.65)}.src-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:4px}.src-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid rgba(200,168,141,.06);border-radius:6px}.src-item-num{font-family:"Poppins",sans-serif;font-size:8px;letter-spacing:.1em;color:rgba(200,168,141,.25);flex-shrink:0;padding-top:1px;min-width:18px}.src-item-label{font-size:11px;color:rgba(241,239,237,.6);line-height:1.45;margin-bottom:3px}.src-item-url{font-family:"Poppins",sans-serif;font-size:8px;color:rgba(200,168,141,.4);text-decoration:none;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media(max-width:768px){.src-drawer-inner{padding:16px 20px}.src-list{grid-template-columns:1fr}}';
+document.head.appendChild(style);
+var drawer=document.createElement('div');drawer.className='src-drawer';
+var ih='';
+for(var i=0;i<SRC.length;i++){
+  ih+='<div class="src-item"><span class="src-item-num">'+String(i+1).padStart(2,'0')+'</span>'+
+    '<div><div class="src-item-label">'+SRC[i].label+'</div>'+
+    '<a href="'+SRC[i].url+'" target="_blank" rel="noopener noreferrer" class="src-item-url">'+SRC[i].url+'</a></div></div>';
+}
+drawer.innerHTML='<div class="src-drawer-inner"><div class="src-drawer-head">'+
+  '<span class="src-drawer-title">Fonti \u00b7 '+SRC.length+' riferimenti \u00b7 M4</span>'+
+  '<button class="src-drawer-close" id="srcClose">Chiudi \u2715</button></div>'+
+  '<div class="src-list">'+ih+'</div></div>';
+document.body.appendChild(drawer);
+var toggle=document.createElement('button');toggle.className='src-toggle';
+toggle.innerHTML='<span class="st-dot"></span>Fonti <span class="st-n">'+SRC.length+'</span>';
+document.body.appendChild(toggle);
+var open=false;
+function td(){open=!open;drawer.classList.toggle('open',open);toggle.style.borderColor=open?'rgba(200,168,141,.3)':'';toggle.style.color=open?'rgba(200,168,141,.75)':'';}
+toggle.addEventListener('click',td);
+document.getElementById('srcClose').addEventListener('click',function(){open=true;td();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&open){open=true;td();}});
+})();
+</script>
+</body>
+</html>
