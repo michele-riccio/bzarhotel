@@ -597,273 +597,280 @@ gsap.fromTo("#finale",{opacity:0,y:20},{opacity:1,y:0,duration:.85,ease:"power3.
 
 </script>
 
-<!-- ══════════════════════════════════════════════════
-     MENU SYSTEM: IIFE (adattato da template RAV)
-══════════════════════════════════════════════════ -->
+
+<!-- ═══════════════════════════════════════════════
+     CRUSCOTTO BZAR · MENU + FONTI · IIFE v3 FINAL
+═══════════════════════════════════════════════════ -->
 <script>
 (function(){
 'use strict';
 
-var MODULES = [
-  {id:'m0',code:'00',label:'Executive Summary',sub:'Il gap · La proposta',url:'m0.html',color:'#C8A88D'},
-  {id:'m0',code:'01',label:'Executive Summary',sub:'Roma 2026 · OTA · Social discovery',url:'m1.html',color:'#755847'},
-  {id:'m2',code:'02',label:'Competitor Map',sub:'Hoxton · Chapter · Mama · Generator',url:'m2.html',color:'#9a7d6a'},
-  {id:'m3',code:'03',label:'Voce del Cliente',sub:'VOC · 14 account · Gap critico',url:'m3.html',color:'#C4ACA5'},
-  {id:'m4',code:'04',label:'Personas',sub:'4 profili · Trigger · Social behavior',url:'m4.html',color:'#a08470'},
-  {id:'m5',code:'05',label:'Mappa del Momento',sub:'Perché investire adesso',url:'m5.html',color:'#C8A88D'},
-  {id:'m6',code:'06',label:'Benchmark Creativi',sub:'Il Pellicano · Borgo S.Pietro · The Pig',url:'m6.html',color:'#755847'},
-  {id:'m7',code:'07',label:'Piano Operativo',sub:'KPI · Governance · Onboarding',url:'m7.html',color:'#9a7d6a'}
+/* ── MODULI ─────────────────────────────────────── */
+var M=[
+  {id:'m0',code:'00',label:'Executive Summary',sub:'Il gap \u00b7 La proposta',url:'m0.html',color:'#C8A88D'},
+  {id:'m1',code:'01',label:'Mercato',sub:'Roma 2026 \u00b7 OTA \u00b7 Social discovery',url:'m1.html',color:'#755847'},
+  {id:'m2',code:'02',label:'Competitor Map',sub:'Hoxton \u00b7 Chapter \u00b7 Mama \u00b7 Generator',url:'m2.html',color:'#9a7d6a'},
+  {id:'m3',code:'03',label:'Voce del Cliente',sub:'VOC \u00b7 14 account \u00b7 Gap critico',url:'m3.html',color:'#C4ACA5'},
+  {id:'m4',code:'04',label:'Personas',sub:'4 profili \u00b7 Trigger \u00b7 Social behavior',url:'m4.html',color:'#a08470'},
+  {id:'m5',code:'05',label:'Mappa del Momento',sub:'Perch\u00e9 investire adesso',url:'m5.html',color:'#C8A88D'},
+  {id:'m6',code:'06',label:'Benchmark Creativi',sub:'Il Pellicano \u00b7 Borgo S.Pietro \u00b7 The Pig',url:'m6.html',color:'#755847'},
+  {id:'m7',code:'07',label:'Brainstorming Strategico',sub:'Piano per struttura \u00b7 Mappe sinaptiche',url:'m7.html',color:'#9a7d6a'}
 ];
 
-var path = window.location.pathname.split('/').pop().replace('.html','') || 'm0';
-var currentMod = MODULES[0];
-for(var ci=0;ci<MODULES.length;ci++){if(MODULES[ci].id===path){currentMod=MODULES[ci];break;}}
-
-var s = document.createElement('style');
-s.textContent = [
-  '.rbmenu-btn{position:fixed;top:14px;right:16px;z-index:9001;width:44px;height:44px;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:5px;padding:8px}',
-  '.rbmenu-btn span{display:block;height:1.5px;background:#F1EFED;border-radius:1px;transition:all .45s cubic-bezier(0.16,1,0.3,1);transform-origin:right center}',
-  '.rbmenu-btn.light span{background:#1E1410}',
-  '.rbmenu-btn .l1{width:22px}.rbmenu-btn .l2{width:16px}.rbmenu-btn .l3{width:22px}',
-  '.rbmenu-btn.open .l1{width:22px;transform:translateY(6.5px) rotate(-45deg)}',
-  '.rbmenu-btn.open .l2{opacity:0;width:0}',
-  '.rbmenu-btn.open .l3{width:22px;transform:translateY(-6.5px) rotate(45deg)}',
-  '.rbmenu-overlay{position:fixed;inset:0;z-index:9000;background:#1E1410;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .5s cubic-bezier(0.16,1,0.3,1);overflow:hidden}',
-  '.rbmenu-overlay.open{opacity:1;pointer-events:auto}',
-  '.rbmenu-top{display:flex;align-items:center;justify-content:space-between;padding:18px 48px;border-bottom:1px solid rgba(200,168,141,.07);flex-shrink:0}',
-  '.rbmenu-brand{display:flex;align-items:center;gap:12px}',
-  '.rbmenu-brand-sep{width:1px;height:16px;background:rgba(200,168,141,.2)}',
-  '.rbmenu-brand-label{font-family:"Poppins",sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(200,168,141,.3)}',
-  '.rbmenu-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:24px 48px 36px;overflow-y:auto}',
-  '.rbmenu-items{list-style:none}',
-  '.rbmenu-item{border-top:1px solid rgba(200,168,141,.06);opacity:0;transform:translateY(20px);position:relative}',
-  '.rbmenu-item:last-child{border-bottom:1px solid rgba(200,168,141,.06)}',
-  '.rbmenu-item a{display:grid;grid-template-columns:48px 1fr auto;gap:0 20px;align-items:center;padding:14px 0;text-decoration:none;color:inherit;position:relative;overflow:hidden}',
-  '.rbmenu-item a::after{content:"";position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--brand,#C8A88D);transition:width .5s cubic-bezier(0.16,1,0.3,1);opacity:.3}',
-  '.rbmenu-item a:hover::after{width:100%}',
-  '.rmi-code{font-family:"Poppins",monospace;font-size:10px;letter-spacing:.12em;color:rgba(200,168,141,.22);line-height:1;transition:color .3s}',
-  '.rbmenu-item a:hover .rmi-code{color:rgba(200,168,141,.5)}',
-  '.rmi-left{display:flex;flex-direction:column;gap:3px}',
-  '.rmi-label{font-family:"Afacad Flux",Georgia,sans-serif;font-weight:300;font-size:clamp(24px,3.2vw,42px);line-height:1;color:rgba(241,239,237,.65);transition:color .3s;letter-spacing:-.01em}',
-  '.rbmenu-item a:hover .rmi-label{color:rgba(241,239,237,.9)}',
-  '.rbmenu-item.active .rmi-label{color:#C8A88D;font-style:italic}',
-  '.rmi-sub{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.22);transition:color .3s}',
-  '.rbmenu-item a:hover .rmi-sub{color:rgba(200,168,141,.4)}',
-  '.rmi-arr{font-size:18px;color:rgba(200,168,141,.18);transition:transform .4s cubic-bezier(0.16,1,0.3,1),color .3s}',
-  '.rbmenu-item a:hover .rmi-arr{transform:translateX(6px);color:rgba(200,168,141,.5)}',
-  '.rbmenu-item-active-bar{position:absolute;left:0;top:2px;bottom:2px;width:3px;border-radius:0 2px 2px 0;opacity:.8}',
-  '.rbmenu-footer{padding:16px 48px;border-top:1px solid rgba(200,168,141,.06);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}',
-  '.rbmf-left{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.2)}',
-  '.rbmf-right{display:flex;align-items:center;gap:16px}',
-  '.rbmf-link{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.25);text-decoration:none;transition:color .3s}',
-  '.rbmf-link:hover{color:rgba(200,168,141,.6)}',
-  '.rbmenu-glow{position:absolute;top:50%;right:-10%;transform:translateY(-50%);width:50vw;height:50vw;border-radius:50%;pointer-events:none;opacity:.05;transition:background 1s;filter:blur(80px)}',
-  '.rbnavbar{position:fixed;bottom:0;left:0;right:0;z-index:8000;background:rgba(30,20,16,.97);backdrop-filter:blur(24px);border-top:1px solid rgba(200,168,141,.07);height:48px;display:flex;align-items:stretch}',
-  '.rbnavbar-inner{max-width:1440px;margin:0 auto;padding:0 16px;display:flex;align-items:stretch;width:100%}',
-  '.rbnavbar-brand{display:flex;align-items:center;gap:8px;padding-right:12px;border-right:1px solid rgba(200,168,141,.07);margin-right:2px;flex-shrink:0}',
-  '.rbnavbar-brand-txt{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(200,168,141,.22);white-space:nowrap}',
-  '.rbnavbar-items{display:flex;align-items:stretch;flex:1;overflow-x:auto;scrollbar-width:none}',
-  '.rbnavbar-items::-webkit-scrollbar{display:none}',
-  '.rbnav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 10px;text-decoration:none;color:inherit;border-right:1px solid rgba(200,168,141,.05);min-width:56px;position:relative;gap:2px;transition:background .2s}',
-  '.rbnav-item:hover{background:rgba(200,168,141,.05)}',
-  '.rbnav-item.active{background:rgba(200,168,141,.07)}',
-  '.rbnav-item-bar{position:absolute;top:0;left:0;right:0;height:2px}',
-  '.rbnav-code{font-family:"Poppins",sans-serif;font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.28);line-height:1}',
-  '.rbnav-item.active .rbnav-code{color:rgba(200,168,141,.55)}',
-  '.rbnav-title{font-family:"Afacad Flux",sans-serif;font-size:9px;font-weight:400;color:rgba(200,168,141,.4);line-height:1;white-space:nowrap}',
-  '.rbnav-item.active .rbnav-title{color:rgba(200,168,141,.85);font-weight:500}',
-  'body{padding-bottom:48px !important}',
-  '@media(max-width:600px){.rbmenu-top,.rbmenu-body,.rbmenu-footer{padding-left:20px;padding-right:20px}.rmi-label{font-size:clamp(20px,5.5vw,32px)}}'
-].join('\n');
-document.head.appendChild(s);
-
-/* hamburger button */
-var btn = document.createElement('button');
-btn.className = 'rbmenu-btn';
-var bgCol = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
-var isLight = bgCol && bgCol.indexOf('#F') === 0;
-if(isLight) btn.classList.add('light');
-btn.setAttribute('aria-label','Apri menu');
-btn.innerHTML = '<span class="l1"></span><span class="l2"></span><span class="l3"></span>';
-document.body.appendChild(btn);
-
-/* overlay */
-var ov = document.createElement('div');
-ov.className = 'rbmenu-overlay';
-var itemsHtml = '';
-for(var i=0;i<MODULES.length;i++){
-  var m = MODULES[i];
-  var isActive = m.id === path;
-  var activeBar = isActive ? '<span class="rbmenu-item-active-bar" style="background:'+m.color+'"></span>' : '';
-  itemsHtml += '<li class="rbmenu-item'+(isActive?' active':'')+'">'+activeBar+
-    '<a href="'+m.url+'">'+
-    '<span class="rmi-code">'+m.code+'</span>'+
-    '<span class="rmi-left"><span class="rmi-label">'+m.label+'</span><span class="rmi-sub">'+m.sub+'</span></span>'+
-    '<span class="rmi-arr">\u2192</span>'+
-    '</a></li>';
-}
-ov.innerHTML = '<div class="rbmenu-glow" id="rbglow" style="background:'+currentMod.color+'"></div>'+
-  '<div class="rbmenu-top">'+
-  '<div class="rbmenu-brand">'+
-  '<span style="font-family:\'Afacad Flux\',sans-serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#C8A88D">BZAR Hotels</span>'+
-  '<div class="rbmenu-brand-sep"></div>'+
-  '<img src="https://www.ribrainstudio.com/wp-content/uploads/2025/01/Logo_ribrain_Nero.svg" style="height:13px;filter:invert(1);opacity:.5" onerror="this.style.display=\'none\'">'+
-  '<div class="rbmenu-brand-sep"></div>'+
-  '<span class="rbmenu-brand-label">Cruscotto Strategico \u00b7 BZAR Hotels</span>'+
-  '</div></div>'+
-  '<div class="rbmenu-body"><ul class="rbmenu-items" id="rbItems">'+itemsHtml+'</ul></div>'+
-  '<div class="rbmenu-footer">'+
-  '<span class="rbmf-left">Aprile 2026 \u00b7 Ribrain Studio \u00b7 Confidenziale</span>'+
-  '<div class="rbmf-right">'+
-  '<a href="m0.html" class="rbmf-link">Executive Summary</a>'+
-  '<a href="m7.html" class="rbmf-link">Piano Operativo \u2192</a>'+
-  '</div></div>';
-document.body.appendChild(ov);
-
-/* bottom navbar */
-var nb = document.createElement('nav');
-nb.className = 'rbnavbar';
-var navItemsHtml = '';
-for(var ni=0;ni<MODULES.length;ni++){
-  var nm = MODULES[ni];
-  var isNavActive = nm.id === path;
-  var activeTopBar = isNavActive ? '<span class="rbnav-item-bar" style="background:'+nm.color+'"></span>' : '';
-  navItemsHtml += '<a href="'+nm.url+'" class="rbnav-item'+(isNavActive?' active':'')+'" title="'+nm.label+'">'+
-    activeTopBar+'<span class="rbnav-code">'+nm.code+'</span><span class="rbnav-title">'+nm.label+'</span></a>';
-}
-nb.innerHTML = '<div class="rbnavbar-inner">'+
-  '<div class="rbnavbar-brand">'+
-  '<img src="https://www.ribrainstudio.com/wp-content/uploads/2025/01/Logo_ribrain_Nero.svg" style="height:11px;filter:invert(1);opacity:.3" onerror="this.style.display=\'none\'">'+
-  '<span class="rbnavbar-brand-txt">\u00d7 BZAR</span>'+
-  '</div>'+
-  '<div class="rbnavbar-items">'+navItemsHtml+'</div>'+
-  '</div>';
-document.body.appendChild(nb);
-
-/* toggle logic */
-var isOpen = false;
-function openMenu(){
-  isOpen=true; btn.classList.add('open'); ov.classList.add('open');
-  btn.setAttribute('aria-label','Chiudi menu');
-  document.body.style.overflow='hidden';
-  var items = ov.querySelectorAll('.rbmenu-item');
-  for(var ii=0;ii<items.length;ii++){
-    (function(el,idx){
-      el.style.opacity='0'; el.style.transform='translateY(20px)';
-      el.style.transition='opacity .5s '+(.07+idx*.055)+'s cubic-bezier(0.16,1,0.3,1),transform .5s '+(.07+idx*.055)+'s cubic-bezier(0.16,1,0.3,1)';
-      setTimeout(function(){el.style.opacity='1';el.style.transform='translateY(0)';},10);
-    })(items[ii],ii);
-  }
-}
-function closeMenu(){
-  isOpen=false; btn.classList.remove('open'); ov.classList.remove('open');
-  btn.setAttribute('aria-label','Apri menu');
-  document.body.style.overflow='';
-}
-btn.addEventListener('click',function(){if(isOpen)closeMenu();else openMenu();});
-document.addEventListener('keydown',function(e){if(e.key==='Escape'&&isOpen)closeMenu();});
-
-/* glow on hover */
-var lis = ov.querySelectorAll('.rbmenu-item');
-for(var gi=0;gi<lis.length;gi++){
-  (function(li,mod){
-    li.addEventListener('mouseenter',function(){var g=document.getElementById('rbglow');if(g)g.style.background=mod.color;});
-    li.addEventListener('mouseleave',function(){var g=document.getElementById('rbglow');if(g)g.style.background=currentMod.color;});
-  })(lis[gi],MODULES[gi]);
-}
-
-})();
-</script>
-
-<!-- ══════════════════════════════════════════════════
-     FONTI SYSTEM: IIFE (adattato da template RAV)
-══════════════════════════════════════════════════ -->
-<script>
-(function(){
-'use strict';
-
-var PAGE_SOURCES = {
+/* ── FONTI PER MODULO ───────────────────────────── */
+var FONTI={
+  m0:[],
   m1:[
-    {id:'s1',note:'Turismo Roma 2025 record storico',url:'https://www.comune.roma.it/web/it/notizia/il-2025--il-nuovo-anno-record-del-turismo-di-roma.page',label:'Roma Capitale: Il 2025 è il nuovo anno record del turismo · EBTL'},
-    {id:'s2',note:'Previsioni turismo Roma 2026 post-Giubileo',url:'https://www.ilmessaggero.it/economia/news/roma_dopo_il_giubileo_turismo_2026-9280656.html',label:'Il Messaggero: Roma dopo il Giubileo: turismo 2026 · gennaio 2026'},
-    {id:'s3',note:'Occupancy e ADR hotel Roma estate 2025',url:'https://www.lagenziadiviaggimag.it/roma-cresce-loccupazione-degli-hotel-in-estate-i-dati-federalberghi/',label:'L\'Agenzia di Viaggi Magazine: Occupazione hotel Roma · Federalberghi 2025'},
-    {id:'s4',note:'Commissioni OTA 2026 · Booking Expedia',url:'https://www.cloudbeds.com/online-travel-agencies/commissions/',label:'Cloudbeds: A Guide to OTA Commission Rates in 2026'},
-    {id:'s5',note:'Social media travel discovery Gen Z',url:'https://ads.tiktok.com/business/en/guides/travel-advertising-guide',label:'TikTok for Business: Travel Advertising Guide 2025'},
-    {id:'s6',note:'Turismo Italia 2026 record presenze',url:'https://www.zerosette.it/2026/03/turismo-in-italia-numeri-da-record-2/',label:'Zerosette: Turismo in Italia, numeri da record · marzo 2026'},
+    {label:'ENIT \u2013 Turismo verso l\'Italia, arrivi 2025',url:'https://www.enit.it/'},
+    {label:'Federalberghi / L\'Agenzia di Viaggi \u2013 Occupazione hotel Roma estate 2025',url:'https://www.lagenziadiviaggimag.it/roma-cresce-loccupazione-degli-hotel-in-estate-i-dati-federalberghi/'},
+    {label:'Barchart \u2013 Rome Hotels Pricing Trends & Demand Forecast 2026',url:'https://www.barchart.com/story/news/36932939/'},
+    {label:'Cloudbeds \u2013 A Guide to OTA Commission Rates in 2026',url:'https://www.cloudbeds.com/online-travel-agencies/commissions/'},
+    {label:'TravelQuotidiano \u2013 TikTok supera Instagram nella scelta del viaggio',url:'https://www.travelquotidiano.com/mercato_e_tecnologie/tik-tok-supera-instagram/tqid-501494'},
+    {label:'Hospitality Net \u2013 How Hotels Can Harness Social Media',url:'https://www.hospitalitynet.org/news/4128795/'}
+  ],
+  m2:[
+    {label:'@generatorhostels \u2013 560K follower \u00b7 analisi aprile 2026',url:'https://www.instagram.com/generatorhostels/'},
+    {label:'@thehoxton \u2013 427K follower \u00b7 analisi aprile 2026',url:'https://www.instagram.com/thehoxton/'},
+    {label:'@chapterhostels \u2013 45K follower \u00b7 analisi aprile 2026',url:'https://www.instagram.com/chapterhostels/'},
+    {label:'@bzarhotels \u2013 10K follower \u00b7 analisi aprile 2026',url:'https://www.instagram.com/bzarhotels/'}
+  ],
+  m3:[
+    {label:'TripAdvisor Roma \u2013 Hotel Viminale #1/1153',url:'https://www.tripadvisor.it/Hotels-g187791-Rome_Lazio-Hotels.html'},
+    {label:'@hotelviminale \u2013 678 follower IG \u00b7 analisi diretta aprile 2026',url:'https://www.instagram.com/hotelviminale/'},
+    {label:'@dimoracoppelle \u2013 172 follower IG \u00b7 5.0 TripAdvisor \u00b7 aprile 2026',url:'https://www.instagram.com/dimoracoppelle/'},
+    {label:'@spritzeria_monti \u2013 35K follower IG \u00b7 TA 3.5 \u00b7 aprile 2026',url:'https://www.instagram.com/spritzeria_monti/'},
+    {label:'@osteriaoliva.roma \u2013 789 follower \u00b7 1130+ post \u00b7 aprile 2026',url:'https://www.instagram.com/osteriaoliva.roma/'}
+  ],
+  m4:[
+    {label:'Think with Google \u2013 Travel Consumer Insights 2025',url:'https://www.thinkwithgoogle.com/'},
+    {label:'Meta \u2013 Travel Advertising Insights 2025',url:'https://www.facebook.com/business/industries/travel'},
+    {label:'Personas Social BZAR Hotels \u2013 Ribrain Deep Research aprile 2026',url:'https://bzarhotels.it/'}
+  ],
+  m5:[
+    {label:'ENIT \u2013 Turismo verso l\'Italia, arrivi e presenze 2025',url:'https://www.enit.it/'},
+    {label:'Federalberghi \u2013 Occupazione hotel Roma estate 2025',url:'https://www.lagenziadiviaggimag.it/roma-cresce-loccupazione-degli-hotel-in-estate-i-dati-federalberghi/'},
+    {label:'Barchart \u2013 Rome Hotels Pricing Trends & Demand Forecast 2026',url:'https://www.barchart.com/story/news/36932939/'},
+    {label:'Cloudbeds \u2013 OTA Commission Rates 2026',url:'https://www.cloudbeds.com/online-travel-agencies/commissions/'},
+    {label:'TravelQuotidiano \u2013 TikTok supera Instagram',url:'https://www.travelquotidiano.com/mercato_e_tecnologie/tik-tok-supera-instagram/tqid-501494'},
+    {label:'Hospitality Net \u2013 How Hotels Can Harness Social Media',url:'https://www.hospitalitynet.org/news/4128795/'}
+  ],
+  m6:[
+    {label:'@hotelilpellicano \u2013 209K follower \u00b7 aprile 2026',url:'https://www.instagram.com/hotelilpellicano/'},
+    {label:'@passalacqualakecomo \u2013 267K follower \u00b7 Reel boat ride 15K like',url:'https://www.instagram.com/reel/DIUCqS6qqT9/'},
+    {label:'@portraitmilano \u2013 94K follower \u00b7 aprile 2026',url:'https://www.instagram.com/portraitmilano/'},
+    {label:'@borgosantopietro \u2013 562K follower \u00b7 aprile 2026',url:'https://www.instagram.com/borgosantopietro/'},
+    {label:'@nihi \u2013 788K follower \u00b7 Reel cavalli in acqua 11K like',url:'https://www.instagram.com/nihi/'},
+    {label:'@thenewtinsomerset \u2013 363K follower \u00b7 Newt Minute series',url:'https://www.instagram.com/thenewtinsomerset/'},
+    {label:'@the_pig_hotels \u2013 319K follower \u00b7 Kitchen Gardener Nathan',url:'https://www.instagram.com/the_pig_hotels/'},
+    {label:'Benchmark Social Hotel Boutique e F&B \u2013 Ribrain Deep Research aprile 2026',url:'https://bzarhotels.it/'}
+  ],
+  m7:[
+    {label:'Brief Social Media BZAR Hotels 2026 \u2013 documento cliente',url:'https://bzarhotels.it/'},
+    {label:'Piano Operativo Social Media Multi-Account \u2013 Ribrain Deep Research',url:'https://bzarhotels.it/'},
+    {label:'Benchmark Social Hotel Boutique e F&B \u2013 Ribrain Deep Research',url:'https://bzarhotels.it/'},
+    {label:'Personas Social BZAR Hotels \u2013 Ribrain Deep Research',url:'https://bzarhotels.it/'},
+    {label:'Mappa del Momento BZAR Hotels \u2013 Ribrain Deep Research',url:'https://bzarhotels.it/'},
+    {label:'Brand Book BZAR Hotels 2026',url:'https://bzarhotels.it/'}
   ]
 };
 
-var page = window.location.pathname.split('/').pop().replace('.html','') || 'm0';
-var sources = PAGE_SOURCES[page] || PAGE_SOURCES['m0'];
+/* ── PATH DETECTION ─────────────────────────────── */
+var _href=window.location.href;
+var _pm=_href.match(/\/(m\d+)(?:\.html)?(?:[?#].*)?$/);
+var path=_pm?_pm[1]:'m0';
 
-var style = document.createElement('style');
-style.textContent = [
-  '.src-toggle{position:fixed;bottom:56px;right:14px;z-index:7500;display:flex;align-items:center;gap:7px;background:rgba(30,20,16,.92);border:1px solid rgba(200,168,141,.15);backdrop-filter:blur(16px);padding:6px 11px;cursor:pointer;font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.45);transition:all .25s;border-radius:99px}',
-  '.src-toggle:hover{border-color:rgba(200,168,141,.35);color:rgba(200,168,141,.75)}',
+var cur=M[0];
+for(var ci=0;ci<M.length;ci++){if(M[ci].id===path){cur=M[ci];break;}}
+var srcs=FONTI[path]||[];
+
+/* ── CSS ─────────────────────────────────────────── */
+var s=document.createElement('style');
+s.textContent=[
+  '.rbmenu-btn{position:fixed;top:8px;right:14px;z-index:9001;width:36px;height:36px;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:5px;padding:6px}',
+  '.rbmenu-btn span{display:block;height:1.5px;background:#F1EFED;border-radius:1px;transition:all .4s cubic-bezier(0.16,1,0.3,1);transform-origin:right center}',
+  '.rbmenu-btn.light span{background:#1E1410}',
+  '.rbmenu-btn.in-tb{position:relative!important;top:auto!important;right:auto!important;width:32px!important;height:32px!important;padding:5px!important;flex-shrink:0!important}',
+  '.rbmenu-btn .l1{width:20px}.rbmenu-btn .l2{width:14px}.rbmenu-btn .l3{width:20px}',
+  '.rbmenu-btn.open .l1{width:20px;transform:translateY(6.5px) rotate(-45deg)}',
+  '.rbmenu-btn.open .l2{opacity:0;width:0}',
+  '.rbmenu-btn.open .l3{width:20px;transform:translateY(-6.5px) rotate(45deg)}',
+  '.rbmenu-overlay{position:fixed;inset:0;z-index:9000;background:#1E1410;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .45s cubic-bezier(0.16,1,0.3,1)}',
+  '.rbmenu-overlay.open{opacity:1;pointer-events:auto}',
+  '.rbmenu-top{display:flex;align-items:center;justify-content:space-between;padding:16px 40px;border-bottom:1px solid rgba(200,168,141,.07);flex-shrink:0}',
+  '.rbmenu-brand{display:flex;align-items:center;gap:10px}',
+  '.rbmenu-brand-logo{height:12px;filter:invert(1);opacity:.45}',
+  '.rbmenu-brand-sep{width:1px;height:14px;background:rgba(200,168,141,.18)}',
+  '.rbmenu-brand-label{font-family:"Poppins",sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(200,168,141,.28)}',
+  '.rbmenu-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:20px 40px 32px;overflow-y:auto}',
+  '.rbmenu-items{list-style:none}',
+  '.rbmenu-item{border-top:1px solid rgba(200,168,141,.06);opacity:0;transform:translateY(16px);position:relative}',
+  '.rbmenu-item:last-child{border-bottom:1px solid rgba(200,168,141,.06)}',
+  '.rbmenu-item a{display:grid;grid-template-columns:44px 1fr auto;gap:0 16px;align-items:center;padding:12px 0;text-decoration:none;color:inherit}',
+  '.rmi-code{font-family:"Poppins",monospace;font-size:10px;letter-spacing:.1em;color:rgba(200,168,141,.2)}',
+  '.rmi-left{display:flex;flex-direction:column;gap:2px}',
+  '.rmi-label{font-family:"Afacad Flux",Georgia,sans-serif;font-weight:300;font-size:clamp(22px,3vw,40px);line-height:1;color:rgba(241,239,237,.6);transition:color .25s;letter-spacing:-.01em}',
+  '.rbmenu-item.active .rmi-label{color:rgba(241,239,237,.9)}',
+  '.rbmenu-item a:hover .rmi-label{color:rgba(241,239,237,.9)}',
+  '.rmi-sub{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.2)}',
+  '.rmi-arrow{font-size:14px;color:rgba(200,168,141,.15);transition:transform .25s,color .25s}',
+  '.rbmenu-item a:hover .rmi-arrow{transform:translateX(4px);color:rgba(200,168,141,.5)}',
+  '.rbmenu-item.active .rmi-arrow{color:rgba(200,168,141,.4)}',
+  '.rbmenu-item-bar{position:absolute;top:0;left:0;right:0;height:2px;opacity:0}',
+  '.rbmenu-item.active .rbmenu-item-bar{opacity:1}',
+  '.rbmenu-footer{padding:14px 40px;border-top:1px solid rgba(200,168,141,.07);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}',
+  '.rbmenu-footer-l{font-family:"Afacad Flux",sans-serif;font-size:13px;color:rgba(200,168,141,.25)}',
+  '.rbmenu-footer-r{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.2)}',
+  '.src-toggle{position:fixed;bottom:56px;right:14px;z-index:7500;display:flex;align-items:center;gap:6px;background:rgba(30,20,16,.92);border:1px solid rgba(200,168,141,.15);backdrop-filter:blur(16px);padding:5px 10px;cursor:pointer;font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.4);transition:all .25s;border-radius:99px}',
+  '.src-toggle:hover{border-color:rgba(200,168,141,.35);color:rgba(200,168,141,.7)}',
   '.src-toggle .st-dot{width:5px;height:5px;border-radius:50%;background:#C8A88D;flex-shrink:0}',
   '.src-toggle .st-n{background:rgba(200,168,141,.15);color:#C8A88D;padding:1px 5px;border-radius:10px;font-size:8px}',
-  '.src-drawer{position:fixed;bottom:48px;left:0;right:0;z-index:7000;background:rgba(30,20,16,.97);backdrop-filter:blur(24px);border-top:1px solid rgba(200,168,141,.1);max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(0.16,1,0.3,1),opacity .4s;opacity:0}',
-  '.src-drawer.open{max-height:360px;opacity:1}',
-  '.src-drawer-inner{padding:20px 48px 24px;overflow-y:auto;max-height:320px}',
-  '.src-drawer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}',
-  '.src-drawer-title{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,168,141,.32)}',
-  '.src-drawer-close{background:none;border:none;cursor:pointer;font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.25);transition:color .2s}',
-  '.src-drawer-close:hover{color:rgba(200,168,141,.65)}',
-  '.src-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:4px}',
-  '.src-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid rgba(200,168,141,.06);border-radius:6px;transition:background .2s}',
-  '.src-item:hover{background:rgba(200,168,141,.04)}',
-  '.src-item-num{font-family:"Poppins",sans-serif;font-size:8px;letter-spacing:.1em;color:rgba(200,168,141,.25);flex-shrink:0;padding-top:1px;min-width:18px}',
-  '.src-item-label{font-size:11px;color:rgba(241,239,237,.6);line-height:1.45;margin-bottom:3px}',
-  '.src-item-url{font-family:"Poppins",sans-serif;font-size:8px;letter-spacing:.03em;color:rgba(200,168,141,.4);text-decoration:none;transition:color .2s;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
-  '.src-item-url:hover{color:#C8A88D}',
-  '@media(max-width:768px){.src-drawer-inner{padding:16px 20px}.src-list{grid-template-columns:1fr}}'
-].join('\n');
-document.head.appendChild(style);
+  '.src-drawer{position:fixed;bottom:48px;left:0;right:0;z-index:7000;background:rgba(20,14,10,.97);backdrop-filter:blur(24px);border-top:1px solid rgba(200,168,141,.1);max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(0.16,1,0.3,1),opacity .35s;opacity:0}',
+  '.src-drawer.open{max-height:340px;opacity:1}',
+  '.src-drawer-inner{padding:18px 40px 20px;overflow-y:auto;max-height:300px}',
+  '.src-drawer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}',
+  '.src-drawer-title{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,168,141,.3)}',
+  '.src-close-btn{background:none;border:none;cursor:pointer;font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.25);transition:color .2s}',
+  '.src-close-btn:hover{color:rgba(200,168,141,.6)}',
+  '.src-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:4px}',
+  '.src-item{display:flex;align-items:flex-start;gap:10px;padding:9px 11px;border:1px solid rgba(200,168,141,.06);border-radius:6px}',
+  '.src-item-num{font-family:"Poppins",sans-serif;font-size:8px;letter-spacing:.1em;color:rgba(200,168,141,.22);flex-shrink:0;min-width:18px;padding-top:1px}',
+  '.src-item-label{font-size:11px;color:rgba(241,239,237,.55);line-height:1.45;margin-bottom:2px}',
+  '.src-item-url{font-family:"Poppins",sans-serif;font-size:8px;color:rgba(200,168,141,.35);text-decoration:none;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
+  '@media(max-width:640px){.rbmenu-body{padding:16px 20px 24px}.rbmenu-top,.rbmenu-footer{padding-left:20px;padding-right:20px}.src-drawer-inner{padding:14px 16px}.src-list{grid-template-columns:1fr}}'
+].join('');
+document.head.appendChild(s);
 
-/* drawer */
-var drawer = document.createElement('div');
-drawer.className = 'src-drawer';
-var itemsHtml = '';
-for(var i=0;i<sources.length;i++){
-  var src = sources[i];
-  itemsHtml += '<div class="src-item">'+
-    '<span class="src-item-num">'+String(i+1).padStart(2,'0')+'</span>'+
-    '<div>'+
-    '<div class="src-item-label">'+src.label+'</div>'+
-    '<a href="'+src.url+'" target="_blank" rel="noopener noreferrer" class="src-item-url">'+src.url+'</a>'+
-    '</div></div>';
+/* ── HAMBURGER BUTTON ────────────────────────────── */
+var btn=document.createElement('button');
+btn.className='rbmenu-btn';
+btn.setAttribute('aria-label','Apri menu');
+btn.innerHTML='<span class="l1"></span><span class="l2"></span><span class="l3"></span>';
+var bg=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
+if(bg&&(bg.indexOf('#F')===0||bg.indexOf('#f')===0)){btn.classList.add('light');}
+var _tbr=document.querySelector('.tb-r');
+if(_tbr){btn.classList.add('in-tb');_tbr.appendChild(btn);}
+else{document.body.appendChild(btn);}
+
+/* ── OVERLAY ─────────────────────────────────────── */
+var ov=document.createElement('div');
+ov.className='rbmenu-overlay';
+ov.id='rbmenu-ov';
+var itemsHtml='';
+for(var ni=0;ni<M.length;ni++){
+  var nm=M[ni],na=nm.id===path;
+  itemsHtml+='<li class="rbmenu-item'+(na?' active':'')+'">'
+    +'<div class="rbmenu-item-bar" style="background:'+nm.color+'"></div>'
+    +'<a href="'+nm.url+'">'
+    +'<span class="rmi-code">'+nm.code+'</span>'
+    +'<span class="rmi-left"><span class="rmi-label">'+nm.label+'</span><span class="rmi-sub">'+nm.sub+'</span></span>'
+    +'<span class="rmi-arrow">\u2192</span>'
+    +'</a></li>';
 }
-drawer.innerHTML = '<div class="src-drawer-inner">'+
-  '<div class="src-drawer-head">'+
-  '<span class="src-drawer-title">Fonti \u00b7 '+sources.length+' riferimenti \u00b7 '+page.toUpperCase()+'</span>'+
-  '<button class="src-drawer-close" id="srcClose">Chiudi \u2715</button>'+
-  '</div>'+
-  '<div class="src-list">'+itemsHtml+'</div>'+
-  '</div>';
-document.body.appendChild(drawer);
+ov.innerHTML='<div class="rbmenu-top">'
+  +'<div class="rbmenu-brand">'
+  +'<img src="https://www.ribrainstudio.com/wp-content/uploads/2025/01/Logo_ribrain_Nero.svg" class="rbmenu-brand-logo" alt="Ribrain">'
+  +'<div class="rbmenu-brand-sep"></div>'
+  +'<span class="rbmenu-brand-label">BZAR Hotels \u00d7 Ribrain</span>'
+  +'</div>'
+  +'</div>'
+  +'<div class="rbmenu-body"><ul class="rbmenu-items">'+itemsHtml+'</ul></div>'
+  +'<div class="rbmenu-footer">'
+  +'<span class="rbmenu-footer-l">Cruscotto Strategico</span>'
+  +'<span class="rbmenu-footer-r">Aprile 2026 \u00b7 Confidenziale</span>'
+  +'</div>';
+document.body.appendChild(ov);
 
-/* toggle button */
-var toggle = document.createElement('button');
-toggle.className = 'src-toggle';
-toggle.innerHTML = '<span class="st-dot"></span>Fonti <span class="st-n">'+sources.length+'</span>';
-document.body.appendChild(toggle);
-
-var open = false;
-function toggleDrawer(){
-  open = !open;
-  drawer.classList.toggle('open',open);
-  toggle.style.borderColor = open ? 'rgba(200,168,141,.3)' : '';
-  toggle.style.color = open ? 'rgba(200,168,141,.75)' : '';
+/* ── MENU LOGIC ──────────────────────────────────── */
+var menuOpen=false;
+function openMenu(){
+  menuOpen=true;btn.classList.add('open');ov.classList.add('open');
+  document.body.style.overflow='hidden';
+  var its=ov.querySelectorAll('.rbmenu-item');
+  for(var ii=0;ii<its.length;ii++){
+    (function(el,i){
+      el.style.opacity='0';el.style.transform='translateY(16px)';
+      el.style.transition='opacity .4s '+(.06+i*.05)+'s,transform .4s '+(.06+i*.05)+'s cubic-bezier(0.16,1,0.3,1)';
+      setTimeout(function(){el.style.opacity='1';el.style.transform='translateY(0)';},10);
+    })(its[ii],ii);
+  }
 }
-toggle.addEventListener('click',toggleDrawer);
-document.getElementById('srcClose').addEventListener('click',function(){open=true;toggleDrawer();});
-document.addEventListener('keydown',function(e){if(e.key==='Escape'&&open){open=true;toggleDrawer();}});
+function closeMenu(){
+  menuOpen=false;btn.classList.remove('open');ov.classList.remove('open');
+  document.body.style.overflow='';
+}
+btn.addEventListener('click',function(){if(menuOpen)closeMenu();else openMenu();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menuOpen)closeMenu();});
+ov.addEventListener('click',function(e){if(e.target===ov)closeMenu();});
+
+/* ── NAVBAR BOTTOM ───────────────────────────────── */
+var nb=document.createElement('nav');
+nb.id='rbnav';
+var nbCSS=document.createElement('style');
+nbCSS.textContent=[
+  '#rbnav{position:fixed;bottom:0;left:0;right:0;z-index:700;background:rgba(30,20,16,.96);backdrop-filter:blur(20px);border-top:.5px solid rgba(200,168,141,.08);display:flex;height:48px;overflow:hidden}',
+  '.rbnav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;color:rgba(200,168,141,.3);font-family:"Poppins",sans-serif;font-size:8px;letter-spacing:.08em;text-transform:uppercase;gap:2px;transition:color .2s;position:relative;min-width:0;overflow:hidden}',
+  '.rbnav-item:hover{color:rgba(200,168,141,.65)}',
+  '.rbnav-item.active{color:rgba(200,168,141,.8)}',
+  '.rbnav-item-dot{width:3px;height:3px;border-radius:50%;background:currentColor;opacity:0}',
+  '.rbnav-item.active .rbnav-item-dot{opacity:1}',
+  '.rbnav-item-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:90%}'
+].join('');
+document.head.appendChild(nbCSS);
+var nbH='';
+for(var ni=0;ni<M.length;ni++){
+  var nm=M[ni],na=nm.id===path;
+  nbH+='<a href="'+nm.url+'" class="rbnav-item'+(na?' active':'')+'">'
+    +'<div class="rbnav-item-dot"></div>'
+    +'<span class="rbnav-item-label">'+nm.code+' '+nm.label.split(' ')[0]+'</span>'
+    +'</a>';
+}
+nb.innerHTML=nbH;
+document.body.appendChild(nb);
+
+/* ── FONTI DRAWER ────────────────────────────────── */
+if(srcs.length>0){
+  var fdStyle=document.createElement('style');
+  fdStyle.textContent='';
+  document.head.appendChild(fdStyle);
+
+  var drawer=document.createElement('div');
+  drawer.className='src-drawer';
+  var ih='';
+  for(var i=0;i<srcs.length;i++){
+    ih+='<div class="src-item">'
+      +'<span class="src-item-num">'+String(i+1).padStart(2,'0')+'</span>'
+      +'<div><div class="src-item-label">'+srcs[i].label+'</div>'
+      +'<a href="'+srcs[i].url+'" target="_blank" rel="noopener noreferrer" class="src-item-url">'+srcs[i].url+'</a>'
+      +'</div></div>';
+  }
+  drawer.innerHTML='<div class="src-drawer-inner">'
+    +'<div class="src-drawer-head">'
+    +'<span class="src-drawer-title">Fonti \u00b7 '+srcs.length+' riferimenti \u00b7 '+path.toUpperCase()+'</span>'
+    +'<button class="src-close-btn" id="srcCloseBtn">Chiudi \u00d7</button>'
+    +'</div>'
+    +'<div class="src-list">'+ih+'</div>'
+    +'</div>';
+  document.body.appendChild(drawer);
+
+  var toggle=document.createElement('button');
+  toggle.className='src-toggle';
+  toggle.innerHTML='<span class="st-dot"></span>Fonti <span class="st-n">'+srcs.length+'</span>';
+  document.body.appendChild(toggle);
+
+  var fdOpen=false;
+  function toggleDrawer(){
+    fdOpen=!fdOpen;
+    drawer.classList.toggle('open',fdOpen);
+    toggle.style.borderColor=fdOpen?'rgba(200,168,141,.3)':'';
+    toggle.style.color=fdOpen?'rgba(200,168,141,.7)':'';
+  }
+  toggle.addEventListener('click',toggleDrawer);
+  var closeBtn=document.getElementById('srcCloseBtn');
+  if(closeBtn){closeBtn.addEventListener('click',function(){if(fdOpen)toggleDrawer();});}
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&fdOpen)toggleDrawer();});
+}
 
 })();
 </script>
-
-</body>
-</html>
-
 </body>
 </html>
