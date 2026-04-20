@@ -112,6 +112,17 @@ body{background:var(--bg);color:var(--dark);font-family:'Poppins',sans-serif;fon
 .re-ins-t{font-family:'Afacad Flux',sans-serif;font-size:clamp(1.1rem,3vw,1.5rem);line-height:1.4;max-width:600px;color:rgba(241,239,237,.75);font-weight:300}
 .re-cta{display:inline-flex;align-items:center;gap:.6rem;background:var(--brand);color:var(--dark);padding:.8rem 1.6rem;border-radius:99px;text-decoration:none;font-family:'Afacad Flux',sans-serif;font-size:14px;font-weight:500;transition:background .2s,transform .15s}
 .re-cta:hover{background:#d4b89a;transform:translateY(-1px)}
+
+/* ── HAMBURGER STATICO ────────────────────────── */
+.rb-ham{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:5px;width:32px;height:32px;padding:5px;background:none;border:none;cursor:pointer;flex-shrink:0;z-index:9001;position:relative}
+.rb-ham span{display:block;height:1.5px;background:#F1EFED;border-radius:1px;transition:all .4s cubic-bezier(0.16,1,0.3,1);transform-origin:right center}
+.rb-ham .h1{width:20px}
+.rb-ham .h2{width:14px}
+.rb-ham .h3{width:20px}
+.rb-ham.open .h1{width:20px;transform:translateY(6.5px) rotate(-45deg)}
+.rb-ham.open .h2{opacity:0;width:0}
+.rb-ham.open .h3{width:20px;transform:translateY(-6.5px) rotate(45deg)}
+
 </style>
 </head>
 <body>
@@ -127,6 +138,7 @@ body{background:var(--bg);color:var(--dark);font-family:'Poppins',sans-serif;fon
   <div class="tb-r">
     <span class="tb-date">Aprile 2026</span>
     <span class="tb-conf">Confidenziale</span>
+    <button class="rb-ham" id="rbHamBtn" aria-label="Apri menu"><span class="h1"></span><span class="h2"></span><span class="h3"></span></button>
   </div>
 </header>
 
@@ -761,14 +773,8 @@ s.textContent=[
 document.head.appendChild(s);
 
 /* ── HAMBURGER BUTTON ────────────────────────────── */
-var btn=document.createElement('button');
-btn.className='rbmenu-btn';
-btn.setAttribute('aria-label','Apri menu');
-btn.innerHTML='<span class="l1"></span><span class="l2"></span><span class="l3"></span>';
-/* topbar always dark — hamburger lines always light */
-var _tbr=document.querySelector('.tb-r');
-if(_tbr){btn.classList.add('in-tb');_tbr.appendChild(btn);}
-else{document.body.appendChild(btn);}
+var btn=document.getElementById('rbHamBtn');
+if(!btn){btn=document.createElement('button');btn.className='rb-ham';document.body.appendChild(btn);}
 
 /* ── OVERLAY ─────────────────────────────────────── */
 var ov=document.createElement('div');

@@ -152,6 +152,17 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 .footer-min-link{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(200,168,141,.2);text-decoration:none;font-family:"Poppins",sans-serif;transition:color .2s}
 .footer-min-link:hover{color:rgba(200,168,141,.6)}
 .footer-min-r{font-size:10px;color:rgba(200,168,141,.15);font-family:"Poppins",sans-serif}
+
+/* ── HAMBURGER STATICO ────────────────────────── */
+.rb-ham{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:5px;width:32px;height:32px;padding:5px;background:none;border:none;cursor:pointer;flex-shrink:0;z-index:9001;position:relative}
+.rb-ham span{display:block;height:1.5px;background:#F1EFED;border-radius:1px;transition:all .4s cubic-bezier(0.16,1,0.3,1);transform-origin:right center}
+.rb-ham .h1{width:20px}
+.rb-ham .h2{width:14px}
+.rb-ham .h3{width:20px}
+.rb-ham.open .h1{width:20px;transform:translateY(6.5px) rotate(-45deg)}
+.rb-ham.open .h2{opacity:0;width:0}
+.rb-ham.open .h3{width:20px;transform:translateY(-6.5px) rotate(45deg)}
+
 </style>
 </head>
 <body>
@@ -169,6 +180,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
   <div class="tb-r">
     <span class="tb-date">Aprile 2026</span>
     <span class="tb-conf">Confidenziale</span>
+    <button class="rb-ham" id="rbHamBtn" aria-label="Apri menu"><span class="h1"></span><span class="h2"></span><span class="h3"></span></button>
   </div>
 </header>
 
@@ -741,14 +753,8 @@ s.textContent=[
 document.head.appendChild(s);
 
 /* ── HAMBURGER BUTTON ────────────────────────────── */
-var btn=document.createElement('button');
-btn.className='rbmenu-btn';
-btn.setAttribute('aria-label','Apri menu');
-btn.innerHTML='<span class="l1"></span><span class="l2"></span><span class="l3"></span>';
-/* topbar always dark — hamburger lines always light */
-var _tbr=document.querySelector('.tb-r');
-if(_tbr){btn.classList.add('in-tb');_tbr.appendChild(btn);}
-else{document.body.appendChild(btn);}
+var btn=document.getElementById('rbHamBtn');
+if(!btn){btn=document.createElement('button');btn.className='rb-ham';document.body.appendChild(btn);}
 
 /* ── OVERLAY ─────────────────────────────────────── */
 var ov=document.createElement('div');
