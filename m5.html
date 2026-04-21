@@ -340,10 +340,10 @@ body{background:var(--bg);color:var(--dark);font-family:'Poppins',sans-serif;fon
       <div class="cs-row">
         <div class="cs-head">
           <span class="cs-label">Camere totali</span>
-          <span class="cs-val" id="sv-rooms">2.000</span>
+          <span class="cs-val" id="sv-rooms">1.700</span>
         </div>
         <div class="cs-track">
-          <input type="range" class="cs-input" id="sl-rooms" min="500" max="3000" step="50" value="2000">
+          <input type="range" class="cs-input" id="sl-rooms" min="500" max="3000" step="50" value="1700">
           <div class="cs-fill" id="sf-rooms"></div>
         </div>
         <div class="cs-range-labels"><span>500</span><span>3.000</span></div>
@@ -352,10 +352,10 @@ body{background:var(--bg);color:var(--dark);font-family:'Poppins',sans-serif;fon
       <div class="cs-row">
         <div class="cs-head">
           <span class="cs-label">Occupancy media</span>
-          <span class="cs-val" id="sv-occ">90%</span>
+          <span class="cs-val" id="sv-occ">92%</span>
         </div>
         <div class="cs-track">
-          <input type="range" class="cs-input" id="sl-occ" min="50" max="100" step="1" value="90">
+          <input type="range" class="cs-input" id="sl-occ" min="50" max="100" step="1" value="92">
           <div class="cs-fill" id="sf-occ"></div>
         </div>
         <div class="cs-range-labels"><span>50%</span><span>100%</span></div>
@@ -364,10 +364,10 @@ body{background:var(--bg);color:var(--dark);font-family:'Poppins',sans-serif;fon
       <div class="cs-row">
         <div class="cs-head">
           <span class="cs-label">ADR media (€/notte)</span>
-          <span class="cs-val" id="sv-adr">256 €</span>
+          <span class="cs-val" id="sv-adr">220 €</span>
         </div>
         <div class="cs-track">
-          <input type="range" class="cs-input" id="sl-adr" min="80" max="600" step="5" value="256">
+          <input type="range" class="cs-input" id="sl-adr" min="80" max="600" step="5" value="220">
           <div class="cs-fill" id="sf-adr"></div>
         </div>
         <div class="cs-range-labels"><span>80 €</span><span>600 €</span></div>
@@ -376,10 +376,10 @@ body{background:var(--bg);color:var(--dark);font-family:'Poppins',sans-serif;fon
       <div class="cs-row">
         <div class="cs-head">
           <span class="cs-label">% prenotazioni via OTA</span>
-          <span class="cs-val" id="sv-ota">60%</span>
+          <span class="cs-val" id="sv-ota">40%</span>
         </div>
         <div class="cs-track">
-          <input type="range" class="cs-input" id="sl-ota" min="10" max="90" step="5" value="60">
+          <input type="range" class="cs-input" id="sl-ota" min="10" max="90" step="5" value="40">
           <div class="cs-fill" id="sf-ota"></div>
         </div>
         <div class="cs-range-labels"><span>10%</span><span>90%</span></div>
@@ -464,12 +464,12 @@ body{background:var(--bg);color:var(--dark);font-family:'Poppins',sans-serif;fon
   };
 
   function fmtEur(n){
-    if(n>=1000000) return '€ '+( n/1000000).toFixed(2).replace('.',',')+' M';
-    if(n>=1000)    return '€ '+(n/1000).toFixed(0)+'.'+String(Math.round((n%1000)/100))+'K';
-    return '€ '+Math.round(n).toLocaleString('it-IT');
+    if(n>=1000000) return '\u20ac\u00a0'+(n/1000000).toFixed(2).replace('.',',')+'\u00a0M';
+    if(n>=1000)    return '\u20ac\u00a0'+(n/1000).toFixed(1).replace('.',',')+'\u00a0K';
+    return '\u20ac\u00a0'+Math.round(n).toLocaleString('it-IT');
   }
   function fmtFull(n){
-    return '€ '+Math.round(n).toLocaleString('it-IT');
+    return '\u20ac\u00a0'+Math.round(n).toLocaleString('it-IT');
   }
 
   function calc(){
@@ -484,28 +484,37 @@ body{background:var(--bg);color:var(--dark);font-family:'Poppins',sans-serif;fon
     var daily=monthly/30;
     var hourly=daily/24;
 
-    /* animate big number */
+    /* animate big number — fallback diretto se GSAP non pronto */
     var crMonth=document.getElementById('crMonth');
-    var prev=crMonth._val||0;
-    if(!crMonth._tween) crMonth._tween=true;
-    var obj={v:prev};
-    if(window._calcTween) window._calcTween.kill();
-    window._calcTween=gsap.to(obj,{v:monthly,duration:.5,ease:'power2.out',onUpdate:function(){
-      crMonth.textContent=fmtEur(obj.v);
-      crMonth._val=obj.v;
-    }});
+    if(window.gsap && crMonth){
+      var prev=crMonth._val||0;
+      var obj={v:prev};
+      if(window._calcTween) window._calcTween.kill();
+      window._calcTween=gsap.to(obj,{v:monthly,duration:.5,ease:'power2.out',onUpdate:function(){
+        crMonth.textContent=fmtEur(obj.v);
+        crMonth._val=obj.v;
+      }});
+    } else if(crMonth){
+      crMonth.textContent=fmtEur(monthly);
+      crMonth._val=monthly;
+    }
 
-    document.getElementById('crYear').textContent=fmtEur(yearly);
-    document.getElementById('crDay').textContent=fmtEur(daily);
-    document.getElementById('crHour').textContent=fmtEur(hourly);
+    var crYear=document.getElementById('crYear');
+    var crDay=document.getElementById('crDay');
+    var crHour=document.getElementById('crHour');
+    if(crYear) crYear.textContent=fmtEur(yearly);
+    if(crDay)  crDay.textContent=fmtEur(daily);
+    if(crHour) crHour.textContent=fmtEur(hourly);
 
     /* formula */
-    document.getElementById('cfEq').innerHTML=
+    var cfEq=document.getElementById('cfEq');
+    if(cfEq) cfEq.innerHTML=
       rooms.toLocaleString('it-IT')+' &times; '+Math.round(occ*100)+'% &times; '+adr+' € &times; 30gg &times; '+Math.round(otaPct*100)+'% &times; '+Math.round(comm*100)+'% = <strong>'+fmtFull(monthly)+'/mese</strong>';
 
     /* insight: 10% shift */
-    var saving10=(rooms*occ*adr*365*otaPct*comm)*(0.10);
-    document.getElementById('ciSaving').textContent=fmtFull(saving10)+' all\'anno';
+    var saving10=yearly*0.10;
+    var ciSaving=document.getElementById('ciSaving');
+    if(ciSaving) ciSaving.textContent=fmtFull(saving10)+' all\'anno';
   }
 
   function updateFills(){
