@@ -1269,7 +1269,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
     <div class="mo-card" id="mo1">
       <div class="mo-icon">&#x1F3AF;</div>
       <div class="mo-title">Ribrain: Strategia &amp; Content</div>
-      <div class="mo-body">Piano editoriale per ogni account. Copywriting e direzione creativa. Gestione approvazioni con <strong>Francesco Mormile</strong> come referente unico. Reporting periodico pre/post Ribrain con confronto KPI. Gestione campagne ADV (Meta Ads, TikTok Ads) per amplificare i contenuti strategici prioritari.</div>
+      <div class="mo-body">Piano editoriale per ogni account. Copywriting e direzione creativa. Gestione approvazioni con <strong>Francesco M.</strong> come referente unico. Reporting periodico pre/post Ribrain con confronto KPI. Gestione campagne ADV (Meta Ads, TikTok Ads) per amplificare i contenuti strategici prioritari.</div>
     </div>
     <div class="mo-card" id="mo2">
       <div class="mo-icon">&#x1F3A5;</div>
@@ -1279,7 +1279,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
     <div class="mo-card" id="mo3">
       <div class="mo-icon">&#x1F4CB;</div>
       <div class="mo-title">Governance &amp; Approvazioni</div>
-      <div class="mo-body">Referente unico lato BZAR: <strong>Francesco Mormile</strong>. Batch di contenuti per approvazione (non contenuto per contenuto). Strumento condiviso per revisione. Finestre concordate  48h per contenuti standard, 24h per real-time. <em>Nessuna catena di mail.</em></div>
+      <div class="mo-body">Referente unico lato BZAR: <strong>Francesco M.</strong>. Batch di contenuti per approvazione (non contenuto per contenuto). Strumento condiviso per revisione. Finestre concordate  48h per contenuti standard, 24h per real-time. <em>Nessuna catena di mail.</em></div>
     </div>
     <div class="mo-card" id="mo4">
       <div class="mo-icon">&#x1F4CA;</div>
@@ -1402,7 +1402,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
   <div class="re-pills">
     <div class="rp"><div class="rp-v">10</div><div class="rp-u">strutture nel piano</div><div class="rp-l">5 hotel + 5 F&B outlet + apertura A Mano a giugno + 2 strutture toscane</div></div>
     <div class="rp"><div class="rp-v">4</div><div class="rp-u">fasi operative</div><div class="rp-l">Kickoff → Audit → Strategia → Go live. Tempi da allineare post-firma.</div></div>
-    <div class="rp"><div class="rp-v">1</div><div class="rp-u">referente unico</div><div class="rp-l">Francesco Mormile. Batch di contenuti per approvazione. Nessuna catena di mail.</div></div>
+    <div class="rp"><div class="rp-v">1</div><div class="rp-u">referente unico</div><div class="rp-l">Francesco M. Batch di contenuti per approvazione. Nessuna catena di mail.</div></div>
   </div>
   <div class="re-ins">
     <div class="re-ins-h">Il passo successivo</div>
@@ -1504,6 +1504,42 @@ function toggleFb(id){
   document.querySelectorAll(".fb-card.open").forEach(function(c){c.classList.remove("open");});
   if(!isOpen) card.classList.add("open");
 }
+
+// ── MAPPA SINAPTICA: reveal + interattività ──────────────────────────────
+// Fade-in sin-wrap on scroll
+document.querySelectorAll('.sin-wrap').forEach(function(el){
+  setTimeout(function(){el.style.opacity='1';},2500); // fallback
+  ScrollTrigger.create({
+    trigger:el, start:'top 85%', once:true,
+    onEnter:function(){
+      gsap.fromTo(el,{opacity:0,y:20},{opacity:1,y:0,duration:.8,ease:'power3.out'});
+    }
+  });
+});
+
+// Logica click persona
+function sinActivate(hotelId, personaId){
+  document.querySelectorAll('[data-hotel="'+hotelId+'"]').forEach(function(b){b.classList.remove('active');});
+  var btn=document.getElementById(hotelId+'-'+personaId);
+  if(btn) btn.classList.add('active');
+  var empty=document.getElementById(hotelId+'-empty');
+  if(empty) empty.style.display='none';
+  document.querySelectorAll('[id^="'+hotelId+'-"][id$="-strat"]').forEach(function(el){el.style.display='none';el.classList.remove('show');});
+  document.querySelectorAll('[id^="'+hotelId+'-"][id$="-obj"]').forEach(function(el){el.style.display='none';el.classList.remove('show');});
+  var objEmpty=document.getElementById(hotelId+'-obj-empty');
+  if(objEmpty) objEmpty.style.display='none';
+  var strat=document.getElementById(hotelId+'-'+personaId+'-strat');
+  if(strat){strat.style.display='block';setTimeout(function(){strat.classList.add('show');},20);}
+  var obj=document.getElementById(hotelId+'-'+personaId+'-obj');
+  if(obj){obj.style.display='flex';setTimeout(function(){obj.classList.add('show');},40);}
+}
+
+// Fallback opacity per tutti gli elementi animati che potrebbero bloccarsi
+setTimeout(function(){
+  document.querySelectorAll('.hi-card,.hs-paradox,.hs-narr,.hs-grid3,.hi-header,.hs-canali,.sin-wrap').forEach(function(el){
+    if(getComputedStyle(el).opacity==='0') el.style.opacity='1';
+  });
+},3000);
 </script>
 
 
@@ -1523,7 +1559,8 @@ var M=[
   {id:'m4',code:'04',label:'Personas',sub:'4 profili \u00b7 Trigger \u00b7 Social behavior',url:'m4.html',color:'#a08470'},
   {id:'m5',code:'05',label:'Mappa del Momento',sub:'Perch\u00e9 investire adesso',url:'m5.html',color:'#C8A88D'},
   {id:'m6',code:'06',label:'Benchmark Creativi',sub:'Il Pellicano \u00b7 Borgo S.Pietro \u00b7 The Pig',url:'m6.html',color:'#755847'},
-  {id:'m7',code:'07',label:'Brainstorming Strategico',sub:'Piano per struttura \u00b7 Mappe sinaptiche',url:'m7.html',color:'#9a7d6a'}
+  {id:'m7',code:'07',label:'Brainstorming Strategico',sub:'Piano per struttura \u00b7 Mappe sinaptiche',url:'m7.html',color:'#9a7d6a'},
+  {id:'m8',code:'08',label:'Come Lavoriamo',sub:'Team \u00b7 Processo \u00b7 Cadenza \u00b7 Governance',url:'m8.html',color:'#C4ACA5'}
 ];
 
 /* ── FONTI PER MODULO ───────────────────────────── */

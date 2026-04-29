@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M8: Come Lavoriamo · BZAR Hotels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{--bg:#F1EFED;--ink:#755847;--brand:#C8A88D;--rose:#C4ACA5;--dark:#1E1410;--mid:#9a7d6a;--go:#5a7a4a;--warn:#c0572a}
+body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;font-size:15px;line-height:1.65;overflow-x:hidden;padding-top:52px;padding-bottom:48px;cursor:none}
+@media(hover:none){body{cursor:auto}#cur{display:none}}
+#cur{position:fixed;width:8px;height:8px;background:var(--brand);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:width .18s,height .18s}
+
+/* TOPBAR */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:800;height:52px;background:var(--dark);display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem 0 1.5rem;border-bottom:.5px solid rgba(200,168,141,.1)}
+.tb-l{display:flex;align-items:center;gap:.75rem}
+.tb-brand{font-family:"Afacad Flux",sans-serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.tb-sep{width:.5px;height:16px;background:rgba(255,255,255,.15)}
+.tb-rlogo{height:13px;filter:invert(1);opacity:.6}
+.tb-c{font-family:"Poppins",sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.2);position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap}
+@media(max-width:680px){.tb-c{display:none}}
+.tb-r{display:flex;align-items:center;gap:.75rem}
+.tb-date{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+.tb-conf{font-size:9px;letter-spacing:.14em;text-transform:uppercase;border:.5px solid rgba(200,168,141,.28);color:rgba(200,168,141,.45);padding:3px 8px;border-radius:3px}
+
+/* HAMBURGER */
+.rb-ham{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:5px;width:32px;height:32px;padding:5px;background:none;border:none;cursor:pointer;flex-shrink:0;z-index:9001;position:relative}
+.rb-ham span{display:block;height:1.5px;background:#F1EFED;border-radius:1px;transition:all .4s cubic-bezier(0.16,1,0.3,1);transform-origin:right center}
+.rb-ham .h1{width:20px}
+.rb-ham .h2{width:14px}
+.rb-ham .h3{width:20px}
+.rb-ham.open .h1{width:20px;transform:translateY(6.5px) rotate(-45deg)}
+.rb-ham.open .h2{opacity:0;width:0}
+.rb-ham.open .h3{width:20px;transform:translateY(-6.5px) rotate(45deg)}
+
+/* HERO */
+.hero{min-height:100svh;display:grid;grid-template-rows:1fr auto;padding:5.5rem 1.5rem 2.5rem;position:relative;overflow:hidden}
+.hero-noise{position:absolute;inset:0;pointer-events:none;opacity:.018;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px}
+.hero-ghost{position:absolute;right:-2%;top:50%;transform:translateY(-50%);font-family:"Afacad Flux",sans-serif;font-size:clamp(18rem,44vw,40rem);font-weight:700;line-height:1;color:rgba(117,88,71,.04);pointer-events:none;user-select:none;letter-spacing:-.07em}
+.hero-body{display:flex;flex-direction:column;justify-content:center}
+.hero-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--brand);display:flex;align-items:center;gap:.75rem;margin-bottom:2rem}
+.hero-tag::before{content:"";width:28px;height:1px;background:var(--brand)}
+.hero-h1{font-family:"Afacad Flux",sans-serif;font-size:clamp(2.8rem,8vw,6.5rem);font-weight:400;line-height:1.02;letter-spacing:-.035em;max-width:880px}
+.hero-h1 em{font-style:italic;font-weight:300;color:var(--ink)}
+.hero-sub{margin-top:1.75rem;font-size:14px;color:var(--mid);max-width:520px;line-height:1.8}
+.hero-counts{display:flex;gap:2.5rem;margin-top:2.5rem;flex-wrap:wrap}
+.hc-v{font-family:"Afacad Flux",sans-serif;font-size:clamp(2rem,4.5vw,3rem);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.03em}
+.hc-l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-top:.2rem}
+.hero-foot{padding-top:1.5rem}
+.hero-scroll{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(117,88,71,.3);display:flex;align-items:center;gap:.5rem}
+.hero-scroll::after{content:"";width:48px;height:1px;background:rgba(200,168,141,.22)}
+
+/* SEZIONI BASE */
+.sec{padding:4.5rem 1.5rem;border-top:.5px solid rgba(117,88,71,.1);position:relative}
+.sec.bg-alt{background:#FDFCFA}
+.sec.bg-dark{background:var(--dark);color:#F1EFED}
+.sec.bg-dark .s-tag{color:rgba(200,168,141,.45)}
+.sec.bg-dark .s-h{color:#F1EFED}
+.sec.bg-dark .s-lead{color:rgba(200,168,141,.55)}
+.s-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);margin-bottom:.5rem}
+.s-h{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.9rem,4vw,3rem);font-weight:400;line-height:1.08;letter-spacing:-.02em;margin-bottom:.75rem;max-width:820px}
+.s-h em{font-style:italic;color:var(--ink)}
+.sec.bg-dark .s-h em{color:var(--brand)}
+.s-lead{font-size:14px;color:var(--mid);max-width:600px;line-height:1.8}
+.s-num{position:absolute;top:1.2rem;right:1.5rem;font-family:"Afacad Flux",sans-serif;font-size:11px;letter-spacing:.18em;color:rgba(117,88,71,.25)}
+.sec.bg-dark .s-num{color:rgba(200,168,141,.25)}
+
+/* ═══ S1 · TEAM ═══ */
+.team-slide-wrap{margin-top:2.5rem;border-radius:14px;overflow:hidden;background:#1E1410;position:relative;opacity:0}
+.team-slide-img{display:block;width:100%;height:auto}
+.team-slide-cap{padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;border-top:.5px solid rgba(200,168,141,.15);background:rgba(0,0,0,.18);gap:1rem;flex-wrap:wrap}
+.team-slide-l{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(200,168,141,.45);font-family:"Poppins",sans-serif}
+.team-slide-t{font-size:11px;color:rgba(241,239,237,.55);font-style:italic;font-family:"Poppins",sans-serif}
+.team-count{font-family:"Poppins",sans-serif;font-size:11px;letter-spacing:.06em;color:var(--mid);font-weight:400;text-transform:uppercase}
+.team-wrap{margin-top:2rem;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(117,88,71,.1);border-radius:14px;overflow:hidden}
+@media(max-width:840px){.team-wrap{grid-template-columns:1fr}}
+.team-col{background:var(--bg);padding:2rem 1.75rem;display:flex;flex-direction:column;gap:1.25rem}
+.sec.bg-alt .team-col{background:#FDFCFA}
+.team-h{display:flex;align-items:flex-end;gap:.75rem;border-bottom:.5px solid rgba(117,88,71,.12);padding-bottom:1rem;margin-bottom:.5rem}
+.team-name{font-family:"Afacad Flux",sans-serif;font-size:1.6rem;font-weight:400;letter-spacing:-.02em;color:var(--dark)}
+.team-loc{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);margin-bottom:.25rem}
+.team-mission{font-size:13px;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:.5rem}
+.team-roles{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+@media(max-width:520px){.team-roles{grid-template-columns:1fr}}
+.role{padding:.85rem 1rem;border:.5px solid rgba(117,88,71,.12);border-radius:8px;background:rgba(255,255,255,.4);transition:all .25s}
+.role:hover{border-color:rgba(200,168,141,.4);background:rgba(200,168,141,.06)}
+.role-name{font-family:"Afacad Flux",sans-serif;font-size:14px;font-weight:500;color:var(--dark);letter-spacing:-.005em}
+.role-do{font-size:11px;color:var(--mid);margin-top:.25rem;line-height:1.5}
+.client-bar{margin-top:2.5rem;background:var(--dark);border-radius:12px;padding:1.5rem 1.75rem;display:grid;grid-template-columns:auto 1fr auto;gap:1.25rem;align-items:center;color:#F1EFED;opacity:0}
+@media(max-width:680px){.client-bar{grid-template-columns:1fr;gap:1rem;text-align:center}}
+.cb-tag{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,168,141,.5);font-family:"Poppins",sans-serif}
+.cb-name{font-family:"Afacad Flux",sans-serif;font-size:1.4rem;font-weight:400;color:#F1EFED;line-height:1.2}
+.cb-role{font-size:11px;color:rgba(200,168,141,.55);margin-top:.2rem}
+.cb-note{font-size:11px;color:rgba(200,168,141,.5);font-style:italic;border-left:1.5px solid rgba(200,168,141,.25);padding-left:1rem}
+@media(max-width:680px){.cb-note{border-left:none;border-top:.5px solid rgba(200,168,141,.15);padding:.75rem 0 0;text-align:left}}
+
+/* ═══ S2 · PROCESSO 5 FASI ═══ */
+.proc-wrap{margin-top:3rem;position:relative}
+.proc-line{position:absolute;top:32px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(200,168,141,.35) 8%,rgba(200,168,141,.35) 92%,transparent);z-index:0}
+.proc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;position:relative;z-index:1}
+@media(max-width:840px){.proc-grid{grid-template-columns:1fr;gap:1.5rem}.proc-line{display:none}}
+.proc-step{display:flex;flex-direction:column;align-items:flex-start;padding-right:1rem;opacity:0}
+.proc-num{width:64px;height:64px;border-radius:50%;background:#FDFCFA;border:1.5px solid var(--brand);display:flex;align-items:center;justify-content:center;font-family:"Afacad Flux",sans-serif;font-size:1.5rem;font-weight:400;color:var(--ink);margin-bottom:1rem;box-shadow:0 0 0 6px var(--bg)}
+.sec.bg-alt .proc-num{box-shadow:0 0 0 6px #FDFCFA}
+.proc-when{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:.4rem;font-weight:500}
+.proc-title{font-family:"Afacad Flux",sans-serif;font-size:1.15rem;font-weight:500;color:var(--dark);margin-bottom:.5rem;line-height:1.2}
+.proc-desc{font-size:12px;color:var(--mid);line-height:1.65}
+.proc-deliv{margin-top:.7rem;font-size:10px;color:var(--ink);font-style:italic;border-top:.5px solid rgba(117,88,71,.12);padding-top:.5rem}
+
+/* ═══ S3 · FREQUENZA PER TIER ═══ */
+.tier-grid{margin-top:3rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+@media(max-width:840px){.tier-grid{grid-template-columns:1fr}}
+.tier{background:#FDFCFA;border:.5px solid rgba(117,88,71,.12);border-radius:14px;padding:1.75rem;display:flex;flex-direction:column;position:relative;overflow:hidden;opacity:0}
+.tier::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+.tier.a::before{background:var(--ink)}
+.tier.b::before{background:#9a6b3a}
+.tier.c::before{background:var(--rose)}
+.tier-tag{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);margin-bottom:.5rem;font-family:"Poppins",sans-serif;font-weight:500}
+.tier-h{font-family:"Afacad Flux",sans-serif;font-size:1.6rem;font-weight:400;color:var(--dark);line-height:1.1;letter-spacing:-.02em;margin-bottom:.5rem}
+.tier-h em{font-style:italic;color:var(--ink);font-weight:300}
+.tier-who{font-size:11px;color:var(--mid);font-style:italic;margin-bottom:1.25rem;line-height:1.6}
+.tier-cad{display:flex;flex-direction:column;gap:.65rem;border-top:.5px solid rgba(117,88,71,.1);padding-top:1.25rem;margin-bottom:1.25rem}
+.cad-row{display:grid;grid-template-columns:auto 1fr;gap:.75rem;align-items:baseline}
+.cad-v{font-family:"Afacad Flux",sans-serif;font-size:1.3rem;font-weight:400;color:var(--ink);line-height:1;letter-spacing:-.02em;min-width:62px}
+.cad-l{font-size:11.5px;color:var(--dark);line-height:1.5}
+.cad-l strong{font-weight:500;color:var(--ink)}
+.tier-mix{margin-top:auto;padding-top:1.25rem;border-top:.5px solid rgba(117,88,71,.1)}
+.mix-l{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);margin-bottom:.6rem;font-family:"Poppins",sans-serif}
+.mix-bar{display:flex;height:6px;border-radius:3px;overflow:hidden;background:rgba(117,88,71,.08)}
+.mix-seg{height:100%;transition:all .3s}
+.mix-seg.video{background:var(--ink)}
+.mix-seg.foto{background:var(--brand)}
+.mix-seg.car{background:var(--rose)}
+.mix-leg{display:flex;flex-wrap:wrap;gap:.85rem;margin-top:.6rem;font-size:10px;color:var(--mid)}
+.mix-leg span{display:inline-flex;align-items:center;gap:.35rem}
+.mix-leg span::before{content:"";width:8px;height:8px;border-radius:2px}
+.mix-leg .ml-v::before{background:var(--ink)}
+.mix-leg .ml-f::before{background:var(--brand)}
+.mix-leg .ml-c::before{background:var(--rose)}
+
+/* ═══ S4 · CICLO MENSILE ═══ */
+.cycle-wrap{margin-top:3rem}
+.cycle-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;position:relative}
+@media(max-width:980px){.cycle-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.cycle-grid{grid-template-columns:1fr}}
+.cycle-card{background:rgba(255,255,255,.04);border:.5px solid rgba(200,168,141,.14);border-radius:12px;padding:1.5rem 1.35rem;display:flex;flex-direction:column;gap:1rem;position:relative;opacity:0;min-height:340px}
+.cycle-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;border-radius:12px 12px 0 0;background:linear-gradient(90deg,var(--brand),var(--rose))}
+.cycle-card[data-cy="1"]::before{background:var(--brand)}
+.cycle-card[data-cy="2"]::before{background:#a08470}
+.cycle-card[data-cy="3"]::before{background:#9a6b3a}
+.cycle-card[data-cy="4"]::before{background:var(--rose)}
+.cycle-card::after{content:"→";position:absolute;top:50%;right:-13px;transform:translateY(-50%);font-size:18px;color:rgba(200,168,141,.4);width:14px;height:14px;display:flex;align-items:center;justify-content:center;background:var(--dark);border-radius:50%;z-index:2}
+.cycle-card:last-child::after{content:"↻";color:var(--brand);background:var(--dark);right:-13px;font-size:14px;font-weight:bold}
+@media(max-width:980px){.cycle-card::after{display:none}}
+.cy-h{display:flex;justify-content:space-between;align-items:center;border-bottom:.5px solid rgba(200,168,141,.15);padding-bottom:.7rem}
+.cy-wk{font-family:"Afacad Flux",sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--brand);font-weight:500}
+.cy-team{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(200,168,141,.45);font-family:"Poppins",sans-serif;text-align:right}
+.cy-title{font-family:"Afacad Flux",sans-serif;font-size:1.4rem;font-weight:400;color:#F1EFED;line-height:1.15;letter-spacing:-.02em}
+.cy-acts{display:flex;flex-direction:column;gap:.55rem;flex:1}
+.cy-act{font-size:11.5px;color:rgba(241,239,237,.78);line-height:1.55;padding-left:.85rem;position:relative}
+.cy-act::before{content:"";position:absolute;left:0;top:7px;width:4px;height:4px;border-radius:50%;background:var(--brand)}
+.cy-deliv{margin-top:auto;padding:.65rem .8rem;background:rgba(200,168,141,.08);border-radius:6px;font-size:11px;line-height:1.5;color:rgba(241,239,237,.8);border:.5px solid rgba(200,168,141,.15)}
+.cy-deliv span{display:block;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--brand);margin-bottom:.2rem;font-weight:500;font-family:"Poppins",sans-serif}
+.cycle-loop{margin-top:2rem;display:flex;align-items:center;justify-content:center;gap:.85rem;padding:1rem 1.5rem;background:rgba(200,168,141,.06);border:.5px dashed rgba(200,168,141,.25);border-radius:99px;max-width:780px;margin-left:auto;margin-right:auto;opacity:0}
+.cycle-loop-arrow{font-size:1.4rem;color:var(--brand)}
+.cycle-loop-text{font-size:12px;color:rgba(241,239,237,.65);font-style:italic;line-height:1.4}
+@media(max-width:520px){.cycle-loop{flex-direction:column;border-radius:14px;text-align:center}.cycle-loop-text{font-size:11px}}
+
+/* ═══ S5 · ADV STRATEGY ═══ */
+.adv-wrap{margin-top:3rem;display:flex;flex-direction:column;gap:1rem}
+.adv-row{background:#FDFCFA;border:.5px solid rgba(117,88,71,.1);border-radius:12px;padding:1.5rem 1.75rem;display:grid;grid-template-columns:auto 1fr auto;gap:1.5rem;align-items:center;opacity:0}
+@media(max-width:780px){.adv-row{grid-template-columns:1fr;gap:1rem}}
+.adv-channel{display:flex;flex-direction:column;gap:.25rem;min-width:180px}
+.adv-ch-tag{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);font-weight:500}
+.adv-ch-name{font-family:"Afacad Flux",sans-serif;font-size:1.35rem;font-weight:400;color:var(--dark);letter-spacing:-.01em}
+.adv-ch-role{font-size:11px;color:var(--mid);font-style:italic}
+.adv-targets{display:flex;flex-direction:column;gap:.5rem}
+.adv-tgt{display:grid;grid-template-columns:90px 1fr;gap:.75rem;font-size:12px;line-height:1.5}
+.adv-tgt-l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding-top:2px}
+.adv-tgt-c{color:var(--dark)}
+.adv-tgt-c strong{color:var(--ink);font-weight:500}
+.adv-cad{display:flex;flex-direction:column;align-items:flex-end;gap:.25rem;min-width:140px}
+@media(max-width:780px){.adv-cad{align-items:flex-start}}
+.adv-cad-v{font-family:"Afacad Flux",sans-serif;font-size:1.5rem;font-weight:400;color:var(--ink);line-height:1;letter-spacing:-.02em}
+.adv-cad-l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);text-align:right}
+@media(max-width:780px){.adv-cad-l{text-align:left}}
+.adv-timeline{margin-top:2rem;background:var(--dark);border-radius:12px;padding:1.5rem 1.75rem;color:#F1EFED;opacity:0}
+.adv-tl-h{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(200,168,141,.5);margin-bottom:1rem}
+.adv-tl-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:3px}
+.tl-month{display:flex;flex-direction:column;align-items:center;gap:.4rem;padding:.6rem .25rem;border-radius:6px;border:.5px solid rgba(200,168,141,.1);min-height:88px;justify-content:flex-start}
+.tl-month.lift{background:rgba(200,168,141,.08);border-color:rgba(200,168,141,.3)}
+.tl-mn{font-size:9px;letter-spacing:.1em;color:rgba(200,168,141,.45);font-weight:500;text-transform:uppercase}
+.tl-month.lift .tl-mn{color:var(--brand)}
+.tl-mtag{font-size:8.5px;color:rgba(241,239,237,.7);writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:.04em;text-align:left;line-height:1.3}
+.tl-month.lift .tl-mtag{color:var(--brand)}
+@media(max-width:780px){.adv-tl-grid{grid-template-columns:repeat(6,1fr)}.tl-month{min-height:64px}.tl-mtag{writing-mode:horizontal-tb;transform:none;text-align:center;font-size:9px}}
+
+/* ═══ S6 · CALENDARIO MESE 1 VIMINALE ═══ */
+.cal-intro{margin-top:2rem;background:rgba(117,88,71,.05);border-left:3px solid var(--brand);padding:1.25rem 1.5rem;border-radius:0 10px 10px 0}
+.cal-theme{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin-bottom:.4rem;font-weight:500}
+.cal-headline{font-family:"Afacad Flux",sans-serif;font-size:1.5rem;font-weight:400;color:var(--dark);line-height:1.2;letter-spacing:-.02em;font-style:italic}
+.cal-wrap{margin-top:2rem;background:#FDFCFA;border-radius:14px;padding:1.5rem;border:.5px solid rgba(117,88,71,.1);overflow-x:auto}
+.cal-head{display:grid;grid-template-columns:auto repeat(7,1fr);gap:8px;margin-bottom:.5rem;min-width:780px}
+.cal-h-week{}
+.cal-dh{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);text-align:center;padding:.5rem 0;font-weight:500}
+.cal-row{display:grid;grid-template-columns:auto repeat(7,1fr);gap:8px;margin-bottom:8px;min-width:780px}
+.cal-wk{font-family:"Afacad Flux",sans-serif;font-size:11px;letter-spacing:.1em;color:var(--mid);text-transform:uppercase;text-align:right;padding:.75rem .75rem 0 0;min-width:60px;writing-mode:vertical-rl;transform:rotate(180deg);align-self:center}
+.cal-cell{aspect-ratio:1/1.05;border:.5px solid rgba(117,88,71,.08);border-radius:8px;padding:.5rem;display:flex;flex-direction:column;background:var(--bg);min-height:88px;font-family:"Poppins",sans-serif;opacity:0;position:relative}
+.cal-cell.has{cursor:default}
+.cal-cell.has.video{background:linear-gradient(135deg,rgba(117,88,71,.92),rgba(117,88,71,.85));color:#F1EFED;border-color:transparent}
+.cal-cell.has.foto{background:rgba(200,168,141,.18);border-color:rgba(200,168,141,.3)}
+.cal-cell.has.car{background:rgba(196,172,165,.18);border-color:rgba(196,172,165,.35)}
+.cal-cell.has.story{background:rgba(154,107,58,.1);border-color:rgba(154,107,58,.2)}
+.cal-d{font-size:10px;color:rgba(0,0,0,.32);letter-spacing:.04em;font-family:"Afacad Flux",sans-serif}
+.cal-cell.video .cal-d{color:rgba(241,239,237,.55)}
+.cal-fmt{font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;margin-top:.2rem}
+.cal-cell.video .cal-fmt{color:var(--brand)}
+.cal-cell.foto .cal-fmt{color:var(--ink)}
+.cal-cell.car .cal-fmt{color:var(--ink)}
+.cal-cell.story .cal-fmt{color:#9a6b3a}
+.cal-topic{font-size:10px;line-height:1.3;margin-top:.35rem;font-weight:400}
+.cal-cell.video .cal-topic{color:rgba(241,239,237,.92)}
+.cal-cell.foto .cal-topic, .cal-cell.car .cal-topic, .cal-cell.story .cal-topic{color:var(--dark)}
+.cal-leg{display:flex;flex-wrap:wrap;gap:1.25rem;margin-top:1.5rem;padding-top:1.25rem;border-top:.5px solid rgba(117,88,71,.1)}
+.cal-l-i{display:inline-flex;align-items:center;gap:.5rem;font-size:11px;color:var(--mid)}
+.cal-l-i::before{content:"";width:14px;height:14px;border-radius:3px;border:.5px solid}
+.cal-l-i.video::before{background:linear-gradient(135deg,rgba(117,88,71,.92),rgba(117,88,71,.85));border-color:transparent}
+.cal-l-i.foto::before{background:rgba(200,168,141,.18);border-color:rgba(200,168,141,.3)}
+.cal-l-i.car::before{background:rgba(196,172,165,.18);border-color:rgba(196,172,165,.35)}
+.cal-l-i.story::before{background:rgba(154,107,58,.1);border-color:rgba(154,107,58,.2)}
+.cal-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.75rem;padding-top:1.5rem;border-top:.5px solid rgba(117,88,71,.1)}
+@media(max-width:680px){.cal-stats{grid-template-columns:repeat(2,1fr)}}
+.cs-i{display:flex;flex-direction:column;gap:.25rem}
+.cs-v{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.03em}
+.cs-l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid)}
+
+/* ═══ S7 · STACK & GOVERNANCE ═══ */
+.sg-wrap{margin-top:3rem;display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+@media(max-width:840px){.sg-wrap{grid-template-columns:1fr}}
+.sg-card{background:#FDFCFA;border:.5px solid rgba(117,88,71,.1);border-radius:14px;padding:1.75rem;display:flex;flex-direction:column;gap:1.25rem;opacity:0}
+.sg-h{font-family:"Afacad Flux",sans-serif;font-size:1.4rem;font-weight:400;color:var(--dark);letter-spacing:-.02em;display:flex;align-items:baseline;justify-content:space-between;border-bottom:.5px solid rgba(117,88,71,.1);padding-bottom:.85rem}
+.sg-h-tag{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);font-family:"Poppins",sans-serif;font-weight:500}
+.sg-list{display:flex;flex-direction:column;gap:.75rem}
+.sg-item{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start}
+.sg-pill{font-size:10px;letter-spacing:.08em;background:rgba(200,168,141,.15);color:var(--ink);padding:.3rem .6rem;border-radius:99px;font-family:"Poppins",sans-serif;font-weight:500;white-space:nowrap;min-width:90px;text-align:center}
+.sg-text{font-size:12.5px;color:var(--dark);line-height:1.6}
+.sg-text strong{color:var(--ink);font-weight:500}
+.sg-sub{font-size:11px;color:var(--mid);font-style:italic;margin-top:.15rem}
+.sg-sla{margin-top:.5rem;padding:1rem 1.15rem;background:var(--dark);border-radius:9px;display:flex;justify-content:space-between;align-items:center;color:#F1EFED}
+.sg-sla-l{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,168,141,.55)}
+.sg-sla-v{font-family:"Afacad Flux",sans-serif;font-size:1.5rem;font-weight:400;color:var(--brand);letter-spacing:-.02em}
+
+/* ═══ S8 · IL PATTO ═══ */
+.patto-wrap{margin-top:3rem;display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+@media(max-width:780px){.patto-wrap{grid-template-columns:1fr}}
+.patto-col{background:#FDFCFA;border-radius:14px;padding:1.75rem;border-top:3px solid;display:flex;flex-direction:column;gap:1rem;opacity:0}
+.patto-col.si{border-top-color:var(--go)}
+.patto-col.no{border-top-color:#c0572a}
+.patto-icon{font-family:"Afacad Flux",sans-serif;font-size:2.5rem;font-weight:400;line-height:1}
+.patto-col.si .patto-icon{color:var(--go)}
+.patto-col.no .patto-icon{color:#c0572a}
+.patto-h{font-family:"Afacad Flux",sans-serif;font-size:1.5rem;font-weight:400;color:var(--dark);letter-spacing:-.02em;border-bottom:.5px solid rgba(117,88,71,.1);padding-bottom:.6rem}
+.patto-list{display:flex;flex-direction:column;gap:.65rem}
+.patto-li{display:grid;grid-template-columns:auto 1fr;gap:.85rem;align-items:start;font-size:13px;line-height:1.6;color:var(--dark)}
+.patto-li::before{content:"";width:6px;height:6px;border-radius:50%;margin-top:8px;flex-shrink:0}
+.patto-col.si .patto-li::before{background:var(--go)}
+.patto-col.no .patto-li::before{background:#c0572a}
+.patto-li strong{color:var(--ink);font-weight:500}
+
+/* ═══ FINALE ═══ */
+.finale{padding:6rem 1.5rem 5rem;background:var(--dark);color:#F1EFED;text-align:center;border-top:.5px solid rgba(200,168,141,.1);position:relative;overflow:hidden}
+.finale-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(200,168,141,.05) 0%,transparent 70%);pointer-events:none}
+.finale-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(200,168,141,.45);margin-bottom:1.25rem}
+.finale-h{font-family:"Afacad Flux",sans-serif;font-size:clamp(2.4rem,6vw,4.5rem);font-weight:300;line-height:1.05;letter-spacing:-.03em;color:#F1EFED;max-width:780px;margin:0 auto;font-style:italic}
+.finale-h em{color:var(--brand);font-style:normal;font-weight:400}
+.finale-sub{margin-top:1.5rem;font-size:13px;color:rgba(200,168,141,.5);letter-spacing:.04em;max-width:580px;margin-left:auto;margin-right:auto;line-height:1.8}
+.finale-cta{margin-top:2.5rem;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brand);display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;border:.5px solid rgba(200,168,141,.3);padding:.85rem 1.4rem;border-radius:99px;transition:all .3s}
+.finale-cta:hover{background:rgba(200,168,141,.08);border-color:rgba(200,168,141,.5)}
+.finale-cta::after{content:"→";transition:transform .3s}
+.finale-cta:hover::after{transform:translateX(4px)}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+
+<header class="topbar">
+  <div class="tb-l">
+    <span class="tb-brand">BZAR Hotels</span>
+    <div class="tb-sep"></div>
+    <img src="https://www.ribrainstudio.com/wp-content/uploads/2025/01/Logo_ribrain_Nero.svg" alt="Ribrain" class="tb-rlogo">
+  </div>
+  <span class="tb-c">Cruscotto Strategico &middot; Come Lavoriamo</span>
+  <div class="tb-r">
+    <span class="tb-date">Aprile 2026</span>
+    <span class="tb-conf">Confidenziale</span>
+    <button class="rb-ham" id="rbHamBtn" aria-label="Apri menu"><span class="h1"></span><span class="h2"></span><span class="h3"></span></button>
+  </div>
+</header>
+
+<!-- ═════ HERO ═════ -->
+<section class="hero">
+  <div class="hero-noise" aria-hidden="true"></div>
+  <div class="hero-ghost" aria-hidden="true">M8</div>
+  <div class="hero-body">
+    <div class="hero-tag" id="htag">M8 &mdash; Come Lavoriamo</div>
+    <h1 class="hero-h1">
+      <span id="hl1">Non un fornitore.</span><br>
+      <span id="hl2"><em>Un partner stabile.</em></span>
+    </h1>
+    <p class="hero-sub" id="hsub">Il metodo operativo che proponiamo a BZAR Hotels: chi fa cosa, con quale ritmo, sotto quale governance. Trasparente, scalabile, replicabile su tutte le strutture &mdash; senza dover rispiegare ogni volta il brand.</p>
+    <div class="hero-counts" id="hcnts">
+      <div><div class="hc-v">16</div><div class="hc-l">Account gestiti</div></div>
+      <div><div class="hc-v">4</div><div class="hc-l">Settimane &middot; un ciclo</div></div>
+      <div><div class="hc-v">12</div><div class="hc-l">Cicli all'anno</div></div>
+      <div><div class="hc-v">1</div><div class="hc-l">Referente unico</div></div>
+    </div>
+  </div>
+  <div class="hero-foot">
+    <span class="hero-scroll">Otto sezioni · scroll</span>
+  </div>
+</section>
+
+<!-- ═════ S1 · TEAM ═════ -->
+<section class="sec">
+  <div class="s-num">01 / 08</div>
+  <div class="s-tag">Il team</div>
+  <h2 class="s-h">Due unità, <em>un solo team</em>. Strategia da Napoli, produzione da Roma.</h2>
+  <p class="s-lead">Ribrain Studio gestisce strategia, copy, community e ADV; Snacky Agency &mdash; la nostra unit romana &mdash; produce foto e video sul campo, struttura per struttura, con vicinanza fisica alle 32 sedi di Roma. Nessun handover esterno, nessun freelance volante: lo stesso team per 24 mesi.</p>
+
+  <div class="team-slide-wrap" id="teamSlide">
+    <img src="team-slide.jpg" alt="Il team Ribrain × Snacky che lavorerà al progetto BZAR" class="team-slide-img">
+    <div class="team-slide-cap">
+      <span class="team-slide-l">Slide 41 &middot; Pitch BZAR</span>
+      <span class="team-slide-t">I volti del team operativo &mdash; Ribrain Studio + Snacky Agency</span>
+    </div>
+  </div>
+
+  <div class="team-wrap">
+    <div class="team-col" data-team="rib">
+      <div class="team-h">
+        <div>
+          <div class="team-loc">Napoli &middot; Strategia &amp; Always-on</div>
+          <div class="team-name">Ribrain Studio &middot; <span class="team-count">9 persone</span></div>
+        </div>
+      </div>
+      <p class="team-mission">Pensa la voce, scrive il calendario, presidia i canali, ottimizza le ADV e legge i numeri. Stabilità del team per tutta la durata del contratto.</p>
+      <div class="team-roles">
+        <div class="role"><div class="role-name">CEO &middot; ×2</div><div class="role-do">Direzione strategica, account ownership massimo livello, garanzia continuità partnership</div></div>
+        <div class="role"><div class="role-name">Account &amp; Project Manager &middot; ×2</div><div class="role-do">Single point of contact con Francesco M., owner del piano, project tracking, escalation</div></div>
+        <div class="role"><div class="role-name">Copywriter</div><div class="role-do">Tono di voce per account, caption, microcopy, naming campagne</div></div>
+        <div class="role"><div class="role-name">Art Director &middot; ×2</div><div class="role-do">Direzione creativa, mood, format design, supervisione output Snacky</div></div>
+        <div class="role"><div class="role-name">Social Media Manager</div><div class="role-do">PED esecutivo, scheduling, community management, listening competitor</div></div>
+        <div class="role"><div class="role-name">ADS Specialist</div><div class="role-do">Meta Ads, TikTok Ads, Google Ads &mdash; setup, budgeting, ottimizzazione mensile</div></div>
+      </div>
+    </div>
+
+    <div class="team-col" data-team="snk">
+      <div class="team-h">
+        <div>
+          <div class="team-loc">Roma &middot; Unit video e foto</div>
+          <div class="team-name">Snacky Agency &middot; <span class="team-count">4 persone</span></div>
+        </div>
+      </div>
+      <p class="team-mission">Va dentro le strutture, conosce gli staff per nome, gira il ritmo emotivo che la strategia chiede. Vicinanza fisica alle 32 sedi romane.</p>
+      <div class="team-roles">
+        <div class="role"><div class="role-name">Direzione foto</div><div class="role-do">Mood book per struttura, direzione visiva, casting staff e ospiti</div></div>
+        <div class="role"><div class="role-name">Direzione video</div><div class="role-do">Reel hero, storyboard, ritmo narrativo, voice-over</div></div>
+        <div class="role"><div class="role-name">Produzione on-field</div><div class="role-do">Calendario shooting, scouting, liberatorie, coordinamento direttori hotel</div></div>
+        <div class="role"><div class="role-name">Post-produzione</div><div class="role-do">Editing, color, sub multilingua, adattamento per piattaforma e formato</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="client-bar" id="cbar">
+    <div>
+      <div class="cb-tag">Cliente &middot; Single Point of Contact</div>
+      <div class="cb-name">Francesco M.</div>
+      <div class="cb-role">Marketing &amp; Communications Manager &middot; BZAR Hotels</div>
+    </div>
+    <div></div>
+    <div class="cb-note">Referente unico per tutti i 16 account. PED approvato a sett. 2 di ogni mese &middot; review mensile on-site &middot; review strategica trimestrale.</div>
+  </div>
+</section>
+
+<!-- ═════ S2 · PROCESSO 5 FASI ═════ -->
+<section class="sec bg-alt">
+  <div class="s-num">02 / 08</div>
+  <div class="s-tag">Il processo</div>
+  <h2 class="s-h">Una fase di setup, <em>quattro che si ripetono ogni mese</em>.</h2>
+  <p class="s-lead">L'onboarding accade una sola volta. Dal mese 1 in poi, il ciclo gira come un orologio: settimana 1 strategia e PED, settimana 2 approvazione e brief Snacky, settimana 3 produzione on-field, settimana 4 pubblicazione e raccolta dati. Il ritmo mensile evita di sovraccaricare il cliente con micro-decisioni quotidiane.</p>
+
+  <div class="proc-wrap">
+    <div class="proc-line"></div>
+    <div class="proc-grid">
+      <div class="proc-step" data-step="1">
+        <div class="proc-num">01</div>
+        <div class="proc-when">Mese 0 &middot; Una tantum</div>
+        <div class="proc-title">Onboarding</div>
+        <div class="proc-desc">Audit account, accessi, raccolta asset, mappa stakeholder per struttura, calendario shooting Q1 con direttori hotel.</div>
+        <div class="proc-deliv">Deliverable: brief approvato + calendario Q1</div>
+      </div>
+      <div class="proc-step" data-step="2">
+        <div class="proc-num">02</div>
+        <div class="proc-when">Settimana 1 &middot; Ricorrente</div>
+        <div class="proc-title">Strategia &amp; PED</div>
+        <div class="proc-desc">Dal mese 2: analisi performance mese precedente. Definizione tema mensile, bozza PED per ogni struttura, media plan ADV.</div>
+        <div class="proc-deliv">Deliverable: PED draft + media plan</div>
+      </div>
+      <div class="proc-step" data-step="3">
+        <div class="proc-num">03</div>
+        <div class="proc-when">Settimana 2 &middot; Ricorrente</div>
+        <div class="proc-title">Approvazione &amp; Brief</div>
+        <div class="proc-desc">Review congiunto PED con Francesco M., sign-off finale, brief Snacky per le strutture del mese, coordinamento direttori per agenda shooting.</div>
+        <div class="proc-deliv">Deliverable: PED approvato + brief produzione</div>
+      </div>
+      <div class="proc-step" data-step="4">
+        <div class="proc-num">04</div>
+        <div class="proc-when">Settimana 3 &middot; Ricorrente</div>
+        <div class="proc-title">Produzione on-field</div>
+        <div class="proc-desc">Snacky entra nelle strutture programmate, gira foto e video con staff e ospiti, post-produzione (editing, color, sub) entro fine settimana.</div>
+        <div class="proc-deliv">Deliverable: pacchetto contenuti finale</div>
+      </div>
+      <div class="proc-step" data-step="5">
+        <div class="proc-num">05</div>
+        <div class="proc-when">Settimana 4 + chiusura</div>
+        <div class="proc-title">Pubblicazione &amp; Analytics</div>
+        <div class="proc-desc">Scheduling completo, pubblicazione sui canali, ADV attivata, community management. Raccolta KPI che alimenta la Sett 1 del ciclo successivo.</div>
+        <div class="proc-deliv">Deliverable: mese pubblicato + dataset performance</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ S3 · FREQUENZA PER TIER ═════ -->
+<section class="sec">
+  <div class="s-num">03 / 08</div>
+  <div class="s-tag">Frequenza per tier</div>
+  <h2 class="s-h">Tre livelli di intensità. <em>Stesso metodo, sforzo calibrato.</em></h2>
+  <p class="s-lead">Non tutte le strutture hanno bisogno della stessa pressione. Le hotel ammiraglie di Roma vanno sempre on, gli outlet F&amp;B con cadenza più snella, la Toscana solo nei momenti che contano. Il piano economico segue questa segmentazione.</p>
+
+  <div class="tier-grid">
+    <div class="tier a" data-tier="a">
+      <div class="tier-tag">Livello A · Hotel Roma</div>
+      <h3 class="tier-h">Sempre <em>on</em></h3>
+      <p class="tier-who">Viminale &middot; Condominio Monti &middot; Dimora Coppelle &middot; Adoro &middot; La Griffe</p>
+      <div class="tier-cad">
+        <div class="cad-row"><span class="cad-v">3-4</span><span class="cad-l"><strong>Post a settimana</strong> &middot; mix reel + foto + carosello</span></div>
+        <div class="cad-row"><span class="cad-v">1/dì</span><span class="cad-l"><strong>Stories</strong> Instagram + Facebook</span></div>
+        <div class="cad-row"><span class="cad-v">1/mese</span><span class="cad-l"><strong>Reel hero</strong> da Snacky shooting</span></div>
+        <div class="cad-row"><span class="cad-v">1/Q</span><span class="cad-l"><strong>Lift ADV</strong> trimestrale per persona target</span></div>
+      </div>
+      <div class="tier-mix">
+        <div class="mix-l">Mix di formato &middot; output mensile</div>
+        <div class="mix-bar">
+          <div class="mix-seg video" style="width:50%"></div>
+          <div class="mix-seg foto" style="width:30%"></div>
+          <div class="mix-seg car" style="width:20%"></div>
+        </div>
+        <div class="mix-leg"><span class="ml-v">Video 50%</span><span class="ml-f">Foto 30%</span><span class="ml-c">Carosello 20%</span></div>
+      </div>
+    </div>
+
+    <div class="tier b" data-tier="b">
+      <div class="tier-tag">Livello B · F&amp;B Standalone</div>
+      <h3 class="tier-h"><em>On</em>, ma snello</h3>
+      <p class="tier-who">Spritzeria Monti &middot; Osteria Oliva &middot; Moderno Bakery &middot; A Mano (lancio giugno) &middot; Elisia</p>
+      <div class="tier-cad">
+        <div class="cad-row"><span class="cad-v">2-3</span><span class="cad-l"><strong>Post a settimana</strong> &middot; video-first, food close-up</span></div>
+        <div class="cad-row"><span class="cad-v">1/dì</span><span class="cad-l"><strong>Stories</strong> Instagram (no Facebook)</span></div>
+        <div class="cad-row"><span class="cad-v">1/mese</span><span class="cad-l"><strong>Reel hero</strong> chef o piatto signature</span></div>
+        <div class="cad-row"><span class="cad-v">on demand</span><span class="cad-l"><strong>ADV</strong> per eventi, lanci, novità menu</span></div>
+      </div>
+      <div class="tier-mix">
+        <div class="mix-l">Mix di formato &middot; output mensile</div>
+        <div class="mix-bar">
+          <div class="mix-seg video" style="width:60%"></div>
+          <div class="mix-seg foto" style="width:30%"></div>
+          <div class="mix-seg car" style="width:10%"></div>
+        </div>
+        <div class="mix-leg"><span class="ml-v">Video 60%</span><span class="ml-f">Foto 30%</span><span class="ml-c">Carosello 10%</span></div>
+      </div>
+    </div>
+
+    <div class="tier c" data-tier="c">
+      <div class="tier-tag">Livello C · Toscana</div>
+      <h3 class="tier-h">A <em>stagione</em></h3>
+      <p class="tier-who">La Collegiata &middot; Il Castello di Leonina &mdash; integrati nel canale BZAR centrale</p>
+      <div class="tier-cad">
+        <div class="cad-row"><span class="cad-v">4-6</span><span class="cad-l"><strong>Post al mese</strong> &middot; periodo aprile-ottobre</span></div>
+        <div class="cad-row"><span class="cad-v">eventi</span><span class="cad-l"><strong>Stories</strong> in cluster su Vendemmia, MICE, weekend lunghi</span></div>
+        <div class="cad-row"><span class="cad-v">1/Q</span><span class="cad-l"><strong>Reel hero</strong> per stagione (primavera/estate)</span></div>
+        <div class="cad-row"><span class="cad-v">1/Q</span><span class="cad-l"><strong>ADV</strong> stagionale &middot; targeting MICE + coppie</span></div>
+      </div>
+      <div class="tier-mix">
+        <div class="mix-l">Mix di formato &middot; output stagionale</div>
+        <div class="mix-bar">
+          <div class="mix-seg video" style="width:40%"></div>
+          <div class="mix-seg foto" style="width:50%"></div>
+          <div class="mix-seg car" style="width:10%"></div>
+        </div>
+        <div class="mix-leg"><span class="ml-v">Video 40%</span><span class="ml-f">Foto 50%</span><span class="ml-c">Carosello 10%</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ S4 · CICLO MENSILE ═════ -->
+<section class="sec bg-dark">
+  <div class="s-num">04 / 08</div>
+  <div class="s-tag">Il ciclo mensile</div>
+  <h2 class="s-h">Quattro settimane, <em>un solo ciclo</em>. Mensile, prevedibile, in loop.</h2>
+  <p class="s-lead">Lavorare in cicli mensili &mdash; non in micro-decisioni settimanali &mdash; protegge sia il team Ribrain sia BZAR da un ritmo di approvazioni e revisioni che diventerebbe insostenibile su 16 account. Una decisione importante a inizio mese, una review a fine mese, in mezzo l'esecuzione.</p>
+
+  <div class="cycle-wrap">
+    <div class="cycle-grid">
+      <article class="cycle-card" data-cy="1">
+        <div class="cy-h">
+          <span class="cy-wk">Settimana 1</span>
+          <span class="cy-team">Ribrain</span>
+        </div>
+        <h3 class="cy-title">Strategia &amp; PED</h3>
+        <div class="cy-acts">
+          <div class="cy-act">Analisi performance mese precedente (dal mese 2)</div>
+          <div class="cy-act">Definizione tema mensile per ogni struttura</div>
+          <div class="cy-act">Bozza piano editoriale per Liv. A / B / C</div>
+          <div class="cy-act">Media planning ADV mensile (Meta + TikTok + Google)</div>
+        </div>
+        <div class="cy-deliv"><span>Deliverable</span>PED draft + media plan</div>
+      </article>
+
+      <article class="cycle-card" data-cy="2">
+        <div class="cy-h">
+          <span class="cy-wk">Settimana 2</span>
+          <span class="cy-team">Ribrain × BZAR</span>
+        </div>
+        <h3 class="cy-title">Approvazione &amp; Brief</h3>
+        <div class="cy-acts">
+          <div class="cy-act">Review congiunto del PED con Francesco M.</div>
+          <div class="cy-act">Sign-off finale piano editoriale (gate del ciclo)</div>
+          <div class="cy-act">Brief shooting a Snacky con dettagli per struttura</div>
+          <div class="cy-act">Coordinamento con direttori hotel per agenda Sett 3</div>
+        </div>
+        <div class="cy-deliv"><span>Deliverable</span>PED approvato + brief produzione</div>
+      </article>
+
+      <article class="cycle-card" data-cy="3">
+        <div class="cy-h">
+          <span class="cy-wk">Settimana 3</span>
+          <span class="cy-team">Snacky × Hotel</span>
+        </div>
+        <h3 class="cy-title">Produzione on-field</h3>
+        <div class="cy-acts">
+          <div class="cy-act">Shooting nelle strutture pianificate (foto + video)</div>
+          <div class="cy-act">Coordinamento staff e direttori in loco</div>
+          <div class="cy-act">Cattura UGC + interviste staff (Fabiana, Lorenzo, Federico&hellip;)</div>
+          <div class="cy-act">Post-produzione: editing, color, sub multilingua</div>
+        </div>
+        <div class="cy-deliv"><span>Deliverable</span>Pacchetto contenuti pronto</div>
+      </article>
+
+      <article class="cycle-card" data-cy="4">
+        <div class="cy-h">
+          <span class="cy-wk">Settimana 4</span>
+          <span class="cy-team">Ribrain</span>
+        </div>
+        <h3 class="cy-title">Pubblicazione &amp; Listening</h3>
+        <div class="cy-acts">
+          <div class="cy-act">Scheduling completo del mese sui canali nativi (IG, FB, TikTok)</div>
+          <div class="cy-act">Pubblicazione attiva + ADV lift mensile</div>
+          <div class="cy-act">Community management H+24 sui canali</div>
+          <div class="cy-act">Raccolta KPI &mdash; alimenta la Sett 1 successiva</div>
+        </div>
+        <div class="cy-deliv"><span>Deliverable</span>Mese pubblicato + dataset performance</div>
+      </article>
+    </div>
+
+    <div class="cycle-loop" id="cycLoop">
+      <span class="cycle-loop-arrow">↻</span>
+      <span class="cycle-loop-text">I dati di Settimana 4 alimentano la Strategia di Settimana 1 del mese successivo. Il ciclo non si rompe mai.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ S5 · ADV STRATEGY ═════ -->
+<section class="sec">
+  <div class="s-num">05 / 08</div>
+  <div class="s-tag">ADV strategy</div>
+  <h2 class="s-h">Tre canali pubblicitari, <em>tre obiettivi diversi</em>. Niente sparare nel mucchio.</h2>
+  <p class="s-lead">Meta porta awareness e retargeting visit-to-book. TikTok intercetta la discovery Gen Z. Google protegge il brand e converte chi cerca direttamente. Ogni canale ha un budget proprio, una persona target, una metrica di successo.</p>
+
+  <div class="adv-wrap">
+    <div class="adv-row" data-adv="1">
+      <div class="adv-channel">
+        <span class="adv-ch-tag">Canale 01</span>
+        <span class="adv-ch-name">Meta Ads</span>
+        <span class="adv-ch-role">Awareness + Retargeting</span>
+      </div>
+      <div class="adv-targets">
+        <div class="adv-tgt"><span class="adv-tgt-l">Persona</span><span class="adv-tgt-c"><strong>Sophie</strong> (famiglia, Lione) + <strong>Katharina</strong> (coppia, Zurigo)</span></div>
+        <div class="adv-tgt"><span class="adv-tgt-l">Obiettivo</span><span class="adv-tgt-c">Always-on awareness Roma + retargeting visitor sito</span></div>
+        <div class="adv-tgt"><span class="adv-tgt-l">KPI</span><span class="adv-tgt-c">Reach incrementale &middot; CTR &middot; conversion direct booking</span></div>
+      </div>
+      <div class="adv-cad">
+        <span class="adv-cad-v">12 mesi</span>
+        <span class="adv-cad-l">always-on</span>
+      </div>
+    </div>
+
+    <div class="adv-row" data-adv="2">
+      <div class="adv-channel">
+        <span class="adv-ch-tag">Canale 02</span>
+        <span class="adv-ch-name">TikTok Ads</span>
+        <span class="adv-ch-role">Discovery + Lift</span>
+      </div>
+      <div class="adv-targets">
+        <div class="adv-tgt"><span class="adv-tgt-l">Persona</span><span class="adv-tgt-c"><strong>Olivia</strong> (Londra, visual-first) + <strong>Leo</strong> (Barcellona, creativo)</span></div>
+        <div class="adv-tgt"><span class="adv-tgt-l">Obiettivo</span><span class="adv-tgt-c">Discovery Gen Z &middot; brand association con quartieri romani</span></div>
+        <div class="adv-tgt"><span class="adv-tgt-l">KPI</span><span class="adv-tgt-c">Video view rate &middot; saves &middot; profile visit &middot; click-out sito</span></div>
+      </div>
+      <div class="adv-cad">
+        <span class="adv-cad-v">4 lift/anno</span>
+        <span class="adv-cad-l">trimestrale</span>
+      </div>
+    </div>
+
+    <div class="adv-row" data-adv="3">
+      <div class="adv-channel">
+        <span class="adv-ch-tag">Canale 03</span>
+        <span class="adv-ch-name">Google Ads</span>
+        <span class="adv-ch-role">Brand protection + Convert</span>
+      </div>
+      <div class="adv-targets">
+        <div class="adv-tgt"><span class="adv-tgt-l">Persona</span><span class="adv-tgt-c">Tutte &mdash; chi ha già il brand in mente e cerca direttamente</span></div>
+        <div class="adv-tgt"><span class="adv-tgt-l">Obiettivo</span><span class="adv-tgt-c">Branded search protection (no OTA hijack) + landing direct booking</span></div>
+        <div class="adv-tgt"><span class="adv-tgt-l">KPI</span><span class="adv-tgt-c">Quality score &middot; CPA prenotazione &middot; share of voice branded</span></div>
+      </div>
+      <div class="adv-cad">
+        <span class="adv-cad-v">12 mesi</span>
+        <span class="adv-cad-l">always-on</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="adv-timeline" id="advTl">
+    <div class="adv-tl-h">Calendario campagne lift &middot; Anno operativo</div>
+    <div class="adv-tl-grid">
+      <div class="tl-month"><span class="tl-mn">Gen</span></div>
+      <div class="tl-month"><span class="tl-mn">Feb</span></div>
+      <div class="tl-month lift"><span class="tl-mn">Mar</span><span class="tl-mtag">Spring lift &middot; coppie</span></div>
+      <div class="tl-month"><span class="tl-mn">Apr</span></div>
+      <div class="tl-month"><span class="tl-mn">Mag</span></div>
+      <div class="tl-month lift"><span class="tl-mn">Giu</span><span class="tl-mtag">Summer + lancio A Mano</span></div>
+      <div class="tl-month"><span class="tl-mn">Lug</span></div>
+      <div class="tl-month"><span class="tl-mn">Ago</span></div>
+      <div class="tl-month lift"><span class="tl-mn">Set</span><span class="tl-mtag">Autumn &middot; MICE Toscana</span></div>
+      <div class="tl-month"><span class="tl-mn">Ott</span></div>
+      <div class="tl-month lift"><span class="tl-mn">Nov</span><span class="tl-mtag">Christmas lift &middot; cene</span></div>
+      <div class="tl-month"><span class="tl-mn">Dic</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ S6 · CALENDARIO MESE 1 VIMINALE ═════ -->
+<section class="sec bg-alt">
+  <div class="s-num">06 / 08</div>
+  <div class="s-tag">Esempio operativo &middot; Mese 1</div>
+  <h2 class="s-h">Cosa pubblichiamo davvero. <em>Hotel Viminale, primo mese.</em></h2>
+  <p class="s-lead">Un calendario reale, non un mood board. Tema mensile, pillar, formato giorno per giorno. È il deliverable che Francesco M. riceve a fine settimana 4 dell'onboarding e che diventa il modello replicabile per le altre 15 strutture.</p>
+
+  <div class="cal-intro">
+    <div class="cal-theme">Tema del mese · Viminale</div>
+    <div class="cal-headline">"Il paradosso del primo posto: 678 follower, #1 su 1.153 hotel romani."</div>
+  </div>
+
+  <div class="cal-wrap">
+    <div class="cal-head">
+      <div class="cal-h-week"></div>
+      <div class="cal-dh">Lun</div>
+      <div class="cal-dh">Mar</div>
+      <div class="cal-dh">Mer</div>
+      <div class="cal-dh">Gio</div>
+      <div class="cal-dh">Ven</div>
+      <div class="cal-dh">Sab</div>
+      <div class="cal-dh">Dom</div>
+    </div>
+
+    <div class="cal-row">
+      <div class="cal-wk">Sett 1</div>
+      <div class="cal-cell" data-c="0"><div class="cal-d">L</div></div>
+      <div class="cal-cell has video" data-c="1"><div class="cal-d">M</div><div class="cal-fmt">Reel</div><div class="cal-topic">"Sono primi su 1.153" &mdash; opening manifesto</div></div>
+      <div class="cal-cell has story" data-c="2"><div class="cal-d">M</div><div class="cal-fmt">Story 5x</div><div class="cal-topic">Behind reel: il muro recensioni</div></div>
+      <div class="cal-cell has foto" data-c="3"><div class="cal-d">G</div><div class="cal-fmt">Foto</div><div class="cal-topic">Esterno hotel + insegna iconica</div></div>
+      <div class="cal-cell" data-c="4"><div class="cal-d">V</div></div>
+      <div class="cal-cell has car" data-c="5"><div class="cal-d">S</div><div class="cal-fmt">Carosello 7</div><div class="cal-topic">7 frasi delle recensioni #1</div></div>
+      <div class="cal-cell has story" data-c="6"><div class="cal-d">D</div><div class="cal-fmt">Story 4x</div><div class="cal-topic">Il quartiere alle 7 di mattina</div></div>
+    </div>
+
+    <div class="cal-row">
+      <div class="cal-wk">Sett 2</div>
+      <div class="cal-cell" data-c="7"><div class="cal-d">L</div></div>
+      <div class="cal-cell has foto" data-c="8"><div class="cal-d">M</div><div class="cal-fmt">Foto</div><div class="cal-topic">Fabiana al desk &mdash; staff series</div></div>
+      <div class="cal-cell has story" data-c="9"><div class="cal-d">M</div><div class="cal-fmt">Story 5x</div><div class="cal-topic">Q&amp;A Fabiana: la sua Roma</div></div>
+      <div class="cal-cell has video" data-c="10"><div class="cal-d">G</div><div class="cal-fmt">Reel</div><div class="cal-topic">"Cosa dice Fabiana ai checked-in"</div></div>
+      <div class="cal-cell" data-c="11"><div class="cal-d">V</div></div>
+      <div class="cal-cell has foto" data-c="12"><div class="cal-d">S</div><div class="cal-fmt">Foto</div><div class="cal-topic">Lorenzo al concierge &mdash; ritratto</div></div>
+      <div class="cal-cell has story" data-c="13"><div class="cal-d">D</div><div class="cal-fmt">Story 4x</div><div class="cal-topic">3 indirizzi Lorenzo nel rione</div></div>
+    </div>
+
+    <div class="cal-row">
+      <div class="cal-wk">Sett 3</div>
+      <div class="cal-cell" data-c="14"><div class="cal-d">L</div></div>
+      <div class="cal-cell has video" data-c="15"><div class="cal-d">M</div><div class="cal-fmt">Reel</div><div class="cal-topic">"5 minuti dal Viminale" &mdash; quartiere</div></div>
+      <div class="cal-cell has story" data-c="16"><div class="cal-d">M</div><div class="cal-fmt">Story 6x</div><div class="cal-topic">Saved places: 6 indirizzi rione</div></div>
+      <div class="cal-cell has foto" data-c="17"><div class="cal-d">G</div><div class="cal-fmt">Foto</div><div class="cal-topic">La camera 12 al tramonto</div></div>
+      <div class="cal-cell" data-c="18"><div class="cal-d">V</div></div>
+      <div class="cal-cell has car" data-c="19"><div class="cal-d">S</div><div class="cal-fmt">Carosello 5</div><div class="cal-topic">Map "Roma in 5 min": food &middot; libreria &middot; bar &middot; museo</div></div>
+      <div class="cal-cell has story" data-c="20"><div class="cal-d">D</div><div class="cal-fmt">Story 5x</div><div class="cal-topic">Domenica romana, ritmo lento</div></div>
+    </div>
+
+    <div class="cal-row">
+      <div class="cal-wk">Sett 4</div>
+      <div class="cal-cell" data-c="21"><div class="cal-d">L</div></div>
+      <div class="cal-cell has foto" data-c="22"><div class="cal-d">M</div><div class="cal-fmt">Foto</div><div class="cal-topic">Federico, housekeeping &mdash; staff series</div></div>
+      <div class="cal-cell has story" data-c="23"><div class="cal-d">M</div><div class="cal-fmt">Story 5x</div><div class="cal-topic">Dietro la pulizia: il dettaglio invisibile</div></div>
+      <div class="cal-cell has video" data-c="24"><div class="cal-d">G</div><div class="cal-fmt">Reel hero</div><div class="cal-topic">"Una notte al Viminale" &mdash; reel chiusura mese</div></div>
+      <div class="cal-cell" data-c="25"><div class="cal-d">V</div></div>
+      <div class="cal-cell has car" data-c="26"><div class="cal-d">S</div><div class="cal-fmt">Carosello UGC</div><div class="cal-topic">8 ospiti raccontano in 8 frasi</div></div>
+      <div class="cal-cell has story" data-c="27"><div class="cal-d">D</div><div class="cal-fmt">Story 4x</div><div class="cal-topic">Wrap-up &middot; teaser mese 2</div></div>
+    </div>
+
+    <div class="cal-leg">
+      <span class="cal-l-i video">Reel</span>
+      <span class="cal-l-i foto">Foto</span>
+      <span class="cal-l-i car">Carosello</span>
+      <span class="cal-l-i story">Story serie</span>
+    </div>
+
+    <div class="cal-stats">
+      <div class="cs-i"><span class="cs-v">12</span><span class="cs-l">Post pubblicati</span></div>
+      <div class="cs-i"><span class="cs-v">38</span><span class="cs-l">Story (8 serie)</span></div>
+      <div class="cs-i"><span class="cs-v">4</span><span class="cs-l">Reel (1 hero)</span></div>
+      <div class="cs-i"><span class="cs-v">3</span><span class="cs-l">Carosello</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ S7 · STACK & GOVERNANCE ═════ -->
+<section class="sec">
+  <div class="s-num">07 / 08</div>
+  <div class="s-tag">Stack &amp; governance</div>
+  <h2 class="s-h">Gli <em>strumenti che già usate</em>. Niente piattaforme da imparare.</h2>
+  <p class="s-lead">Lavoriamo dentro Google Workspace e via email + telefono. Per gli analytics ci adattiamo a quello che BZAR usa già. L'unica disciplina imposta è il ciclo mensile e gli SLA &mdash; il resto è dentro le vostre abitudini, senza file persi e senza software in più sulle scrivanie.</p>
+
+  <div class="sg-wrap">
+    <div class="sg-card" data-sg="stack">
+      <div class="sg-h">Lo stack <span class="sg-h-tag">7 strumenti &middot; Tutti già vostri</span></div>
+      <div class="sg-list">
+        <div class="sg-item"><span class="sg-pill">Google Drive</span><div><div class="sg-text"><strong>Shared workspace</strong> &middot; piano editoriale, brief, asset, brand book</div><div class="sg-sub">Francesco M. ha accesso totale, può commentare ovunque, niente account in più</div></div></div>
+        <div class="sg-item"><span class="sg-pill">Excel / Sheets</span><div><div class="sg-text"><strong>PED, calendari mensili, KPI tracking</strong> &middot; un file vivo per struttura</div><div class="sg-sub">Versionato in Drive, accesso in lettura/scrittura modulato per ruolo</div></div></div>
+        <div class="sg-item"><span class="sg-pill">Email</span><div><div class="sg-text"><strong>Comunicazione formale</strong> &middot; brief, approvazioni PED, deliverable, report</div><div class="sg-sub">Tracciabilità completa &middot; tempi di risposta &lt; 4h business hours</div></div></div>
+        <div class="sg-item"><span class="sg-pill">Telefono dedicato</span><div><div class="sg-text"><strong>Urgenze, daily ops, escalation</strong> &middot; numero diretto Account Manager</div><div class="sg-sub">Per quando l'email è troppo lenta &middot; sempre uno stesso interlocutore</div></div></div>
+        <div class="sg-item"><span class="sg-pill">Google Meet</span><div><div class="sg-text"><strong>Call mensili + trimestrali</strong> &middot; review, allineamenti, brief con direttori</div><div class="sg-sub">Riunioni ad hoc se serve, niente call inutili in calendario</div></div></div>
+        <div class="sg-item"><span class="sg-pill">Google Calendar</span><div><div class="sg-text"><strong>Agenda shooting Snacky</strong> &middot; struttura, data, location, casting</div><div class="sg-sub">Visibile a Francesco M. e ai direttori hotel, evita doppie prenotazioni</div></div></div>
+        <div class="sg-item"><span class="sg-pill">Analytics cliente</span><div><div class="sg-text"><strong>Lavoriamo nei tool che BZAR ha già</strong> &middot; Meta Insights, GA4, Looker, qualsiasi</div><div class="sg-sub">Ci adattiamo &mdash; non vi imponiamo dashboard nostre da gestire</div></div></div>
+      </div>
+    </div>
+
+    <div class="sg-card" data-sg="gov">
+      <div class="sg-h">La governance <span class="sg-h-tag">SLA 48h</span></div>
+      <div class="sg-list">
+        <div class="sg-item"><span class="sg-pill">Mid-cycle</span><div><div class="sg-text"><strong>PED in approvazione</strong> a fine Settimana 1 / inizio Settimana 2</div><div class="sg-sub">SLA 48h. Se nessuna risposta entro 72h: escalation per email diretta</div></div></div>
+        <div class="sg-item"><span class="sg-pill">Fine ciclo</span><div><div class="sg-text"><strong>Performance review</strong> mensile + brief mese successivo (dati Sett 4)</div><div class="sg-sub">Documento su Drive + check-in 30 minuti via Meet</div></div></div>
+        <div class="sg-item"><span class="sg-pill">Trimestrale</span><div><div class="sg-text"><strong>Strategic review on-site Roma</strong> &middot; KPI vs target, ottimizzazione piano, allocazione ADV</div><div class="sg-sub">In presenza, 90 minuti, alla sede BZAR scelta da Francesco M.</div></div></div>
+        <div class="sg-item"><span class="sg-pill">Crisis</span><div><div class="sg-text"><strong>Escalation H+2</strong> &middot; protocollo gestione crisi reputazionale</div><div class="sg-sub">Chiamata diretta + bozza risposta entro 2h, fuori dal ciclo</div></div></div>
+        <div class="sg-item"><span class="sg-pill">Onboarding</span><div><div class="sg-text"><strong>Apertura nuova struttura</strong> &middot; 2 settimane di setup pre-lancio</div><div class="sg-sub">Esempio: A Mano (giugno 2026) &mdash; piano già pronto in fase di brief</div></div></div>
+      </div>
+      <div class="sg-sla">
+        <span class="sg-sla-l">Tempo medio risposta team Ribrain</span>
+        <span class="sg-sla-v">&lt; 2h</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ S8 · IL PATTO ═════ -->
+<section class="sec bg-alt">
+  <div class="s-num">08 / 08</div>
+  <div class="s-tag">Il patto</div>
+  <h2 class="s-h">Cosa BZAR riceve, <em>cosa non facciamo</em>. Senza ambiguità.</h2>
+  <p class="s-lead">Trasparenza è la sola garanzia di una partnership che dura due anni e oltre. Ecco esattamente cosa è dentro il retainer mensile e cosa è fuori scope &mdash; per evitare frizioni in corsa.</p>
+
+  <div class="patto-wrap">
+    <div class="patto-col si" data-patto="si">
+      <div class="patto-icon">+</div>
+      <h3 class="patto-h">Cosa è incluso</h3>
+      <div class="patto-list">
+        <div class="patto-li"><span><strong>12 post</strong> per struttura Liv. A &middot; 8 per Liv. B &middot; 4-6 per Liv. C</span></div>
+        <div class="patto-li"><span><strong>30 stories/mese</strong> per Liv. A &middot; 20 per Liv. B</span></div>
+        <div class="patto-li"><span><strong>1 reel hero</strong> mensile per ogni struttura attiva (Snacky shooting on-site)</span></div>
+        <div class="patto-li"><span><strong>Community management H+24</strong> 7 giorni su 7 per tutti gli account</span></div>
+        <div class="patto-li"><span><strong>Setup e ottimizzazione</strong> Meta Ads, TikTok Ads, Google Ads &mdash; budget separato</span></div>
+        <div class="patto-li"><span><strong>Report mensile completo</strong> + review trimestrale on-site &mdash; nei tool analytics che BZAR già usa</span></div>
+        <div class="patto-li"><span><strong>Brief operativo</strong> per nuove aperture (es. A Mano giugno 2026)</span></div>
+        <div class="patto-li"><span><strong>Escalation crisi reputazionale</strong> H+2 con protocollo dedicato</span></div>
+      </div>
+    </div>
+
+    <div class="patto-col no" data-patto="no">
+      <div class="patto-icon">&minus;</div>
+      <h3 class="patto-h">Cosa non facciamo</h3>
+      <div class="patto-list">
+        <div class="patto-li"><span><strong>Account brand</strong> non concordati nel piano iniziale (out of scope)</span></div>
+        <div class="patto-li"><span><strong>Post commerciali</strong> non in linea con il tono di voce esperienziale</span></div>
+        <div class="patto-li"><span><strong>Contenuto</strong> generato senza brief approvato &mdash; mai improvvisato</span></div>
+        <div class="patto-li"><span><strong>Modifiche al PED</strong> dopo l'approvazione di Settimana 2 &mdash; integrate nel ciclo successivo</span></div>
+        <div class="patto-li"><span><strong>Gestione recensioni</strong> TripAdvisor / Google &mdash; resta in carico al team BZAR</span></div>
+        <div class="patto-li"><span><strong>Sviluppo sito</strong> o landing page &mdash; competenza del partner web di BZAR</span></div>
+        <div class="patto-li"><span><strong>Email marketing</strong> e CRM &mdash; canali separati, da definire eventualmente</span></div>
+        <div class="patto-li"><span><strong>Influencer marketing</strong> &gt;10K follower &mdash; quotato a parte come progetto</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ FINALE ═════ -->
+<section class="finale" id="finale">
+  <div class="finale-bg"></div>
+  <div class="finale-tag">Insight chiave</div>
+  <h2 class="finale-h" id="finh">Un metodo. <em>Stesso ufficio.</em></h2>
+  <p class="finale-sub" id="finsub">Il valore di una partnership stabile non è solo nei contenuti: è nel non dover rispiegare ogni mese chi siete, cosa volete dire, dove state andando. Ribrain e Snacky entrano nel team BZAR e ci restano.</p>
+  <a href="m9.html" class="finale-cta" id="fincta">Prossimo · Esempi di contenuto</a>
+</section>
+
+<!-- ═════ ANIMAZIONI MODULO M8 ═════ -->
+<script>
+(function(){
+'use strict';
+
+if(typeof gsap==='undefined'||typeof ScrollTrigger==='undefined'){
+  // fallback: rimuovi opacity:0 dopo 2s se GSAP non carica
+  setTimeout(function(){
+    var hidden=document.querySelectorAll('[style*="opacity:0"], .proc-step, .tier, .cycle-card, .adv-row, #advTl, .sg-card, .patto-col, .cal-cell, .client-bar, #teamSlide, #cycLoop');
+    for(var i=0;i<hidden.length;i++){hidden[i].style.opacity='1';hidden[i].style.transform='none';}
+  },2500);
+  return;
+}
+
+gsap.registerPlugin(ScrollTrigger);
+
+/* CURSOR */
+(function(){
+  var c=document.getElementById('cur');if(!c)return;
+  document.addEventListener('mousemove',function(e){
+    gsap.to(c,{left:e.clientX,top:e.clientY,duration:.18,ease:'power2.out'});
+  });
+  var hover=document.querySelectorAll('a, button, .role, .tier, .proc-step, .cycle-card, .adv-row, .cal-cell.has');
+  for(var i=0;i<hover.length;i++){
+    hover[i].addEventListener('mouseenter',function(){gsap.to(c,{width:24,height:24,duration:.2});});
+    hover[i].addEventListener('mouseleave',function(){gsap.to(c,{width:8,height:8,duration:.2});});
+  }
+})();
+
+/* HERO ANIMS */
+gsap.fromTo('#htag',{opacity:0,y:10},{opacity:1,y:0,duration:.7,delay:.15,ease:'power2.out'});
+gsap.fromTo('#hl1',{opacity:0,y:24},{opacity:1,y:0,duration:.9,delay:.3,ease:'power3.out'});
+gsap.fromTo('#hl2',{opacity:0,y:24},{opacity:1,y:0,duration:.9,delay:.5,ease:'power3.out'});
+gsap.fromTo('#hsub',{opacity:0,y:14},{opacity:1,y:0,duration:.7,delay:.75,ease:'power2.out'});
+gsap.fromTo('#hcnts > div',{opacity:0,y:14},{opacity:1,y:0,duration:.7,delay:.95,stagger:.08,ease:'power2.out'});
+
+/* SECTION HEADERS (s-tag, s-h, s-lead) */
+gsap.utils.toArray('.sec').forEach(function(sec){
+  var els=sec.querySelectorAll('.s-tag, .s-h, .s-lead');
+  gsap.fromTo(els,{opacity:0,y:18},{
+    opacity:1,y:0,duration:.7,stagger:.08,ease:'power2.out',
+    scrollTrigger:{trigger:sec,start:'top 78%',once:true}
+  });
+});
+
+/* S1 · TEAM SLIDE + ROLES */
+gsap.fromTo('#teamSlide',{opacity:0,y:24},{
+  opacity:1,y:0,duration:.9,ease:'power3.out',
+  scrollTrigger:{trigger:'#teamSlide',start:'top 82%',once:true}
+});
+gsap.utils.toArray('.team-col').forEach(function(col,i){
+  var roles=col.querySelectorAll('.role');
+  gsap.fromTo(roles,{opacity:0,y:14},{
+    opacity:1,y:0,duration:.55,stagger:.05,delay:i*.1,ease:'power2.out',
+    scrollTrigger:{trigger:col,start:'top 78%',once:true}
+  });
+});
+gsap.fromTo('#cbar',{opacity:0,y:18},{
+  opacity:1,y:0,duration:.7,ease:'power3.out',
+  scrollTrigger:{trigger:'#cbar',start:'top 80%',once:true}
+});
+
+/* S2 · PROC STEPS */
+gsap.utils.toArray('.proc-step').forEach(function(step,i){
+  gsap.fromTo(step,{opacity:0,y:20},{
+    opacity:1,y:0,duration:.6,delay:i*.12,ease:'power2.out',
+    scrollTrigger:{trigger:'.proc-grid',start:'top 80%',once:true}
+  });
+});
+
+/* S3 · TIER CARDS */
+gsap.utils.toArray('.tier').forEach(function(t,i){
+  gsap.fromTo(t,{opacity:0,y:24},{
+    opacity:1,y:0,duration:.7,delay:i*.1,ease:'power3.out',
+    scrollTrigger:{trigger:'.tier-grid',start:'top 78%',once:true}
+  });
+});
+
+/* S4 · CYCLE CARDS */
+gsap.utils.toArray('.cycle-card').forEach(function(c,i){
+  gsap.fromTo(c,{opacity:0,y:24},{
+    opacity:1,y:0,duration:.7,delay:i*.15,ease:'power3.out',
+    scrollTrigger:{trigger:'.cycle-grid',start:'top 80%',once:true}
+  });
+});
+gsap.fromTo('#cycLoop',{opacity:0,y:14},{
+  opacity:1,y:0,duration:.7,delay:.6,ease:'power2.out',
+  scrollTrigger:{trigger:'.cycle-grid',start:'top 80%',once:true}
+});
+
+/* S5 · ADV ROWS */
+gsap.utils.toArray('.adv-row').forEach(function(row,i){
+  gsap.fromTo(row,{opacity:0,x:-20},{
+    opacity:1,x:0,duration:.6,delay:i*.1,ease:'power2.out',
+    scrollTrigger:{trigger:row,start:'top 82%',once:true}
+  });
+});
+gsap.fromTo('#advTl',{opacity:0,y:18},{
+  opacity:1,y:0,duration:.8,ease:'power3.out',
+  scrollTrigger:{trigger:'#advTl',start:'top 82%',once:true}
+});
+
+/* S6 · CAL CELLS */
+gsap.utils.toArray('.cal-cell').forEach(function(c,i){
+  gsap.fromTo(c,{opacity:0,scale:.95},{
+    opacity:1,scale:1,duration:.4,delay:i*.012,ease:'power2.out',
+    scrollTrigger:{trigger:'.cal-wrap',start:'top 75%',once:true}
+  });
+});
+
+/* S7 · STACK & GOV */
+gsap.utils.toArray('.sg-card').forEach(function(card,i){
+  gsap.fromTo(card,{opacity:0,y:20},{
+    opacity:1,y:0,duration:.7,delay:i*.12,ease:'power3.out',
+    scrollTrigger:{trigger:card,start:'top 80%',once:true}
+  });
+});
+
+/* S8 · PATTO */
+gsap.utils.toArray('.patto-col').forEach(function(col,i){
+  gsap.fromTo(col,{opacity:0,y:24},{
+    opacity:1,y:0,duration:.7,delay:i*.15,ease:'power3.out',
+    scrollTrigger:{trigger:'.patto-wrap',start:'top 80%',once:true}
+  });
+});
+
+/* FINALE */
+gsap.fromTo(['#finh','#finsub','#fincta'],{opacity:0,y:18},{
+  opacity:1,y:0,duration:.85,stagger:.18,ease:'power3.out',
+  scrollTrigger:{trigger:'#finale',start:'top 75%',once:true}
+});
+
+/* SAFETY: dopo 3s, garantisci che tutto sia visibile (fallback) */
+setTimeout(function(){
+  var els=document.querySelectorAll('.proc-step, .tier, .cycle-card, .adv-row, .sg-card, .patto-col, .cal-cell, .client-bar, #advTl, #teamSlide, #cycLoop');
+  for(var i=0;i<els.length;i++){
+    var el=els[i];
+    var cs=window.getComputedStyle(el);
+    if(parseFloat(cs.opacity)<.1){el.style.opacity='1';el.style.transform='none';}
+  }
+},3000);
+
+})();
+</script>
+
+
+<!-- ═══════════════════════════════════════════════
+     CRUSCOTTO BZAR · MENU + FONTI · IIFE v3 FINAL
+═══════════════════════════════════════════════════ -->
+<script>
+(function(){
+'use strict';
+
+/* ── MODULI ─────────────────────────────────────── */
+var M=[
+  {id:'m0',code:'00',label:'Executive Summary',sub:'Il gap \u00b7 La proposta',url:'m0.html',color:'#C8A88D'},
+  {id:'m1',code:'01',label:'Mercato',sub:'Roma 2026 \u00b7 OTA \u00b7 Social discovery',url:'m1.html',color:'#755847'},
+  {id:'m2',code:'02',label:'Competitor Map',sub:'Hoxton \u00b7 Chapter \u00b7 Mama \u00b7 Generator',url:'m2.html',color:'#9a7d6a'},
+  {id:'m3',code:'03',label:'Voce del Cliente',sub:'VOC \u00b7 14 account \u00b7 Gap critico',url:'m3.html',color:'#C4ACA5'},
+  {id:'m4',code:'04',label:'Personas',sub:'4 profili \u00b7 Trigger \u00b7 Social behavior',url:'m4.html',color:'#a08470'},
+  {id:'m5',code:'05',label:'Mappa del Momento',sub:'Perch\u00e9 investire adesso',url:'m5.html',color:'#C8A88D'},
+  {id:'m6',code:'06',label:'Benchmark Creativi',sub:'Il Pellicano \u00b7 Borgo S.Pietro \u00b7 The Pig',url:'m6.html',color:'#755847'},
+  {id:'m7',code:'07',label:'Brainstorming Strategico',sub:'Piano per struttura \u00b7 Mappe sinaptiche',url:'m7.html',color:'#9a7d6a'},
+  {id:'m8',code:'08',label:'Come Lavoriamo',sub:'Team \u00b7 Processo \u00b7 Cadenza \u00b7 Governance',url:'m8.html',color:'#C4ACA5'}
+];
+
+/* ── FONTI PER MODULO ───────────────────────────── */
+var FONTI={
+  m0:[],
+  m1:[
+    {label:'ENIT \u2013 Turismo verso l\'Italia, arrivi 2025',url:'https://www.enit.it/'},
+    {label:'Federalberghi / L\'Agenzia di Viaggi \u2013 Occupazione hotel Roma estate 2025',url:'https://www.lagenziadiviaggimag.it/roma-cresce-loccupazione-degli-hotel-in-estate-i-dati-federalberghi/'},
+    {label:'Barchart \u2013 Rome Hotels Pricing Trends & Demand Forecast 2026',url:'https://www.barchart.com/story/news/36932939/'},
+    {label:'Cloudbeds \u2013 A Guide to OTA Commission Rates in 2026',url:'https://www.cloudbeds.com/online-travel-agencies/commissions/'},
+    {label:'TravelQuotidiano \u2013 TikTok supera Instagram nella scelta del viaggio',url:'https://www.travelquotidiano.com/mercato_e_tecnologie/tik-tok-supera-instagram/tqid-501494'},
+    {label:'Hospitality Net \u2013 How Hotels Can Harness Social Media',url:'https://www.hospitalitynet.org/news/4128795/'}
+  ],
+  m2:[
+    {label:'@generatorhostels \u2013 560K follower \u00b7 analisi aprile 2026',url:'https://www.instagram.com/generatorhostels/'},
+    {label:'@thehoxton \u2013 427K follower \u00b7 analisi aprile 2026',url:'https://www.instagram.com/thehoxton/'},
+    {label:'@chapterhostels \u2013 45K follower \u00b7 analisi aprile 2026',url:'https://www.instagram.com/chapterhostels/'},
+    {label:'@bzarhotels \u2013 10K follower \u00b7 analisi aprile 2026',url:'https://www.instagram.com/bzarhotels/'}
+  ],
+  m3:[
+    {label:'TripAdvisor Roma \u2013 Hotel Viminale #1/1153',url:'https://www.tripadvisor.it/Hotels-g187791-Rome_Lazio-Hotels.html'},
+    {label:'@hotelviminale \u2013 678 follower IG \u00b7 analisi diretta aprile 2026',url:'https://www.instagram.com/hotelviminale/'},
+    {label:'@dimoracoppelle \u2013 172 follower IG \u00b7 5.0 TripAdvisor \u00b7 aprile 2026',url:'https://www.instagram.com/dimoracoppelle/'},
+    {label:'@spritzeria_monti \u2013 35K follower IG \u00b7 TA 3.5 \u00b7 aprile 2026',url:'https://www.instagram.com/spritzeria_monti/'},
+    {label:'@osteriaoliva.roma \u2013 789 follower \u00b7 1130+ post \u00b7 aprile 2026',url:'https://www.instagram.com/osteriaoliva.roma/'}
+  ],
+  m4:[
+    {label:'Think with Google \u2013 Travel Consumer Insights 2025',url:'https://www.thinkwithgoogle.com/'},
+    {label:'Meta \u2013 Travel Advertising Insights 2025',url:'https://www.facebook.com/business/industries/travel'},
+    {label:'Personas Social BZAR Hotels \u2013 Ribrain Deep Research aprile 2026',url:'https://bzarhotels.it/'}
+  ],
+  m5:[
+    {label:'ENIT \u2013 Turismo verso l\'Italia, arrivi e presenze 2025',url:'https://www.enit.it/'},
+    {label:'Federalberghi \u2013 Occupazione hotel Roma estate 2025',url:'https://www.lagenziadiviaggimag.it/roma-cresce-loccupazione-degli-hotel-in-estate-i-dati-federalberghi/'},
+    {label:'Barchart \u2013 Rome Hotels Pricing Trends & Demand Forecast 2026',url:'https://www.barchart.com/story/news/36932939/'},
+    {label:'Cloudbeds \u2013 OTA Commission Rates 2026',url:'https://www.cloudbeds.com/online-travel-agencies/commissions/'},
+    {label:'TravelQuotidiano \u2013 TikTok supera Instagram',url:'https://www.travelquotidiano.com/mercato_e_tecnologie/tik-tok-supera-instagram/tqid-501494'},
+    {label:'Hospitality Net \u2013 How Hotels Can Harness Social Media',url:'https://www.hospitalitynet.org/news/4128795/'}
+  ],
+  m6:[
+    {label:'@hotelilpellicano \u2013 209K follower \u00b7 aprile 2026',url:'https://www.instagram.com/hotelilpellicano/'},
+    {label:'@passalacqualakecomo \u2013 267K follower \u00b7 Reel boat ride 15K like',url:'https://www.instagram.com/reel/DIUCqS6qqT9/'},
+    {label:'@portraitmilano \u2013 94K follower \u00b7 aprile 2026',url:'https://www.instagram.com/portraitmilano/'},
+    {label:'@borgosantopietro \u2013 562K follower \u00b7 aprile 2026',url:'https://www.instagram.com/borgosantopietro/'},
+    {label:'@nihi \u2013 788K follower \u00b7 Reel cavalli in acqua 11K like',url:'https://www.instagram.com/nihi/'},
+    {label:'@thenewtinsomerset \u2013 363K follower \u00b7 Newt Minute series',url:'https://www.instagram.com/thenewtinsomerset/'},
+    {label:'@the_pig_hotels \u2013 319K follower \u00b7 Kitchen Gardener Nathan',url:'https://www.instagram.com/the_pig_hotels/'},
+    {label:'Benchmark Social Hotel Boutique e F&B \u2013 Ribrain Deep Research aprile 2026',url:'https://bzarhotels.it/'}
+  ],
+  m7:[
+    {label:'Brief Social Media BZAR Hotels 2026 \u2013 documento cliente',url:'https://bzarhotels.it/'},
+    {label:'Piano Operativo Social Media Multi-Account \u2013 Ribrain Deep Research',url:'https://bzarhotels.it/'},
+    {label:'Benchmark Social Hotel Boutique e F&B \u2013 Ribrain Deep Research',url:'https://bzarhotels.it/'},
+    {label:'Personas Social BZAR Hotels \u2013 Ribrain Deep Research',url:'https://bzarhotels.it/'},
+    {label:'Mappa del Momento BZAR Hotels \u2013 Ribrain Deep Research',url:'https://bzarhotels.it/'},
+    {label:'Brand Book BZAR Hotels 2026'.replace('&','&'),url:'https://bzarhotels.it/'}
+  ],
+  m8:[
+    {label:'Brief Social Media BZAR Hotels 2026 \u2013 documento cliente',url:'https://bzarhotels.it/'},
+    {label:'Meet conoscitivo BZAR Hotels \u00d7 Ribrain \u2013 25 marzo 2026 \u00b7 trascrizione',url:'https://bzarhotels.it/'},
+    {label:'Piano Operativo Social Media Multi-Account \u2013 Ribrain Deep Research',url:'https://bzarhotels.it/'},
+    {label:'Cloudbeds \u2013 Hospitality Industry Operational Benchmarks 2026',url:'https://www.cloudbeds.com/'},
+    {label:'Hospitality Net \u2013 Multi-property Social Media Management Best Practices',url:'https://www.hospitalitynet.org/'}
+  ]
+};
+
+/* ── PATH DETECTION ─────────────────────────────── */
+var _href=window.location.href;
+var _pm=_href.match(/\/(m\d+)(?:\.html)?(?:[?#].*)?$/);
+var path=_pm?_pm[1]:'m0';
+
+var cur=M[0];
+for(var ci=0;ci<M.length;ci++){if(M[ci].id===path){cur=M[ci];break;}}
+var srcs=FONTI[path]||[];
+
+/* ── CSS ─────────────────────────────────────────── */
+var s=document.createElement('style');
+s.textContent=[
+  '.rbmenu-btn{position:fixed;top:8px;right:14px;z-index:9001;width:36px;height:36px;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:5px;padding:6px;opacity:1}',
+  '.rbmenu-btn span{display:block;height:1.5px;background:#F1EFED;border-radius:1px;transition:all .4s cubic-bezier(0.16,1,0.3,1);transform-origin:right center;opacity:1}',
+  '.rbmenu-btn.light span{background:#1E1410}',
+  '.rbmenu-btn.in-tb{position:relative!important;top:auto!important;right:auto!important;width:32px!important;height:32px!important;padding:5px!important;flex-shrink:0!important;opacity:1!important;visibility:visible!important}',
+  '.rbmenu-btn .l1{width:20px}.rbmenu-btn .l2{width:14px}.rbmenu-btn .l3{width:20px}',
+  '.rbmenu-btn.open .l1{width:20px;transform:translateY(6.5px) rotate(-45deg)}',
+  '.rbmenu-btn.open .l2{opacity:0;width:0}',
+  '.rbmenu-btn.open .l3{width:20px;transform:translateY(-6.5px) rotate(45deg)}',
+  '.rbmenu-overlay{position:fixed;inset:0;z-index:9000;background:#1E1410;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .45s cubic-bezier(0.16,1,0.3,1)}',
+  '.rbmenu-overlay.open{opacity:1;pointer-events:auto}',
+  '.rbmenu-top{display:flex;align-items:center;justify-content:space-between;padding:16px 40px;border-bottom:1px solid rgba(200,168,141,.07);flex-shrink:0}',
+  '.rbmenu-brand{display:flex;align-items:center;gap:10px}',
+  '.rbmenu-brand-logo{height:12px;filter:invert(1);opacity:.45}',
+  '.rbmenu-brand-sep{width:1px;height:14px;background:rgba(200,168,141,.18)}',
+  '.rbmenu-brand-label{font-family:"Poppins",sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(200,168,141,.28)}',
+  '.rbmenu-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:20px 40px 32px;overflow-y:auto}',
+  '.rbmenu-items{list-style:none}',
+  '.rbmenu-item{border-top:1px solid rgba(200,168,141,.06);opacity:0;transform:translateY(16px);position:relative}',
+  '.rbmenu-item:last-child{border-bottom:1px solid rgba(200,168,141,.06)}',
+  '.rbmenu-item a{display:grid;grid-template-columns:44px 1fr auto;gap:0 16px;align-items:center;padding:12px 0;text-decoration:none;color:inherit}',
+  '.rmi-code{font-family:"Poppins",monospace;font-size:10px;letter-spacing:.1em;color:rgba(200,168,141,.2)}',
+  '.rmi-left{display:flex;flex-direction:column;gap:2px}',
+  '.rmi-label{font-family:"Afacad Flux",Georgia,sans-serif;font-weight:300;font-size:clamp(22px,3vw,40px);line-height:1;color:rgba(241,239,237,.6);transition:color .25s;letter-spacing:-.01em}',
+  '.rbmenu-item.active .rmi-label{color:rgba(241,239,237,.9)}',
+  '.rbmenu-item a:hover .rmi-label{color:rgba(241,239,237,.9)}',
+  '.rmi-sub{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.2)}',
+  '.rmi-arrow{font-size:14px;color:rgba(200,168,141,.15);transition:transform .25s,color .25s}',
+  '.rbmenu-item a:hover .rmi-arrow{transform:translateX(4px);color:rgba(200,168,141,.5)}',
+  '.rbmenu-item.active .rmi-arrow{color:rgba(200,168,141,.4)}',
+  '.rbmenu-item-bar{position:absolute;top:0;left:0;right:0;height:2px;opacity:0}',
+  '.rbmenu-item.active .rbmenu-item-bar{opacity:1}',
+  '.rbmenu-footer{padding:14px 40px;border-top:1px solid rgba(200,168,141,.07);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}',
+  '.rbmenu-footer-l{font-family:"Afacad Flux",sans-serif;font-size:13px;color:rgba(200,168,141,.25)}',
+  '.rbmenu-footer-r{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.2)}',
+  '.src-toggle{position:fixed;bottom:64px;right:16px;z-index:7900;display:flex;align-items:center;gap:6px;background:rgba(30,20,16,.92);border:1px solid rgba(200,168,141,.15);backdrop-filter:blur(16px);padding:5px 10px;cursor:pointer;font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.4);transition:all .25s;border-radius:99px}',
+  '.src-toggle:hover{border-color:rgba(200,168,141,.35);color:rgba(200,168,141,.7)}',
+  '.src-toggle .st-dot{width:5px;height:5px;border-radius:50%;background:#C8A88D;flex-shrink:0}',
+  '.src-toggle .st-n{background:rgba(200,168,141,.15);color:#C8A88D;padding:1px 5px;border-radius:10px;font-size:8px}',
+  '.src-drawer{position:fixed;bottom:48px;left:0;right:0;z-index:7800;background:rgba(20,14,10,.97);backdrop-filter:blur(24px);border-top:1px solid rgba(200,168,141,.1);max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(0.16,1,0.3,1),opacity .35s;opacity:0;pointer-events:none}',
+  '.src-drawer.open{max-height:340px;opacity:1;pointer-events:auto}',
+  '.src-drawer-inner{padding:18px 40px 20px;overflow-y:auto;max-height:300px}',
+  '.src-drawer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}',
+  '.src-drawer-title{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,168,141,.3)}',
+  '.src-close-btn{background:none;border:none;cursor:pointer;font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.25);transition:color .2s}',
+  '.src-close-btn:hover{color:rgba(200,168,141,.6)}',
+  '.src-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:4px}',
+  '.src-item{display:flex;align-items:flex-start;gap:10px;padding:9px 11px;border:1px solid rgba(200,168,141,.06);border-radius:6px}',
+  '.src-item-num{font-family:"Poppins",sans-serif;font-size:8px;letter-spacing:.1em;color:rgba(200,168,141,.22);flex-shrink:0;min-width:18px;padding-top:1px}',
+  '.src-item-label{font-size:11px;color:rgba(241,239,237,.55);line-height:1.45;margin-bottom:2px}',
+  '.src-item-url{font-family:"Poppins",sans-serif;font-size:8px;color:rgba(200,168,141,.35);text-decoration:none;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
+  '@media(max-width:640px){.rbmenu-body{padding:16px 20px 24px}.rbmenu-top,.rbmenu-footer{padding-left:20px;padding-right:20px}.src-drawer-inner{padding:14px 16px}.src-list{grid-template-columns:1fr}}'
+].join('');
+document.head.appendChild(s);
+
+/* ── HAMBURGER BUTTON ────────────────────────────── */
+var btn=document.getElementById('rbHamBtn');
+if(!btn){btn=document.createElement('button');btn.className='rb-ham';document.body.appendChild(btn);}
+
+/* ── OVERLAY ─────────────────────────────────────── */
+var ov=document.createElement('div');
+ov.className='rbmenu-overlay';
+ov.id='rbmenu-ov';
+var itemsHtml='';
+for(var ni=0;ni<M.length;ni++){
+  var nm=M[ni],na=nm.id===path;
+  itemsHtml+='<li class="rbmenu-item'+(na?' active':'')+'">'
+    +'<div class="rbmenu-item-bar" style="background:'+nm.color+'"></div>'
+    +'<a href="'+nm.url+'">'
+    +'<span class="rmi-code">'+nm.code+'</span>'
+    +'<span class="rmi-left"><span class="rmi-label">'+nm.label+'</span><span class="rmi-sub">'+nm.sub+'</span></span>'
+    +'<span class="rmi-arrow">\u2192</span>'
+    +'</a></li>';
+}
+ov.innerHTML='<div class="rbmenu-top">'
+  +'<div class="rbmenu-brand">'
+  +'<img src="https://www.ribrainstudio.com/wp-content/uploads/2025/01/Logo_ribrain_Nero.svg" class="rbmenu-brand-logo" alt="Ribrain">'
+  +'<div class="rbmenu-brand-sep"></div>'
+  +'<span class="rbmenu-brand-label">BZAR Hotels \u00d7 Ribrain</span>'
+  +'</div>'
+  +'</div>'
+  +'<div class="rbmenu-body"><ul class="rbmenu-items">'+itemsHtml+'</ul></div>'
+  +'<div class="rbmenu-footer">'
+  +'<span class="rbmenu-footer-l">Cruscotto Strategico</span>'
+  +'<span class="rbmenu-footer-r">Aprile 2026 \u00b7 Confidenziale</span>'
+  +'</div>';
+document.body.appendChild(ov);
+
+/* ── MENU LOGIC ──────────────────────────────────── */
+var menuOpen=false;
+function openMenu(){
+  menuOpen=true;btn.classList.add('open');ov.classList.add('open');
+  document.body.style.overflow='hidden';
+  var its=ov.querySelectorAll('.rbmenu-item');
+  for(var ii=0;ii<its.length;ii++){
+    (function(el,i){
+      el.style.opacity='0';el.style.transform='translateY(16px)';
+      el.style.transition='opacity .4s '+(.06+i*.05)+'s,transform .4s '+(.06+i*.05)+'s cubic-bezier(0.16,1,0.3,1)';
+      setTimeout(function(){el.style.opacity='1';el.style.transform='translateY(0)';},10);
+    })(its[ii],ii);
+  }
+}
+function closeMenu(){
+  menuOpen=false;btn.classList.remove('open');ov.classList.remove('open');
+  document.body.style.overflow='';
+}
+btn.addEventListener('click',function(){if(menuOpen)closeMenu();else openMenu();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menuOpen)closeMenu();});
+ov.addEventListener('click',function(e){if(e.target===ov)closeMenu();});
+
+/* ── NAVBAR BOTTOM ───────────────────────────────── */
+var nb=document.createElement('nav');
+nb.id='rbnav';
+var nbCSS=document.createElement('style');
+nbCSS.textContent=[
+  '#rbnav{position:fixed;bottom:0;left:0;right:0;z-index:8000;pointer-events:auto;background:rgba(30,20,16,.96);backdrop-filter:blur(20px);border-top:.5px solid rgba(200,168,141,.08);display:flex;height:48px;overflow:visible}',
+  '.rbnav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;color:rgba(200,168,141,.3);font-family:"Poppins",sans-serif;font-size:8px;letter-spacing:.08em;text-transform:uppercase;gap:2px;transition:color .2s;position:relative;min-width:0;overflow:visible;pointer-events:auto;cursor:pointer}',
+  '.rbnav-item:hover{color:rgba(200,168,141,.65)}',
+  '.rbnav-item.active{color:rgba(200,168,141,.8)}',
+  '.rbnav-item-dot{width:3px;height:3px;border-radius:50%;background:currentColor;opacity:0}',
+  '.rbnav-item.active .rbnav-item-dot{opacity:1}',
+  '.rbnav-item-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:90%}'
+].join('');
+document.head.appendChild(nbCSS);
+var nbH='';
+for(var nj=0;nj<M.length;nj++){
+  var mm=M[nj],ma=mm.id===path;
+  nbH+='<a href="'+mm.url+'" class="rbnav-item'+(ma?' active':'')+'">'
+    +'<div class="rbnav-item-dot"></div>'
+    +'<span class="rbnav-item-label">'+mm.code+' '+mm.label.split(' ')[0]+'</span>'
+    +'</a>';
+}
+nb.innerHTML=nbH;
+document.body.appendChild(nb);
+
+/* ── FONTI DRAWER ────────────────────────────────── */
+if(srcs.length>0){
+  var drawer=document.createElement('div');
+  drawer.className='src-drawer';
+  var ih='';
+  for(var i=0;i<srcs.length;i++){
+    ih+='<div class="src-item">'
+      +'<span class="src-item-num">'+String(i+1).padStart(2,'0')+'</span>'
+      +'<div><div class="src-item-label">'+srcs[i].label+'</div>'
+      +'<a href="'+srcs[i].url+'" target="_blank" rel="noopener noreferrer" class="src-item-url">'+srcs[i].url+'</a>'
+      +'</div></div>';
+  }
+  drawer.innerHTML='<div class="src-drawer-inner">'
+    +'<div class="src-drawer-head">'
+    +'<span class="src-drawer-title">Fonti \u00b7 '+srcs.length+' riferimenti \u00b7 '+path.toUpperCase()+'</span>'
+    +'<button class="src-close-btn" id="srcCloseBtn">Chiudi \u00d7</button>'
+    +'</div>'
+    +'<div class="src-list">'+ih+'</div>'
+    +'</div>';
+  document.body.appendChild(drawer);
+
+  var toggle=document.createElement('button');
+  toggle.className='src-toggle';
+  toggle.innerHTML='<span class="st-dot"></span>Fonti <span class="st-n">'+srcs.length+'</span>';
+  document.body.appendChild(toggle);
+
+  var fdOpen=false;
+  function toggleDrawer(){
+    fdOpen=!fdOpen;
+    drawer.classList.toggle('open',fdOpen);
+    toggle.style.borderColor=fdOpen?'rgba(200,168,141,.3)':'';
+    toggle.style.color=fdOpen?'rgba(200,168,141,.7)':'';
+  }
+  toggle.addEventListener('click',toggleDrawer);
+  var closeBtn=document.getElementById('srcCloseBtn');
+  if(closeBtn){closeBtn.addEventListener('click',function(){if(fdOpen)toggleDrawer();});}
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&fdOpen)toggleDrawer();});
+}
+
+})();
+</script>
+</body>
+</html>
