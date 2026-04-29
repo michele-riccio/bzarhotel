@@ -73,6 +73,25 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
 /* ═══ S1 · TEAM ═══ */
 .team-slide-wrap{margin-top:2.5rem;border-radius:14px;overflow:hidden;background:#1E1410;position:relative;opacity:0}
 .team-slide-img{display:block;width:100%;height:auto}
+.team-viz{display:grid;grid-template-columns:1fr auto 1fr;gap:1.5rem;padding:2.75rem 2rem;align-items:center;background:radial-gradient(ellipse at top,rgba(200,168,141,.04),transparent 65%),#1E1410;position:relative}
+@media(max-width:680px){.team-viz{grid-template-columns:1fr;gap:2rem;padding:2rem 1.5rem}}
+.team-viz::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 20% 30%,rgba(200,168,141,.04) 1px,transparent 1px),radial-gradient(circle at 70% 60%,rgba(200,168,141,.03) 1px,transparent 1px);background-size:24px 24px,32px 32px;pointer-events:none}
+.team-viz-side{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:.4rem}
+.tv-loc{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(200,168,141,.5);font-family:"Poppins",sans-serif}
+.tv-name{font-family:"Afacad Flux",sans-serif;font-size:1.4rem;font-weight:400;color:rgba(241,239,237,.95);letter-spacing:-.015em}
+.tv-count{font-size:10px;color:rgba(200,168,141,.6);margin-bottom:1.1rem;font-family:"Poppins",sans-serif;letter-spacing:.05em}
+.tv-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;width:100%;max-width:240px}
+.tv-grid-snk{grid-template-columns:repeat(2,minmax(0,1fr));max-width:180px}
+.tv-av{aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:"Poppins",sans-serif;font-size:10px;font-weight:500;letter-spacing:.04em;color:rgba(241,239,237,.85);transition:transform .25s,background .25s,border-color .25s;cursor:default;text-align:center;line-height:1}
+.tv-av span{padding:0 4px}
+.tv-av.tv-rib{background:rgba(200,168,141,.08);border:.5px solid rgba(200,168,141,.25)}
+.tv-av.tv-snk{background:rgba(196,172,165,.08);border:.5px solid rgba(196,172,165,.3)}
+.tv-av:hover{transform:scale(1.06);background:rgba(200,168,141,.18);border-color:rgba(200,168,141,.55);color:#F1EFED}
+.team-viz-bridge{display:flex;flex-direction:column;align-items:center;gap:.5rem;height:100%;justify-content:center;position:relative;z-index:1}
+@media(max-width:680px){.team-viz-bridge{flex-direction:row;height:auto;width:100%;padding:0 2rem}}
+.tv-line{width:1px;height:38px;background:linear-gradient(to bottom,transparent,rgba(200,168,141,.35),transparent);flex:none}
+@media(max-width:680px){.tv-line{width:38px;height:1px;background:linear-gradient(to right,transparent,rgba(200,168,141,.35),transparent)}}
+.tv-dot{width:7px;height:7px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px rgba(200,168,141,.12);flex:none}
 .team-slide-cap{padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;border-top:.5px solid rgba(200,168,141,.15);background:rgba(0,0,0,.18);gap:1rem;flex-wrap:wrap}
 .team-slide-l{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(200,168,141,.45);font-family:"Poppins",sans-serif}
 .team-slide-t{font-size:11px;color:rgba(241,239,237,.55);font-style:italic;font-family:"Poppins",sans-serif}
@@ -316,9 +335,9 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
     <p class="hero-sub" id="hsub">Il metodo operativo che proponiamo a BZAR Hotels: chi fa cosa, con quale ritmo, sotto quale governance. Trasparente, scalabile, replicabile su tutte le strutture &mdash; senza dover rispiegare ogni volta il brand.</p>
     <div class="hero-counts" id="hcnts">
       <div><div class="hc-v">16</div><div class="hc-l">Account gestiti</div></div>
+      <div><div class="hc-v">13</div><div class="hc-l">Persone dedicate</div></div>
       <div><div class="hc-v">4</div><div class="hc-l">Settimane &middot; un ciclo</div></div>
       <div><div class="hc-v">12</div><div class="hc-l">Cicli all'anno</div></div>
-      <div><div class="hc-v">1</div><div class="hc-l">Referente unico</div></div>
     </div>
   </div>
   <div class="hero-foot">
@@ -334,10 +353,43 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
   <p class="s-lead">Ribrain Studio gestisce strategia, copy, community e ADV; Snacky Agency &mdash; la nostra unit romana &mdash; produce foto e video sul campo, struttura per struttura, con vicinanza fisica alle 32 sedi di Roma. Nessun handover esterno, nessun freelance volante: lo stesso team per 24 mesi.</p>
 
   <div class="team-slide-wrap" id="teamSlide">
-    <img src="team-slide.jpg" alt="Il team Ribrain × Snacky che lavorerà al progetto BZAR" class="team-slide-img">
+    <div class="team-viz">
+      <div class="team-viz-side">
+        <div class="tv-loc">Napoli</div>
+        <div class="tv-name">Ribrain Studio</div>
+        <div class="tv-count">9 persone</div>
+        <div class="tv-grid">
+          <div class="tv-av tv-rib" title="CEO"><span>CEO</span></div>
+          <div class="tv-av tv-rib" title="CEO"><span>CEO</span></div>
+          <div class="tv-av tv-rib" title="Account & PM"><span>AM</span></div>
+          <div class="tv-av tv-rib" title="Account & PM"><span>AM</span></div>
+          <div class="tv-av tv-rib" title="Copywriter"><span>CW</span></div>
+          <div class="tv-av tv-rib" title="Art Director"><span>AD</span></div>
+          <div class="tv-av tv-rib" title="Art Director"><span>AD</span></div>
+          <div class="tv-av tv-rib" title="Social Media Manager"><span>SM</span></div>
+          <div class="tv-av tv-rib" title="ADS Specialist"><span>ADV</span></div>
+        </div>
+      </div>
+      <div class="team-viz-bridge" aria-hidden="true">
+        <span class="tv-line"></span>
+        <span class="tv-dot"></span>
+        <span class="tv-line"></span>
+      </div>
+      <div class="team-viz-side">
+        <div class="tv-loc">Roma</div>
+        <div class="tv-name">Snacky Agency</div>
+        <div class="tv-count">4 persone</div>
+        <div class="tv-grid tv-grid-snk">
+          <div class="tv-av tv-snk" title="Direzione foto"><span>DF</span></div>
+          <div class="tv-av tv-snk" title="Direzione video"><span>DV</span></div>
+          <div class="tv-av tv-snk" title="Produzione on-field"><span>PF</span></div>
+          <div class="tv-av tv-snk" title="Post-produzione"><span>PP</span></div>
+        </div>
+      </div>
+    </div>
     <div class="team-slide-cap">
-      <span class="team-slide-l">Slide 41 &middot; Pitch BZAR</span>
-      <span class="team-slide-t">I volti del team operativo &mdash; Ribrain Studio + Snacky Agency</span>
+      <span class="team-slide-l">Team operativo &middot; 13 persone dedicate</span>
+      <span class="team-slide-t">Stabili per 24 mesi &mdash; nessun handover, nessun freelance volante</span>
     </div>
   </div>
 
@@ -558,7 +610,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
         <div class="cy-acts">
           <div class="cy-act">Shooting nelle strutture pianificate (foto + video)</div>
           <div class="cy-act">Coordinamento staff e direttori in loco</div>
-          <div class="cy-act">Cattura UGC + interviste staff (Fabiana, Lorenzo, Federico&hellip;)</div>
+          <div class="cy-act">Cattura UGC + interviste staff (reception, concierge, housekeeping&hellip;)</div>
           <div class="cy-act">Post-produzione: editing, color, sub multilingua</div>
         </div>
         <div class="cy-deliv"><span>Deliverable</span>Pacchetto contenuti pronto</div>
@@ -704,12 +756,12 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
     <div class="cal-row">
       <div class="cal-wk">Sett 2</div>
       <div class="cal-cell" data-c="7"><div class="cal-d">L</div></div>
-      <div class="cal-cell has foto" data-c="8"><div class="cal-d">M</div><div class="cal-fmt">Foto</div><div class="cal-topic">Fabiana al desk &mdash; staff series</div></div>
-      <div class="cal-cell has story" data-c="9"><div class="cal-d">M</div><div class="cal-fmt">Story 5x</div><div class="cal-topic">Q&amp;A Fabiana: la sua Roma</div></div>
-      <div class="cal-cell has video" data-c="10"><div class="cal-d">G</div><div class="cal-fmt">Reel</div><div class="cal-topic">"Cosa dice Fabiana ai checked-in"</div></div>
+      <div class="cal-cell has foto" data-c="8"><div class="cal-d">M</div><div class="cal-fmt">Foto</div><div class="cal-topic">Reception &mdash; staff portrait</div></div>
+      <div class="cal-cell has story" data-c="9"><div class="cal-d">M</div><div class="cal-fmt">Story 5x</div><div class="cal-topic">Q&amp;A reception: la sua Roma</div></div>
+      <div class="cal-cell has video" data-c="10"><div class="cal-d">G</div><div class="cal-fmt">Reel</div><div class="cal-topic">Il rito del check-in alle 14:00</div></div>
       <div class="cal-cell" data-c="11"><div class="cal-d">V</div></div>
-      <div class="cal-cell has foto" data-c="12"><div class="cal-d">S</div><div class="cal-fmt">Foto</div><div class="cal-topic">Lorenzo al concierge &mdash; ritratto</div></div>
-      <div class="cal-cell has story" data-c="13"><div class="cal-d">D</div><div class="cal-fmt">Story 4x</div><div class="cal-topic">3 indirizzi Lorenzo nel rione</div></div>
+      <div class="cal-cell has foto" data-c="12"><div class="cal-d">S</div><div class="cal-fmt">Foto</div><div class="cal-topic">Concierge &mdash; ritratto</div></div>
+      <div class="cal-cell has story" data-c="13"><div class="cal-d">D</div><div class="cal-fmt">Story 4x</div><div class="cal-topic">3 indirizzi del concierge nel rione</div></div>
     </div>
 
     <div class="cal-row">
@@ -726,7 +778,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
     <div class="cal-row">
       <div class="cal-wk">Sett 4</div>
       <div class="cal-cell" data-c="21"><div class="cal-d">L</div></div>
-      <div class="cal-cell has foto" data-c="22"><div class="cal-d">M</div><div class="cal-fmt">Foto</div><div class="cal-topic">Federico, housekeeping &mdash; staff series</div></div>
+      <div class="cal-cell has foto" data-c="22"><div class="cal-d">M</div><div class="cal-fmt">Foto</div><div class="cal-topic">Housekeeping &mdash; staff portrait</div></div>
       <div class="cal-cell has story" data-c="23"><div class="cal-d">M</div><div class="cal-fmt">Story 5x</div><div class="cal-topic">Dietro la pulizia: il dettaglio invisibile</div></div>
       <div class="cal-cell has video" data-c="24"><div class="cal-d">G</div><div class="cal-fmt">Reel hero</div><div class="cal-topic">"Una notte al Viminale" &mdash; reel chiusura mese</div></div>
       <div class="cal-cell" data-c="25"><div class="cal-d">V</div></div>
