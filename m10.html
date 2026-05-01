@@ -89,7 +89,31 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
 .pi-text{font-size:14px;color:var(--ink);line-height:1.75;max-width:420px}
 .pi-text strong{color:var(--dark);font-weight:500}
 
+/* === TRIS DI INSIGHT SEZ 1 === */
+.tris{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.85rem;margin-top:2rem;align-items:stretch}
+@media(max-width:880px){.tris{grid-template-columns:1fr}}
+.tris-col{padding:1.25rem 1.25rem;display:flex;flex-direction:column;gap:.65rem;position:relative;border-radius:10px;border:.5px solid}
+.tris-col.t1{background:rgba(196,172,165,.06);border-color:rgba(196,172,165,.25)}
+.tris-col.t2{background:rgba(192,87,42,.04);border-color:rgba(192,87,42,.18)}
+.tris-col.t3{background:rgba(90,122,74,.05);border-color:rgba(90,122,74,.22)}
+.tris-tag{font-size:9px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;font-family:"Poppins",sans-serif}
+.tris-col.t1 .tris-tag{color:#8a6e69}
+.tris-col.t2 .tris-tag{color:var(--warn)}
+.tris-col.t3 .tris-tag{color:var(--go)}
+.tris-h{font-family:"Afacad Flux",sans-serif;font-size:1.1rem;font-weight:500;color:var(--dark);line-height:1.25;letter-spacing:-.01em}
+.tris-h em{font-style:italic;color:var(--ink);font-weight:300}
+.tris-list{list-style:none;display:flex;flex-direction:column;gap:.4rem;font-size:11.5px;color:var(--mid);line-height:1.5;margin-top:.2rem}
+.tris-list li{display:flex;gap:.5rem;align-items:flex-start}
+.tris-list li::before{flex-shrink:0;width:10px;font-weight:600;font-size:11px}
+.tris-col.t1 .tris-list li::before{content:"✓";color:#8a6e69}
+.tris-num{font-family:"Afacad Flux",sans-serif;font-size:clamp(2rem,4vw,2.6rem);font-weight:300;line-height:1;letter-spacing:-.03em;color:var(--warn);margin-top:.25rem}
+.tris-num small{display:block;font-size:11px;color:var(--mid);font-family:"Poppins",sans-serif;font-weight:400;margin-top:.4rem;line-height:1.4}
+.tris-claim{font-family:"Afacad Flux",sans-serif;font-size:13px;color:var(--dark);line-height:1.6;font-weight:400;margin-top:auto;font-style:italic}
+.tris-claim strong{color:var(--ink);font-weight:500;font-style:normal}
+.tris-pillkey{display:inline-block;background:rgba(90,122,74,.12);color:var(--go);padding:3px 10px;border-radius:99px;font-size:10.5px;font-weight:500;letter-spacing:.04em;margin-top:.3rem;align-self:flex-start;font-family:"Poppins",sans-serif}
+
 /* === SEZ 2: I DUE TIER === */
+.tier-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:3rem}
 .tier-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:3rem}
 @media(max-width:880px){.tier-grid{grid-template-columns:1fr}}
 .tier-card{background:#fff;border-radius:18px;border:.5px solid rgba(117,88,71,.12);padding:2rem 1.75rem 1.5rem;position:relative;overflow:hidden}
@@ -98,9 +122,12 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
 .tier-num{font-family:"Afacad Flux",sans-serif;font-size:.95rem;color:rgba(117,88,71,.4);margin-bottom:.4rem;letter-spacing:.06em}
 .tier-name{font-family:"Afacad Flux",sans-serif;font-size:2rem;font-weight:400;color:var(--dark);line-height:1.1;letter-spacing:-.02em;margin-bottom:.4rem}
 .tier-tag{font-size:11px;color:var(--mid);margin-bottom:1.5rem;line-height:1.6;max-width:340px}
-.tier-price{display:flex;align-items:baseline;gap:.4rem;padding-bottom:1.25rem;border-bottom:.5px solid rgba(117,88,71,.1);margin-bottom:1.25rem}
+.tier-price{display:flex;align-items:baseline;gap:.4rem;padding-bottom:.4rem;border-bottom:none;margin-bottom:0}
 .tier-price-v{font-family:"Afacad Flux",sans-serif;font-size:clamp(2.6rem,5vw,3.4rem);font-weight:400;color:var(--ink);line-height:1;letter-spacing:-.03em}
 .tier-price-u{font-size:11px;color:var(--mid);letter-spacing:.06em}
+.tier-perstruct{display:flex;align-items:baseline;gap:.45rem;padding-bottom:1.25rem;border-bottom:.5px solid rgba(117,88,71,.1);margin-bottom:1.25rem;font-size:11.5px;color:var(--mid);line-height:1.5}
+.tier-perstruct strong{color:var(--ink);font-weight:500;font-family:"Afacad Flux",sans-serif;font-size:13px;letter-spacing:-.01em}
+.tier-perstruct em{font-style:italic;color:var(--mid);font-size:10.5px}
 .tier-section{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);margin:1.25rem 0 .6rem;font-weight:500}
 .tier-section:first-child{margin-top:0}
 .tier-list{list-style:none;display:flex;flex-direction:column;gap:.5rem}
@@ -165,7 +192,64 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
 .adv-row-d{font-size:11.5px;line-height:1.6;color:rgba(241,239,237,.55)}
 .adv-row-stat{display:inline-block;margin-top:.5rem;font-family:"Afacad Flux",sans-serif;font-size:1.1rem;color:var(--brand);font-weight:500}
 
+/* === SCHEMA ASTA · SEZ ADV === */
+.auction-schema{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem 0}
+.auction-stage{position:relative;width:100%;max-width:340px;height:200px;margin:0 auto}
+.auction-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(192,87,42,.15);border:1.5px solid rgba(192,87,42,.5);border-radius:50%;width:88px;height:88px;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:3;text-align:center;padding:.4rem}
+.auction-center::before{content:"";position:absolute;inset:-10px;border-radius:50%;border:1px dashed rgba(192,87,42,.3);animation:pulse-ring 3s infinite ease-in-out}
+@keyframes pulse-ring{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.12);opacity:.15}}
+.auction-center-l{font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:rgba(192,87,42,.85);font-weight:500;font-family:"Poppins",sans-serif;line-height:1.2}
+.auction-center-v{font-family:"Afacad Flux",sans-serif;font-size:.8rem;color:rgba(241,239,237,.92);font-weight:500;line-height:1.1;margin-top:2px;text-align:center}
+.auction-node{position:absolute;width:62px;height:30px;background:rgba(255,255,255,.06);border:.5px solid rgba(200,168,141,.3);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.04em;color:rgba(241,239,237,.7);font-weight:500;z-index:2;text-align:center;padding:0 4px;line-height:1.1}
+.auction-node.n1{top:6px;left:8%}
+.auction-node.n2{top:6px;right:8%}
+.auction-node.n3{top:50%;left:0%;transform:translateY(-50%)}
+.auction-node.n4{top:50%;right:0%;transform:translateY(-50%)}
+.auction-node.n5{bottom:6px;left:50%;transform:translateX(-50%)}
+.auction-arrow{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.auction-caption{font-size:11.5px;color:rgba(241,239,237,.55);text-align:center;margin-top:1.25rem;font-family:"Poppins",sans-serif;letter-spacing:.02em;font-style:italic;max-width:380px;line-height:1.5}
+.auction-caption strong{color:var(--brand);font-weight:500;font-style:normal}
+
+/* === CALC FLOW === */
+.calc-flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:.6rem;margin-top:1.5rem;align-items:stretch}
+@media(max-width:880px){.calc-flow{grid-template-columns:1fr;gap:.6rem}.calc-arrow{display:none}}
+.calc-step{background:#fff;border:.5px solid rgba(117,88,71,.12);border-radius:10px;padding:1.1rem 1.1rem;display:flex;flex-direction:column;gap:.55rem}
+.calc-step.problem{border-left:3px solid var(--warn);background:#fdf6f2}
+.calc-step.solution{border-left:3px solid var(--go);background:#f5f8f2}
+.calc-step-tag{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);font-weight:500}
+.calc-step.problem .calc-step-tag{color:var(--warn)}
+.calc-step.solution .calc-step-tag{color:var(--go)}
+.calc-step-name{font-family:"Afacad Flux",sans-serif;font-size:1rem;font-weight:500;color:var(--dark);line-height:1.2;letter-spacing:-.01em}
+.calc-step-num{font-family:"Afacad Flux",sans-serif;font-size:1.5rem;font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.02em}
+.calc-step.problem .calc-step-num{color:var(--warn)}
+.calc-step.solution .calc-step-num{color:var(--go)}
+.calc-step-desc{font-size:11.5px;color:var(--mid);line-height:1.5;margin-top:auto}
+.calc-step-desc strong{color:var(--dark);font-weight:500}
+.calc-step.problem .calc-step-desc strong{color:var(--warn)}
+.calc-step.solution .calc-step-desc strong{color:var(--go)}
+.calc-arrow{display:flex;align-items:center;justify-content:center;color:rgba(117,88,71,.25);font-size:1.4rem;font-weight:300}
+
 /* === SEZ 5: ROI DISINTERMEDIAZIONE === */
+
+/* Tradotto in prenotazioni reali */
+.tip-wrap{margin-top:1.5rem;margin-bottom:2rem;background:#fff;border:.5px solid rgba(117,88,71,.12);border-radius:14px;padding:1.75rem 1.75rem;overflow:hidden}
+.tip-head{margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:.5px solid rgba(117,88,71,.08)}
+.tip-tag{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);margin-bottom:.5rem;font-weight:500}
+.tip-h{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.2rem,2.4vw,1.5rem);font-weight:500;color:var(--dark);line-height:1.25;letter-spacing:-.015em}
+.tip-h em{font-style:italic;color:var(--ink);font-weight:300}
+.tip-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+@media(max-width:880px){.tip-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.tip-grid{grid-template-columns:1fr}}
+.tip-cell{padding:1.1rem 1.1rem 1.1rem 1.2rem;border-left:2px solid rgba(200,168,141,.4);background:#FDFCFA;border-radius:6px;display:flex;flex-direction:column;gap:.5rem}
+.tip-cell.highlight{border-left-color:var(--ink);background:linear-gradient(180deg,rgba(117,88,71,.04),transparent)}
+.tip-cell-step{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--brand);font-weight:500;font-family:"Poppins",sans-serif}
+.tip-cell.highlight .tip-cell-step{color:var(--ink)}
+.tip-cell-num{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.7rem,3.2vw,2.2rem);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.03em}
+.tip-cell-l{font-family:"Afacad Flux",sans-serif;font-size:13px;font-weight:500;color:var(--dark);line-height:1.3;letter-spacing:-.005em}
+.tip-cell-d{font-size:11.5px;color:var(--mid);line-height:1.55;margin-top:auto}
+.tip-foot{margin-top:1.5rem;padding-top:1.25rem;border-top:.5px solid rgba(117,88,71,.08);font-size:11.5px;color:var(--mid);line-height:1.7;font-style:italic}
+.tip-foot strong{color:var(--ink);font-weight:500;font-style:normal}
+
 .roi-intro{margin-top:2.5rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
 @media(max-width:780px){.roi-intro{grid-template-columns:1fr}}
 .roi-year{background:#fff;border:.5px solid rgba(117,88,71,.1);border-radius:14px;padding:1.5rem 1.4rem;position:relative;overflow:hidden}
@@ -314,6 +398,86 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
 .cmaif-cost-l{color:var(--mid)}
 .cmaif-cost-v{color:var(--ink);font-weight:500;font-family:"Afacad Flux",sans-serif;font-size:13px}
 
+/* === TIMELINE CM ECONOMICS === */
+.cmtl-wrap{margin-top:2.5rem;background:#fff;border:.5px solid rgba(117,88,71,.1);border-radius:14px;padding:1.75rem 1.75rem;overflow:hidden}
+.cmtl-head{margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:.5px solid rgba(117,88,71,.08)}
+.cmtl-tag{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);margin-bottom:.5rem;font-weight:500}
+.cmtl-h{font-family:"Afacad Flux",sans-serif;font-size:1.3rem;font-weight:500;color:var(--dark);line-height:1.25;margin-bottom:.4rem;letter-spacing:-.015em}
+.cmtl-h em{font-style:italic;color:var(--ink);font-weight:300}
+.cmtl-sub{font-size:12px;color:var(--mid);line-height:1.6;max-width:620px}
+.cmtl{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:1.5rem}
+@media(max-width:780px){.cmtl{grid-template-columns:1fr;gap:.6rem}.cmtl::before{display:none}}
+.cmtl::before{content:"";position:absolute;top:34px;left:6%;right:6%;height:1px;background:linear-gradient(90deg,rgba(117,88,71,.15),rgba(200,168,141,.5),rgba(200,168,141,.6),rgba(90,122,74,.5));z-index:0}
+.cmtl-step{position:relative;z-index:1;padding:0 .85rem;text-align:left}
+.cmtl-step:not(:last-child){border-right:.5px dashed rgba(117,88,71,.08)}
+@media(max-width:780px){.cmtl-step{padding:1rem .85rem;border:.5px solid rgba(117,88,71,.1) !important;border-radius:8px;display:grid;grid-template-columns:auto 1fr;gap:.4rem 1rem;align-items:start}.cmtl-step .cmtl-dot{margin-top:5px;margin-bottom:0}}
+.cmtl-dot{width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid var(--brand);margin-bottom:1rem;position:relative;z-index:2}
+.cmtl-step.s1 .cmtl-dot{border-color:var(--mid);background:var(--mid)}
+.cmtl-step.s2 .cmtl-dot{border-color:var(--ink);background:#fff}
+.cmtl-step.s3 .cmtl-dot{border-color:var(--brand);background:var(--brand)}
+.cmtl-step.s4 .cmtl-dot{border-color:var(--go);background:var(--go)}
+.cmtl-content{display:contents}
+@media(max-width:780px){.cmtl-content{display:block}}
+.cmtl-period{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);font-weight:500;margin-bottom:.3rem;font-family:"Poppins",sans-serif}
+.cmtl-step.s4 .cmtl-period{color:var(--go)}
+.cmtl-name{font-family:"Afacad Flux",sans-serif;font-size:1rem;font-weight:500;color:var(--dark);line-height:1.25;margin-bottom:.4rem;letter-spacing:-.01em}
+.cmtl-desc{font-size:11.5px;color:var(--mid);line-height:1.55;margin-bottom:.65rem}
+.cmtl-cost{font-family:"Afacad Flux",sans-serif;font-size:.95rem;font-weight:500;color:var(--ink);line-height:1.2;letter-spacing:-.01em;padding-top:.4rem;border-top:.5px solid rgba(117,88,71,.08)}
+.cmtl-cost em{font-style:normal;color:var(--mid);font-size:10px;font-family:"Poppins",sans-serif;font-weight:400;letter-spacing:.04em;display:block;margin-top:2px;text-transform:uppercase;line-height:1.4}
+.cmtl-step.s4 .cmtl-cost{color:var(--go)}
+
+/* === GRAFICO CONTENUTI MENSILI === */
+.cnt-wrap{margin-top:2.5rem;background:#fff;border:.5px solid rgba(117,88,71,.1);border-radius:18px;padding:2rem 1.75rem;overflow:hidden}
+.cnt-head{display:flex;align-items:baseline;gap:1.5rem;flex-wrap:wrap;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:.5px solid rgba(117,88,71,.08)}
+.cnt-head-l{flex:1;min-width:280px}
+.cnt-head-tag{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);font-weight:500;margin-bottom:.5rem}
+.cnt-head-h{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.3rem,2.5vw,1.7rem);font-weight:500;color:var(--dark);line-height:1.25;letter-spacing:-.015em}
+.cnt-head-h em{font-style:italic;color:var(--ink);font-weight:300}
+.cnt-head-r{text-align:right}
+@media(max-width:680px){.cnt-head-r{text-align:left}}
+.cnt-head-num{font-family:"Afacad Flux",sans-serif;font-size:clamp(2.6rem,5vw,3.4rem);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.04em}
+.cnt-head-l2{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-top:.4rem;line-height:1.5;max-width:200px;margin-left:auto}
+@media(max-width:680px){.cnt-head-l2{margin-left:0}}
+.cnt-mix{margin-bottom:2rem}
+.cnt-mix-tit{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);font-weight:500;margin-bottom:.85rem}
+.cnt-mix-bar{display:flex;height:34px;border-radius:6px;overflow:hidden;margin-bottom:1rem}
+.cnt-mix-seg{display:flex;align-items:center;justify-content:flex-start;padding-left:.65rem;font-family:"Poppins",sans-serif;font-size:11px;color:#fff;font-weight:500;letter-spacing:.04em;transition:filter .2s}
+.cnt-mix-seg:hover{filter:brightness(1.1)}
+.cnt-mix-seg.stories{background:var(--ink)}
+.cnt-mix-seg.posts{background:var(--mid)}
+.cnt-mix-seg.cross{background:var(--brand)}
+.cnt-mix-seg.reel{background:var(--go)}
+.cnt-mix-legend{display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem}
+@media(max-width:600px){.cnt-mix-legend{grid-template-columns:1fr 1fr}}
+.cnt-mix-leg{display:flex;align-items:flex-start;gap:.5rem;font-size:11.5px}
+.cnt-mix-leg-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0;margin-top:5px}
+.cnt-mix-leg-dot.stories{background:var(--ink)}
+.cnt-mix-leg-dot.posts{background:var(--mid)}
+.cnt-mix-leg-dot.cross{background:var(--brand)}
+.cnt-mix-leg-dot.reel{background:var(--go)}
+.cnt-mix-leg-content{flex:1;min-width:0}
+.cnt-mix-leg-name{font-family:"Afacad Flux",sans-serif;font-size:13px;font-weight:500;color:var(--dark);line-height:1.2;margin-bottom:1px;letter-spacing:-.01em}
+.cnt-mix-leg-num{font-size:11px;color:var(--mid);line-height:1.4}
+.cnt-mix-leg-num strong{color:var(--ink);font-weight:500;font-family:"Afacad Flux",sans-serif;font-size:12.5px}
+.cnt-cluster-tit{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);font-weight:500;margin-bottom:.85rem;margin-top:1.5rem}
+.cnt-clusters{display:flex;flex-direction:column;gap:.65rem}
+.cnt-cl{display:grid;grid-template-columns:1.1fr 2.5fr auto;gap:1rem;align-items:center;padding:.75rem 1rem;background:#FDFCFA;border-radius:8px;border:.5px solid rgba(117,88,71,.06)}
+@media(max-width:780px){.cnt-cl{grid-template-columns:1fr;gap:.5rem;padding:1rem}}
+.cnt-cl-name{font-family:"Afacad Flux",sans-serif;font-size:13.5px;font-weight:500;color:var(--dark);line-height:1.2;margin-bottom:2px;letter-spacing:-.01em}
+.cnt-cl-sub{font-size:10.5px;color:var(--mid);letter-spacing:.04em}
+.cnt-cl-bar{display:flex;height:22px;border-radius:4px;overflow:hidden}
+.cnt-cl-seg{transition:filter .2s}
+.cnt-cl-seg:hover{filter:brightness(1.1)}
+.cnt-cl-seg.stories{background:var(--ink)}
+.cnt-cl-seg.posts{background:var(--mid)}
+.cnt-cl-seg.cross{background:var(--brand)}
+.cnt-cl-seg.reel{background:var(--go)}
+.cnt-cl-tot{font-family:"Afacad Flux",sans-serif;font-size:1.1rem;font-weight:500;color:var(--ink);letter-spacing:-.02em;white-space:nowrap;text-align:right}
+.cnt-cl-tot em{display:block;font-style:normal;font-size:9.5px;color:var(--mid);font-family:"Poppins",sans-serif;letter-spacing:.06em;text-transform:uppercase;font-weight:400;margin-top:1px}
+@media(max-width:780px){.cnt-cl-tot{text-align:left}}
+.cnt-foot{margin-top:1.5rem;padding-top:1.25rem;border-top:.5px solid rgba(117,88,71,.08);font-size:12px;color:var(--mid);line-height:1.7}
+.cnt-foot strong{color:var(--ink);font-weight:500}
+
 .cmai-cond{margin-top:2.5rem;background:#fff;border:.5px solid rgba(117,88,71,.1);border-radius:14px;padding:1.75rem 1.75rem}
 .cmai-cond-h{font-family:"Afacad Flux",sans-serif;font-size:1.2rem;font-weight:500;color:var(--dark);line-height:1.25;margin-bottom:1.25rem}
 .cmai-cond-h em{font-style:italic;color:var(--ink);font-weight:300}
@@ -395,9 +559,34 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
 
 <!-- ═══════════════════════════════════ SEZ 1: IL PROBLEMA ═══════════════════════════════════ -->
 <section class="sec bg-alt" id="s-problem">
-  <div class="s-tag">Il punto di partenza</div>
-  <h2 class="s-h">Il vero costo non è il nostro.<br>&Egrave; <em>quello che continuate a pagare alle OTA.</em></h2>
-  <p class="s-lead">Prima di parlare di investimento, vale la pena guardare la baseline. Ogni mese, su ogni prenotazione che passa da Booking o Expedia, BZAR cede una commissione tra il 15% e il 30%. Con la quota OTA al 40% del totale, il conto cumulativo diventa rapidamente la voce di costo più rilevante del piano marketing &mdash; senza che nessun piano marketing l&rsquo;abbia mai affrontata.</p>
+  <div class="s-tag"><span style="color:var(--brand);font-weight:500">01</span> &middot; Il punto di partenza</div>
+  <h2 class="s-h">Le OTA non sono il nemico.<br><em>Ma il loro prezzo merita una conversazione onesta.</em></h2>
+
+  <div class="tris">
+    <div class="tris-col t1">
+      <div class="tris-tag">Quello che fanno bene</div>
+      <h3 class="tris-h">Un servizio reale per i viaggiatori</h3>
+      <ul class="tris-list">
+        <li>Fiducia e copertura globale consolidata</li>
+        <li>Comparazione veloce, recensioni dense</li>
+        <li>Riferimento per milioni di scelte ogni giorno</li>
+      </ul>
+      <p class="tris-claim">Il loro ruolo nel mix di canali <strong>resta importante</strong> anche in un orizzonte multi-anno.</p>
+    </div>
+
+    <div class="tris-col t2">
+      <div class="tris-tag">Quello che costano</div>
+      <h3 class="tris-h">La voce di costo n&deg;1<br><em>del piano marketing</em></h3>
+      <div class="tris-num">~&euro;784K<small>al mese in commissioni cedute &middot; con quota OTA al 40% e commissioni mediane intorno al 19%</small></div>
+    </div>
+
+    <div class="tris-col t3">
+      <div class="tris-tag">Cosa proponiamo</div>
+      <h3 class="tris-h">Riequilibrio,<br><em>non sostituzione</em></h3>
+      <p class="tris-claim">Mantenere il ruolo OTA come canale efficace, costruendo in parallelo un&rsquo;<strong>abitudine di prenotazione diretta</strong> che fino a oggi non era mai stata l&rsquo;obiettivo prioritario di nessun piano.</p>
+      <span class="tris-pillkey">Equilibrio del mix di canali</span>
+    </div>
+  </div>
 
   <div class="problem-grid" id="pgrid">
     <div class="problem-flow" id="pflow">
@@ -420,98 +609,14 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
     <div class="problem-impact">
       <div class="pi-l">Cumulato annuo</div>
       <div class="pi-yearly"><em>&euro;9,4M</em></div>
-      <div class="pi-text">In commissioni OTA all&rsquo;anno. <strong>Senza piano social</strong>, questa cifra continua a crescere insieme al gruppo. <strong>Con un piano social efficace</strong>, ogni punto percentuale spostato dal canale OTA al canale diretto vale &euro;195K all&rsquo;anno.<br><br>Il social non &egrave; il modo per riempire le camere &mdash; le riempite gi&agrave; al 92%. &Egrave; il modo per <strong>riempirle costando meno</strong>.</div>
+      <div class="pi-text"><strong>In commissioni OTA all&rsquo;anno</strong>, ai ritmi attuali. Una cifra che cresce in modo lineare con il gruppo.<br><br>Ogni punto percentuale di mix di prenotazione che si sposta dal canale OTA al canale diretto vale <strong>&euro;195K all&rsquo;anno</strong>.<br><br>Le camere sono gi&agrave; al 92%. Il social non serve a riempirle &mdash; serve a renderle <strong>pi&ugrave; sostenibili economicamente</strong>.</div>
     </div>
   </div>
-</section>
-
-<!-- ═══════════════════════════════════ SEZ 2: I DUE TIER ═══════════════════════════════════ -->
-<section class="sec" id="s-tier">
-  <div class="s-tag">La proposta &middot; Due tier</div>
-  <h2 class="s-h">Due livelli di intensit&agrave;.<br><em>Stesso metodo, perimetro modulare.</em></h2>
-  <p class="s-lead">Entrambi i tier coprono i 16 account della catena con strategia, copywriting, grafica, scheduling, ADV unificato, community management 5 giorni su 7, account management dedicato a Francesco. La differenza sta nell&rsquo;intensit&agrave; della produzione video e nella profondit&agrave; dei cicli creativi &mdash; due dimensioni che hanno impatto diretto su ritmo editoriale e qualit&agrave; percepita dei reel hero.</p>
-
-  <div class="tier-grid" id="tgrid">
-    <!-- TIER FOUNDATION -->
-    <div class="tier-card" id="tier-f">
-      <div class="tier-num">Tier 01</div>
-      <div class="tier-name">Foundation</div>
-      <div class="tier-tag">Piano completo, ritmo standard. Per partire con tutta la macchina operativa accesa, con produzione video integrata nelle giornate di shooting.</div>
-      <div class="tier-price">
-        <span class="tier-price-v">&euro;20.500</span>
-        <span class="tier-price-u">/ mese</span>
-      </div>
-
-      <div class="tier-section">Strategia &amp; pensiero</div>
-      <ul class="tier-list">
-        <li>Piano editoriale mensile per <strong>16 account</strong> &mdash; 5 hotel + 5 F&amp;B + 2 Toscana + chain BZAR + cross-post FB Liv. A</li>
-        <li>Direzione creativa, mood per struttura, supervisione output produzione</li>
-        <li>Brief shooting strutturati per ogni struttura attiva nel mese</li>
-      </ul>
-
-      <div class="tier-section">Esecuzione editoriale</div>
-      <ul class="tier-list">
-        <li><strong>117 post originali / mese</strong> &middot; copywriting e grafica per ogni canale</li>
-        <li><strong>278 stories / mese</strong> &middot; copy, sticker, sondaggi, CTA</li>
-        <li><strong>11 reel hero / mese</strong> &middot; uno per ogni struttura attiva</li>
-        <li>Trattamento grafico foto post-shooting (headline, logo, brand layer)</li>
-      </ul>
-
-      <div class="tier-section">Produzione foto/video</div>
-      <ul class="tier-list">
-        <li><strong>~9 giornate di shooting</strong> on-location al mese</li>
-        <li>Editing video integrato nelle giornate di shooting</li>
-        <li>Selezione e ritocco foto base inclusi</li>
-      </ul>
-
-      <div class="tier-section">Sempre on</div>
-      <ul class="tier-list">
-        <li><strong>Community management 5 giorni su 7</strong> &middot; SLA H+24</li>
-        <li><strong>ADV unificato</strong> Meta + Google + TikTok</li>
-        <li>Account management single-point-of-contact</li>
-        <li>Report mensile + review trimestrale on-site</li>
-      </ul>
-
-      <div class="tier-foot"><em>Indicato per chi vuole partire</em> con l&rsquo;intera macchina attiva, accettando un ritmo editoriale standard e una produzione video efficiente ma essenziale.</div>
-    </div>
-
-    <!-- TIER STRATEGIC -->
-    <div class="tier-card recommended" id="tier-s">
-      <div class="tier-badge">Consigliato</div>
-      <div class="tier-num">Tier 02</div>
-      <div class="tier-name">Strategic</div>
-      <div class="tier-tag">Tutto del Foundation, con produzione video amplificata e cicli creativi pi&ugrave; profondi. Per dare ai reel hero la qualit&agrave; che la narrativa BZAR merita.</div>
-      <div class="tier-price">
-        <span class="tier-price-v">&euro;24.000</span>
-        <span class="tier-price-u">/ mese</span>
-      </div>
-
-      <div class="tier-section">Tutto del Foundation, +</div>
-      <ul class="tier-list">
-        <li><strong>Editing video dedicato</strong> &middot; cicli pi&ugrave; lunghi, color grade curato, music sync, ritmo editoriale per ogni reel hero</li>
-        <li><strong>Cicli di revisione creativa</strong> sui materiali video &mdash; non one-shot, ma iterazione fino a ottenere il pezzo giusto</li>
-        <li>Brief operativi pi&ugrave; strutturati per outlet F&amp;B (con direttori e staff in struttura)</li>
-        <li>Listening competitor avanzato (Hoxton, Mama, Generator, Chapter) &middot; benchmark mensile</li>
-        <li>Crisis protocol presidiato H+2 con bozza risposta in tempo reale</li>
-      </ul>
-
-      <div class="tier-section">Differenza visibile</div>
-      <ul class="tier-list">
-        <li>I reel hero diventano <strong>contenuto editoriale</strong> &mdash; non documentazione</li>
-        <li>Il calendario respira: ogni Liv. A pu&ograve; permettersi reel pilota e formato sperimentale (es. <em>"24h al Condominio"</em>) senza compromettere il ritmo standard</li>
-        <li>Snacky lavora con un budget editing che gli consente di chiudere i pezzi <strong>al livello di Il Pellicano e Borgo Santo Pietro</strong> &mdash; benchmark M6</li>
-      </ul>
-
-      <div class="tier-foot"><em>Indicato per chi vuole posizionare</em> BZAR a livello dei boutique hotel di riferimento M6, costruendo asset video che vivono oltre il singolo post.</div>
-    </div>
-  </div>
-
-  <p class="s-lead" style="margin-top:2rem;font-size:13px;color:var(--mid);max-width:700px;line-height:1.75">Entrambi i tier sono pensati come punto di partenza negoziabile. Si pu&ograve; salire o scendere su singole voci (frequenza Liv. B, intensit&agrave; ADV, presidio CM esteso) sulla base di esigenze specifiche emerse nelle prime settimane.</p>
 </section>
 
 <!-- ═══════════════════════════════════ SEZ MOTORE: COSA FA FUNZIONARE 16 ACCOUNT ═══════════════════════════════════ -->
 <section class="sec" id="s-motore">
-  <div class="s-tag">Cosa c&rsquo;&egrave; sotto il prezzo</div>
+  <div class="s-tag"><span style="color:var(--brand);font-weight:500">02</span> &middot; Cosa facciamo concretamente</div>
   <h2 class="s-h">Il motore.<br><em>Cosa serve concretamente</em> per tenere accesi 16 account, ogni mese.</h2>
   <p class="s-lead">Un retainer di questo ordine pu&ograve; suonare astratto. Quello che segue &egrave; il dettaglio operativo &mdash; tutte le aree di lavoro che si attivano in un mese tipo, il volume associato, il numero indicativo di ore richieste. &Egrave; il modo pi&ugrave; trasparente per mostrare la densit&agrave; reale del piano e dare forma a un&rsquo;idea concreta di cosa stanno comprando.</p>
 
@@ -633,38 +738,157 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
       <strong>Tutto questo &egrave; il retainer.</strong> Le ore stimate sono indicative e si ridistribuiscono nel mese in base a periodi caldi (lanci, eventi) e periodi standard. Quello che resta costante &egrave; <strong>la qualit&agrave; del presidio</strong>: nessuna area pu&ograve; rimanere scoperta senza che ne risenta il risultato.<br><br>Includiamo un buffer realistico (+15%) sulle ore base per coprire imprevisti, picchi non pianificati e quel <em>"&egrave; un attimo, mando subito un brief"</em> che &egrave; la differenza tra un&rsquo;agenzia che rispetta il piano e una che lo subisce.
     </div>
   </div>
-</section>
 
-<!-- ═══════════════════════════════════ SEZ 3: MESE 0 SETUP ═══════════════════════════════════ -->
-<section class="sec bg-alt" id="s-onboarding">
-  <div class="s-tag">Una tantum &middot; Solo all&rsquo;inizio</div>
-  <h2 class="s-h">Onboarding una sola volta.<br><em>Poi la macchina &egrave; accesa.</em></h2>
-  <p class="s-lead">C&rsquo;&egrave; una voce che resta volutamente fuori dal retainer mensile: il setup di Mese 0. &Egrave; un costo che si sostiene una volta nella vita del contratto, copre tutto quello che serve per partire al primo giorno utile con il piano gi&agrave; rodato &mdash; account audit, brand book operativi, calendario shooting, e soprattutto la libreria foto/video iniziale che alimenta i primi 60 giorni di pubblicazioni.</p>
-
-  <div class="mz-grid" style="margin-top:2rem">
-    <div class="mz-card" style="grid-column:1 / -1;display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start">
-      <div>
-        <div class="mz-tag">Mese 0 &middot; Una tantum</div>
-        <div class="mz-h" style="font-size:1.6rem">Setup, audit e <em>stock iniziale</em></div>
-        <div class="mz-price" style="font-size:2.6rem">&euro;17.000</div>
-        <div class="mz-price-l">una tantum, prima del Mese 1</div>
+  <!-- GRAFICO CONTENUTI MENSILI -->
+  <div class="cnt-wrap">
+    <div class="cnt-head">
+      <div class="cnt-head-l">
+        <div class="cnt-head-tag">Volume editoriale &middot; Mese tipico a regime</div>
+        <h3 class="cnt-head-h">Quasi <em>cinquecento contenuti al mese</em>, distribuiti tra le strutture.</h3>
       </div>
-      <ul class="mz-list">
-        <li>Audit completo dei 16 account esistenti, raccolta accessi, mappa stakeholder</li>
-        <li>Brand book operativo per ogni struttura (3 hotel Liv. A + 5 F&amp;B + chain)</li>
-        <li>Calendario shooting Q1 concordato con direttori hotel</li>
-        <li><strong>Stock shooting raddoppiato</strong> &mdash; ~14 giornate Snacky per costituire la libreria foto/video iniziale di tutte le strutture</li>
-        <li>Brief book editoriale per persona, pillar, tono di voce per account</li>
-        <li>Setup piattaforme: ad accounts unificati, Meta Business Suite, scheduling tool, dashboard analytics</li>
-        <li>Kick-off call estesa con Francesco e direttori per allineamento operativo</li>
-      </ul>
+      <div class="cnt-head-r">
+        <div class="cnt-head-num">~478</div>
+        <div class="cnt-head-l2">contenuti / mese sui 16 account della catena</div>
+      </div>
+    </div>
+
+    <!-- MIX TIPOLOGIE -->
+    <div class="cnt-mix">
+      <div class="cnt-mix-tit">Composizione del mix per tipologia</div>
+      <div class="cnt-mix-bar">
+        <div class="cnt-mix-seg stories" style="flex-basis:58%">58%</div>
+        <div class="cnt-mix-seg posts" style="flex-basis:25%">25%</div>
+        <div class="cnt-mix-seg cross" style="flex-basis:15%">15%</div>
+        <div class="cnt-mix-seg reel" style="flex-basis:2%"></div>
+      </div>
+      <div class="cnt-mix-legend">
+        <div class="cnt-mix-leg">
+          <div class="cnt-mix-leg-dot stories"></div>
+          <div class="cnt-mix-leg-content">
+            <div class="cnt-mix-leg-name">Stories</div>
+            <div class="cnt-mix-leg-num"><strong>278</strong> al mese &middot; copy + grafica</div>
+          </div>
+        </div>
+        <div class="cnt-mix-leg">
+          <div class="cnt-mix-leg-dot posts"></div>
+          <div class="cnt-mix-leg-content">
+            <div class="cnt-mix-leg-name">Post originali</div>
+            <div class="cnt-mix-leg-num"><strong>117</strong> al mese &middot; carousel + foto</div>
+          </div>
+        </div>
+        <div class="cnt-mix-leg">
+          <div class="cnt-mix-leg-dot cross"></div>
+          <div class="cnt-mix-leg-content">
+            <div class="cnt-mix-leg-name">Cross-post FB Liv. A</div>
+            <div class="cnt-mix-leg-num"><strong>72</strong> al mese &middot; adattamento</div>
+          </div>
+        </div>
+        <div class="cnt-mix-leg">
+          <div class="cnt-mix-leg-dot reel"></div>
+          <div class="cnt-mix-leg-content">
+            <div class="cnt-mix-leg-name">Reel hero</div>
+            <div class="cnt-mix-leg-num"><strong>11</strong> al mese &middot; uno per struttura</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DISTRIBUZIONE PER CLUSTER -->
+    <div class="cnt-cluster-tit">Distribuzione per cluster di strutture &middot; Le barre sono proporzionali al volume reale</div>
+    <div class="cnt-clusters">
+      <!-- LIV A -->
+      <div class="cnt-cl">
+        <div class="cnt-cl-meta">
+          <div class="cnt-cl-name">Hotel Liv. A</div>
+          <div class="cnt-cl-sub">5 strutture &middot; Viminale, Condominio, Coppelle, Adoro, La Griffe</div>
+        </div>
+        <div class="cnt-cl-bar" style="width:100%">
+          <div class="cnt-cl-seg stories" style="flex-basis:48%" title="Stories"></div>
+          <div class="cnt-cl-seg cross" style="flex-basis:30%" title="Cross-post FB"></div>
+          <div class="cnt-cl-seg posts" style="flex-basis:20%" title="Post"></div>
+          <div class="cnt-cl-seg reel" style="flex-basis:2%" title="Reel"></div>
+        </div>
+        <div class="cnt-cl-tot">~230<em>contenuti / mese</em></div>
+      </div>
+
+      <!-- LIV B -->
+      <div class="cnt-cl">
+        <div class="cnt-cl-meta">
+          <div class="cnt-cl-name">F&amp;B Liv. B</div>
+          <div class="cnt-cl-sub">5 outlet &middot; Spritzeria, Osteria Oliva, Moderno, A Mano, Elisia</div>
+        </div>
+        <div class="cnt-cl-bar" style="width:80%">
+          <div class="cnt-cl-seg stories" style="flex-basis:70%" title="Stories"></div>
+          <div class="cnt-cl-seg posts" style="flex-basis:27%" title="Post"></div>
+          <div class="cnt-cl-seg reel" style="flex-basis:3%" title="Reel"></div>
+        </div>
+        <div class="cnt-cl-tot">~185<em>contenuti / mese</em></div>
+      </div>
+
+      <!-- LIV C -->
+      <div class="cnt-cl">
+        <div class="cnt-cl-meta">
+          <div class="cnt-cl-name">Toscana Liv. C</div>
+          <div class="cnt-cl-sub">2 strutture &middot; La Collegiata, Castello di Leonina</div>
+        </div>
+        <div class="cnt-cl-bar" style="width:18%">
+          <div class="cnt-cl-seg stories" style="flex-basis:65%" title="Stories"></div>
+          <div class="cnt-cl-seg posts" style="flex-basis:32%" title="Post"></div>
+          <div class="cnt-cl-seg reel" style="flex-basis:3%" title="Reel"></div>
+        </div>
+        <div class="cnt-cl-tot">~37<em>contenuti / mese</em></div>
+      </div>
+
+      <!-- CHAIN -->
+      <div class="cnt-cl">
+        <div class="cnt-cl-meta">
+          <div class="cnt-cl-name">Chain BZAR Hotels</div>
+          <div class="cnt-cl-sub">1 entit&agrave; corporate &middot; Account chain catena</div>
+        </div>
+        <div class="cnt-cl-bar" style="width:14%">
+          <div class="cnt-cl-seg stories" style="flex-basis:47%" title="Stories"></div>
+          <div class="cnt-cl-seg posts" style="flex-basis:33%" title="Post"></div>
+          <div class="cnt-cl-seg reel" style="flex-basis:13%" title="Reel"></div>
+          <div class="cnt-cl-seg cross" style="flex-basis:7%" title="Cross-post"></div>
+        </div>
+        <div class="cnt-cl-tot">~26<em>contenuti / mese</em></div>
+      </div>
+    </div>
+
+    <div class="cnt-foot">
+      <strong>Quasi 500 contenuti al mese</strong> non &egrave; un dato comunicativo: &egrave; il volume reale di lavoro che richiede una macchina coordinata. Ogni post originale ha caption calibrata, foto trattata, grafica brand-fit. Ogni reel hero richiede shot list, shooting on location, editing dedicato. Il cross-post FB Liv. A non &egrave; un copia-incolla: <em>&egrave; un adattamento di formato, copy e tagging</em>.
+    </div>
+
+    <!-- NOTA TRASPARENZA SULLE STORIES -->
+    <div style="margin-top:1.25rem;padding:1.25rem 1.5rem;background:rgba(200,168,141,.06);border:1px dashed rgba(200,168,141,.35);border-radius:10px">
+      <div style="font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin-bottom:.6rem;font-weight:500">Nota tecnica &middot; Come si producono 278 stories al mese</div>
+      <p style="font-size:12.5px;color:var(--dark);line-height:1.7;margin-bottom:.85rem">Le 278 stories non sono 278 creazioni da zero &mdash; sarebbe insostenibile produttivamente, e non &egrave; il modo intelligente di farlo. Sono il risultato di un <strong>mix coordinato dove ogni asset prodotto serve a pi&ugrave; scopi:</strong></p>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem">
+        <div style="font-size:11.5px;line-height:1.55;color:var(--mid)">
+          <div style="font-family:'Afacad Flux',sans-serif;font-size:1.4rem;font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.02em;margin-bottom:.4rem">~40%</div>
+          <div><strong style="color:var(--dark)">Frame da reel hero</strong><br>Un reel da 30s produce 8&ndash;10 stories utili per teaser, behind-the-scenes, dettagli</div>
+        </div>
+        <div style="font-size:11.5px;line-height:1.55;color:var(--mid)">
+          <div style="font-family:'Afacad Flux',sans-serif;font-size:1.4rem;font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.02em;margin-bottom:.4rem">~25%</div>
+          <div><strong style="color:var(--dark)">Repurposing carousel</strong><br>Un carousel di 5 immagini diventa 5 stories sequenziali con CTA</div>
+        </div>
+        <div style="font-size:11.5px;line-height:1.55;color:var(--mid)">
+          <div style="font-family:'Afacad Flux',sans-serif;font-size:1.4rem;font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.02em;margin-bottom:.4rem">~25%</div>
+          <div><strong style="color:var(--dark)">Foto extra shooting</strong><br>Ogni shooting produce 80&ndash;120 foto, solo una parte va nel feed; il resto alimenta stories</div>
+        </div>
+        <div style="font-size:11.5px;line-height:1.55;color:var(--mid)">
+          <div style="font-family:'Afacad Flux',sans-serif;font-size:1.4rem;font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.02em;margin-bottom:.4rem">~10%</div>
+          <div><strong style="color:var(--dark)">Originali nativi</strong><br>Stories pensate ad-hoc: sondaggi, Q&amp;A, repost UGC, format real-time</div>
+        </div>
+      </div>
+      <p style="font-size:11.5px;color:var(--mid);line-height:1.65;margin-top:1rem;padding-top:.85rem;border-top:.5px dashed rgba(200,168,141,.25);font-style:italic">In altre parole: <strong style="color:var(--ink);font-style:normal">il piano editoriale &egrave; progettato per produrre asset multi-uso fin dalla fase di brief.</strong> Ogni shooting ha output predefiniti per feed + stories + reel insieme. &Egrave; uno dei motivi per cui un&rsquo;agenzia coordinata produce risultati misurabilmente diversi dal lavoro account-by-account.</p>
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════ SEZ 3-bis: COMMUNITY AI ESPANSA ═══════════════════════════════════ -->
 <section class="sec" id="s-cmai">
-  <div class="s-tag">Innovazione operativa &middot; Vantaggio competitivo</div>
+  <div class="s-tag"><span style="color:var(--brand);font-weight:500">03</span> &middot; Innovazione operativa &middot; Community AI</div>
   <h2 class="s-h">Community che impara.<br><em>E poi si automatizza, in modo trasparente.</em></h2>
   <p class="s-lead">Questa &egrave; una delle parti del piano di cui siamo pi&ugrave; convinti, e per cui pensiamo che valga la pena dedicare qualche minuto in pi&ugrave;. Riguarda come gestiamo la community management nel medio termine, e perch&eacute; siamo certi che <strong style="color:var(--dark)">questo &egrave; uno degli elementi che fa la differenza tra un piano social ben costruito e uno mediocre</strong>.</p>
 
@@ -716,6 +940,57 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
     </div>
   </div>
 
+  <!-- TIMELINE ECONOMICS DEL MODELLO -->
+  <div class="cmtl-wrap">
+    <div class="cmtl-head">
+      <div class="cmtl-tag">Riepilogo economico &middot; Mese per mese</div>
+      <h3 class="cmtl-h">Quando si paga cosa, e quando il modello inizia a far <em>risparmiare.</em></h3>
+      <p class="cmtl-sub">Domanda legittima: i tre mesi di training sono una voce a parte? No. <strong>Sono il community management standard, gi&agrave; incluso nel retainer mensile</strong>. Quel lavoro umano produce, in parallelo, l&rsquo;asset che dal Mese 4 fa scendere il costo. La sequenza temporale chiarisce esattamente cosa entra in fattura e quando.</p>
+    </div>
+
+    <div class="cmtl">
+      <div class="cmtl-step s1">
+        <div class="cmtl-dot"></div>
+        <div class="cmtl-content">
+          <div class="cmtl-period">Mese 0</div>
+          <div class="cmtl-name">Setup e onboarding</div>
+          <div class="cmtl-desc">Audit account, brand book, calendario shooting, stock iniziale. Nessun CM ancora &mdash; il piano editoriale non &egrave; partito.</div>
+          <div class="cmtl-cost">&euro;17.000<em>una tantum</em></div>
+        </div>
+      </div>
+
+      <div class="cmtl-step s2">
+        <div class="cmtl-dot"></div>
+        <div class="cmtl-content">
+          <div class="cmtl-period">Mesi 1&ndash;3</div>
+          <div class="cmtl-name">CM 5/7 manuale + training AI in parallelo</div>
+          <div class="cmtl-desc">Il team risponde a tutte le interazioni sui 16 account. Ogni risposta umana alimenta il dataset di training del modello AI. <strong style="color:var(--ink)">Il training non &egrave; una voce a parte: &egrave; il CM che gi&agrave; pagavate.</strong></div>
+          <div class="cmtl-cost">&euro;24.000<em>x 3 mesi &middot; nel retainer</em></div>
+        </div>
+      </div>
+
+      <div class="cmtl-step s3">
+        <div class="cmtl-dot"></div>
+        <div class="cmtl-content">
+          <div class="cmtl-period">Mese 4</div>
+          <div class="cmtl-name">Attivazione layer AI</div>
+          <div class="cmtl-desc">Il modello brand-specific va live. Presidio passa da 5/7 a 7/7 H+24. Setup AI una tantum + check umano residuo + tool esterno.</div>
+          <div class="cmtl-cost">&euro;1.500<em>setup ai &middot; una tantum</em></div>
+        </div>
+      </div>
+
+      <div class="cmtl-step s4">
+        <div class="cmtl-dot"></div>
+        <div class="cmtl-content">
+          <div class="cmtl-period">Mese 5+</div>
+          <div class="cmtl-name">Regime evoluto: presidio 7/7, costo che scende</div>
+          <div class="cmtl-desc">Retainer Ribrain ridotto di ~&euro;1.150/mese (CM da 65h a 15h check). Costo tool AI esterno pass-through. <strong style="color:var(--go)">Risparmio cumulativo: ~&euro;14K/anno.</strong></div>
+          <div class="cmtl-cost">~&euro;23.050<em>al mese da qui in poi</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- LE 3 CONDIZIONI -->
   <div class="cmai-cond">
     <h3 class="cmai-cond-h">Tre cose che rendono questo modello <em>realisticamente fattibile.</em></h3>
@@ -747,7 +1022,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
 
 <!-- ═══════════════════════════════════ SEZ 4: ADV UNIFICATO ═══════════════════════════════════ -->
 <section class="sec bg-alt" id="s-adv">
-  <div class="s-tag">Vantaggio strategico &middot; Verificato con fonti</div>
+  <div class="s-tag"><span style="color:var(--brand);font-weight:500">04</span> &middot; Vantaggio strategico &middot; ADV unificato</div>
   <h2 class="s-h">ADV unificato a livello gruppo.<br><em>Il dettaglio tecnico</em> che fa la differenza economica.</h2>
   <p class="s-lead">Sembra una scelta operativa interna. In realt&agrave; &egrave; una delle voci con il maggior impatto economico nascosto del piano e una delle ragioni concrete per cui un&rsquo;agenzia coordinata produce risultati misurabilmente diversi da gestioni separate per account. La meccanica &egrave; documentata in industry e si pu&ograve; verificare anche solo guardando come funzionano oggi gli ad auctions su Google e Meta.</p>
 
@@ -756,7 +1031,33 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
       <div class="adv-left">
         <div class="adv-tag">Il problema invisibile</div>
         <h3 class="adv-h">Quando 16 account BZAR si <em>fanno concorrenza tra loro</em> nelle stesse aste pubblicitarie.</h3>
-        <p class="adv-text">Su Meta e Google, ogni volta che un utente cerca <strong>"boutique hotel Roma centro"</strong>, <strong>"ristorante Monti"</strong> o <strong>"rooftop Roma"</strong>, scatta un&rsquo;asta in tempo reale. Se i 16 account BZAR hanno ognuno il proprio piano pubblicitario scollegato, <strong>finiscono nella stessa asta come avversari</strong>. Il sistema sceglie chi mostrare, ma nel processo i CPM/CPC del gruppo salgono &mdash; senza che nessun account capisca perch&eacute; sta pagando di pi&ugrave;.<br><br>&Egrave; un fenomeno noto in industry come <em>fratricidal competition</em> o <em>self-bidding</em>. Documentato e quantificato.</p>
+
+        <div class="auction-schema">
+          <div class="auction-stage">
+            <svg class="auction-arrow" viewBox="0 0 340 200" preserveAspectRatio="none">
+              <defs>
+                <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                  <polygon points="0 0, 8 4, 0 8" fill="#c0572a" opacity="0.55"/>
+                </marker>
+              </defs>
+              <line x1="60" y1="22" x2="155" y2="92" stroke="#c0572a" stroke-width="1" opacity="0.55" stroke-dasharray="3,2" marker-end="url(#arrowhead)"/>
+              <line x1="280" y1="22" x2="185" y2="92" stroke="#c0572a" stroke-width="1" opacity="0.55" stroke-dasharray="3,2" marker-end="url(#arrowhead)"/>
+              <line x1="34" y1="100" x2="135" y2="100" stroke="#c0572a" stroke-width="1" opacity="0.55" stroke-dasharray="3,2" marker-end="url(#arrowhead)"/>
+              <line x1="306" y1="100" x2="205" y2="100" stroke="#c0572a" stroke-width="1" opacity="0.55" stroke-dasharray="3,2" marker-end="url(#arrowhead)"/>
+              <line x1="170" y1="178" x2="170" y2="148" stroke="#c0572a" stroke-width="1" opacity="0.55" stroke-dasharray="3,2" marker-end="url(#arrowhead)"/>
+            </svg>
+            <div class="auction-node n1">Viminale</div>
+            <div class="auction-node n2">Coppelle</div>
+            <div class="auction-node n3">Adoro</div>
+            <div class="auction-node n4">La Griffe</div>
+            <div class="auction-node n5">Condominio</div>
+            <div class="auction-center">
+              <div class="auction-center-l">Stessa<br>asta</div>
+              <div class="auction-center-v">"hotel<br>Roma"</div>
+            </div>
+          </div>
+          <div class="auction-caption">5 account BZAR &mdash; tutti dentro lo stesso real-time auction su Google e Meta. Il sistema sceglie chi mostrare, ma <strong>i CPM/CPC del gruppo salgono</strong>. Fenomeno noto come <strong>fratricidal competition</strong>.</div>
+        </div>
       </div>
       <div class="adv-vs">
         <div class="adv-row bad">
@@ -801,19 +1102,84 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
   <div class="adv-example">
     <div class="adv-ex-tag">Un esempio concreto applicato a BZAR</div>
     <h3 class="adv-ex-h">Cosa cambia, in pratica, su una keyword come <em>"boutique hotel Roma centro storico"</em></h3>
-    <p class="adv-ex-text">Immaginiamo che 5 hotel della catena (Viminale, Condominio, Coppelle, Adoro, La Griffe) decidano ognuno autonomamente di investire €500/mese su Google Ads su quella keyword e variazioni correlate. <strong>Spesa lorda gruppo: €2.500/mese, €30.000/anno.</strong><br><br>Senza coordinamento, le 5 inserzioni partecipano alla stessa asta tra loro come fossero concorrenti distinti. Con un overhead conservativo del 20% sui CPC (estremo basso del range industry), il gruppo paga circa <strong>€500-€600/mese in pi&ugrave;</strong> per le stesse impression utili &mdash; <em>~€6.000-€7.000 all&rsquo;anno bruciati nella concorrenza interna</em>.<br><br>Con piano ADV unificato Ribrain: una sola strategia centrale gestisce le 5 strutture come segmentazioni interne, con audience exclusion reciproca, deduplica del bid, focus delle 5 inserzioni su micro-segmenti distinti (Olivia ai Liv. A pi&ugrave; visual-first, Sophie su Coppelle pi&ugrave; family). <strong>Stesso budget, zero concorrenza interna, copertura aumentata.</strong></p>
+
+    <div class="calc-flow">
+      <div class="calc-step">
+        <div class="calc-step-tag">01 &middot; Setup</div>
+        <div class="calc-step-name">Spesa gruppo dichiarata</div>
+        <div class="calc-step-num">&euro;30K<span style="font-size:.7em;color:var(--mid);font-weight:400">/anno</span></div>
+        <div class="calc-step-desc">5 hotel Liv. A &times; <strong>&euro;500/mese</strong> ognuno, autonomi su Google Ads sulla stessa keyword e varianti correlate.</div>
+      </div>
+
+      <div class="calc-arrow">&rarr;</div>
+
+      <div class="calc-step problem">
+        <div class="calc-step-tag">02 &middot; Senza coordinamento</div>
+        <div class="calc-step-name">Le 5 inserzioni si incontrano in asta</div>
+        <div class="calc-step-num">&minus;&euro;6&ndash;7K<span style="font-size:.7em;color:var(--warn);font-weight:400">/anno</span></div>
+        <div class="calc-step-desc">Overhead +20% conservativo sui CPC <em>(estremo basso del range industry)</em>. <strong>Bruciati nella concorrenza interna del gruppo</strong>.</div>
+      </div>
+
+      <div class="calc-arrow">&rarr;</div>
+
+      <div class="calc-step solution">
+        <div class="calc-step-tag">03 &middot; ADV Unificato Ribrain</div>
+        <div class="calc-step-name">Stesso budget, sistema coordinato</div>
+        <div class="calc-step-num">+0%<span style="font-size:.7em;color:var(--go);font-weight:400">overhead</span></div>
+        <div class="calc-step-desc">Strategia centrale, audience exclusion sincronizzate, focus su micro-segmenti distinti per persona target. <strong>Recupero del budget bruciato</strong>.</div>
+      </div>
+    </div>
+
+    <p style="font-size:11.5px;color:var(--mid);margin-top:1.25rem;line-height:1.7;font-style:italic">Questo &egrave; il calcolo applicato a una sola keyword. Su un&rsquo;intera strategia ADV multi-canale (Meta + Google + TikTok) attraverso 16 account, l&rsquo;impatto si moltiplica.</p>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════ SEZ 5: ROI DISINTERMEDIAZIONE ═══════════════════════════════════ -->
-<section class="sec bg-alt" id="s-roi">
-  <div class="s-tag">Il calcolo del ritorno &middot; Onestà prima di tutto</div>
+<section class="sec" id="s-roi">
+  <div class="s-tag"><span style="color:var(--brand);font-weight:500">05</span> &middot; Il calcolo del ritorno &middot; Onestà prima di tutto</div>
   <h2 class="s-h">Cosa cambia con noi rispetto<br>alle agenzie precedenti.</h2>
 
-  <div style="background:#fff;border:.5px solid rgba(117,88,71,.12);border-left:3px solid var(--ink);border-radius:10px;padding:1.5rem 1.75rem;margin-top:2rem;max-width:780px">
-    <div style="font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);margin-bottom:.6rem;font-weight:500">Il punto di partenza onesto</div>
-    <p style="font-size:13.5px;color:var(--dark);line-height:1.75">BZAR ha gi&agrave; lavorato con agenzie. La macchina commerciale funziona &mdash; <strong>occupancy al 92%, ADR a €220, brand riconosciuto</strong>. La quota OTA al 40% non &egrave; un sintomo di qualcosa che non funziona, &egrave; lo stato attuale di un&rsquo;ottimizzazione che non &egrave; mai stata l&rsquo;obiettivo prioritario di nessuno fino a oggi.<br><br>Quello che proponiamo non &egrave; un miracolo di ROI. &Egrave; uno <strong>spostamento di asse</strong>: da social come tool di brand awareness generico a social come <em>strumento misurabile di disintermediazione</em>. Le agenzie precedenti non avevano questa tesi al centro del piano. Noi s&igrave;.</p>
+  <div style="display:grid;grid-template-columns:1.1fr 1.4fr;gap:1.5rem;margin-top:2rem;align-items:stretch" class="roi-context-grid">
+    <!-- Stato BZAR oggi -->
+    <div style="background:#fff;border:.5px solid rgba(117,88,71,.12);border-radius:12px;padding:1.5rem 1.5rem">
+      <div style="font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);margin-bottom:1rem;font-weight:500">Stato BZAR oggi &middot; La macchina funziona</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:1.25rem">
+        <div>
+          <div style="font-family:'Afacad Flux',sans-serif;font-size:clamp(1.6rem,3vw,2rem);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.03em">92%</div>
+          <div style="font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);margin-top:.4rem;line-height:1.4">Occupancy</div>
+        </div>
+        <div>
+          <div style="font-family:'Afacad Flux',sans-serif;font-size:clamp(1.6rem,3vw,2rem);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.03em">€220</div>
+          <div style="font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);margin-top:.4rem;line-height:1.4">ADR medio</div>
+        </div>
+        <div>
+          <div style="font-family:'Afacad Flux',sans-serif;font-size:clamp(1.6rem,3vw,2rem);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.03em">#1</div>
+          <div style="font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);margin-top:.4rem;line-height:1.4">Hotel Roma TA<br>(Viminale)</div>
+        </div>
+      </div>
+      <p style="font-size:12.5px;color:var(--dark);line-height:1.65;margin-top:.75rem;padding-top:1rem;border-top:.5px solid rgba(117,88,71,.08)">La quota OTA al 40% <strong style="color:var(--ink)">non &egrave; un sintomo</strong> di qualcosa che non funziona. &Egrave; lo stato attuale di un&rsquo;ottimizzazione che <em style="color:var(--mid)">non &egrave; mai stata obiettivo prioritario</em> di nessun piano fino a oggi.</p>
+    </div>
+
+    <!-- Spostamento di asse -->
+    <div style="background:linear-gradient(135deg,rgba(117,88,71,.06),rgba(200,168,141,.04));border:.5px solid rgba(200,168,141,.3);border-radius:12px;padding:1.5rem 1.5rem;display:flex;flex-direction:column;justify-content:space-between">
+      <div>
+        <div style="font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin-bottom:.85rem;font-weight:500">Cosa cambia con noi &middot; Spostamento di asse</div>
+        <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:.85rem;align-items:center;margin-bottom:1.25rem">
+          <div style="background:#FDFCFA;border:.5px solid rgba(117,88,71,.1);border-radius:8px;padding:.85rem .9rem">
+            <div style="font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);margin-bottom:.3rem">Da</div>
+            <div style="font-family:'Afacad Flux',sans-serif;font-size:.95rem;font-weight:500;color:var(--dark);line-height:1.25">Social come tool di <em style="color:var(--mid);font-style:italic;font-weight:400">brand awareness generico</em></div>
+          </div>
+          <div style="font-family:'Afacad Flux',sans-serif;font-size:1.4rem;color:var(--brand);font-weight:300">&rarr;</div>
+          <div style="background:rgba(200,168,141,.12);border:.5px solid rgba(200,168,141,.4);border-radius:8px;padding:.85rem .9rem">
+            <div style="font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin-bottom:.3rem">A</div>
+            <div style="font-family:'Afacad Flux',sans-serif;font-size:.95rem;font-weight:500;color:var(--dark);line-height:1.25">Social come strumento <strong style="color:var(--ink)">misurabile di disintermediazione</strong></div>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:12.5px;color:var(--dark);line-height:1.65;font-style:italic">Non un miracolo di ROI. <strong style="color:var(--ink);font-style:normal">Le agenzie precedenti non avevano questa tesi al centro del piano. Noi s&igrave;.</strong></p>
+    </div>
   </div>
+  <style>@media(max-width:880px){.roi-context-grid{grid-template-columns:1fr !important}}</style>
 
   <h3 style="font-family:'Afacad Flux',sans-serif;font-size:clamp(1.3rem,2.5vw,1.7rem);font-weight:500;color:var(--dark);margin-top:3rem;margin-bottom:.75rem;line-height:1.25">Tre cose concretamente diverse nel nostro piano:</h3>
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:3rem" class="diff-grid">
@@ -833,6 +1199,52 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
 
   <h3 style="font-family:'Afacad Flux',sans-serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:400;color:var(--dark);margin-bottom:.5rem;line-height:1.2;letter-spacing:-.015em">Lo spazio dell&rsquo;opportunit&agrave;.<br><em style="font-style:italic;color:var(--ink);font-weight:300">Non una promessa, un modello previsionale.</em></h3>
   <p class="s-lead" style="margin-bottom:1.5rem">Ecco tre scenari su come potrebbe muoversi la quota OTA negli anni con un piano disintermediazione attivo. Sono ipotesi conservative, basate su pattern osservati in altri gruppi alberghieri italiani che hanno fatto questo percorso. <strong style="color:var(--dark)">Non sono garanzia di risultato</strong> &mdash; sono il modo migliore che abbiamo per dimensionare la posta in gioco.</p>
+
+  <!-- TRADOTTO IN PRENOTAZIONI REALI -->
+  <div class="tip-wrap">
+    <div class="tip-head">
+      <div class="tip-tag">Sotto la cifra del €569K &middot; I numeri concreti</div>
+      <h3 class="tip-h">Tradotto in prenotazioni reali, <em>cosa significa esattamente</em> "spostare 4 punti %".</h3>
+    </div>
+
+    <div class="tip-grid">
+      <!-- 01: Punto di partenza -->
+      <div class="tip-cell">
+        <div class="tip-cell-step">01 &middot; Oggi</div>
+        <div class="tip-cell-num">~7.500</div>
+        <div class="tip-cell-l">prenotazioni/mese via OTA</div>
+        <div class="tip-cell-d">Su <strong>~18.800 prenotazioni totali</strong> mensili del gruppo (1.700 camere × 92% × 30 gg ÷ 2,5 notti durata media). Il <strong>40%</strong> &egrave; oggi via Booking, Expedia e altri.</div>
+      </div>
+
+      <!-- 02: Spostamento target -->
+      <div class="tip-cell">
+        <div class="tip-cell-step">02 &middot; Fine anno 1</div>
+        <div class="tip-cell-num">~750</div>
+        <div class="tip-cell-l">prenotazioni/mese spostate</div>
+        <div class="tip-cell-d">A regime fine anno: 4 punti % di mix spostato da OTA a canale diretto. <strong>Mix futuro</strong>: 64% diretto / 36% OTA (oggi 60/40).</div>
+      </div>
+
+      <!-- 03: Tradotto al giorno -->
+      <div class="tip-cell highlight">
+        <div class="tip-cell-step">03 &middot; In termini quotidiani</div>
+        <div class="tip-cell-num">~5</div>
+        <div class="tip-cell-l">prenotazioni dirette in pi&ugrave; al giorno per hotel Liv. A</div>
+        <div class="tip-cell-d">Sul gruppo: ~25 prenotazioni dirette in pi&ugrave; ogni giorno. Per ogni Liv. A: <strong>5 in pi&ugrave;/giorno</strong>, cio&egrave; <strong>~4% del flusso quotidiano</strong> di prenotazioni dell&rsquo;hotel.</div>
+      </div>
+
+      <!-- 04: Risparmio -->
+      <div class="tip-cell">
+        <div class="tip-cell-step">04 &middot; Risparmio anno 1</div>
+        <div class="tip-cell-num">~&euro;569K</div>
+        <div class="tip-cell-l">commissioni risparmiate</div>
+        <div class="tip-cell-d"><strong>5.443 prenotazioni</strong> totali spostate cumulativamente nei 12 mesi (rampa progressiva), per <strong>~&euro;104 di commissione media</strong> per prenotazione (€220 ADR × 2,5 notti × 19%).</div>
+      </div>
+    </div>
+
+    <div class="tip-foot">
+      <strong>Sanity check:</strong> 5 prenotazioni dirette in pi&ugrave; al giorno per un hotel boutique 4* a Roma in posizione #1 TripAdvisor &egrave; un obiettivo morbido, non aggressivo. Le agenzie aggressive promettono spesso 8&ndash;10 punti % anno 1; noi ne stimiamo 4 a fine anno 1 e 6,8 medi anno 2 perch&eacute; preferiamo essere conservativi che ottimisti. <strong>Il modello dipende anche da fattori che non controlliamo direttamente:</strong> stagionalit&agrave;, ranking SEO, competitivit&agrave; del mercato, abitudini consolidate dei viaggiatori. Per questo prevediamo review trimestrale di ricalibrazione.
+    </div>
+  </div>
 
   <div class="roi-intro" id="roigrid">
     <!-- ANNO 1 -->
@@ -905,8 +1317,8 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
 </section>
 
 <!-- ═══════════════════════════════════ SEZ 6: BENEFICI INDIRETTI ═══════════════════════════════════ -->
-<section class="sec" id="s-indiretti">
-  <div class="s-tag">Oltre il calcolo OTA</div>
+<section class="sec bg-alt" id="s-indiretti">
+  <div class="s-tag"><span style="color:var(--brand);font-weight:500">06</span> &middot; Oltre il calcolo OTA</div>
   <h2 class="s-h">Quattro benefici indiretti.<br><em>Difficili da fatturare, impossibili da ignorare.</em></h2>
   <p class="s-lead">Il ROI da disintermediazione &egrave; la voce pi&ugrave; misurabile del piano, ma non &egrave; l&rsquo;unica. Un programma social ben costruito genera valore in altre quattro direzioni, di cui ogni voce ha un ordine di grandezza chiaro anche se non sempre allocabile a una singola campagna. Sono valori conservativi, calcolati su ipotesi realistiche.</p>
 
@@ -955,8 +1367,8 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
 </section>
 
 <!-- ═══════════════════════════════════ SEZ 7: CUMULATIVO 24 MESI ═══════════════════════════════════ -->
-<section class="sec bg-alt" id="s-cum">
-  <div class="s-tag">Investimento vs ritorno</div>
+<section class="sec" id="s-cum">
+  <div class="s-tag"><span style="color:var(--brand);font-weight:500">07</span> &middot; Investimento vs ritorno</div>
   <h2 class="s-h">24 mesi cumulativi.<br>La <em>traiettoria del piano in un grafico.</em></h2>
   <p class="s-lead">Il modo pi&ugrave; onesto di guardare i numeri non &egrave; un singolo anno. &Egrave; il cumulativo. Investimento che cresce in modo lineare, ritorno che cresce in modo crescente, payback che si raggiunge nel punto in cui le due curve si incrociano.</p>
 
@@ -994,9 +1406,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
         <line x1="656" y1="20" x2="656" y2="285" stroke="rgba(117,88,71,.18)" stroke-width="0.5" stroke-dasharray="2,3"/>
         <text x="656" y="14" text-anchor="middle" font-family="Poppins,sans-serif" font-size="8" fill="rgba(117,88,71,.4)" letter-spacing="0.06em">FINE ANNO 1</text>
 
-        <!-- INVESTIMENTO (rosso/warn) - parte da 17K (M0 setup) e cresce -->
-        <!-- M0=17, M1=53, M2=89... ogni mese +36K (24K retainer + 12K media) -->
-        <!-- Anno 2: ogni mese +34.85K (22.85 + 12) -->
+        <!-- INVESTIMENTO (rosso/warn) - cresce linearmente -->
         <!-- y = 280 - (val/2400000)*240 -->
         <path id="invPath" d="M 40,278.3 L 91.4,275.3 L 142.7,271.7 L 194.1,268.1 L 245.4,264.5 L 296.8,260.9 L 348.2,257.3 L 399.5,253.7 L 450.9,250.1 L 502.2,246.5 L 553.6,242.9 L 605,239.3 L 656.3,235.7 L 668,234.6 L 679.7,233.5 L 691.4,232.4 L 703.2,231.3 L 714.9,230.2 L 726.6,229.1 L 738.3,228 L 750,226.9 L 761.7,225.8 L 773.5,224.7 L 780,224" 
               fill="none" stroke="#c0572a" stroke-width="2" stroke-linecap="round" stroke-dasharray="0 2000"/>
@@ -1033,9 +1443,131 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
   </div>
 </section>
 
+<!-- ═══════════════════════════════════ SEZ 8: I DUE TIER (spostata dopo cumulativo) ═══════════════════════════════════ -->
+<section class="sec bg-alt" id="s-tier">
+  <div class="s-tag"><span style="color:var(--brand);font-weight:500">08</span> &middot; La proposta &middot; Due tier</div>
+  <h2 class="s-h">Adesso che avete visto il motore.<br><em>Ecco quanto costa farlo girare.</em></h2>
+  <p class="s-lead">A questo punto del documento avete visto: <strong style="color:var(--dark)">~330 ore di lavoro Ribrain al mese</strong>, distribuite su 14 aree operative. <strong style="color:var(--dark)">~478 contenuti prodotti mensilmente</strong>, su 16 account coordinati. Il modello evolutivo di community management con AI. ADV unificato che recupera marginalit&agrave; sui CPM. Un calcolo di disintermediazione progressiva delle OTA con payback al decimo mese. Ecco cosa serve, in termini di investimento, per attivare tutto questo.</p>
+  <p class="s-lead" style="margin-top:.75rem;font-size:13px;color:var(--mid);max-width:680px"><em style="font-style:italic">Due tier, stesso metodo. La differenza sta nell&rsquo;intensit&agrave; della produzione video e nella profondit&agrave; dei cicli creativi. Per dare una scala immediata: il piano gestisce 13 entit&agrave; editoriali distinte (5 hotel Liv. A &middot; 5 F&amp;B Liv. B &middot; 2 Toscana Liv. C &middot; 1 chain corporate). Sotto ogni tier trovi anche il costo medio per struttura, calcolato su questa base.</em></p>
+
+  <div class="tier-grid" id="tgrid">
+    <!-- TIER FOUNDATION -->
+    <div class="tier-card" id="tier-f">
+      <div class="tier-num">Tier 01</div>
+      <div class="tier-name">Foundation</div>
+      <div class="tier-tag">Piano completo, ritmo standard. Per partire con tutta la macchina operativa accesa, con produzione video integrata nelle giornate di shooting.</div>
+      <div class="tier-price">
+        <span class="tier-price-v">&euro;20.500</span>
+        <span class="tier-price-u">/ mese</span>
+      </div>
+      <div class="tier-perstruct">
+        <span>= <strong>~&euro;1.575</strong> al mese per struttura</span>
+        <span style="color:rgba(117,88,71,.35)">&middot;</span>
+        <em>su 13 entit&agrave; editoriali</em>
+      </div>
+
+      <div class="tier-section">Strategia &amp; pensiero</div>
+      <ul class="tier-list">
+        <li>Piano editoriale mensile per <strong>16 account</strong> &mdash; 5 hotel + 5 F&amp;B + 2 Toscana + chain BZAR + cross-post FB Liv. A</li>
+        <li>Direzione creativa, mood per struttura, supervisione output produzione</li>
+        <li>Brief shooting strutturati per ogni struttura attiva nel mese</li>
+      </ul>
+
+      <div class="tier-section">Esecuzione editoriale</div>
+      <ul class="tier-list">
+        <li><strong>117 post originali / mese</strong> &middot; copywriting e grafica per ogni canale</li>
+        <li><strong>278 stories / mese</strong> &middot; copy, sticker, sondaggi, CTA</li>
+        <li><strong>11 reel hero / mese</strong> &middot; uno per ogni struttura attiva</li>
+        <li>Trattamento grafico foto post-shooting (headline, logo, brand layer)</li>
+      </ul>
+
+      <div class="tier-section">Produzione foto/video</div>
+      <ul class="tier-list">
+        <li><strong>~9 giornate di shooting</strong> on-location al mese</li>
+        <li>Editing video integrato nelle giornate di shooting</li>
+        <li>Selezione e ritocco foto base inclusi</li>
+      </ul>
+
+      <div class="tier-section">Sempre on</div>
+      <ul class="tier-list">
+        <li><strong>Community management 5 giorni su 7</strong> &middot; SLA H+24</li>
+        <li><strong>ADV unificato</strong> Meta + Google + TikTok</li>
+        <li>Account management single-point-of-contact</li>
+        <li>Report mensile + review trimestrale on-site</li>
+      </ul>
+
+      <div class="tier-foot"><em>Indicato per chi vuole partire</em> con l&rsquo;intera macchina attiva, accettando un ritmo editoriale standard e una produzione video efficiente ma essenziale.</div>
+    </div>
+
+    <!-- TIER STRATEGIC -->
+    <div class="tier-card recommended" id="tier-s">
+      <div class="tier-badge">Consigliato</div>
+      <div class="tier-num">Tier 02</div>
+      <div class="tier-name">Strategic</div>
+      <div class="tier-tag">Tutto del Foundation, con produzione video amplificata e cicli creativi pi&ugrave; profondi. Per dare ai reel hero la qualit&agrave; che la narrativa BZAR merita.</div>
+      <div class="tier-price">
+        <span class="tier-price-v">&euro;24.000</span>
+        <span class="tier-price-u">/ mese</span>
+      </div>
+      <div class="tier-perstruct">
+        <span>= <strong>~&euro;1.850</strong> al mese per struttura</span>
+        <span style="color:rgba(117,88,71,.35)">&middot;</span>
+        <em>su 13 entit&agrave; editoriali</em>
+      </div>
+
+      <div class="tier-section">Tutto del Foundation, +</div>
+      <ul class="tier-list">
+        <li><strong>Editing video dedicato</strong> &middot; cicli pi&ugrave; lunghi, color grade curato, music sync, ritmo editoriale per ogni reel hero</li>
+        <li><strong>Cicli di revisione creativa</strong> sui materiali video &mdash; non one-shot, ma iterazione fino a ottenere il pezzo giusto</li>
+        <li>Brief operativi pi&ugrave; strutturati per outlet F&amp;B (con direttori e staff in struttura)</li>
+        <li>Listening competitor avanzato (Hoxton, Mama, Generator, Chapter) &middot; benchmark mensile</li>
+        <li>Crisis protocol presidiato H+2 con bozza risposta in tempo reale</li>
+      </ul>
+
+      <div class="tier-section">Differenza visibile</div>
+      <ul class="tier-list">
+        <li>I reel hero diventano <strong>contenuto editoriale</strong> &mdash; non documentazione</li>
+        <li>Il calendario respira: ogni Liv. A pu&ograve; permettersi reel pilota e formato sperimentale (es. <em>"24h al Condominio"</em>) senza compromettere il ritmo standard</li>
+        <li>Snacky lavora con un budget editing che gli consente di chiudere i pezzi <strong>al livello di Il Pellicano e Borgo Santo Pietro</strong> &mdash; benchmark M6</li>
+      </ul>
+
+      <div class="tier-foot"><em>Indicato per chi vuole posizionare</em> BZAR a livello dei boutique hotel di riferimento M6, costruendo asset video che vivono oltre il singolo post.</div>
+    </div>
+  </div>
+
+  <p class="s-lead" style="margin-top:2rem;font-size:13px;color:var(--mid);max-width:700px;line-height:1.75">Entrambi i tier sono pensati come punto di partenza negoziabile. Si pu&ograve; salire o scendere su singole voci (frequenza Liv. B, intensit&agrave; ADV, presidio CM esteso) sulla base di esigenze specifiche emerse nelle prime settimane.</p>
+</section>
+
+<!-- ═══════════════════════════════════ SEZ 3: MESE 0 SETUP ═══════════════════════════════════ -->
+<section class="sec" id="s-onboarding">
+  <div class="s-tag"><span style="color:var(--brand);font-weight:500">09</span> &middot; Una tantum &middot; Solo all&rsquo;inizio</div>
+  <h2 class="s-h">Onboarding una sola volta.<br><em>Poi la macchina &egrave; accesa.</em></h2>
+  <p class="s-lead">C&rsquo;&egrave; una voce che resta volutamente fuori dal retainer mensile: il setup di Mese 0. &Egrave; un costo che si sostiene una volta nella vita del contratto, copre tutto quello che serve per partire al primo giorno utile con il piano gi&agrave; rodato &mdash; account audit, brand book operativi, calendario shooting, e soprattutto la libreria foto/video iniziale che alimenta i primi 60 giorni di pubblicazioni.</p>
+
+  <div class="mz-grid" style="margin-top:2rem">
+    <div class="mz-card" style="grid-column:1 / -1;display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start">
+      <div>
+        <div class="mz-tag">Mese 0 &middot; Una tantum</div>
+        <div class="mz-h" style="font-size:1.6rem">Setup, audit e <em>stock iniziale</em></div>
+        <div class="mz-price" style="font-size:2.6rem">&euro;17.000</div>
+        <div class="mz-price-l">una tantum, prima del Mese 1</div>
+      </div>
+      <ul class="mz-list">
+        <li>Audit completo dei 16 account esistenti, raccolta accessi, mappa stakeholder</li>
+        <li>Brand book operativo per ogni struttura (3 hotel Liv. A + 5 F&amp;B + chain)</li>
+        <li>Calendario shooting Q1 concordato con direttori hotel</li>
+        <li><strong>Stock shooting raddoppiato</strong> &mdash; ~14 giornate Snacky per costituire la libreria foto/video iniziale di tutte le strutture</li>
+        <li>Brief book editoriale per persona, pillar, tono di voce per account</li>
+        <li>Setup piattaforme: ad accounts unificati, Meta Business Suite, scheduling tool, dashboard analytics</li>
+        <li>Kick-off call estesa con Francesco e direttori per allineamento operativo</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════════════════════════════════ SEZ 8: PATTO DENTRO/FUORI ═══════════════════════════════════ -->
 <section class="sec bg-alt" id="s-patto">
-  <div class="s-tag">Trasparenza</div>
+  <div class="s-tag"><span style="color:var(--brand);font-weight:500">10</span> &middot; Trasparenza</div>
   <h2 class="s-h">Cosa &egrave; incluso, <em>cosa &egrave; fuori scope.</em></h2>
   <p class="s-lead">La condizione perch&eacute; una partnership funzioni per due anni e oltre &egrave; una sola: nessuna ambiguit&agrave; iniziale. Ecco esattamente cosa entra nel retainer mensile e cosa, per scelta esplicita, resta fuori &mdash; o perch&eacute; &egrave; competenza di altri partner BZAR, o perch&eacute; ha natura progettuale e va quotata a parte.</p>
 
@@ -1145,16 +1677,23 @@ ScrollTrigger.create({
 gsap.fromTo('#tier-f',{opacity:0,y:30},{opacity:1,y:0,duration:.9,scrollTrigger:{trigger:'#tgrid',start:'top 78%',toggleActions:'play none none none'}});
 gsap.fromTo('#tier-s',{opacity:0,y:30},{opacity:1,y:0,duration:.9,delay:.15,scrollTrigger:{trigger:'#tgrid',start:'top 78%',toggleActions:'play none none none'}});
 
-// SEZ 3: Mese 0 + CM
-gsap.fromTo('.mz-card',{opacity:0,y:20},{opacity:1,y:0,duration:.8,stagger:.15,scrollTrigger:{trigger:'#s-onboarding',start:'top 75%',toggleActions:'play none none none'}});
+// SEZ 3: Mese 0 setup
+gsap.fromTo('.mz-card',{opacity:0,y:20},{opacity:1,y:0,duration:.8,scrollTrigger:{trigger:'#s-onboarding',start:'top 75%',toggleActions:'play none none none'}});
 
 // SEZ MOTORE
 gsap.fromTo('.motore-wrap',{opacity:0,y:30},{opacity:1,y:0,duration:1,scrollTrigger:{trigger:'#s-motore',start:'top 75%',toggleActions:'play none none none'}});
 gsap.fromTo('.mt-row',{opacity:0,y:10},{opacity:1,y:0,duration:.5,stagger:.05,scrollTrigger:{trigger:'.motore-table',start:'top 75%',toggleActions:'play none none none'}});
 
+// Grafico contenuti mensili (dentro sez Motore)
+gsap.fromTo('.cnt-wrap',{opacity:0,y:25},{opacity:1,y:0,duration:.9,scrollTrigger:{trigger:'.cnt-wrap',start:'top 78%',toggleActions:'play none none none'}});
+gsap.fromTo('.cnt-mix-seg',{flexBasis:'0%'},{flexBasis:function(i,el){return el.style.flexBasis;},duration:1.2,stagger:.08,delay:.3,ease:'power2.out',scrollTrigger:{trigger:'.cnt-mix',start:'top 80%',toggleActions:'play none none none'}});
+gsap.fromTo('.cnt-cl',{opacity:0,x:-15},{opacity:1,x:0,duration:.6,stagger:.12,scrollTrigger:{trigger:'.cnt-clusters',start:'top 82%',toggleActions:'play none none none'}});
+
 // SEZ 3-bis: Community AI espansa
 gsap.fromTo('.cmai-scenario',{opacity:0,y:20},{opacity:1,y:0,duration:1,scrollTrigger:{trigger:'#s-cmai',start:'top 75%',toggleActions:'play none none none'}});
 gsap.fromTo('.cmai-fase',{opacity:0,y:20},{opacity:1,y:0,duration:.8,stagger:.2,scrollTrigger:{trigger:'.cmai-fasi',start:'top 78%',toggleActions:'play none none none'}});
+gsap.fromTo('.cmtl-wrap',{opacity:0,y:20},{opacity:1,y:0,duration:.9,scrollTrigger:{trigger:'.cmtl-wrap',start:'top 80%',toggleActions:'play none none none'}});
+gsap.fromTo('.cmtl-step',{opacity:0,y:10},{opacity:1,y:0,duration:.5,stagger:.12,delay:.3,scrollTrigger:{trigger:'.cmtl',start:'top 82%',toggleActions:'play none none none'}});
 gsap.fromTo('.cmai-cond-item',{opacity:0,y:15},{opacity:1,y:0,duration:.7,stagger:.15,scrollTrigger:{trigger:'.cmai-cond',start:'top 80%',toggleActions:'play none none none'}});
 gsap.fromTo('.cmai-savings',{opacity:0,y:15},{opacity:1,y:0,duration:.9,scrollTrigger:{trigger:'.cmai-savings',start:'top 85%',toggleActions:'play none none none'}});
 
@@ -1168,6 +1707,8 @@ gsap.fromTo('.adv-example',{opacity:0,y:15},{opacity:1,y:0,duration:.9,scrollTri
 gsap.fromTo('.diff-grid > div',{opacity:0,y:15},{opacity:1,y:0,duration:.7,stagger:.15,scrollTrigger:{trigger:'.diff-grid',start:'top 80%',toggleActions:'play none none none'}});
 
 // SEZ 5: ROI cards
+gsap.fromTo('.tip-wrap',{opacity:0,y:25},{opacity:1,y:0,duration:.9,scrollTrigger:{trigger:'.tip-wrap',start:'top 80%',toggleActions:'play none none none'}});
+gsap.fromTo('.tip-cell',{opacity:0,y:15},{opacity:1,y:0,duration:.6,stagger:.12,delay:.2,scrollTrigger:{trigger:'.tip-grid',start:'top 82%',toggleActions:'play none none none'}});
 gsap.fromTo('.roi-year',{opacity:0,y:30},{opacity:1,y:0,duration:.8,stagger:.15,scrollTrigger:{trigger:'#roigrid',start:'top 78%',toggleActions:'play none none none'}});
 gsap.fromTo('#paybackcard',{opacity:0,y:30},{opacity:1,y:0,duration:1,scrollTrigger:{trigger:'#paybackcard',start:'top 80%',toggleActions:'play none none none'}});
 
