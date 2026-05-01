@@ -221,7 +221,7 @@ body{background:var(--bg);color:var(--dark);font-family:'Poppins',sans-serif;fon
   <div class="tb-r">
     <span class="tb-date">Aprile 2026</span>
     <span class="tb-conf">Confidenziale</span>
-    <button class="rbmenu-btn in-tb" id="rbHamBtn" aria-label="Apri menu"><span class="l1"></span><span class="l2"></span><span class="l3"></span></button>
+    <button class="rb-ham" id="rbHamBtn" aria-label="Apri menu"><span class="h1"></span><span class="h2"></span><span class="h3"></span></button>
   </div>
 </header>
 
@@ -1117,8 +1117,10 @@ var M=[
   {id:'m4',code:'04',label:'Personas',sub:'4 profili \u00b7 Trigger \u00b7 Social behavior',url:'m4.html',color:'#a08470'},
   {id:'m5',code:'05',label:'Mappa del Momento',sub:'Perch\u00e9 investire adesso',url:'m5.html',color:'#C8A88D'},
   {id:'m6',code:'06',label:'Benchmark Creativi',sub:'Il Pellicano \u00b7 Borgo S.Pietro \u00b7 The Pig',url:'m6.html',color:'#755847'},
-  {id:'m7',code:'07',label:'Brainstorming Strategico',sub:'Piano per struttura \u00b7 Mappe sinaptiche',url:'m7.html',color:'#9a7d6a'},
-  {id:'m8',code:'08',label:'Come Lavoriamo',sub:'Team \u00b7 Processo \u00b7 Cadenza \u00b7 Governance',url:'m8.html',color:'#C4ACA5'}
+  {id:'m7',code:'07',label:'Strategia',sub:'Piano per struttura \u00b7 Mappe sinaptiche',url:'m7.html',color:'#9a7d6a'},
+  {id:'m8',code:'08',label:'Come Lavoriamo',sub:'Team \u00b7 Processo \u00b7 Frequenze \u00b7 Patto',url:'m8.html',color:'#C4ACA5'},
+  {id:'m9',code:'09',label:'Casi Studio',sub:'Esempi di contenuto \u00b7 Mockup',url:'m9.html',color:'#a08470'},
+  {id:'m10',code:'10',label:'Economics',sub:'ROI \u00b7 Tier \u00b7 Disintermediazione OTA',url:'m10.html',color:'#C8A88D'}
 ];
 
 /* ── FONTI PER MODULO ───────────────────────────── */
@@ -1175,6 +1177,16 @@ var FONTI={
     {label:'Personas Social BZAR Hotels \u2013 Ribrain Deep Research',url:'https://bzarhotels.it/'},
     {label:'Mappa del Momento BZAR Hotels \u2013 Ribrain Deep Research',url:'https://bzarhotels.it/'},
     {label:'Brand Book BZAR Hotels 2026',url:'https://bzarhotels.it/'}
+  ],
+  m8:[],
+  m9:[],
+  m10:[
+    {label:'Cloudbeds \u2013 OTA Commission Rates 2026 (15-30%)',url:'https://www.cloudbeds.com/online-travel-agencies/commissions/'},
+    {label:'Search Engine Land \u2013 Google ad auction policy update 2025-2026',url:'https://searchengineland.com/google-double-serving-dilemma-who-wins-464233'},
+    {label:'Manoeuvre Group \u2013 Multi-brand Google Ads strategies (fratricidal competition)',url:'https://manoeuvregroup.com/11-strategies-for-multi-brand-google-ads-advertisers/'},
+    {label:'Meta Business \u2013 Audience Overlap effect on CPM',url:'https://www.facebook.com/business/help/1679591828938781'},
+    {label:'Dati BZAR Hotels \u2013 Confermati da Francesco Mormile in call aprile 2026',url:'https://bzarhotels.it/'},
+    {label:'Modello ROI disintermediazione \u2013 Ribrain Deep Research aprile 2026',url:'https://bzarhotels.it/'}
   ]
 };
 
@@ -1205,7 +1217,7 @@ s.textContent=[
   '.rbmenu-brand-logo{height:12px;filter:invert(1);opacity:.45}',
   '.rbmenu-brand-sep{width:1px;height:14px;background:rgba(200,168,141,.18)}',
   '.rbmenu-brand-label{font-family:"Poppins",sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(200,168,141,.28)}',
-  '.rbmenu-body{flex:1;display:flex;flex-direction:column;justify-content:flex-start;padding:20px 40px 32px;overflow-y:auto}',
+  '.rbmenu-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:20px 40px 32px;overflow-y:auto}',
   '.rbmenu-items{list-style:none}',
   '.rbmenu-item{border-top:1px solid rgba(200,168,141,.06);opacity:0;transform:translateY(16px);position:relative}',
   '.rbmenu-item:last-child{border-bottom:1px solid rgba(200,168,141,.06)}',
@@ -1305,7 +1317,7 @@ nb.id='rbnav';
 var nbCSS=document.createElement('style');
 nbCSS.textContent=[
   '#rbnav{position:fixed;bottom:0;left:0;right:0;z-index:8000;pointer-events:auto;background:rgba(30,20,16,.96);backdrop-filter:blur(20px);border-top:.5px solid rgba(200,168,141,.08);display:flex;height:48px;overflow:visible}',
-  '.rbnav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;color:rgba(200,168,141,.3);font-family:"Poppins",sans-serif;font-size:8px;letter-spacing:.08em;text-transform:uppercase;gap:2px;transition:color .2s;position:relative;min-width:0;overflow:visible;pointer-events:auto;cursor:pointer;touch-action:manipulation}',
+  '.rbnav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;color:rgba(200,168,141,.3);font-family:"Poppins",sans-serif;font-size:8px;letter-spacing:.08em;text-transform:uppercase;gap:2px;transition:color .2s;position:relative;min-width:0;overflow:visible;pointer-events:auto;cursor:pointer}',
   '.rbnav-item:hover{color:rgba(200,168,141,.65)}',
   '.rbnav-item.active{color:rgba(200,168,141,.8)}',
   '.rbnav-item-dot{width:3px;height:3px;border-radius:50%;background:currentColor;opacity:0}',
