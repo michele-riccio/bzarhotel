@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M10: Economics & ROI · BZAR Hotels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{--bg:#F1EFED;--ink:#755847;--brand:#C8A88D;--rose:#C4ACA5;--dark:#1E1410;--mid:#9a7d6a;--go:#5a7a4a;--warn:#c0572a}
+body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;font-size:15px;line-height:1.65;overflow-x:hidden;padding-top:52px;padding-bottom:48px;cursor:none}
+@media(hover:none){body{cursor:auto}#cur{display:none}}
+#cur{position:fixed;width:8px;height:8px;background:var(--brand);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:width .18s,height .18s}
+
+/* TOPBAR */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:800;height:52px;background:var(--dark);display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem 0 1.5rem;border-bottom:.5px solid rgba(200,168,141,.1)}
+.tb-l{display:flex;align-items:center;gap:.75rem}
+.tb-brand{font-family:"Afacad Flux",sans-serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.tb-sep{width:.5px;height:16px;background:rgba(255,255,255,.15)}
+.tb-rlogo{height:13px;filter:invert(1);opacity:.6}
+.tb-c{font-family:"Poppins",sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.2);position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap}
+@media(max-width:680px){.tb-c{display:none}}
+.tb-r{display:flex;align-items:center;gap:.75rem}
+.tb-date{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+.tb-conf{font-size:9px;letter-spacing:.14em;text-transform:uppercase;border:.5px solid rgba(200,168,141,.28);color:rgba(200,168,141,.45);padding:3px 8px;border-radius:3px}
+.rb-ham{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:5px;width:32px;height:32px;padding:5px;background:none;border:none;cursor:pointer;flex-shrink:0;z-index:9001;position:relative}
+.rb-ham span{display:block;height:1.5px;background:#F1EFED;border-radius:1px;transition:all .4s cubic-bezier(0.16,1,0.3,1);transform-origin:right center}
+.rb-ham .h1{width:20px}
+.rb-ham .h2{width:14px}
+.rb-ham .h3{width:20px}
+.rb-ham.open .h1{width:20px;transform:translateY(6.5px) rotate(-45deg)}
+.rb-ham.open .h2{opacity:0;width:0}
+.rb-ham.open .h3{width:20px;transform:translateY(-6.5px) rotate(45deg)}
+
+/* HERO */
+.hero{min-height:100svh;display:grid;grid-template-rows:1fr auto;padding:5.5rem 1.5rem 2.5rem;position:relative;overflow:hidden}
+.hero-noise{position:absolute;inset:0;pointer-events:none;opacity:.018;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px}
+.hero-ghost{position:absolute;right:-2%;top:50%;transform:translateY(-50%);font-family:"Afacad Flux",sans-serif;font-size:clamp(18rem,44vw,40rem);font-weight:700;line-height:1;color:rgba(117,88,71,.04);pointer-events:none;user-select:none;letter-spacing:-.07em}
+.hero-body{display:flex;flex-direction:column;justify-content:center}
+.hero-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--brand);display:flex;align-items:center;gap:.75rem;margin-bottom:2rem}
+.hero-tag::before{content:"";width:28px;height:1px;background:var(--brand)}
+.hero-h1{font-family:"Afacad Flux",sans-serif;font-size:clamp(2.5rem,7vw,5.8rem);font-weight:400;line-height:1.04;letter-spacing:-.035em;max-width:920px}
+.hero-h1 em{font-style:italic;font-weight:300;color:var(--ink)}
+.hero-sub{margin-top:1.75rem;font-size:14px;color:var(--mid);max-width:540px;line-height:1.8}
+.hero-counts{display:flex;gap:2.5rem;margin-top:2.5rem;flex-wrap:wrap}
+.hc-v{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.03em}
+.hc-l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-top:.2rem;max-width:160px;line-height:1.4}
+.hero-foot{padding-top:1.5rem}
+.hero-scroll{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(117,88,71,.3);display:flex;align-items:center;gap:.5rem}
+.hero-scroll::after{content:"";width:48px;height:1px;background:rgba(200,168,141,.22)}
+
+/* SEZIONI BASE */
+.sec{padding:4.5rem 1.5rem;border-top:.5px solid rgba(117,88,71,.1);position:relative}
+.sec.bg-alt{background:#FDFCFA}
+.sec.bg-dark{background:var(--dark);color:rgba(241,239,237,.85);border-top:none}
+.s-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);margin-bottom:.5rem}
+.bg-dark .s-tag{color:rgba(200,168,141,.45)}
+.s-h{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.9rem,4vw,3rem);font-weight:400;line-height:1.08;letter-spacing:-.02em;margin-bottom:.75rem;max-width:820px}
+.bg-dark .s-h{color:rgba(241,239,237,.92)}
+.s-h em{font-style:italic;color:var(--ink);font-weight:300}
+.bg-dark .s-h em{color:var(--brand)}
+.s-lead{font-size:14px;color:var(--mid);max-width:580px;line-height:1.8}
+.bg-dark .s-lead{color:rgba(241,239,237,.5)}
+
+/* === SEZ 1: IL PROBLEMA === */
+.problem-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:2rem;margin-top:2.5rem;align-items:center}
+@media(max-width:880px){.problem-grid{grid-template-columns:1fr}}
+.problem-flow{background:rgba(117,88,71,.04);border:.5px solid rgba(117,88,71,.12);border-radius:14px;padding:2rem 1.75rem}
+.pf-head{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);margin-bottom:1.5rem;display:flex;align-items:center;gap:.5rem}
+.pf-head::before{content:"";width:18px;height:1px;background:var(--brand)}
+.pf-formula{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:1.5rem}
+.pf-cell{background:#FDFCFA;border-radius:8px;padding:.75rem .85rem;text-align:center}
+.pf-cv{font-family:"Afacad Flux",sans-serif;font-size:1.4rem;font-weight:500;color:var(--ink);line-height:1}
+.pf-cl{font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-top:.3rem;line-height:1.3}
+.pf-arrow{height:1px;background:linear-gradient(90deg,transparent,rgba(117,88,71,.3),transparent);margin:.5rem 0 1.25rem}
+.pf-result{text-align:center;padding:1rem 1.25rem;background:var(--dark);border-radius:10px;color:rgba(241,239,237,.9)}
+.pf-result-l{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(200,168,141,.4);margin-bottom:.4rem}
+.pf-result-v{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:400;color:var(--brand);line-height:1;letter-spacing:-.02em}
+.pf-result-sub{font-size:10px;color:rgba(241,239,237,.4);margin-top:.5rem;letter-spacing:.06em}
+.problem-impact{padding:1.5rem 1.5rem 1.5rem 0}
+.pi-yearly{font-family:"Afacad Flux",sans-serif;font-size:clamp(3rem,7vw,5rem);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.04em;margin-bottom:.75rem}
+.pi-yearly em{font-style:normal;color:var(--brand);font-weight:400}
+.pi-l{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-bottom:1.5rem}
+.pi-text{font-size:14px;color:var(--ink);line-height:1.75;max-width:420px}
+.pi-text strong{color:var(--dark);font-weight:500}
+
+/* === SEZ 2: I DUE TIER === */
+.tier-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:3rem}
+@media(max-width:880px){.tier-grid{grid-template-columns:1fr}}
+.tier-card{background:#fff;border-radius:18px;border:.5px solid rgba(117,88,71,.12);padding:2rem 1.75rem 1.5rem;position:relative;overflow:hidden}
+.tier-card.recommended{border:2px solid var(--brand);background:linear-gradient(180deg,rgba(200,168,141,.04),rgba(200,168,141,0))}
+.tier-badge{position:absolute;top:1.25rem;right:1.25rem;background:var(--brand);color:#fff;font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:99px;font-weight:500}
+.tier-num{font-family:"Afacad Flux",sans-serif;font-size:.95rem;color:rgba(117,88,71,.4);margin-bottom:.4rem;letter-spacing:.06em}
+.tier-name{font-family:"Afacad Flux",sans-serif;font-size:2rem;font-weight:400;color:var(--dark);line-height:1.1;letter-spacing:-.02em;margin-bottom:.4rem}
+.tier-tag{font-size:11px;color:var(--mid);margin-bottom:1.5rem;line-height:1.6;max-width:340px}
+.tier-price{display:flex;align-items:baseline;gap:.4rem;padding-bottom:1.25rem;border-bottom:.5px solid rgba(117,88,71,.1);margin-bottom:1.25rem}
+.tier-price-v{font-family:"Afacad Flux",sans-serif;font-size:clamp(2.6rem,5vw,3.4rem);font-weight:400;color:var(--ink);line-height:1;letter-spacing:-.03em}
+.tier-price-u{font-size:11px;color:var(--mid);letter-spacing:.06em}
+.tier-section{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);margin:1.25rem 0 .6rem;font-weight:500}
+.tier-section:first-child{margin-top:0}
+.tier-list{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.tier-list li{font-size:12.5px;color:var(--dark);line-height:1.55;display:flex;gap:.65rem;align-items:flex-start}
+.tier-list li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--brand);flex-shrink:0;margin-top:9px}
+.tier-list li strong{color:var(--ink);font-weight:500}
+.tier-foot{margin-top:1.25rem;padding-top:1rem;border-top:.5px solid rgba(117,88,71,.1);font-size:11px;color:var(--mid);line-height:1.65}
+.tier-foot em{color:var(--ink);font-style:normal;font-weight:500}
+
+/* === SEZ 3: MESE 0 + MODELLO IBRIDO CM === */
+.mz-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:1.5rem;margin-top:2.5rem}
+@media(max-width:880px){.mz-grid{grid-template-columns:1fr}}
+.mz-card{background:#FDFCFA;border-radius:14px;border:.5px solid rgba(117,88,71,.1);padding:1.75rem}
+.mz-tag{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.mz-h{font-family:"Afacad Flux",sans-serif;font-size:1.4rem;font-weight:400;color:var(--dark);line-height:1.15;margin-bottom:1rem}
+.mz-h em{font-style:italic;color:var(--ink);font-weight:300}
+.mz-price{font-family:"Afacad Flux",sans-serif;font-size:2.2rem;font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.03em;margin-bottom:.4rem}
+.mz-price-l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-bottom:1.25rem}
+.mz-list{list-style:none;display:flex;flex-direction:column;gap:.55rem;font-size:12px;color:var(--dark);line-height:1.55}
+.mz-list li{display:flex;gap:.6rem;align-items:flex-start}
+.mz-list li::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--mid);flex-shrink:0;margin-top:8px}
+
+/* CM ibrido fasi */
+.cm-fasi{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;margin-top:1rem}
+@media(max-width:600px){.cm-fasi{grid-template-columns:1fr}}
+.cm-fase{background:#fff;border-radius:10px;border:.5px solid rgba(117,88,71,.1);padding:1.25rem 1.1rem;position:relative}
+.cm-fase.f1{border-left:3px solid var(--mid)}
+.cm-fase.f2{border-left:3px solid var(--brand)}
+.cmf-tag{font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);margin-bottom:.35rem}
+.cm-fase.f2 .cmf-tag{color:var(--ink)}
+.cmf-name{font-family:"Afacad Flux",sans-serif;font-size:1.05rem;font-weight:500;color:var(--dark);line-height:1.2;margin-bottom:.35rem}
+.cmf-period{font-size:10px;color:var(--mid);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.85rem}
+.cmf-desc{font-size:11.5px;color:var(--dark);line-height:1.55;margin-bottom:.85rem}
+.cmf-cost{display:flex;flex-direction:column;gap:3px;border-top:.5px dashed rgba(117,88,71,.15);padding-top:.65rem}
+.cmf-cost-row{display:flex;justify-content:space-between;align-items:baseline;font-size:11px}
+.cmf-cost-l{color:var(--mid)}
+.cmf-cost-v{color:var(--ink);font-weight:500}
+
+.cm-savings{margin-top:1.25rem;padding:1rem 1.25rem;background:rgba(90,122,74,.06);border:.5px solid rgba(90,122,74,.18);border-radius:10px;display:flex;align-items:center;gap:1rem}
+.cms-icon{width:32px;height:32px;border-radius:50%;background:rgba(90,122,74,.12);display:flex;align-items:center;justify-content:center;color:var(--go);font-size:1.1rem;flex-shrink:0}
+.cms-text{font-size:12px;color:var(--dark);line-height:1.55}
+.cms-text strong{color:var(--go);font-weight:500}
+
+/* === SEZ 4: ADV UNIFICATO === */
+.adv-card-wrap{margin-top:2.5rem;background:linear-gradient(135deg,rgba(30,20,16,.98),rgba(46,32,26,.98));border-radius:18px;padding:2.5rem 2rem;color:rgba(241,239,237,.88);position:relative;overflow:hidden}
+.adv-card-wrap::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 80% 30%,rgba(200,168,141,.08) 0%,transparent 60%);pointer-events:none}
+.adv-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;position:relative;z-index:1}
+@media(max-width:780px){.adv-grid{grid-template-columns:1fr;gap:1.5rem}}
+.adv-left .adv-tag{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--brand);margin-bottom:.6rem}
+.adv-h{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:400;color:rgba(241,239,237,.95);line-height:1.18;margin-bottom:1rem;letter-spacing:-.015em}
+.adv-h em{font-style:italic;color:var(--brand);font-weight:300}
+.adv-text{font-size:13px;line-height:1.75;color:rgba(241,239,237,.65);max-width:480px}
+.adv-text strong{color:rgba(241,239,237,.92);font-weight:500}
+.adv-vs{display:flex;flex-direction:column;gap:.85rem}
+.adv-row{background:rgba(255,255,255,.04);border-radius:10px;padding:1rem 1.1rem;border:.5px solid rgba(200,168,141,.08)}
+.adv-row.bad{border-color:rgba(192,87,42,.25)}
+.adv-row.good{border-color:rgba(200,168,141,.3)}
+.adv-row-tag{font-size:9px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;margin-bottom:.4rem}
+.adv-row.bad .adv-row-tag{color:rgba(192,87,42,.7)}
+.adv-row.good .adv-row-tag{color:var(--brand)}
+.adv-row-h{font-family:"Afacad Flux",sans-serif;font-size:1.05rem;font-weight:500;color:rgba(241,239,237,.92);line-height:1.25;margin-bottom:.4rem}
+.adv-row-d{font-size:11.5px;line-height:1.6;color:rgba(241,239,237,.55)}
+.adv-row-stat{display:inline-block;margin-top:.5rem;font-family:"Afacad Flux",sans-serif;font-size:1.1rem;color:var(--brand);font-weight:500}
+
+/* === SEZ 5: ROI DISINTERMEDIAZIONE === */
+.roi-intro{margin-top:2.5rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+@media(max-width:780px){.roi-intro{grid-template-columns:1fr}}
+.roi-year{background:#fff;border:.5px solid rgba(117,88,71,.1);border-radius:14px;padding:1.5rem 1.4rem;position:relative;overflow:hidden}
+.roi-year.year2{border-color:rgba(200,168,141,.4);background:linear-gradient(180deg,rgba(200,168,141,.04),#fff)}
+.roi-year.year3{background:var(--dark);color:rgba(241,239,237,.85);border-color:rgba(200,168,141,.15)}
+.ry-tag{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.roi-year.year3 .ry-tag{color:rgba(200,168,141,.45)}
+.ry-name{font-family:"Afacad Flux",sans-serif;font-size:1.4rem;font-weight:500;color:var(--dark);line-height:1;margin-bottom:.25rem}
+.roi-year.year3 .ry-name{color:rgba(241,239,237,.92)}
+.ry-sub{font-size:11px;color:var(--mid);margin-bottom:1.25rem;line-height:1.5}
+.roi-year.year3 .ry-sub{color:rgba(241,239,237,.4)}
+.ry-points{display:flex;align-items:baseline;gap:.5rem;margin-bottom:.85rem;padding-bottom:.85rem;border-bottom:.5px dashed rgba(117,88,71,.15)}
+.roi-year.year3 .ry-points{border-color:rgba(200,168,141,.12)}
+.ry-points-v{font-family:"Afacad Flux",sans-serif;font-size:2.2rem;font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.03em}
+.roi-year.year3 .ry-points-v{color:var(--brand)}
+.ry-points-l{font-size:11px;color:var(--mid);max-width:140px;line-height:1.4}
+.roi-year.year3 .ry-points-l{color:rgba(241,239,237,.4)}
+.ry-rows{display:flex;flex-direction:column;gap:.5rem}
+.ry-row{display:flex;justify-content:space-between;align-items:baseline;font-size:12px}
+.ry-row-l{color:var(--mid)}
+.roi-year.year3 .ry-row-l{color:rgba(241,239,237,.45)}
+.ry-row-v{font-weight:500;color:var(--dark)}
+.roi-year.year3 .ry-row-v{color:rgba(241,239,237,.85)}
+.ry-row.net{border-top:.5px solid rgba(117,88,71,.1);padding-top:.6rem;margin-top:.4rem}
+.roi-year.year3 .ry-row.net{border-color:rgba(200,168,141,.15)}
+.ry-row.net .ry-row-l{font-weight:500;color:var(--ink);text-transform:uppercase;font-size:10px;letter-spacing:.08em}
+.roi-year.year3 .ry-row.net .ry-row-l{color:var(--brand)}
+.ry-row.net .ry-row-v{font-family:"Afacad Flux",sans-serif;font-size:1.3rem;font-weight:500;color:var(--go)}
+.roi-year.year3 .ry-row.net .ry-row-v{color:var(--brand)}
+.ry-roi{position:absolute;top:1.5rem;right:1.4rem;font-family:"Afacad Flux",sans-serif;font-size:1.3rem;font-weight:500;color:var(--brand);background:rgba(200,168,141,.1);padding:4px 10px;border-radius:6px;letter-spacing:-.02em}
+.roi-year.year3 .ry-roi{background:rgba(200,168,141,.15)}
+
+/* Payback callout */
+.payback-card{margin-top:2.5rem;background:linear-gradient(135deg,var(--ink),var(--mid));border-radius:18px;padding:2.25rem 2rem;color:rgba(241,239,237,.95);position:relative;overflow:hidden;display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:center}
+@media(max-width:680px){.payback-card{grid-template-columns:1fr;text-align:center}}
+.payback-card::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(200,168,141,.18) 0%,transparent 65%);pointer-events:none}
+.pb-num{font-family:"Afacad Flux",sans-serif;font-size:clamp(5rem,12vw,8rem);font-weight:300;line-height:1;color:rgba(241,239,237,.98);letter-spacing:-.05em;position:relative;z-index:1}
+.pb-num em{font-style:italic;color:rgba(200,168,141,.8);font-size:.5em;font-weight:400;display:block;margin-top:.4rem;letter-spacing:.04em;font-family:"Poppins",sans-serif;text-transform:uppercase}
+.pb-text{position:relative;z-index:1}
+.pb-tag{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(200,168,141,.6);margin-bottom:.6rem}
+.pb-h{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.4rem,3vw,1.9rem);font-weight:400;line-height:1.2;color:rgba(241,239,237,.96);margin-bottom:.85rem}
+.pb-d{font-size:13px;line-height:1.65;color:rgba(241,239,237,.65);max-width:520px}
+.pb-d strong{color:rgba(241,239,237,.92);font-weight:500}
+
+/* === SEZ 6: BENEFICI INDIRETTI === */
+.bi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:2.5rem}
+@media(max-width:780px){.bi-grid{grid-template-columns:1fr}}
+.bi-card{background:#fff;border:.5px solid rgba(117,88,71,.1);border-radius:12px;padding:1.5rem 1.4rem;display:grid;grid-template-columns:auto 1fr;gap:1rem 1.25rem;align-items:start}
+.bi-icon{width:42px;height:42px;border-radius:50%;background:rgba(200,168,141,.1);display:flex;align-items:center;justify-content:center;color:var(--ink);flex-shrink:0;font-size:1.05rem}
+.bi-name{font-family:"Afacad Flux",sans-serif;font-size:1.1rem;font-weight:500;color:var(--dark);line-height:1.2;margin-bottom:.4rem}
+.bi-desc{font-size:12px;color:var(--mid);line-height:1.6;margin-bottom:.6rem}
+.bi-value{display:inline-block;font-family:"Afacad Flux",sans-serif;font-size:1rem;color:var(--ink);font-weight:500;background:rgba(200,168,141,.08);padding:3px 9px;border-radius:5px;letter-spacing:-.01em}
+.bi-content{grid-column:2}
+
+.bi-total{margin-top:1.5rem;padding:1.5rem 1.75rem;background:rgba(200,168,141,.08);border:.5px solid rgba(200,168,141,.25);border-radius:12px;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.bi-total-l{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);font-weight:500;max-width:380px;line-height:1.55}
+.bi-total-v{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.8rem,4vw,2.4rem);font-weight:400;color:var(--ink);line-height:1;letter-spacing:-.03em}
+
+/* === SEZ 7: CUMULATIVO 24 MESI === */
+.cum-wrap{margin-top:2.5rem;background:#fff;border:.5px solid rgba(117,88,71,.1);border-radius:18px;padding:2rem 1.75rem}
+.cum-chart{position:relative;height:340px;margin:1.5rem 0}
+.cum-svg{width:100%;height:100%;overflow:visible}
+.cum-legend{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1rem;padding-bottom:1rem;border-bottom:.5px solid rgba(117,88,71,.08)}
+.cum-leg-item{display:flex;align-items:center;gap:.5rem;font-size:11px;color:var(--mid)}
+.cum-leg-dot{width:14px;height:2px;border-radius:1px}
+.cum-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-top:1.25rem}
+@media(max-width:680px){.cum-summary{grid-template-columns:1fr}}
+.cum-sum{padding:1rem 1.1rem;background:#FDFCFA;border-radius:10px;border-left:3px solid}
+.cum-sum-l{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);margin-bottom:.35rem}
+.cum-sum-v{font-family:"Afacad Flux",sans-serif;font-size:1.4rem;font-weight:500;color:var(--ink);line-height:1;letter-spacing:-.02em}
+.cum-sum-d{font-size:10.5px;color:var(--mid);margin-top:.3rem;line-height:1.5}
+
+/* === SEZ 8: PATTO DENTRO/FUORI === */
+.patto-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2.5rem}
+@media(max-width:780px){.patto-grid{grid-template-columns:1fr}}
+.patto-side{border-radius:14px;padding:1.75rem 1.5rem;border:1px solid}
+.patto-side.in{background:#f5f8f1;border-color:rgba(90,122,74,.25)}
+.patto-side.out{background:#fdf3ee;border-color:rgba(192,87,42,.22)}
+.patto-tag{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;margin-bottom:.4rem}
+.patto-side.in .patto-tag{color:var(--go)}
+.patto-side.out .patto-tag{color:var(--warn)}
+.patto-h{font-family:"Afacad Flux",sans-serif;font-size:1.4rem;font-weight:400;line-height:1.2;margin-bottom:1.25rem;color:var(--dark)}
+.patto-list{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.patto-list li{font-size:13px;color:var(--dark);line-height:1.6;display:flex;align-items:flex-start;gap:.65rem}
+.patto-list li::before{flex-shrink:0;font-family:"Poppins",sans-serif;font-weight:600;font-size:13px;width:14px;text-align:center;line-height:1.5}
+.patto-side.in .patto-list li::before{content:"+";color:var(--go)}
+.patto-side.out .patto-list li::before{content:"−";color:var(--warn)}
+.patto-list li strong{color:var(--ink);font-weight:600}
+.patto-list li em{color:var(--mid);font-style:italic;font-weight:400}
+
+/* === SEZ MOTORE: COSA FA FUNZIONARE 16 ACCOUNT === */
+@media(max-width:780px){.diff-grid{grid-template-columns:1fr !important}}
+.motore-wrap{margin-top:2.5rem;background:#fff;border:.5px solid rgba(117,88,71,.1);border-radius:18px;padding:2rem 1.75rem;overflow:hidden}
+.motore-head{display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap;margin-bottom:1.75rem;padding-bottom:1.25rem;border-bottom:.5px solid rgba(117,88,71,.08)}
+.motore-tot{font-family:"Afacad Flux",sans-serif;font-size:clamp(2.4rem,5vw,3.4rem);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.03em}
+.motore-tot-l{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);max-width:200px;line-height:1.5}
+.motore-tot-l strong{color:var(--ink);font-weight:500}
+.motore-table{display:grid;grid-template-columns:1.5fr auto 2fr auto;gap:.75rem 1.25rem;align-items:start}
+@media(max-width:780px){.motore-table{grid-template-columns:1fr;gap:0}}
+.mt-row{display:contents}
+@media(max-width:780px){
+  .mt-row{display:block;padding:1rem 0;border-bottom:.5px solid rgba(117,88,71,.08)}
+  .mt-row:last-of-type{border-bottom:none}
+}
+.mt-area{font-family:"Afacad Flux",sans-serif;font-size:.95rem;font-weight:500;color:var(--dark);line-height:1.3;padding:.85rem 0;border-bottom:.5px solid rgba(117,88,71,.06)}
+@media(max-width:780px){.mt-area{padding:0;border:none;margin-bottom:.4rem;font-size:1.05rem}}
+.mt-h{font-family:"Afacad Flux",sans-serif;font-size:1.1rem;font-weight:500;color:var(--ink);line-height:1;padding:.85rem 0;border-bottom:.5px solid rgba(117,88,71,.06);text-align:center;letter-spacing:-.02em}
+@media(max-width:780px){.mt-h{padding:0;border:none;display:inline;text-align:left}.mt-h::before{content:"· ";color:var(--mid)}}
+.mt-h-u{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);font-family:"Poppins",sans-serif;font-weight:400;display:block;margin-top:1px}
+@media(max-width:780px){.mt-h-u{display:inline}.mt-h-u::before{content:" "}}
+.mt-d{font-size:12px;color:var(--mid);line-height:1.55;padding:.85rem 0;border-bottom:.5px solid rgba(117,88,71,.06)}
+@media(max-width:780px){.mt-d{padding:.4rem 0 0;border:none}}
+.mt-x{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1.05rem 0 .85rem;border-bottom:.5px solid rgba(117,88,71,.06);text-align:right;white-space:nowrap}
+@media(max-width:780px){.mt-x{padding:.5rem 0 0;border:none;text-align:left;display:block}}
+.mt-x.snk{color:#9a6b3a}
+.mt-x.cm{color:var(--brand)}
+.motore-foot{margin-top:1.5rem;padding-top:1.25rem;border-top:.5px solid rgba(117,88,71,.08);font-size:12px;color:var(--mid);line-height:1.7}
+.motore-foot strong{color:var(--ink);font-weight:500}
+
+/* === CM AI ESPANSA === */
+.cmai-scenario{background:var(--dark);color:rgba(241,239,237,.85);border-radius:18px;padding:2rem 1.75rem;margin-top:2.5rem;position:relative;overflow:hidden}
+.cmai-scenario::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(200,168,141,.06) 0%,transparent 65%);pointer-events:none}
+.cmai-sc-tag{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(200,168,141,.5);margin-bottom:.6rem;position:relative;z-index:1}
+.cmai-sc-h{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.4rem,3vw,1.9rem);font-weight:400;color:rgba(241,239,237,.96);line-height:1.25;margin-bottom:1rem;letter-spacing:-.015em;position:relative;z-index:1}
+.cmai-sc-h em{font-style:italic;color:var(--brand);font-weight:300}
+.cmai-sc-text{font-size:13px;line-height:1.8;color:rgba(241,239,237,.7);max-width:620px;position:relative;z-index:1}
+.cmai-sc-text strong{color:rgba(241,239,237,.96);font-weight:500}
+
+.cmai-fasi{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2.5rem}
+@media(max-width:780px){.cmai-fasi{grid-template-columns:1fr}}
+.cmai-fase{background:#fff;border-radius:14px;padding:1.75rem 1.5rem;position:relative;border:.5px solid rgba(117,88,71,.1)}
+.cmai-fase.fase1{border-left:4px solid var(--mid)}
+.cmai-fase.fase2{border-left:4px solid var(--brand);background:linear-gradient(180deg,rgba(200,168,141,.04),#fff)}
+.cmaif-num{font-family:"Afacad Flux",sans-serif;font-size:3rem;font-weight:300;color:rgba(117,88,71,.15);line-height:1;letter-spacing:-.04em;position:absolute;top:1.25rem;right:1.5rem}
+.cmaif-tag{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);font-weight:500;margin-bottom:.4rem}
+.cmai-fase.fase2 .cmaif-tag{color:var(--ink)}
+.cmaif-name{font-family:"Afacad Flux",sans-serif;font-size:1.5rem;font-weight:500;color:var(--dark);line-height:1.2;letter-spacing:-.02em;margin-bottom:.25rem;max-width:75%}
+.cmaif-period{font-size:11px;color:var(--mid);letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.25rem}
+.cmaif-desc{font-size:13px;color:var(--dark);line-height:1.7;margin-bottom:1.25rem}
+.cmaif-desc strong{color:var(--ink);font-weight:500}
+.cmaif-list{list-style:none;display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.25rem;padding-left:0}
+.cmaif-list li{font-size:12px;color:var(--mid);line-height:1.55;padding-left:.85rem;position:relative}
+.cmaif-list li::before{content:"·";position:absolute;left:0;top:0;color:var(--brand);font-weight:600}
+.cmaif-cost{padding-top:1rem;border-top:.5px dashed rgba(117,88,71,.15);display:flex;flex-direction:column;gap:5px}
+.cmaif-cost-row{display:flex;justify-content:space-between;font-size:12px}
+.cmaif-cost-l{color:var(--mid)}
+.cmaif-cost-v{color:var(--ink);font-weight:500;font-family:"Afacad Flux",sans-serif;font-size:13px}
+
+.cmai-cond{margin-top:2.5rem;background:#fff;border:.5px solid rgba(117,88,71,.1);border-radius:14px;padding:1.75rem 1.75rem}
+.cmai-cond-h{font-family:"Afacad Flux",sans-serif;font-size:1.2rem;font-weight:500;color:var(--dark);line-height:1.25;margin-bottom:1.25rem}
+.cmai-cond-h em{font-style:italic;color:var(--ink);font-weight:300}
+.cmai-cond-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+@media(max-width:780px){.cmai-cond-grid{grid-template-columns:1fr}}
+.cmai-cond-num{font-family:"Afacad Flux",sans-serif;font-size:1.6rem;font-weight:300;color:var(--brand);line-height:1;margin-bottom:.5rem;letter-spacing:-.02em}
+.cmai-cond-l{font-family:"Afacad Flux",sans-serif;font-size:1rem;font-weight:500;color:var(--ink);line-height:1.25;margin-bottom:.4rem}
+.cmai-cond-d{font-size:12px;color:var(--mid);line-height:1.6}
+
+.cmai-savings{margin-top:2rem;background:linear-gradient(135deg,rgba(90,122,74,.08),rgba(90,122,74,.03));border:1px solid rgba(90,122,74,.25);border-radius:14px;padding:1.75rem;display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:center}
+@media(max-width:680px){.cmai-savings{grid-template-columns:1fr}}
+.cmai-sav-num{font-family:"Afacad Flux",sans-serif;font-size:clamp(2.6rem,5vw,3.4rem);font-weight:400;color:var(--go);line-height:1;letter-spacing:-.03em}
+.cmai-sav-num em{display:block;font-style:normal;font-size:.35em;color:var(--mid);font-family:"Poppins",sans-serif;letter-spacing:.08em;text-transform:uppercase;font-weight:500;margin-top:.4rem;line-height:1.4}
+.cmai-sav-text{font-size:13px;line-height:1.7;color:var(--dark)}
+.cmai-sav-text strong{color:var(--go);font-weight:500}
+
+/* === ADV ESPANSA con dati === */
+.adv-data-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem}
+@media(max-width:780px){.adv-data-grid{grid-template-columns:1fr}}
+.adv-data{background:#fff;border:.5px solid rgba(117,88,71,.1);border-radius:12px;padding:1.5rem 1.4rem}
+.adv-data-num{font-family:"Afacad Flux",sans-serif;font-size:2.2rem;font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.03em;margin-bottom:.4rem}
+.adv-data-l{font-size:12px;color:var(--dark);line-height:1.55;margin-bottom:.6rem;font-weight:500}
+.adv-data-src{font-size:10px;color:var(--mid);line-height:1.5;font-style:italic}
+.adv-example{margin-top:2rem;background:#FDFCFA;border:.5px solid rgba(117,88,71,.15);border-radius:14px;padding:1.75rem 1.75rem}
+.adv-ex-tag{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);margin-bottom:.6rem;font-weight:500}
+.adv-ex-h{font-family:"Afacad Flux",sans-serif;font-size:1.2rem;font-weight:500;color:var(--dark);line-height:1.25;margin-bottom:1rem}
+.adv-ex-h em{font-style:italic;color:var(--ink);font-weight:300}
+.adv-ex-text{font-size:13px;color:var(--dark);line-height:1.75}
+.adv-ex-text strong{color:var(--ink);font-weight:500}
+.adv-ex-text em{color:var(--mid);font-style:italic}
+
+.recap-fin{background:var(--dark);color:rgba(241,239,237,.85);padding:5rem 1.5rem;text-align:center;position:relative;overflow:hidden;border-top:none}
+.recap-fin::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(200,168,141,.06) 0%,transparent 70%);pointer-events:none}
+.rf-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(200,168,141,.45);margin-bottom:1rem}
+.rf-h{font-family:"Afacad Flux",sans-serif;font-size:clamp(2rem,4.5vw,3.4rem);font-weight:400;line-height:1.12;letter-spacing:-.02em;color:rgba(241,239,237,.96);max-width:780px;margin:0 auto 1.5rem}
+.rf-h em{font-style:italic;color:var(--brand);font-weight:300}
+.rf-text{font-size:14px;color:rgba(241,239,237,.55);max-width:580px;margin:0 auto;line-height:1.8}
+
+</style>
+</head>
+<body>
+<div id="cur" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="tb-l">
+    <span class="tb-brand">BZAR Hotels</span>
+    <div class="tb-sep"></div>
+    <img src="https://www.ribrainstudio.com/wp-content/uploads/2025/01/Logo_ribrain_Nero.svg" alt="Ribrain" class="tb-rlogo">
+  </div>
+  <span class="tb-c">Cruscotto Strategico &middot; Economics &amp; ROI</span>
+  <div class="tb-r">
+    <span class="tb-date">Aprile 2026</span>
+    <span class="tb-conf">Confidenziale</span>
+    <button class="rb-ham" id="rbHamBtn" aria-label="Apri menu"><span class="h1"></span><span class="h2"></span><span class="h3"></span></button>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════ HERO ═══════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-noise" aria-hidden="true"></div>
+  <div class="hero-ghost" aria-hidden="true">M10</div>
+  <div class="hero-body">
+    <div class="hero-tag" id="htag">M10 &mdash; Economics &amp; ROI</div>
+    <h1 class="hero-h1">
+      <span id="hl1">Non un costo.</span><br>
+      <span id="hl2">Un investimento</span><br>
+      <span id="hl3"><em>che si ripaga al mese 10.</em></span>
+    </h1>
+    <p class="hero-sub" id="hsub">Il vero costo del social non è quello che si paga a noi. È quello che si continua a pagare alle OTA. Questo modulo mostra investimento, ritorno, payback e benefici indiretti — anno per anno, voce per voce.</p>
+    <div class="hero-counts" id="hcounts">
+      <div><div class="hc-v">€24K</div><div class="hc-l">investimento mensile · tier strategic</div></div>
+      <div><div class="hc-v">€569K</div><div class="hc-l">risparmio commissioni stimato anno 1</div></div>
+      <div><div class="hc-v">10</div><div class="hc-l">mesi al payback</div></div>
+      <div><div class="hc-v">3.8&times;</div><div class="hc-l">ROI anno 2 a regime</div></div>
+    </div>
+  </div>
+  <div class="hero-foot"><div class="hero-scroll" aria-hidden="true">Scorri</div></div>
+</section>
+
+<!-- ═══════════════════════════════════ SEZ 1: IL PROBLEMA ═══════════════════════════════════ -->
+<section class="sec bg-alt" id="s-problem">
+  <div class="s-tag">Il punto di partenza</div>
+  <h2 class="s-h">Il vero costo non è il nostro.<br>&Egrave; <em>quello che continuate a pagare alle OTA.</em></h2>
+  <p class="s-lead">Prima di parlare di investimento, vale la pena guardare la baseline. Ogni mese, su ogni prenotazione che passa da Booking o Expedia, BZAR cede una commissione tra il 15% e il 30%. Con la quota OTA al 40% del totale, il conto cumulativo diventa rapidamente la voce di costo più rilevante del piano marketing &mdash; senza che nessun piano marketing l&rsquo;abbia mai affrontata.</p>
+
+  <div class="problem-grid" id="pgrid">
+    <div class="problem-flow" id="pflow">
+      <div class="pf-head">Calcolo mensile</div>
+      <div class="pf-formula">
+        <div class="pf-cell"><div class="pf-cv">1.700</div><div class="pf-cl">camere</div></div>
+        <div class="pf-cell"><div class="pf-cv">92%</div><div class="pf-cl">occupancy</div></div>
+        <div class="pf-cell"><div class="pf-cv">€220</div><div class="pf-cl">ADR medio</div></div>
+        <div class="pf-cell"><div class="pf-cv">30 gg</div><div class="pf-cl">mese</div></div>
+        <div class="pf-cell"><div class="pf-cv">40%</div><div class="pf-cl">quota OTA</div></div>
+        <div class="pf-cell"><div class="pf-cv">19%</div><div class="pf-cl">commissione</div></div>
+      </div>
+      <div class="pf-arrow"></div>
+      <div class="pf-result">
+        <div class="pf-result-l">Commissioni perse al mese</div>
+        <div class="pf-result-v" id="pfres">&euro;784.500</div>
+        <div class="pf-result-sub">Stima conservativa con commissione mediana 19%</div>
+      </div>
+    </div>
+    <div class="problem-impact">
+      <div class="pi-l">Cumulato annuo</div>
+      <div class="pi-yearly"><em>&euro;9,4M</em></div>
+      <div class="pi-text">In commissioni OTA all&rsquo;anno. <strong>Senza piano social</strong>, questa cifra continua a crescere insieme al gruppo. <strong>Con un piano social efficace</strong>, ogni punto percentuale spostato dal canale OTA al canale diretto vale &euro;195K all&rsquo;anno.<br><br>Il social non &egrave; il modo per riempire le camere &mdash; le riempite gi&agrave; al 92%. &Egrave; il modo per <strong>riempirle costando meno</strong>.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ SEZ 2: I DUE TIER ═══════════════════════════════════ -->
+<section class="sec" id="s-tier">
+  <div class="s-tag">La proposta &middot; Due tier</div>
+  <h2 class="s-h">Due livelli di intensit&agrave;.<br><em>Stesso metodo, perimetro modulare.</em></h2>
+  <p class="s-lead">Entrambi i tier coprono i 16 account della catena con strategia, copywriting, grafica, scheduling, ADV unificato, community management 5 giorni su 7, account management dedicato a Francesco. La differenza sta nell&rsquo;intensit&agrave; della produzione video e nella profondit&agrave; dei cicli creativi &mdash; due dimensioni che hanno impatto diretto su ritmo editoriale e qualit&agrave; percepita dei reel hero.</p>
+
+  <div class="tier-grid" id="tgrid">
+    <!-- TIER FOUNDATION -->
+    <div class="tier-card" id="tier-f">
+      <div class="tier-num">Tier 01</div>
+      <div class="tier-name">Foundation</div>
+      <div class="tier-tag">Piano completo, ritmo standard. Per partire con tutta la macchina operativa accesa, con produzione video integrata nelle giornate di shooting.</div>
+      <div class="tier-price">
+        <span class="tier-price-v">&euro;20.500</span>
+        <span class="tier-price-u">/ mese</span>
+      </div>
+
+      <div class="tier-section">Strategia &amp; pensiero</div>
+      <ul class="tier-list">
+        <li>Piano editoriale mensile per <strong>16 account</strong> &mdash; 5 hotel + 5 F&amp;B + 2 Toscana + chain BZAR + cross-post FB Liv. A</li>
+        <li>Direzione creativa, mood per struttura, supervisione output produzione</li>
+        <li>Brief shooting strutturati per ogni struttura attiva nel mese</li>
+      </ul>
+
+      <div class="tier-section">Esecuzione editoriale</div>
+      <ul class="tier-list">
+        <li><strong>117 post originali / mese</strong> &middot; copywriting e grafica per ogni canale</li>
+        <li><strong>278 stories / mese</strong> &middot; copy, sticker, sondaggi, CTA</li>
+        <li><strong>11 reel hero / mese</strong> &middot; uno per ogni struttura attiva</li>
+        <li>Trattamento grafico foto post-shooting (headline, logo, brand layer)</li>
+      </ul>
+
+      <div class="tier-section">Produzione foto/video</div>
+      <ul class="tier-list">
+        <li><strong>~9 giornate di shooting</strong> on-location al mese</li>
+        <li>Editing video integrato nelle giornate di shooting</li>
+        <li>Selezione e ritocco foto base inclusi</li>
+      </ul>
+
+      <div class="tier-section">Sempre on</div>
+      <ul class="tier-list">
+        <li><strong>Community management 5 giorni su 7</strong> &middot; SLA H+24</li>
+        <li><strong>ADV unificato</strong> Meta + Google + TikTok</li>
+        <li>Account management single-point-of-contact</li>
+        <li>Report mensile + review trimestrale on-site</li>
+      </ul>
+
+      <div class="tier-foot"><em>Indicato per chi vuole partire</em> con l&rsquo;intera macchina attiva, accettando un ritmo editoriale standard e una produzione video efficiente ma essenziale.</div>
+    </div>
+
+    <!-- TIER STRATEGIC -->
+    <div class="tier-card recommended" id="tier-s">
+      <div class="tier-badge">Consigliato</div>
+      <div class="tier-num">Tier 02</div>
+      <div class="tier-name">Strategic</div>
+      <div class="tier-tag">Tutto del Foundation, con produzione video amplificata e cicli creativi pi&ugrave; profondi. Per dare ai reel hero la qualit&agrave; che la narrativa BZAR merita.</div>
+      <div class="tier-price">
+        <span class="tier-price-v">&euro;24.000</span>
+        <span class="tier-price-u">/ mese</span>
+      </div>
+
+      <div class="tier-section">Tutto del Foundation, +</div>
+      <ul class="tier-list">
+        <li><strong>Editing video dedicato</strong> &middot; cicli pi&ugrave; lunghi, color grade curato, music sync, ritmo editoriale per ogni reel hero</li>
+        <li><strong>Cicli di revisione creativa</strong> sui materiali video &mdash; non one-shot, ma iterazione fino a ottenere il pezzo giusto</li>
+        <li>Brief operativi pi&ugrave; strutturati per outlet F&amp;B (con direttori e staff in struttura)</li>
+        <li>Listening competitor avanzato (Hoxton, Mama, Generator, Chapter) &middot; benchmark mensile</li>
+        <li>Crisis protocol presidiato H+2 con bozza risposta in tempo reale</li>
+      </ul>
+
+      <div class="tier-section">Differenza visibile</div>
+      <ul class="tier-list">
+        <li>I reel hero diventano <strong>contenuto editoriale</strong> &mdash; non documentazione</li>
+        <li>Il calendario respira: ogni Liv. A pu&ograve; permettersi reel pilota e formato sperimentale (es. <em>"24h al Condominio"</em>) senza compromettere il ritmo standard</li>
+        <li>Snacky lavora con un budget editing che gli consente di chiudere i pezzi <strong>al livello di Il Pellicano e Borgo Santo Pietro</strong> &mdash; benchmark M6</li>
+      </ul>
+
+      <div class="tier-foot"><em>Indicato per chi vuole posizionare</em> BZAR a livello dei boutique hotel di riferimento M6, costruendo asset video che vivono oltre il singolo post.</div>
+    </div>
+  </div>
+
+  <p class="s-lead" style="margin-top:2rem;font-size:13px;color:var(--mid);max-width:700px;line-height:1.75">Entrambi i tier sono pensati come punto di partenza negoziabile. Si pu&ograve; salire o scendere su singole voci (frequenza Liv. B, intensit&agrave; ADV, presidio CM esteso) sulla base di esigenze specifiche emerse nelle prime settimane.</p>
+</section>
+
+<!-- ═══════════════════════════════════ SEZ MOTORE: COSA FA FUNZIONARE 16 ACCOUNT ═══════════════════════════════════ -->
+<section class="sec" id="s-motore">
+  <div class="s-tag">Cosa c&rsquo;&egrave; sotto il prezzo</div>
+  <h2 class="s-h">Il motore.<br><em>Cosa serve concretamente</em> per tenere accesi 16 account, ogni mese.</h2>
+  <p class="s-lead">Un retainer di questo ordine pu&ograve; suonare astratto. Quello che segue &egrave; il dettaglio operativo &mdash; tutte le aree di lavoro che si attivano in un mese tipo, il volume associato, il numero indicativo di ore richieste. &Egrave; il modo pi&ugrave; trasparente per mostrare la densit&agrave; reale del piano e dare forma a un&rsquo;idea concreta di cosa stanno comprando.</p>
+
+  <div class="motore-wrap">
+    <div class="motore-head">
+      <div class="motore-tot">~330</div>
+      <div class="motore-tot-l"><strong>ore di lavoro Ribrain</strong> al mese, distribuite sulle aree qui sotto<br><span style="font-size:10px;color:var(--mid);font-weight:400;text-transform:none;letter-spacing:0;line-height:1.5;display:block;margin-top:.4rem">+ <strong>~9 giornate Snacky</strong> on-location · + <strong>~40h editing video</strong> dedicato (Tier Strategic)</span></div>
+    </div>
+
+    <div class="motore-table">
+      <!-- HEAD ROW -->
+      <div class="mt-row" style="font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);font-weight:500;font-family:Poppins">
+        <div class="mt-area" style="font-size:9px !important;font-family:Poppins,sans-serif !important;font-weight:500 !important;letter-spacing:.14em !important;text-transform:uppercase;color:var(--mid) !important;border-bottom:.5px solid rgba(117,88,71,.15) !important">Area di lavoro</div>
+        <div class="mt-h" style="font-size:9px !important;font-family:Poppins,sans-serif !important;font-weight:500 !important;letter-spacing:.14em !important;text-transform:uppercase;color:var(--mid) !important;border-bottom:.5px solid rgba(117,88,71,.15) !important">Volume mensile</div>
+        <div class="mt-d" style="font-size:9px !important;font-weight:500 !important;letter-spacing:.14em !important;text-transform:uppercase;color:var(--mid) !important;border-bottom:.5px solid rgba(117,88,71,.15) !important">Cosa significa concretamente</div>
+        <div class="mt-x" style="border-bottom:.5px solid rgba(117,88,71,.15) !important">Ore stimate</div>
+      </div>
+
+      <div class="mt-row">
+        <div class="mt-area">Strategia &amp; PED</div>
+        <div class="mt-h">12 entit&agrave;<span class="mt-h-u">piano editoriale</span></div>
+        <div class="mt-d">Calendario settimanale per ognuna delle 12 entit&agrave; editoriali. Pillar narrativi attivati persona per persona (M7), dosaggio formati, milestones di lancio (es. A Mano giugno).</div>
+        <div class="mt-x">~33h</div>
+      </div>
+
+      <div class="mt-row">
+        <div class="mt-area">Brief shooting Snacky</div>
+        <div class="mt-h">8 strutture<span class="mt-h-u">per shooting</span></div>
+        <div class="mt-d">Brief operativi strutturati per ogni shooting: shot list, mood, requisiti staff in struttura, location, slot orari, gestione esterni.</div>
+        <div class="mt-x">~12h</div>
+      </div>
+
+      <div class="mt-row">
+        <div class="mt-area">Direzione creativa</div>
+        <div class="mt-h">2 AD<span class="mt-h-u">+ supervisione</span></div>
+        <div class="mt-d">Mood per struttura, supervisione output produzione, garanzia di coerenza visiva tra account diversi della catena.</div>
+        <div class="mt-x">~17h</div>
+      </div>
+
+      <div class="mt-row">
+        <div class="mt-area">Copy &amp; caption feed</div>
+        <div class="mt-h">117 post<span class="mt-h-u">originali al mese</span></div>
+        <div class="mt-d">Caption originale per ogni post, calibrata su persona target, pillar attivato, canale di destinazione. Niente generici, niente template.</div>
+        <div class="mt-x">~43h</div>
+      </div>
+
+      <div class="mt-row">
+        <div class="mt-area">Stories work</div>
+        <div class="mt-h">278 stories<span class="mt-h-u">al mese</span></div>
+        <div class="mt-d">Copy, sticker, sondaggi, CTA, elementi grafici per stories quotidiane su tutti gli account attivi.</div>
+        <div class="mt-x">~21h</div>
+      </div>
+
+      <div class="mt-row">
+        <div class="mt-area">Trattamento grafico</div>
+        <div class="mt-h">~80 foto<span class="mt-h-u">trattate al mese</span></div>
+        <div class="mt-d">Headline, applicazione brand layer, color matching, generazione varianti formato (feed/story/reel cover) per ogni asset originale di Snacky.</div>
+        <div class="mt-x">~11h</div>
+      </div>
+
+      <div class="mt-row">
+        <div class="mt-area">Review materiali Snacky</div>
+        <div class="mt-h">11 reel<span class="mt-h-u">+ pacchetti foto</span></div>
+        <div class="mt-d">Cicli di revisione su materiali video e foto consegnati da Snacky, integrazione feedback, controllo brand-fit.</div>
+        <div class="mt-x">~9h</div>
+      </div>
+
+      <div class="mt-row">
+        <div class="mt-area">Scheduling &amp; QA</div>
+        <div class="mt-h">tutti gli account<span class="mt-h-u">tool-assisted</span></div>
+        <div class="mt-d">Caricamento, programmazione, controllo qualit&agrave; pre-pubblicazione, gestione fuso orario per pubblicazioni in slot ottimali.</div>
+        <div class="mt-x">~16h</div>
+      </div>
+
+      <div class="mt-row">
+        <div class="mt-area" style="color:var(--brand)">Community management</div>
+        <div class="mt-h" style="color:var(--brand)">5 giorni / 7<span class="mt-h-u">SLA H+24</span></div>
+        <div class="mt-d">Risposta a commenti, DM, menzioni su 16 account. Listening competitor (Hoxton, Mama, Generator). Escalation crisis. <em>Vedi sezione successiva sul modello evolutivo con AI da Mese 4.</em></div>
+        <div class="mt-x cm">~65h</div>
+      </div>
+
+      <div class="mt-row">
+        <div class="mt-area" style="color:#9a6b3a">ADV unificato</div>
+        <div class="mt-h" style="color:#9a6b3a">3 canali<span class="mt-h-u">Meta + Google + TikTok</span></div>
+        <div class="mt-d">Strategia centrale, audience exclusion sincronizzate, budget pool gestito a livello gruppo. <em>Vedi sezione dedicata pi&ugrave; avanti.</em></div>
+        <div class="mt-x snk">~18h</div>
+      </div>
+
+      <div class="mt-row">
+        <div class="mt-area">Approvazioni cliente</div>
+        <div class="mt-h">workflow Francesco<span class="mt-h-u">SLA 48h</span></div>
+        <div class="mt-d">Gestione approvazioni, integrazione feedback BZAR, mantenimento cadenza editoriale anche in presenza di revisioni.</div>
+        <div class="mt-x">~8h</div>
+      </div>
+
+      <div class="mt-row">
+        <div class="mt-area">Report &amp; review</div>
+        <div class="mt-h">mensile + trimestrale<span class="mt-h-u">on-site Roma</span></div>
+        <div class="mt-d">Report mensile dati performance, KPI per persona, dashboard quota OTA vs diretto. Review trimestrale on-site con Francesco e direttori.</div>
+        <div class="mt-x">~6h</div>
+      </div>
+
+      <div class="mt-row">
+        <div class="mt-area">Account management</div>
+        <div class="mt-h">single point<span class="mt-h-u">di contatto</span></div>
+        <div class="mt-d">Single point of contact per Francesco. Coordinamento interno team Ribrain + Snacky, gestione tempistiche, anticipazione bisogni.</div>
+        <div class="mt-x">~8h</div>
+      </div>
+
+      <div class="mt-row">
+        <div class="mt-area">Crisis management</div>
+        <div class="mt-h">always-on<span class="mt-h-u">protocollo H+2</span></div>
+        <div class="mt-d">Protocollo di crisi attivabile su segnalazione, bozza risposta in tempo reale, escalation Francesco. Ammortizzato sul ciclo annuale.</div>
+        <div class="mt-x">~2h</div>
+      </div>
+    </div>
+
+    <div class="motore-foot">
+      <strong>Tutto questo &egrave; il retainer.</strong> Le ore stimate sono indicative e si ridistribuiscono nel mese in base a periodi caldi (lanci, eventi) e periodi standard. Quello che resta costante &egrave; <strong>la qualit&agrave; del presidio</strong>: nessuna area pu&ograve; rimanere scoperta senza che ne risenta il risultato.<br><br>Includiamo un buffer realistico (+15%) sulle ore base per coprire imprevisti, picchi non pianificati e quel <em>"&egrave; un attimo, mando subito un brief"</em> che &egrave; la differenza tra un&rsquo;agenzia che rispetta il piano e una che lo subisce.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ SEZ 3: MESE 0 SETUP ═══════════════════════════════════ -->
+<section class="sec bg-alt" id="s-onboarding">
+  <div class="s-tag">Una tantum &middot; Solo all&rsquo;inizio</div>
+  <h2 class="s-h">Onboarding una sola volta.<br><em>Poi la macchina &egrave; accesa.</em></h2>
+  <p class="s-lead">C&rsquo;&egrave; una voce che resta volutamente fuori dal retainer mensile: il setup di Mese 0. &Egrave; un costo che si sostiene una volta nella vita del contratto, copre tutto quello che serve per partire al primo giorno utile con il piano gi&agrave; rodato &mdash; account audit, brand book operativi, calendario shooting, e soprattutto la libreria foto/video iniziale che alimenta i primi 60 giorni di pubblicazioni.</p>
+
+  <div class="mz-grid" style="margin-top:2rem">
+    <div class="mz-card" style="grid-column:1 / -1;display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start">
+      <div>
+        <div class="mz-tag">Mese 0 &middot; Una tantum</div>
+        <div class="mz-h" style="font-size:1.6rem">Setup, audit e <em>stock iniziale</em></div>
+        <div class="mz-price" style="font-size:2.6rem">&euro;17.000</div>
+        <div class="mz-price-l">una tantum, prima del Mese 1</div>
+      </div>
+      <ul class="mz-list">
+        <li>Audit completo dei 16 account esistenti, raccolta accessi, mappa stakeholder</li>
+        <li>Brand book operativo per ogni struttura (3 hotel Liv. A + 5 F&amp;B + chain)</li>
+        <li>Calendario shooting Q1 concordato con direttori hotel</li>
+        <li><strong>Stock shooting raddoppiato</strong> &mdash; ~14 giornate Snacky per costituire la libreria foto/video iniziale di tutte le strutture</li>
+        <li>Brief book editoriale per persona, pillar, tono di voce per account</li>
+        <li>Setup piattaforme: ad accounts unificati, Meta Business Suite, scheduling tool, dashboard analytics</li>
+        <li>Kick-off call estesa con Francesco e direttori per allineamento operativo</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ SEZ 3-bis: COMMUNITY AI ESPANSA ═══════════════════════════════════ -->
+<section class="sec" id="s-cmai">
+  <div class="s-tag">Innovazione operativa &middot; Vantaggio competitivo</div>
+  <h2 class="s-h">Community che impara.<br><em>E poi si automatizza, in modo trasparente.</em></h2>
+  <p class="s-lead">Questa &egrave; una delle parti del piano di cui siamo pi&ugrave; convinti, e per cui pensiamo che valga la pena dedicare qualche minuto in pi&ugrave;. Riguarda come gestiamo la community management nel medio termine, e perch&eacute; siamo certi che <strong style="color:var(--dark)">questo &egrave; uno degli elementi che fa la differenza tra un piano social ben costruito e uno mediocre</strong>.</p>
+
+  <!-- SCENARIO CONCRETO -->
+  <div class="cmai-scenario">
+    <div class="cmai-sc-tag">Lo scenario concreto</div>
+    <h3 class="cmai-sc-h">Sabato sera, 23:14. Una review da una stella sul Viminale appena pubblicata su Instagram.<br><em>&laquo;Camera sporca, staff scortese, mai pi&ugrave;&raquo;</em></h3>
+    <p class="cmai-sc-text">Domenica mattina alle 9:00 quel commento ha gi&agrave; ricevuto 47 like e tre risposte di altri utenti che si lamentano. Il primo che cerca <em>"Hotel Viminale"</em> su Google luned&igrave; mattina lo trover&agrave; tra i primi suggerimenti. <strong>Una review mal gestita pu&ograve; costare due settimane di prenotazioni dirette e attivare un effetto a catena</strong>. Pi&ugrave; in generale, una community senza presidio sabato e domenica perde una percentuale rilevante di occasioni di conversione &mdash; perch&eacute; gli utenti viaggiatori scrollano nei weekend, e le prenotazioni si decidono spesso allora.<br><br>Ecco perch&eacute; il modello che proponiamo mette al centro <strong>la copertura H+24 vera, sette giorni su sette</strong> &mdash; ma in modo evolutivo, sostenibile economicamente, e migliorando nel tempo invece di degradare.</p>
+  </div>
+
+  <!-- LE DUE FASI -->
+  <div class="cmai-fasi">
+    <div class="cmai-fase fase1">
+      <div class="cmaif-num">01</div>
+      <div class="cmaif-tag">Fase 1 &middot; Mesi 1&ndash;3</div>
+      <h3 class="cmaif-name">Training del modello con interazioni reali</h3>
+      <div class="cmaif-period">CM 5/7 H+24 incluso nel retainer</div>
+      <p class="cmaif-desc">Il team Ribrain risponde manualmente a ogni interazione su tutti i 16 account, dal luned&igrave; al venerd&igrave;. Ogni risposta viene archiviata, classificata, taggata. <strong>Il punto non &egrave; rispondere &mdash; il punto &egrave; produrre dati strutturati di qualit&agrave; brand-specific</strong>.</p>
+      <ul class="cmaif-list">
+        <li>Tono di voce per ogni account (Spritzeria diversa da Dimora Coppelle)</li>
+        <li>Library di risposte ricorrenti (orari, prezzi, policy, info quartiere)</li>
+        <li>Mappa delle obiezioni e relative risposte testate</li>
+        <li>Pattern di escalation per casi delicati</li>
+        <li>Sentiment tagging per costruire il classificatore AI futuro</li>
+      </ul>
+      <div class="cmaif-cost">
+        <div class="cmaif-cost-row"><span class="cmaif-cost-l">Costo aggiuntivo</span><span class="cmaif-cost-v">€0 (incluso nel retainer)</span></div>
+      </div>
+    </div>
+
+    <div class="cmai-fase fase2">
+      <div class="cmaif-num">02</div>
+      <div class="cmaif-tag">Fase 2 &middot; Da Mese 4 in poi</div>
+      <h3 class="cmaif-name">Layer AI brand-specific + check umano</h3>
+      <div class="cmaif-period">presidio 7/7 H+24 reale, costo che scende</div>
+      <p class="cmaif-desc">A Mese 4 attiviamo un layer AI dedicato (modelli enterprise tipo <strong>Keplero.ai</strong> o equivalenti come Wonderchat / Botpress / Voiceflow), addestrato esclusivamente sui 3 mesi precedenti di interazioni umane. Da quel momento <strong>la AI presidia 7 giorni su 7, anche notte e weekend</strong>. Il team Ribrain mantiene supervisione, controllo qualit&agrave;, gestione casi complessi.</p>
+      <ul class="cmaif-list">
+        <li>Risposte istantanee sotto i 5 minuti, anche di notte e nei weekend</li>
+        <li>Segnalazione automatica casi delicati al team umano (es. recensioni negative)</li>
+        <li>Sentiment monitoring continuo con report settimanale</li>
+        <li>Re-training mensile sui nuovi pattern emersi</li>
+        <li>Trasparenza totale: BZAR vede sempre cosa risponde la AI e cosa l&rsquo;umano</li>
+      </ul>
+      <div class="cmaif-cost">
+        <div class="cmaif-cost-row"><span class="cmaif-cost-l">Setup AI una tantum</span><span class="cmaif-cost-v">€1.500</span></div>
+        <div class="cmaif-cost-row"><span class="cmaif-cost-l">Check mensile umano (15h)</span><span class="cmaif-cost-v">€750/mese</span></div>
+        <div class="cmaif-cost-row"><span class="cmaif-cost-l">Tool AI esterno</span><span class="cmaif-cost-v">€100&ndash;300/mese</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LE 3 CONDIZIONI -->
+  <div class="cmai-cond">
+    <h3 class="cmai-cond-h">Tre cose che rendono questo modello <em>realisticamente fattibile.</em></h3>
+    <div class="cmai-cond-grid">
+      <div class="cmai-cond-item">
+        <div class="cmai-cond-num">01</div>
+        <div class="cmai-cond-l">I tool AI sono maturi</div>
+        <div class="cmai-cond-d">Modelli come Keplero, Wonderchat, Voiceflow nel 2026 raggiungono qualit&agrave; di risposta indistinguibile dall&rsquo;umano nel 75-80% dei casi standard, se addestrati su dataset specifici di brand.</div>
+      </div>
+      <div class="cmai-cond-item">
+        <div class="cmai-cond-num">02</div>
+        <div class="cmai-cond-l">Il dataset di partenza esiste</div>
+        <div class="cmai-cond-d">3 mesi di gestione manuale su 16 account producono migliaia di interazioni etichettate. Quantit&agrave; pi&ugrave; che sufficiente per fine-tuning solido di un modello brand-specific.</div>
+      </div>
+      <div class="cmai-cond-item">
+        <div class="cmai-cond-num">03</div>
+        <div class="cmai-cond-l">Il check umano resta</div>
+        <div class="cmai-cond-d">Non &egrave; mai 100% AI. Le 15 ore mensili di check coprono escalation, casi limite, sentiment monitoring. La AI accelera, l&rsquo;umano dirige &mdash; anche nei prossimi anni.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IL RISPARMIO LONG-TERM -->
+  <div class="cmai-savings">
+    <div class="cmai-sav-num">~&euro;14.000<em>risparmiati ogni anno<br>da Mese 4 in poi</em></div>
+    <div class="cmai-sav-text">Il modello AI non &egrave; un downgrade del presidio: <strong>&egrave; un upgrade</strong>. Da CM 5/7 a presidio 7/7 vero, con risposta sotto i 5 minuti anche di notte. Il costo invece scende: il check umano da 65h/mese passa a 15h/mese, e la differenza &mdash; al netto del costo AI esterno e del setup ammortizzato &mdash; libera circa <strong>&euro;1.150 al mese</strong>, ovvero <strong>circa &euro;14.000 all&rsquo;anno</strong> che restano dentro il budget BZAR. <em>&Egrave; uno dei pochi casi in cui la tecnologia migliora il servizio invece di tagliarlo.</em></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ SEZ 4: ADV UNIFICATO ═══════════════════════════════════ -->
+<section class="sec bg-alt" id="s-adv">
+  <div class="s-tag">Vantaggio strategico &middot; Verificato con fonti</div>
+  <h2 class="s-h">ADV unificato a livello gruppo.<br><em>Il dettaglio tecnico</em> che fa la differenza economica.</h2>
+  <p class="s-lead">Sembra una scelta operativa interna. In realt&agrave; &egrave; una delle voci con il maggior impatto economico nascosto del piano e una delle ragioni concrete per cui un&rsquo;agenzia coordinata produce risultati misurabilmente diversi da gestioni separate per account. La meccanica &egrave; documentata in industry e si pu&ograve; verificare anche solo guardando come funzionano oggi gli ad auctions su Google e Meta.</p>
+
+  <div class="adv-card-wrap">
+    <div class="adv-grid">
+      <div class="adv-left">
+        <div class="adv-tag">Il problema invisibile</div>
+        <h3 class="adv-h">Quando 16 account BZAR si <em>fanno concorrenza tra loro</em> nelle stesse aste pubblicitarie.</h3>
+        <p class="adv-text">Su Meta e Google, ogni volta che un utente cerca <strong>"boutique hotel Roma centro"</strong>, <strong>"ristorante Monti"</strong> o <strong>"rooftop Roma"</strong>, scatta un&rsquo;asta in tempo reale. Se i 16 account BZAR hanno ognuno il proprio piano pubblicitario scollegato, <strong>finiscono nella stessa asta come avversari</strong>. Il sistema sceglie chi mostrare, ma nel processo i CPM/CPC del gruppo salgono &mdash; senza che nessun account capisca perch&eacute; sta pagando di pi&ugrave;.<br><br>&Egrave; un fenomeno noto in industry come <em>fratricidal competition</em> o <em>self-bidding</em>. Documentato e quantificato.</p>
+      </div>
+      <div class="adv-vs">
+        <div class="adv-row bad">
+          <div class="adv-row-tag">Scenario 16 account scollegati</div>
+          <div class="adv-row-h">CPM/CPC pi&ugrave; alti, audience cannibalizzate</div>
+          <div class="adv-row-d">Ogni hotel paga di pi&ugrave; per raggiungere le stesse persone. Le campagne si sovrappongono, le metriche si confondono, l&rsquo;ottimizzazione algoritmica fatica a uscire dalla learning phase.</div>
+          <div class="adv-row-stat">+15-30% costo pubblicitario stimato</div>
+        </div>
+        <div class="adv-row good">
+          <div class="adv-row-tag">Scenario Ribrain &middot; ADV unificato</div>
+          <div class="adv-row-h">Una strategia centrale, segmentazione interna sincronizzata</div>
+          <div class="adv-row-d">Strategia centralizzata, audience exclusion sincronizzate tra account, budget pool gestito a livello gruppo. Gli annunci di BZAR <strong>smettono di farsi concorrenza</strong> e lavorano come un sistema coordinato.</div>
+          <div class="adv-row-stat">CPM ottimizzati &middot; ROI ADV moltiplicato</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DATI A SUPPORTO -->
+  <h3 style="font-family:'Afacad Flux',sans-serif;font-size:clamp(1.2rem,2.4vw,1.5rem);font-weight:500;color:var(--dark);margin-top:3rem;margin-bottom:.5rem;line-height:1.25">I dati che lo certificano.</h3>
+  <p style="font-size:13px;color:var(--mid);max-width:680px;line-height:1.7;margin-bottom:0">Tre evidenze documentate che mostrano come la cannibalizzazione interna su ad auction non sia un&rsquo;ipotesi astratta &mdash; &egrave; una meccanica precisa e quantificata da chi gestisce campagne multi-brand a scala enterprise.</p>
+
+  <div class="adv-data-grid">
+    <div class="adv-data">
+      <div class="adv-data-num">+15-30%</div>
+      <div class="adv-data-l">CPM overhead stimato in scenari multi-brand quando la gestione &egrave; scollegata, secondo benchmark documentati in industry sui multi-account</div>
+      <div class="adv-data-src">Fonte: Manoeuvre Group &middot; <em>11 strategies for multi-brand Google Ads advertisers</em></div>
+    </div>
+    <div class="adv-data">
+      <div class="adv-data-num">Aprile 2025</div>
+      <div class="adv-data-l">Google ha modificato la policy permettendo allo stesso advertiser di apparire in pi&ugrave; posizioni nello stesso SERP &mdash; aggrava il fenomeno della concorrenza interna in regime multi-account</div>
+      <div class="adv-data-src">Fonte: Search Engine Land &middot; <em>Double-serving dilemma update</em></div>
+    </div>
+    <div class="adv-data">
+      <div class="adv-data-num">Audience overlap</div>
+      <div class="adv-data-l">Su Meta, audience overlap &gt;30% tra ad sets dello stesso advertiser causa rising CPMs, learning phase prolungata, creative fatigue accelerata</div>
+      <div class="adv-data-src">Fonte: Meta Business Help Center &middot; <em>About Overlapping Audiences</em></div>
+    </div>
+  </div>
+
+  <!-- ESEMPIO CONCRETO BZAR -->
+  <div class="adv-example">
+    <div class="adv-ex-tag">Un esempio concreto applicato a BZAR</div>
+    <h3 class="adv-ex-h">Cosa cambia, in pratica, su una keyword come <em>"boutique hotel Roma centro storico"</em></h3>
+    <p class="adv-ex-text">Immaginiamo che 5 hotel della catena (Viminale, Condominio, Coppelle, Adoro, La Griffe) decidano ognuno autonomamente di investire €500/mese su Google Ads su quella keyword e variazioni correlate. <strong>Spesa lorda gruppo: €2.500/mese, €30.000/anno.</strong><br><br>Senza coordinamento, le 5 inserzioni partecipano alla stessa asta tra loro come fossero concorrenti distinti. Con un overhead conservativo del 20% sui CPC (estremo basso del range industry), il gruppo paga circa <strong>€500-€600/mese in pi&ugrave;</strong> per le stesse impression utili &mdash; <em>~€6.000-€7.000 all&rsquo;anno bruciati nella concorrenza interna</em>.<br><br>Con piano ADV unificato Ribrain: una sola strategia centrale gestisce le 5 strutture come segmentazioni interne, con audience exclusion reciproca, deduplica del bid, focus delle 5 inserzioni su micro-segmenti distinti (Olivia ai Liv. A pi&ugrave; visual-first, Sophie su Coppelle pi&ugrave; family). <strong>Stesso budget, zero concorrenza interna, copertura aumentata.</strong></p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ SEZ 5: ROI DISINTERMEDIAZIONE ═══════════════════════════════════ -->
+<section class="sec bg-alt" id="s-roi">
+  <div class="s-tag">Il calcolo del ritorno &middot; Onestà prima di tutto</div>
+  <h2 class="s-h">Cosa cambia con noi rispetto<br>alle agenzie precedenti.</h2>
+
+  <div style="background:#fff;border:.5px solid rgba(117,88,71,.12);border-left:3px solid var(--ink);border-radius:10px;padding:1.5rem 1.75rem;margin-top:2rem;max-width:780px">
+    <div style="font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);margin-bottom:.6rem;font-weight:500">Il punto di partenza onesto</div>
+    <p style="font-size:13.5px;color:var(--dark);line-height:1.75">BZAR ha gi&agrave; lavorato con agenzie. La macchina commerciale funziona &mdash; <strong>occupancy al 92%, ADR a €220, brand riconosciuto</strong>. La quota OTA al 40% non &egrave; un sintomo di qualcosa che non funziona, &egrave; lo stato attuale di un&rsquo;ottimizzazione che non &egrave; mai stata l&rsquo;obiettivo prioritario di nessuno fino a oggi.<br><br>Quello che proponiamo non &egrave; un miracolo di ROI. &Egrave; uno <strong>spostamento di asse</strong>: da social come tool di brand awareness generico a social come <em>strumento misurabile di disintermediazione</em>. Le agenzie precedenti non avevano questa tesi al centro del piano. Noi s&igrave;.</p>
+  </div>
+
+  <h3 style="font-family:'Afacad Flux',sans-serif;font-size:clamp(1.3rem,2.5vw,1.7rem);font-weight:500;color:var(--dark);margin-top:3rem;margin-bottom:.75rem;line-height:1.25">Tre cose concretamente diverse nel nostro piano:</h3>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:3rem" class="diff-grid">
+    <div style="background:#fff;border:.5px solid rgba(117,88,71,.1);border-radius:10px;padding:1.25rem 1.25rem">
+      <div style="font-family:'Afacad Flux',sans-serif;font-size:1.6rem;font-weight:300;color:var(--brand);line-height:1;margin-bottom:.5rem">01</div>
+      <div style="font-size:13px;color:var(--dark);line-height:1.6"><strong style="color:var(--ink)">Tesi commerciale prima del calendario.</strong> Ogni post ha un obiettivo: rinforzare il brand-recall in modo che la prossima ricerca sia <em>"BZAR"</em>, non <em>"hotel Roma"</em>. Su questo si misura il piano, non sul reach.</div>
+    </div>
+    <div style="background:#fff;border:.5px solid rgba(117,88,71,.1);border-radius:10px;padding:1.25rem 1.25rem">
+      <div style="font-family:'Afacad Flux',sans-serif;font-size:1.6rem;font-weight:300;color:var(--brand);line-height:1;margin-bottom:.5rem">02</div>
+      <div style="font-size:13px;color:var(--dark);line-height:1.6"><strong style="color:var(--ink)">ADV unificato a livello gruppo.</strong> Le precedenti gestioni separate per account hanno alimentato la concorrenza interna. Una strategia centrale recupera marginalit&agrave; sul budget media gi&agrave; speso.</div>
+    </div>
+    <div style="background:#fff;border:.5px solid rgba(117,88,71,.1);border-radius:10px;padding:1.25rem 1.25rem">
+      <div style="font-family:'Afacad Flux',sans-serif;font-size:1.6rem;font-weight:300;color:var(--brand);line-height:1;margin-bottom:.5rem">03</div>
+      <div style="font-size:13px;color:var(--dark);line-height:1.6"><strong style="color:var(--ink)">Misurazione del canale diretto.</strong> Dashboard mensile che mostra non solo engagement, ma <em>quota OTA vs diretto</em> mese per mese. Il numero che conta &egrave; quello.</div>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Afacad Flux',sans-serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:400;color:var(--dark);margin-bottom:.5rem;line-height:1.2;letter-spacing:-.015em">Lo spazio dell&rsquo;opportunit&agrave;.<br><em style="font-style:italic;color:var(--ink);font-weight:300">Non una promessa, un modello previsionale.</em></h3>
+  <p class="s-lead" style="margin-bottom:1.5rem">Ecco tre scenari su come potrebbe muoversi la quota OTA negli anni con un piano disintermediazione attivo. Sono ipotesi conservative, basate su pattern osservati in altri gruppi alberghieri italiani che hanno fatto questo percorso. <strong style="color:var(--dark)">Non sono garanzia di risultato</strong> &mdash; sono il modo migliore che abbiamo per dimensionare la posta in gioco.</p>
+
+  <div class="roi-intro" id="roigrid">
+    <!-- ANNO 1 -->
+    <div class="roi-year year1">
+      <div class="ry-roi">1.27&times;</div>
+      <div class="ry-tag">Anno 1 &middot; Rampa</div>
+      <div class="ry-name">In costruzione</div>
+      <div class="ry-sub">Mese 1 kickoff, da Mese 2 progressione graduale. Ipotesi: <strong>4 punti % spostati a fine anno</strong>, media annuale 2,4 punti.</div>
+      <div class="ry-points">
+        <div class="ry-points-v">2,4</div>
+        <div class="ry-points-l">punti % medi spostati da OTA a diretto</div>
+      </div>
+      <div class="ry-rows">
+        <div class="ry-row"><span class="ry-row-l">Risparmio commissioni stimato</span><span class="ry-row-v">+&euro;569K</span></div>
+        <div class="ry-row"><span class="ry-row-l">Investimento Ribrain</span><span class="ry-row-v">&minus;&euro;305K</span></div>
+        <div class="ry-row"><span class="ry-row-l">Budget media stimato</span><span class="ry-row-v">&minus;&euro;144K</span></div>
+        <div class="ry-row net"><span class="ry-row-l">Net positivo</span><span class="ry-row-v">+&euro;120K</span></div>
+      </div>
+    </div>
+
+    <!-- ANNO 2 -->
+    <div class="roi-year year2">
+      <div class="ry-roi">3.80&times;</div>
+      <div class="ry-tag">Anno 2 &middot; Regime</div>
+      <div class="ry-name">A pieno ritmo</div>
+      <div class="ry-sub">Asset library matura, AI Community attiva, brand-recall consolidato. <strong>6,8 punti % medi spostati</strong>, scenario realistico.</div>
+      <div class="ry-points">
+        <div class="ry-points-v">6,8</div>
+        <div class="ry-points-l">punti % medi spostati da OTA a diretto</div>
+      </div>
+      <div class="ry-rows">
+        <div class="ry-row"><span class="ry-row-l">Risparmio commissioni stimato</span><span class="ry-row-v">+&euro;1,59M</span></div>
+        <div class="ry-row"><span class="ry-row-l">Investimento Ribrain</span><span class="ry-row-v">&minus;&euro;274K</span></div>
+        <div class="ry-row"><span class="ry-row-l">Budget media stimato</span><span class="ry-row-v">&minus;&euro;144K</span></div>
+        <div class="ry-row net"><span class="ry-row-l">Net positivo</span><span class="ry-row-v">+&euro;1,17M</span></div>
+      </div>
+    </div>
+
+    <!-- ANNO 3 -->
+    <div class="roi-year year3">
+      <div class="ry-roi">6.05&times;</div>
+      <div class="ry-tag">Anno 3 &middot; Soglia di leverage</div>
+      <div class="ry-name">Spazio negoziale</div>
+      <div class="ry-sub">A questo livello, BZAR ha la base per <strong>ridiscutere le condizioni con le stesse OTA</strong> dal punto di forza. 10,8 punti % medi spostati.</div>
+      <div class="ry-points">
+        <div class="ry-points-v">10,8</div>
+        <div class="ry-points-l">punti % medi spostati da OTA a diretto</div>
+      </div>
+      <div class="ry-rows">
+        <div class="ry-row"><span class="ry-row-l">Risparmio commissioni stimato</span><span class="ry-row-v">+&euro;2,53M</span></div>
+        <div class="ry-row"><span class="ry-row-l">Investimento Ribrain</span><span class="ry-row-v">&minus;&euro;274K</span></div>
+        <div class="ry-row"><span class="ry-row-l">Budget media stimato</span><span class="ry-row-v">&minus;&euro;144K</span></div>
+        <div class="ry-row net"><span class="ry-row-l">Net positivo</span><span class="ry-row-v">+&euro;2,11M</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="payback-card" id="paybackcard">
+    <div class="pb-num">10<em>mesi</em></div>
+    <div class="pb-text">
+      <div class="pb-tag">Payback nello scenario realistico</div>
+      <div class="pb-h">Se il modello regge, il pareggio arriva al decimo mese.</div>
+      <div class="pb-d">Considerando insieme retainer, setup Mese 0 e budget media, il punto di pareggio si raggiunge intorno al decimo mese. <strong>Se</strong> la disintermediazione procede secondo l&rsquo;ipotesi conservativa. <strong>Se</strong> il piano ADV unificato performa come stimato. <strong>Se</strong> la macchina editoriale costruisce il brand-recall che ci aspettiamo. Sono ipotesi, non garanzie &mdash; ma sono ipotesi misurabili mese per mese, e <em>ricalibrate trimestralmente</em> insieme a Francesco.</div>
+    </div>
+  </div>
+
+  <div style="margin-top:2rem;padding:1.25rem 1.5rem;background:rgba(117,88,71,.04);border:.5px dashed rgba(117,88,71,.25);border-radius:10px;font-size:12px;color:var(--mid);line-height:1.7;max-width:760px">
+  <strong style="color:var(--ink)">Nota metodologica.</strong> Tutti i numeri di questa sezione sono modelli previsionali costruiti su ipotesi conservative di traslazione progressiva del canale di prenotazione. Il modello potrebbe sottostimare (se l&rsquo;effetto brand-recall si attiva pi&ugrave; velocemente del previsto) o sovrastimare (se la stagionalit&agrave; o fattori esterni rallentano il ritmo). Il piano prevede <strong>review trimestrale on-site</strong> proprio per ricalibrare il modello con i dati reali e correggere la rotta dove serve.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ SEZ 6: BENEFICI INDIRETTI ═══════════════════════════════════ -->
+<section class="sec" id="s-indiretti">
+  <div class="s-tag">Oltre il calcolo OTA</div>
+  <h2 class="s-h">Quattro benefici indiretti.<br><em>Difficili da fatturare, impossibili da ignorare.</em></h2>
+  <p class="s-lead">Il ROI da disintermediazione &egrave; la voce pi&ugrave; misurabile del piano, ma non &egrave; l&rsquo;unica. Un programma social ben costruito genera valore in altre quattro direzioni, di cui ogni voce ha un ordine di grandezza chiaro anche se non sempre allocabile a una singola campagna. Sono valori conservativi, calcolati su ipotesi realistiche.</p>
+
+  <div class="bi-grid">
+    <div class="bi-card">
+      <div class="bi-icon">&#x1F374;</div>
+      <div class="bi-content">
+        <div class="bi-name">F&amp;B revenue uplift diretto</div>
+        <div class="bi-desc">I cinque outlet F&amp;B (Spritzeria, Osteria, Moderno, A Mano, Elisia) servono pasti e drink in struttura. Ogni follower nuovo che si trasforma in coperto vale margine reale, non solo brand awareness. Stima conservativa: +5% di traffico in struttura sui 5 outlet attivi.</div>
+        <div class="bi-value">~&euro;240.000/anno</div>
+      </div>
+    </div>
+
+    <div class="bi-card">
+      <div class="bi-icon">&#x1F510;</div>
+      <div class="bi-content">
+        <div class="bi-name">Branded search protection</div>
+        <div class="bi-desc">Quando un utente cerca <em>"Hotel Viminale"</em> o <em>"Dimora Coppelle"</em>, oggi spesso il primo risultato &egrave; un&rsquo;OTA che fa hijack del brand. Una strategia Google Ads brand-protection difende il traffico organico e riduce i CPC che le OTA fanno pagare al gruppo via clic indiretti.</div>
+        <div class="bi-value">~&euro;24.000/anno</div>
+      </div>
+    </div>
+
+    <div class="bi-card">
+      <div class="bi-icon">&#x1F4F8;</div>
+      <div class="bi-content">
+        <div class="bi-name">Asset library long-term</div>
+        <div class="bi-desc">Dodici mesi di shooting Snacky producono un patrimonio di foto e video riutilizzabile su sito, email marketing, presentazioni B2B, partnership commerciali, materiali per nuove aperture. Il valore di sostituzione (riacquistare set foto/video equivalenti) &egrave; quantificabile.</div>
+        <div class="bi-value">~&euro;30.000/anno valore</div>
+      </div>
+    </div>
+
+    <div class="bi-card">
+      <div class="bi-icon">&#x26A0;</div>
+      <div class="bi-content">
+        <div class="bi-name">Crisis preparedness</div>
+        <div class="bi-desc">Una crisi reputazionale mal gestita pu&ograve; costare 1-2 mesi di disintermediazione persa. Protocollo H+2 con bozza risposta in tempo reale e listening competitor sono valore puro di risk avoidance &mdash; lo si misura solo quando serve, ma a quel punto fa la differenza tra una crisi gestita e un danno strutturale.</div>
+        <div class="bi-value">~&euro;78.000/anno valore</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bi-total">
+    <div class="bi-total-l">Totale benefici indiretti annui &middot; stima conservativa<br><span style="font-size:11px;color:var(--mid);font-weight:400;text-transform:none;letter-spacing:0">Da sommarsi al risparmio commissioni di ogni anno</span></div>
+    <div class="bi-total-v">+&euro;372K / anno</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ SEZ 7: CUMULATIVO 24 MESI ═══════════════════════════════════ -->
+<section class="sec bg-alt" id="s-cum">
+  <div class="s-tag">Investimento vs ritorno</div>
+  <h2 class="s-h">24 mesi cumulativi.<br>La <em>traiettoria del piano in un grafico.</em></h2>
+  <p class="s-lead">Il modo pi&ugrave; onesto di guardare i numeri non &egrave; un singolo anno. &Egrave; il cumulativo. Investimento che cresce in modo lineare, ritorno che cresce in modo crescente, payback che si raggiunge nel punto in cui le due curve si incrociano.</p>
+
+  <div class="cum-wrap">
+    <div class="cum-legend">
+      <div class="cum-leg-item"><div class="cum-leg-dot" style="background:#c0572a"></div>Investimento cumulativo Ribrain (retainer + setup + media)</div>
+      <div class="cum-leg-item"><div class="cum-leg-dot" style="background:var(--go)"></div>Risparmio commissioni cumulativo</div>
+      <div class="cum-leg-item"><div class="cum-leg-dot" style="background:var(--brand);height:1px;border-bottom:2px dashed var(--brand)"></div>Punto di payback (Mese 10)</div>
+    </div>
+
+    <div class="cum-chart">
+      <svg class="cum-svg" viewBox="0 0 800 320" preserveAspectRatio="none">
+        <!-- griglia orizzontale -->
+        <line x1="40" y1="40" x2="780" y2="40" stroke="rgba(117,88,71,.08)" stroke-width="0.5"/>
+        <line x1="40" y1="100" x2="780" y2="100" stroke="rgba(117,88,71,.08)" stroke-width="0.5"/>
+        <line x1="40" y1="160" x2="780" y2="160" stroke="rgba(117,88,71,.08)" stroke-width="0.5"/>
+        <line x1="40" y1="220" x2="780" y2="220" stroke="rgba(117,88,71,.08)" stroke-width="0.5"/>
+        <line x1="40" y1="280" x2="780" y2="280" stroke="rgba(117,88,71,.15)" stroke-width="0.5"/>
+        <!-- label assi y -->
+        <text x="35" y="44" text-anchor="end" font-family="Poppins,sans-serif" font-size="9" fill="rgba(117,88,71,.5)">€2.4M</text>
+        <text x="35" y="104" text-anchor="end" font-family="Poppins,sans-serif" font-size="9" fill="rgba(117,88,71,.5)">€1.8M</text>
+        <text x="35" y="164" text-anchor="end" font-family="Poppins,sans-serif" font-size="9" fill="rgba(117,88,71,.5)">€1.2M</text>
+        <text x="35" y="224" text-anchor="end" font-family="Poppins,sans-serif" font-size="9" fill="rgba(117,88,71,.5)">€0.6M</text>
+        <text x="35" y="284" text-anchor="end" font-family="Poppins,sans-serif" font-size="9" fill="rgba(117,88,71,.5)">€0</text>
+
+        <!-- label mese -->
+        <text x="40" y="304" text-anchor="middle" font-family="Poppins,sans-serif" font-size="9" fill="rgba(117,88,71,.4)">M0</text>
+        <text x="194" y="304" text-anchor="middle" font-family="Poppins,sans-serif" font-size="9" fill="rgba(117,88,71,.4)">M3</text>
+        <text x="348" y="304" text-anchor="middle" font-family="Poppins,sans-serif" font-size="9" fill="rgba(117,88,71,.4)">M6</text>
+        <text x="502" y="304" text-anchor="middle" font-family="Poppins,sans-serif" font-size="9" fill="rgba(117,88,71,.4)">M9</text>
+        <text x="656" y="304" text-anchor="middle" font-family="Poppins,sans-serif" font-size="9" fill="rgba(117,88,71,.4)">M12</text>
+        <text x="780" y="304" text-anchor="middle" font-family="Poppins,sans-serif" font-size="9" fill="rgba(117,88,71,.4)">M24</text>
+
+        <!-- separatore anno 1 / anno 2 -->
+        <line x1="656" y1="20" x2="656" y2="285" stroke="rgba(117,88,71,.18)" stroke-width="0.5" stroke-dasharray="2,3"/>
+        <text x="656" y="14" text-anchor="middle" font-family="Poppins,sans-serif" font-size="8" fill="rgba(117,88,71,.4)" letter-spacing="0.06em">FINE ANNO 1</text>
+
+        <!-- INVESTIMENTO (rosso/warn) - parte da 17K (M0 setup) e cresce -->
+        <!-- M0=17, M1=53, M2=89... ogni mese +36K (24K retainer + 12K media) -->
+        <!-- Anno 2: ogni mese +34.85K (22.85 + 12) -->
+        <!-- y = 280 - (val/2400000)*240 -->
+        <path id="invPath" d="M 40,278.3 L 91.4,275.3 L 142.7,271.7 L 194.1,268.1 L 245.4,264.5 L 296.8,260.9 L 348.2,257.3 L 399.5,253.7 L 450.9,250.1 L 502.2,246.5 L 553.6,242.9 L 605,239.3 L 656.3,235.7 L 668,234.6 L 679.7,233.5 L 691.4,232.4 L 703.2,231.3 L 714.9,230.2 L 726.6,229.1 L 738.3,228 L 750,226.9 L 761.7,225.8 L 773.5,224.7 L 780,224" 
+              fill="none" stroke="#c0572a" stroke-width="2" stroke-linecap="round" stroke-dasharray="0 2000"/>
+
+        <!-- RISPARMIO (verde/go) - parte da 0 e cresce con curva crescente -->
+        <!-- M0=0, M1=0, M2=15K, M3=30K, M4=45K, M5=75K... -->
+        <path id="savPath" d="M 40,280 L 91.4,280 L 142.7,276.3 L 194.1,272.5 L 245.4,265.1 L 296.8,257.6 L 348.2,250.2 L 399.5,239 L 450.9,227.7 L 502.2,216.5 L 553.6,201.5 L 605,186.5 L 656.3,171.5 L 668,162.5 L 679.7,153.5 L 691.4,144.5 L 703.2,135.5 L 714.9,123.5 L 726.6,111.5 L 738.3,99.5 L 750,87.5 L 761.7,72.7 L 773.5,57.9 L 780,49"
+              fill="none" stroke="#5a7a4a" stroke-width="2" stroke-linecap="round" stroke-dasharray="0 2000"/>
+
+        <!-- punto payback verticale Mese 10 -->
+        <line id="paybackLine" x1="553.6" y1="20" x2="553.6" y2="285" stroke="#C8A88D" stroke-width="1" stroke-dasharray="3,3" opacity="0"/>
+        <circle id="paybackDot" cx="553.6" cy="201.5" r="5" fill="#C8A88D" opacity="0"/>
+        <text id="paybackLabel" x="553.6" y="32" text-anchor="middle" font-family="Afacad Flux,sans-serif" font-size="11" fill="#C8A88D" font-weight="500" opacity="0">PAYBACK · M10</text>
+      </svg>
+    </div>
+
+    <div class="cum-summary">
+      <div class="cum-sum" style="border-left-color:#c0572a">
+        <div class="cum-sum-l">Investimento 24 mesi</div>
+        <div class="cum-sum-v">&euro;867K</div>
+        <div class="cum-sum-d">Retainer + setup Mese 0 + budget media stimato</div>
+      </div>
+      <div class="cum-sum" style="border-left-color:#5a7a4a">
+        <div class="cum-sum-l">Risparmio 24 mesi</div>
+        <div class="cum-sum-v">&euro;2,16M</div>
+        <div class="cum-sum-d">Solo da disintermediazione progressiva OTA</div>
+      </div>
+      <div class="cum-sum" style="border-left-color:var(--brand)">
+        <div class="cum-sum-l">Net cumulativo</div>
+        <div class="cum-sum-v">+&euro;1,29M</div>
+        <div class="cum-sum-d">Senza contare benefici indiretti (+€745K su 2 anni)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ SEZ 8: PATTO DENTRO/FUORI ═══════════════════════════════════ -->
+<section class="sec bg-alt" id="s-patto">
+  <div class="s-tag">Trasparenza</div>
+  <h2 class="s-h">Cosa &egrave; incluso, <em>cosa &egrave; fuori scope.</em></h2>
+  <p class="s-lead">La condizione perch&eacute; una partnership funzioni per due anni e oltre &egrave; una sola: nessuna ambiguit&agrave; iniziale. Ecco esattamente cosa entra nel retainer mensile e cosa, per scelta esplicita, resta fuori &mdash; o perch&eacute; &egrave; competenza di altri partner BZAR, o perch&eacute; ha natura progettuale e va quotata a parte.</p>
+
+  <div class="patto-grid">
+    <div class="patto-side in">
+      <div class="patto-tag">+ Incluso nel retainer mensile</div>
+      <div class="patto-h">La macchina sempre attiva</div>
+      <ul class="patto-list">
+        <li>Strategia editoriale per <strong>16 account</strong> &mdash; PED mensile, mood per struttura, brief shooting</li>
+        <li><strong>117 post originali</strong> + 72 cross-post FB Liv. A &middot; copy + grafica</li>
+        <li><strong>278 stories/mese</strong> &middot; copy, sticker, sondaggi, CTA</li>
+        <li><strong>11 reel hero/mese</strong> &middot; uno per ogni struttura attiva, prodotti da Snacky</li>
+        <li>Trattamento grafico foto, scheduling, QA pubblicazione</li>
+        <li><strong>Community management 5gg/7 H+24</strong> sui 16 account</li>
+        <li><strong>ADV unificato</strong> Meta + Google + TikTok &middot; setup, ottimizzazione, monitoraggio</li>
+        <li>Brief operativo per nuove aperture (es. A Mano giugno 2026)</li>
+        <li>Report mensile + review trimestrale on-site Roma</li>
+        <li>Account manager dedicato &middot; single point of contact con Francesco</li>
+        <li>Crisis protocol H+2 ammortizzato</li>
+      </ul>
+    </div>
+    <div class="patto-side out">
+      <div class="patto-tag">&minus; Fuori scope &middot; quotato a parte</div>
+      <div class="patto-h">Voci dedicate o in capo ad altri partner</div>
+      <ul class="patto-list">
+        <li><strong>Mese 0 onboarding</strong> &middot; setup, audit, brand book, stock shooting iniziale &mdash; <em>una tantum &euro;17K</em></li>
+        <li><strong>Budget media ADV</strong> (cash effettivo speso su Meta, Google, TikTok) &middot; voce trasparente al cliente</li>
+        <li><strong>Upsell AI Community</strong> da Mese 4 &middot; <em>setup &euro;1.500 + check &euro;750/mese + tool AI &euro;100&ndash;300/mese</em></li>
+        <li>Influencer marketing &gt;10K follower &middot; <em>quotato a progetto</em></li>
+        <li>Account brand non concordati nel piano iniziale &middot; <em>scope expansion da definire</em></li>
+        <li>Sviluppo sito web e landing page &middot; <em>competenza partner web BZAR</em></li>
+        <li>Email marketing e CRM &middot; <em>canali separati, da definire</em></li>
+        <li>Gestione recensioni TripAdvisor / Google &middot; <em>resta in carico al team BZAR</em></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ RECAP FINALE ═══════════════════════════════════ -->
+<section class="recap-fin">
+  <div class="rf-tag">Insight chiave &middot; M10</div>
+  <h2 class="rf-h">Il ritorno pi&ugrave; grande non &egrave; finanziario.<br><em>&Egrave; smettere di rincorrere.</em></h2>
+  <p class="rf-text">A regime, BZAR non corre pi&ugrave; dietro alla domanda. Costruisce la propria. Non paga pi&ugrave; le OTA per essere visto. Sceglie quando e quanto usarle. Non aspetta pi&ugrave; che i clienti tornino. Li tiene. Il calcolo OTA &egrave; solo il modo pi&ugrave; chiaro per misurarlo.</p>
+</section>
+
+<!-- ═══════════════════════════════════ SCRIPT GSAP ═══════════════════════════════════ -->
+<script>
+(function(){
+'use strict';
+
+if(typeof gsap==='undefined'){
+  // fallback: rimuovo opacity 0 a tutti gli elementi animabili
+  setTimeout(function(){
+    var els=document.querySelectorAll('[id^="hl"],#hsub,#hcounts,#htag,#pgrid,#tgrid,#roigrid,#paybackcard,.bi-card,.cum-wrap,.patto-side,#invPath,#savPath,#paybackLine,#paybackDot,#paybackLabel');
+    for(var i=0;i<els.length;i++){
+      els[i].style.opacity='1';
+      els[i].style.transform='none';
+    }
+  },1500);
+  return;
+}
+
+gsap.registerPlugin(ScrollTrigger);
+
+// Cursore custom
+var cur=document.getElementById('cur');
+if(cur && window.matchMedia('(hover:hover)').matches){
+  document.addEventListener('mousemove',function(e){
+    cur.style.left=e.clientX+'px';
+    cur.style.top=e.clientY+'px';
+  });
+  // ingrandisce su elementi cliccabili
+  var clickables=document.querySelectorAll('a,button,.tier-card,.bi-card,.roi-year');
+  for(var i=0;i<clickables.length;i++){
+    clickables[i].addEventListener('mouseenter',function(){cur.style.width='28px';cur.style.height='28px';});
+    clickables[i].addEventListener('mouseleave',function(){cur.style.width='8px';cur.style.height='8px';});
+  }
+}
+
+// HERO animations
+gsap.fromTo('#htag',{opacity:0,x:-20},{opacity:1,x:0,duration:.8,delay:.15,ease:'power2.out'});
+gsap.fromTo('#hl1',{opacity:0,y:30},{opacity:1,y:0,duration:.9,delay:.3,ease:'power2.out'});
+gsap.fromTo('#hl2',{opacity:0,y:30},{opacity:1,y:0,duration:.9,delay:.45,ease:'power2.out'});
+gsap.fromTo('#hl3',{opacity:0,y:30},{opacity:1,y:0,duration:.9,delay:.6,ease:'power2.out'});
+gsap.fromTo('#hsub',{opacity:0,y:20},{opacity:1,y:0,duration:.9,delay:.9,ease:'power2.out'});
+gsap.fromTo('#hcounts > div',{opacity:0,y:20},{opacity:1,y:0,duration:.7,delay:1.1,stagger:.1,ease:'power2.out'});
+
+// SEZ 1: Problem
+gsap.fromTo('#pflow',{opacity:0,x:-30},{opacity:1,x:0,duration:1,scrollTrigger:{trigger:'#pflow',start:'top 75%',toggleActions:'play none none none'}});
+gsap.fromTo('#pgrid > .problem-impact',{opacity:0,x:30},{opacity:1,x:0,duration:1,delay:.2,scrollTrigger:{trigger:'#pgrid',start:'top 75%',toggleActions:'play none none none'}});
+
+// Counter animato per €784.500
+ScrollTrigger.create({
+  trigger:'#pfres',
+  start:'top 80%',
+  once:true,
+  onEnter:function(){
+    var el=document.getElementById('pfres');
+    var obj={v:0};
+    gsap.to(obj,{v:784500,duration:1.8,ease:'power2.out',onUpdate:function(){
+      el.textContent='€'+Math.round(obj.v).toLocaleString('it-IT').replace(/,/g,'.');
+    }});
+  }
+});
+
+// SEZ 2: Tier
+gsap.fromTo('#tier-f',{opacity:0,y:30},{opacity:1,y:0,duration:.9,scrollTrigger:{trigger:'#tgrid',start:'top 78%',toggleActions:'play none none none'}});
+gsap.fromTo('#tier-s',{opacity:0,y:30},{opacity:1,y:0,duration:.9,delay:.15,scrollTrigger:{trigger:'#tgrid',start:'top 78%',toggleActions:'play none none none'}});
+
+// SEZ 3: Mese 0 + CM
+gsap.fromTo('.mz-card',{opacity:0,y:20},{opacity:1,y:0,duration:.8,stagger:.15,scrollTrigger:{trigger:'#s-onboarding',start:'top 75%',toggleActions:'play none none none'}});
+
+// SEZ MOTORE
+gsap.fromTo('.motore-wrap',{opacity:0,y:30},{opacity:1,y:0,duration:1,scrollTrigger:{trigger:'#s-motore',start:'top 75%',toggleActions:'play none none none'}});
+gsap.fromTo('.mt-row',{opacity:0,y:10},{opacity:1,y:0,duration:.5,stagger:.05,scrollTrigger:{trigger:'.motore-table',start:'top 75%',toggleActions:'play none none none'}});
+
+// SEZ 3-bis: Community AI espansa
+gsap.fromTo('.cmai-scenario',{opacity:0,y:20},{opacity:1,y:0,duration:1,scrollTrigger:{trigger:'#s-cmai',start:'top 75%',toggleActions:'play none none none'}});
+gsap.fromTo('.cmai-fase',{opacity:0,y:20},{opacity:1,y:0,duration:.8,stagger:.2,scrollTrigger:{trigger:'.cmai-fasi',start:'top 78%',toggleActions:'play none none none'}});
+gsap.fromTo('.cmai-cond-item',{opacity:0,y:15},{opacity:1,y:0,duration:.7,stagger:.15,scrollTrigger:{trigger:'.cmai-cond',start:'top 80%',toggleActions:'play none none none'}});
+gsap.fromTo('.cmai-savings',{opacity:0,y:15},{opacity:1,y:0,duration:.9,scrollTrigger:{trigger:'.cmai-savings',start:'top 85%',toggleActions:'play none none none'}});
+
+// SEZ 4: ADV
+gsap.fromTo('.adv-card-wrap',{opacity:0,y:20},{opacity:1,y:0,duration:1,scrollTrigger:{trigger:'#s-adv',start:'top 75%',toggleActions:'play none none none'}});
+gsap.fromTo('.adv-row',{opacity:0,x:20},{opacity:1,x:0,duration:.8,stagger:.15,delay:.3,scrollTrigger:{trigger:'#s-adv',start:'top 75%',toggleActions:'play none none none'}});
+gsap.fromTo('.adv-data',{opacity:0,y:15},{opacity:1,y:0,duration:.7,stagger:.12,scrollTrigger:{trigger:'.adv-data-grid',start:'top 80%',toggleActions:'play none none none'}});
+gsap.fromTo('.adv-example',{opacity:0,y:15},{opacity:1,y:0,duration:.9,scrollTrigger:{trigger:'.adv-example',start:'top 82%',toggleActions:'play none none none'}});
+
+// SEZ 5: ROI cards (con framing onesto)
+gsap.fromTo('.diff-grid > div',{opacity:0,y:15},{opacity:1,y:0,duration:.7,stagger:.15,scrollTrigger:{trigger:'.diff-grid',start:'top 80%',toggleActions:'play none none none'}});
+
+// SEZ 5: ROI cards
+gsap.fromTo('.roi-year',{opacity:0,y:30},{opacity:1,y:0,duration:.8,stagger:.15,scrollTrigger:{trigger:'#roigrid',start:'top 78%',toggleActions:'play none none none'}});
+gsap.fromTo('#paybackcard',{opacity:0,y:30},{opacity:1,y:0,duration:1,scrollTrigger:{trigger:'#paybackcard',start:'top 80%',toggleActions:'play none none none'}});
+
+// SEZ 6: Benefici indiretti
+gsap.fromTo('.bi-card',{opacity:0,y:20},{opacity:1,y:0,duration:.7,stagger:.12,scrollTrigger:{trigger:'.bi-grid',start:'top 78%',toggleActions:'play none none none'}});
+gsap.fromTo('.bi-total',{opacity:0,y:20},{opacity:1,y:0,duration:.8,delay:.3,scrollTrigger:{trigger:'.bi-grid',start:'top 78%',toggleActions:'play none none none'}});
+
+// SEZ 7: Cumulativo - animazione path SVG
+ScrollTrigger.create({
+  trigger:'#s-cum',
+  start:'top 70%',
+  once:true,
+  onEnter:function(){
+    var inv=document.getElementById('invPath');
+    var sav=document.getElementById('savPath');
+    var pbLine=document.getElementById('paybackLine');
+    var pbDot=document.getElementById('paybackDot');
+    var pbLab=document.getElementById('paybackLabel');
+    if(inv && sav){
+      var len1=inv.getTotalLength();
+      var len2=sav.getTotalLength();
+      inv.setAttribute('stroke-dasharray',len1);
+      inv.setAttribute('stroke-dashoffset',len1);
+      sav.setAttribute('stroke-dasharray',len2);
+      sav.setAttribute('stroke-dashoffset',len2);
+      gsap.to(inv,{strokeDashoffset:0,duration:2,ease:'power2.inOut'});
+      gsap.to(sav,{strokeDashoffset:0,duration:2.4,delay:.3,ease:'power2.inOut'});
+      gsap.to([pbLine,pbDot,pbLab],{opacity:1,duration:.8,delay:2.6,ease:'power2.out'});
+    }
+  }
+});
+gsap.fromTo('.cum-sum',{opacity:0,y:15},{opacity:1,y:0,duration:.7,stagger:.1,scrollTrigger:{trigger:'.cum-summary',start:'top 85%',toggleActions:'play none none none'}});
+
+// SEZ 8: Patto
+gsap.fromTo('.patto-side',{opacity:0,y:20},{opacity:1,y:0,duration:.8,stagger:.2,scrollTrigger:{trigger:'.patto-grid',start:'top 78%',toggleActions:'play none none none'}});
+
+// Recap finale
+gsap.fromTo('.rf-tag,.rf-h,.rf-text',{opacity:0,y:20},{opacity:1,y:0,duration:.9,stagger:.15,scrollTrigger:{trigger:'.recap-fin',start:'top 80%',toggleActions:'play none none none'}});
+
+// Fallback safety
+setTimeout(function(){
+  var els=document.querySelectorAll('[id^="hl"],#hsub,#hcounts,#htag,#pgrid,#tgrid,#roigrid,#paybackcard');
+  for(var i=0;i<els.length;i++){
+    if(parseFloat(getComputedStyle(els[i]).opacity)<.1){
+      els[i].style.opacity='1';
+      els[i].style.transform='none';
+    }
+  }
+},3000);
+
+})();
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     CRUSCOTTO BZAR · MENU + FONTI · IIFE v3 FINAL
+═══════════════════════════════════════════════════ -->
+<script>
+(function(){
+'use strict';
+
+/* ── MODULI ─────────────────────────────────────── */
+var M=[
+  {id:'m0',code:'00',label:'Executive Summary',sub:'Il gap \u00b7 La proposta',url:'m0.html',color:'#C8A88D'},
+  {id:'m1',code:'01',label:'Mercato',sub:'Roma 2026 \u00b7 OTA \u00b7 Social discovery',url:'m1.html',color:'#755847'},
+  {id:'m2',code:'02',label:'Competitor Map',sub:'Hoxton \u00b7 Chapter \u00b7 Mama \u00b7 Generator',url:'m2.html',color:'#9a7d6a'},
+  {id:'m3',code:'03',label:'Voce del Cliente',sub:'VOC \u00b7 14 account \u00b7 Gap critico',url:'m3.html',color:'#C4ACA5'},
+  {id:'m4',code:'04',label:'Personas',sub:'4 profili \u00b7 Trigger \u00b7 Social behavior',url:'m4.html',color:'#a08470'},
+  {id:'m5',code:'05',label:'Mappa del Momento',sub:'Perch\u00e9 investire adesso',url:'m5.html',color:'#C8A88D'},
+  {id:'m6',code:'06',label:'Benchmark Creativi',sub:'Il Pellicano \u00b7 Borgo S.Pietro \u00b7 The Pig',url:'m6.html',color:'#755847'},
+  {id:'m7',code:'07',label:'Strategia',sub:'Piano per struttura \u00b7 Mappe sinaptiche',url:'m7.html',color:'#9a7d6a'},
+  {id:'m8',code:'08',label:'Come Lavoriamo',sub:'Team \u00b7 Processo \u00b7 Frequenze \u00b7 Patto',url:'m8.html',color:'#C4ACA5'},
+  {id:'m9',code:'09',label:'Casi Studio',sub:'Esempi di contenuto \u00b7 Mockup',url:'m9.html',color:'#a08470'},
+  {id:'m10',code:'10',label:'Economics',sub:'ROI \u00b7 Tier \u00b7 Disintermediazione OTA',url:'m10.html',color:'#C8A88D'}
+];
+
+/* ── FONTI PER MODULO ───────────────────────────── */
+var FONTI={
+  m0:[],
+  m1:[
+    {label:'ENIT \u2013 Turismo verso l\'Italia, arrivi 2025',url:'https://www.enit.it/'},
+    {label:'Federalberghi / L\'Agenzia di Viaggi \u2013 Occupazione hotel Roma estate 2025',url:'https://www.lagenziadiviaggimag.it/roma-cresce-loccupazione-degli-hotel-in-estate-i-dati-federalberghi/'},
+    {label:'Barchart \u2013 Rome Hotels Pricing Trends & Demand Forecast 2026',url:'https://www.barchart.com/story/news/36932939/'},
+    {label:'Cloudbeds \u2013 A Guide to OTA Commission Rates in 2026',url:'https://www.cloudbeds.com/online-travel-agencies/commissions/'},
+    {label:'TravelQuotidiano \u2013 TikTok supera Instagram nella scelta del viaggio',url:'https://www.travelquotidiano.com/mercato_e_tecnologie/tik-tok-supera-instagram/tqid-501494'},
+    {label:'Hospitality Net \u2013 How Hotels Can Harness Social Media',url:'https://www.hospitalitynet.org/news/4128795/'}
+  ],
+  m2:[
+    {label:'@generatorhostels \u2013 560K follower \u00b7 analisi aprile 2026',url:'https://www.instagram.com/generatorhostels/'},
+    {label:'@thehoxton \u2013 427K follower \u00b7 analisi aprile 2026',url:'https://www.instagram.com/thehoxton/'},
+    {label:'@chapterhostels \u2013 45K follower \u00b7 analisi aprile 2026',url:'https://www.instagram.com/chapterhostels/'},
+    {label:'@bzarhotels \u2013 10K follower \u00b7 analisi aprile 2026',url:'https://www.instagram.com/bzarhotels/'}
+  ],
+  m3:[
+    {label:'TripAdvisor Roma \u2013 Hotel Viminale #1/1153',url:'https://www.tripadvisor.it/Hotels-g187791-Rome_Lazio-Hotels.html'},
+    {label:'@hotelviminale \u2013 678 follower IG \u00b7 analisi diretta aprile 2026',url:'https://www.instagram.com/hotelviminale/'},
+    {label:'@dimoracoppelle \u2013 172 follower IG \u00b7 5.0 TripAdvisor \u00b7 aprile 2026',url:'https://www.instagram.com/dimoracoppelle/'},
+    {label:'@spritzeria_monti \u2013 35K follower IG \u00b7 TA 3.5 \u00b7 aprile 2026',url:'https://www.instagram.com/spritzeria_monti/'},
+    {label:'@osteriaoliva.roma \u2013 789 follower \u00b7 1130+ post \u00b7 aprile 2026',url:'https://www.instagram.com/osteriaoliva.roma/'}
+  ],
+  m4:[
+    {label:'Think with Google \u2013 Travel Consumer Insights 2025',url:'https://www.thinkwithgoogle.com/'},
+    {label:'Meta \u2013 Travel Advertising Insights 2025',url:'https://www.facebook.com/business/industries/travel'},
+    {label:'Personas Social BZAR Hotels \u2013 Ribrain Deep Research aprile 2026',url:'https://bzarhotels.it/'}
+  ],
+  m5:[
+    {label:'ENIT \u2013 Turismo verso l\'Italia, arrivi e presenze 2025',url:'https://www.enit.it/'},
+    {label:'Federalberghi \u2013 Occupazione hotel Roma estate 2025',url:'https://www.lagenziadiviaggimag.it/roma-cresce-loccupazione-degli-hotel-in-estate-i-dati-federalberghi/'},
+    {label:'Barchart \u2013 Rome Hotels Pricing Trends & Demand Forecast 2026',url:'https://www.barchart.com/story/news/36932939/'},
+    {label:'Cloudbeds \u2013 OTA Commission Rates 2026',url:'https://www.cloudbeds.com/online-travel-agencies/commissions/'},
+    {label:'TravelQuotidiano \u2013 TikTok supera Instagram',url:'https://www.travelquotidiano.com/mercato_e_tecnologie/tik-tok-supera-instagram/tqid-501494'},
+    {label:'Hospitality Net \u2013 How Hotels Can Harness Social Media',url:'https://www.hospitalitynet.org/news/4128795/'}
+  ],
+  m6:[
+    {label:'@hotelilpellicano \u2013 209K follower \u00b7 aprile 2026',url:'https://www.instagram.com/hotelilpellicano/'},
+    {label:'@passalacqualakecomo \u2013 267K follower \u00b7 Reel boat ride 15K like',url:'https://www.instagram.com/reel/DIUCqS6qqT9/'},
+    {label:'@portraitmilano \u2013 94K follower \u00b7 aprile 2026',url:'https://www.instagram.com/portraitmilano/'},
+    {label:'@borgosantopietro \u2013 562K follower \u00b7 aprile 2026',url:'https://www.instagram.com/borgosantopietro/'},
+    {label:'@nihi \u2013 788K follower \u00b7 Reel cavalli in acqua 11K like',url:'https://www.instagram.com/nihi/'},
+    {label:'@thenewtinsomerset \u2013 363K follower \u00b7 Newt Minute series',url:'https://www.instagram.com/thenewtinsomerset/'},
+    {label:'@the_pig_hotels \u2013 319K follower \u00b7 Kitchen Gardener Nathan',url:'https://www.instagram.com/the_pig_hotels/'},
+    {label:'Benchmark Social Hotel Boutique e F&B \u2013 Ribrain Deep Research aprile 2026',url:'https://bzarhotels.it/'}
+  ],
+  m7:[
+    {label:'Brief Social Media BZAR Hotels 2026 \u2013 documento cliente',url:'https://bzarhotels.it/'},
+    {label:'Piano Operativo Social Media Multi-Account \u2013 Ribrain Deep Research',url:'https://bzarhotels.it/'},
+    {label:'Benchmark Social Hotel Boutique e F&B \u2013 Ribrain Deep Research',url:'https://bzarhotels.it/'},
+    {label:'Personas Social BZAR Hotels \u2013 Ribrain Deep Research',url:'https://bzarhotels.it/'},
+    {label:'Mappa del Momento BZAR Hotels \u2013 Ribrain Deep Research',url:'https://bzarhotels.it/'},
+    {label:'Brand Book BZAR Hotels 2026',url:'https://bzarhotels.it/'}
+  ],
+  m8:[],
+  m9:[],
+  m10:[
+    {label:'Cloudbeds \u2013 OTA Commission Rates 2026 (15-30%)',url:'https://www.cloudbeds.com/online-travel-agencies/commissions/'},
+    {label:'Search Engine Land \u2013 Google ad auction policy update 2025-2026',url:'https://searchengineland.com/google-double-serving-dilemma-who-wins-464233'},
+    {label:'Manoeuvre Group \u2013 Multi-brand Google Ads strategies (fratricidal competition)',url:'https://manoeuvregroup.com/11-strategies-for-multi-brand-google-ads-advertisers/'},
+    {label:'Meta Business \u2013 Audience Overlap effect on CPM',url:'https://www.facebook.com/business/help/1679591828938781'},
+    {label:'Dati BZAR Hotels \u2013 Confermati da Francesco Mormile in call aprile 2026',url:'https://bzarhotels.it/'},
+    {label:'Modello ROI disintermediazione \u2013 Ribrain Deep Research aprile 2026',url:'https://bzarhotels.it/'}
+  ]
+};
+
+/* ── PATH DETECTION ─────────────────────────────── */
+var _href=window.location.href;
+var _pm=_href.match(/\/(m\d+)(?:\.html)?(?:[?#].*)?$/);
+var path=_pm?_pm[1]:'m0';
+
+var cur=M[0];
+for(var ci=0;ci<M.length;ci++){if(M[ci].id===path){cur=M[ci];break;}}
+var srcs=FONTI[path]||[];
+
+/* ── CSS ─────────────────────────────────────────── */
+var s=document.createElement('style');
+s.textContent=[
+  '.rbmenu-btn{position:fixed;top:8px;right:14px;z-index:9001;width:36px;height:36px;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:5px;padding:6px;opacity:1}',
+  '.rbmenu-btn span{display:block;height:1.5px;background:#F1EFED;border-radius:1px;transition:all .4s cubic-bezier(0.16,1,0.3,1);transform-origin:right center;opacity:1}',
+  '.rbmenu-btn.light span{background:#1E1410}',
+  '.rbmenu-btn.in-tb{position:relative!important;top:auto!important;right:auto!important;width:32px!important;height:32px!important;padding:5px!important;flex-shrink:0!important;opacity:1!important;visibility:visible!important}',
+  '.rbmenu-btn .l1{width:20px}.rbmenu-btn .l2{width:14px}.rbmenu-btn .l3{width:20px}',
+  '.rbmenu-btn.open .l1{width:20px;transform:translateY(6.5px) rotate(-45deg)}',
+  '.rbmenu-btn.open .l2{opacity:0;width:0}',
+  '.rbmenu-btn.open .l3{width:20px;transform:translateY(-6.5px) rotate(45deg)}',
+  '.rbmenu-overlay{position:fixed;inset:0;z-index:9000;background:#1E1410;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .45s cubic-bezier(0.16,1,0.3,1)}',
+  '.rbmenu-overlay.open{opacity:1;pointer-events:auto}',
+  '.rbmenu-top{display:flex;align-items:center;justify-content:space-between;padding:16px 40px;border-bottom:1px solid rgba(200,168,141,.07);flex-shrink:0}',
+  '.rbmenu-brand{display:flex;align-items:center;gap:10px}',
+  '.rbmenu-brand-logo{height:12px;filter:invert(1);opacity:.45}',
+  '.rbmenu-brand-sep{width:1px;height:14px;background:rgba(200,168,141,.18)}',
+  '.rbmenu-brand-label{font-family:"Poppins",sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(200,168,141,.28)}',
+  '.rbmenu-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:20px 40px 32px;overflow-y:auto}',
+  '.rbmenu-items{list-style:none}',
+  '.rbmenu-item{border-top:1px solid rgba(200,168,141,.06);opacity:0;transform:translateY(16px);position:relative}',
+  '.rbmenu-item:last-child{border-bottom:1px solid rgba(200,168,141,.06)}',
+  '.rbmenu-item a{display:grid;grid-template-columns:44px 1fr auto;gap:0 16px;align-items:center;padding:12px 0;text-decoration:none;color:inherit}',
+  '.rmi-code{font-family:"Poppins",monospace;font-size:10px;letter-spacing:.1em;color:rgba(200,168,141,.2)}',
+  '.rmi-left{display:flex;flex-direction:column;gap:2px}',
+  '.rmi-label{font-family:"Afacad Flux",Georgia,sans-serif;font-weight:300;font-size:clamp(20px,2.6vw,34px);line-height:1;color:rgba(241,239,237,.6);transition:color .25s;letter-spacing:-.01em}',
+  '.rbmenu-item.active .rmi-label{color:rgba(241,239,237,.9)}',
+  '.rbmenu-item a:hover .rmi-label{color:rgba(241,239,237,.9)}',
+  '.rmi-sub{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.2)}',
+  '.rmi-arrow{font-size:14px;color:rgba(200,168,141,.15);transition:transform .25s,color .25s}',
+  '.rbmenu-item a:hover .rmi-arrow{transform:translateX(4px);color:rgba(200,168,141,.5)}',
+  '.rbmenu-item.active .rmi-arrow{color:rgba(200,168,141,.4)}',
+  '.rbmenu-item-bar{position:absolute;top:0;left:0;right:0;height:2px;opacity:0}',
+  '.rbmenu-item.active .rbmenu-item-bar{opacity:1}',
+  '.rbmenu-footer{padding:14px 40px;border-top:1px solid rgba(200,168,141,.07);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}',
+  '.rbmenu-footer-l{font-family:"Afacad Flux",sans-serif;font-size:13px;color:rgba(200,168,141,.25)}',
+  '.rbmenu-footer-r{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.2)}',
+  '.src-toggle{position:fixed;bottom:64px;right:16px;z-index:7900;display:flex;align-items:center;gap:6px;background:rgba(30,20,16,.92);border:1px solid rgba(200,168,141,.15);backdrop-filter:blur(16px);padding:5px 10px;cursor:pointer;font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.4);transition:all .25s;border-radius:99px}',
+  '.src-toggle:hover{border-color:rgba(200,168,141,.35);color:rgba(200,168,141,.7)}',
+  '.src-toggle .st-dot{width:5px;height:5px;border-radius:50%;background:#C8A88D;flex-shrink:0}',
+  '.src-toggle .st-n{background:rgba(200,168,141,.15);color:#C8A88D;padding:1px 5px;border-radius:10px;font-size:8px}',
+  '.src-drawer{position:fixed;bottom:48px;left:0;right:0;z-index:7800;background:rgba(20,14,10,.97);backdrop-filter:blur(24px);border-top:1px solid rgba(200,168,141,.1);max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(0.16,1,0.3,1),opacity .35s;opacity:0;pointer-events:none}',
+  '.src-drawer.open{max-height:340px;opacity:1;pointer-events:auto}',
+  '.src-drawer-inner{padding:18px 40px 20px;overflow-y:auto;max-height:300px}',
+  '.src-drawer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}',
+  '.src-drawer-title{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,168,141,.3)}',
+  '.src-close-btn{background:none;border:none;cursor:pointer;font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.25);transition:color .2s}',
+  '.src-close-btn:hover{color:rgba(200,168,141,.6)}',
+  '.src-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:4px}',
+  '.src-item{display:flex;align-items:flex-start;gap:10px;padding:9px 11px;border:1px solid rgba(200,168,141,.06);border-radius:6px}',
+  '.src-item-num{font-family:"Poppins",sans-serif;font-size:8px;letter-spacing:.1em;color:rgba(200,168,141,.22);flex-shrink:0;min-width:18px;padding-top:1px}',
+  '.src-item-label{font-size:11px;color:rgba(241,239,237,.55);line-height:1.45;margin-bottom:2px}',
+  '.src-item-url{font-family:"Poppins",sans-serif;font-size:8px;color:rgba(200,168,141,.35);text-decoration:none;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
+  '@media(max-width:640px){.rbmenu-body{padding:16px 20px 24px}.rbmenu-top,.rbmenu-footer{padding-left:20px;padding-right:20px}.src-drawer-inner{padding:14px 16px}.src-list{grid-template-columns:1fr}}'
+].join('');
+document.head.appendChild(s);
+
+/* ── HAMBURGER BUTTON ────────────────────────────── */
+var btn=document.getElementById('rbHamBtn');
+if(!btn){btn=document.createElement('button');btn.className='rb-ham';document.body.appendChild(btn);}
+
+/* ── OVERLAY ─────────────────────────────────────── */
+var ov=document.createElement('div');
+ov.className='rbmenu-overlay';
+ov.id='rbmenu-ov';
+var itemsHtml='';
+for(var ni=0;ni<M.length;ni++){
+  var nm=M[ni],na=nm.id===path;
+  itemsHtml+='<li class="rbmenu-item'+(na?' active':'')+'">'
+    +'<div class="rbmenu-item-bar" style="background:'+nm.color+'"></div>'
+    +'<a href="'+nm.url+'">'
+    +'<span class="rmi-code">'+nm.code+'</span>'
+    +'<span class="rmi-left"><span class="rmi-label">'+nm.label+'</span><span class="rmi-sub">'+nm.sub+'</span></span>'
+    +'<span class="rmi-arrow">\u2192</span>'
+    +'</a></li>';
+}
+ov.innerHTML='<div class="rbmenu-top">'
+  +'<div class="rbmenu-brand">'
+  +'<img src="https://www.ribrainstudio.com/wp-content/uploads/2025/01/Logo_ribrain_Nero.svg" class="rbmenu-brand-logo" alt="Ribrain">'
+  +'<div class="rbmenu-brand-sep"></div>'
+  +'<span class="rbmenu-brand-label">BZAR Hotels \u00d7 Ribrain</span>'
+  +'</div>'
+  +'</div>'
+  +'<div class="rbmenu-body"><ul class="rbmenu-items">'+itemsHtml+'</ul></div>'
+  +'<div class="rbmenu-footer">'
+  +'<span class="rbmenu-footer-l">Cruscotto Strategico</span>'
+  +'<span class="rbmenu-footer-r">Aprile 2026 \u00b7 Confidenziale</span>'
+  +'</div>';
+document.body.appendChild(ov);
+
+/* ── MENU LOGIC ──────────────────────────────────── */
+var menuOpen=false;
+function openMenu(){
+  menuOpen=true;btn.classList.add('open');ov.classList.add('open');
+  document.body.style.overflow='hidden';
+  var its=ov.querySelectorAll('.rbmenu-item');
+  for(var ii=0;ii<its.length;ii++){
+    (function(el,i){
+      el.style.opacity='0';el.style.transform='translateY(16px)';
+      el.style.transition='opacity .4s '+(.06+i*.05)+'s,transform .4s '+(.06+i*.05)+'s cubic-bezier(0.16,1,0.3,1)';
+      setTimeout(function(){el.style.opacity='1';el.style.transform='translateY(0)';},10);
+    })(its[ii],ii);
+  }
+}
+function closeMenu(){
+  menuOpen=false;btn.classList.remove('open');ov.classList.remove('open');
+  document.body.style.overflow='';
+}
+btn.addEventListener('click',function(){if(menuOpen)closeMenu();else openMenu();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menuOpen)closeMenu();});
+ov.addEventListener('click',function(e){if(e.target===ov)closeMenu();});
+
+/* ── NAVBAR BOTTOM ───────────────────────────────── */
+var nb=document.createElement('nav');
+nb.id='rbnav';
+var nbCSS=document.createElement('style');
+nbCSS.textContent=[
+  '#rbnav{position:fixed;bottom:0;left:0;right:0;z-index:8000;pointer-events:auto;background:rgba(30,20,16,.96);backdrop-filter:blur(20px);border-top:.5px solid rgba(200,168,141,.08);display:flex;height:48px;overflow:visible}',
+  '.rbnav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;color:rgba(200,168,141,.3);font-family:"Poppins",sans-serif;font-size:8px;letter-spacing:.08em;text-transform:uppercase;gap:2px;transition:color .2s;position:relative;min-width:0;overflow:visible;pointer-events:auto;cursor:pointer}',
+  '.rbnav-item:hover{color:rgba(200,168,141,.65)}',
+  '.rbnav-item.active{color:rgba(200,168,141,.8)}',
+  '.rbnav-item-dot{width:3px;height:3px;border-radius:50%;background:currentColor;opacity:0}',
+  '.rbnav-item.active .rbnav-item-dot{opacity:1}',
+  '.rbnav-item-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:90%}'
+].join('');
+document.head.appendChild(nbCSS);
+var nbH='';
+for(var ni2=0;ni2<M.length;ni2++){
+  var nm2=M[ni2],na2=nm2.id===path;
+  nbH+='<a href="'+nm2.url+'" class="rbnav-item'+(na2?' active':'')+'">'
+    +'<div class="rbnav-item-dot"></div>'
+    +'<span class="rbnav-item-label">'+nm2.code+' '+nm2.label.split(' ')[0]+'</span>'
+    +'</a>';
+}
+nb.innerHTML=nbH;
+document.body.appendChild(nb);
+
+/* ── FONTI DRAWER ────────────────────────────────── */
+if(srcs.length>0){
+  var drawer=document.createElement('div');
+  drawer.className='src-drawer';
+  var ih='';
+  for(var i=0;i<srcs.length;i++){
+    ih+='<div class="src-item">'
+      +'<span class="src-item-num">'+String(i+1).padStart(2,'0')+'</span>'
+      +'<div><div class="src-item-label">'+srcs[i].label+'</div>'
+      +'<a href="'+srcs[i].url+'" target="_blank" rel="noopener noreferrer" class="src-item-url">'+srcs[i].url+'</a>'
+      +'</div></div>';
+  }
+  drawer.innerHTML='<div class="src-drawer-inner">'
+    +'<div class="src-drawer-head">'
+    +'<span class="src-drawer-title">Fonti \u00b7 '+srcs.length+' riferimenti \u00b7 '+path.toUpperCase()+'</span>'
+    +'<button class="src-close-btn" id="srcCloseBtn">Chiudi \u00d7</button>'
+    +'</div>'
+    +'<div class="src-list">'+ih+'</div>'
+    +'</div>';
+  document.body.appendChild(drawer);
+
+  var toggle=document.createElement('button');
+  toggle.className='src-toggle';
+  toggle.innerHTML='<span class="st-dot"></span>Fonti <span class="st-n">'+srcs.length+'</span>';
+  document.body.appendChild(toggle);
+
+  var fdOpen=false;
+  function toggleDrawer(){
+    fdOpen=!fdOpen;
+    drawer.classList.toggle('open',fdOpen);
+    toggle.style.borderColor=fdOpen?'rgba(200,168,141,.3)':'';
+    toggle.style.color=fdOpen?'rgba(200,168,141,.7)':'';
+  }
+  toggle.addEventListener('click',toggleDrawer);
+  var closeBtn=document.getElementById('srcCloseBtn');
+  if(closeBtn){closeBtn.addEventListener('click',function(){if(fdOpen)toggleDrawer();});}
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&fdOpen)toggleDrawer();});
+}
+
+})();
+</script>
+</body>
+</html>
