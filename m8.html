@@ -87,6 +87,14 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
 .tv-av.tv-rib{background:rgba(200,168,141,.08);border:.5px solid rgba(200,168,141,.25)}
 .tv-av.tv-snk{background:rgba(196,172,165,.08);border:.5px solid rgba(196,172,165,.3)}
 .tv-av:hover{transform:scale(1.06);background:rgba(200,168,141,.18);border-color:rgba(200,168,141,.55);color:#F1EFED}
+/* Avatar fotografico */
+.tv-av img{width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center top;display:block}
+.tv-av-wrap{display:flex;flex-direction:column;align-items:center;gap:.3rem;cursor:default}
+.tv-av-wrap:hover .tv-av{transform:scale(1.06)}
+.tv-av-wrap:hover .tv-av img{filter:brightness(1.05)}
+.tv-av-name{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.04em;color:rgba(241,239,237,.65);text-align:center;line-height:1.2;font-weight:400}
+.tv-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem;width:100%;max-width:260px}
+.tv-grid-snk{grid-template-columns:repeat(2,minmax(0,1fr));max-width:190px}
 .team-viz-bridge{display:flex;flex-direction:column;align-items:center;gap:.5rem;height:100%;justify-content:center;position:relative;z-index:1}
 @media(max-width:680px){.team-viz-bridge{flex-direction:row;height:auto;width:100%;padding:0 2rem}}
 .tv-line{width:1px;height:38px;background:linear-gradient(to bottom,transparent,rgba(200,168,141,.35),transparent);flex:none}
@@ -302,6 +310,56 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
 .finale-cta:hover{background:rgba(200,168,141,.08);border-color:rgba(200,168,141,.5)}
 .finale-cta::after{content:"→";transition:transform .3s}
 .finale-cta:hover::after{transform:translateX(4px)}
+
+/* ═══════════ SEZ IMPRENDITORI · American Uncle ═══════════ */
+.ent-wrap{margin-top:3rem}
+.ent-claim{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;margin-bottom:3rem}
+@media(max-width:780px){.ent-claim{grid-template-columns:1fr;gap:1.25rem}}
+.ent-claim-txt{}
+.ent-claim-tag{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--brand);font-weight:500;margin-bottom:.75rem}
+.ent-claim-h{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:500;color:var(--dark);line-height:1.2;letter-spacing:-.02em;margin-bottom:.85rem}
+.ent-claim-h em{font-style:italic;color:var(--ink);font-weight:300}
+.ent-claim-body{font-size:13.5px;color:var(--mid);line-height:1.8}
+.ent-claim-body strong{color:var(--dark);font-weight:500}
+
+/* Brand card */
+.ent-brand-pair{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:520px){.ent-brand-pair{grid-template-columns:1fr}}
+.ent-brand{border-radius:14px;padding:1.5rem 1.5rem;display:flex;flex-direction:column;gap:.85rem;border:.5px solid}
+.ent-brand.b2c{background:rgba(30,60,120,.04);border-color:rgba(30,60,120,.12)}
+.ent-brand.b2b{background:rgba(117,88,71,.04);border-color:rgba(117,88,71,.12)}
+.ent-brand-badge{display:inline-flex;align-items:center;gap:.5rem;font-size:9px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;padding:3px 10px;border-radius:99px;align-self:flex-start;font-family:"Poppins",sans-serif}
+.ent-brand.b2c .ent-brand-badge{background:rgba(30,60,120,.1);color:#1e3c78}
+.ent-brand.b2b .ent-brand-badge{background:rgba(117,88,71,.1);color:var(--ink)}
+.ent-brand-name{font-family:"Afacad Flux",sans-serif;font-size:1.25rem;font-weight:500;color:var(--dark);line-height:1.2;letter-spacing:-.015em}
+.ent-brand-url{font-size:10.5px;color:var(--mid);letter-spacing:.06em;margin-top:-.4rem}
+.ent-brand-desc{font-size:12px;color:var(--mid);line-height:1.6}
+
+/* Stats grid */
+.ent-stats{margin-top:2rem}
+.ent-stats-tit{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);font-weight:500;margin-bottom:1.1rem}
+.ent-stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem}
+@media(max-width:780px){.ent-stat-grid{grid-template-columns:1fr 1fr}}
+.ent-stat{padding:1.1rem 1.1rem;background:#fff;border:.5px solid rgba(117,88,71,.1);border-radius:10px;display:flex;flex-direction:column;gap:.4rem}
+.ent-stat-num{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.03em}
+.ent-stat-l{font-size:11.5px;color:var(--mid);line-height:1.4}
+.ent-stat-l strong{color:var(--dark);font-weight:500;display:block;margin-bottom:1px}
+
+/* HQ strip */
+.ent-hq{margin-top:1.5rem;display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem}
+@media(max-width:780px){.ent-hq{grid-template-columns:1fr}}
+.ent-hq-item{padding:1.1rem 1.25rem;border-radius:10px;border-left:3px solid var(--brand);background:rgba(200,168,141,.06);display:flex;flex-direction:column;gap:.3rem}
+.ent-hq-num{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.03em}
+.ent-hq-l{font-size:11.5px;color:var(--mid);line-height:1.45}
+.ent-hq-l strong{color:var(--dark);font-weight:500}
+
+/* Closing insight */
+.ent-insight{margin-top:2rem;padding:1.5rem 1.75rem;background:linear-gradient(135deg,rgba(117,88,71,.06),rgba(200,168,141,.04));border:.5px solid rgba(200,168,141,.3);border-radius:14px}
+.ent-insight-q{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.15rem,2.5vw,1.45rem);font-weight:400;color:var(--dark);line-height:1.45;letter-spacing:-.015em;font-style:italic;margin-bottom:.75rem}
+.ent-insight-q em{font-style:normal;color:var(--ink);font-weight:500}
+.ent-insight-d{font-size:12.5px;color:var(--mid);line-height:1.7}
+.ent-insight-d strong{color:var(--dark);font-weight:500}
+
 </style>
 </head>
 <body>
@@ -359,15 +417,42 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
         <div class="tv-name">Ribrain Studio</div>
         <div class="tv-count">9 persone</div>
         <div class="tv-grid">
-          <div class="tv-av tv-rib" title="CEO"><span>CEO</span></div>
-          <div class="tv-av tv-rib" title="CEO"><span>CEO</span></div>
-          <div class="tv-av tv-rib" title="Account & PM"><span>AM</span></div>
-          <div class="tv-av tv-rib" title="Account & PM"><span>AM</span></div>
-          <div class="tv-av tv-rib" title="Copywriter"><span>CW</span></div>
-          <div class="tv-av tv-rib" title="Art Director"><span>AD</span></div>
-          <div class="tv-av tv-rib" title="Art Director"><span>AD</span></div>
-          <div class="tv-av tv-rib" title="Social Media Manager"><span>SM</span></div>
-          <div class="tv-av tv-rib" title="ADS Specialist"><span>ADV</span></div>
+          <div class="tv-av-wrap">
+            <div class="tv-av tv-rib"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/team/michele%20-%20ceo.png" alt="Michele"></div>
+            <div class="tv-av-name">Michele<br>CEO</div>
+          </div>
+          <div class="tv-av-wrap">
+            <div class="tv-av tv-rib"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/team/pasquale%20-%20ceo.png" alt="Pasquale"></div>
+            <div class="tv-av-name">Pasquale<br>CEO</div>
+          </div>
+          <div class="tv-av-wrap">
+            <div class="tv-av tv-rib"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/team/angelo%20-%20project%20manager.png" alt="Angelo"></div>
+            <div class="tv-av-name">Angelo<br>PM</div>
+          </div>
+          <div class="tv-av-wrap">
+            <div class="tv-av tv-rib"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/team/lina%20-%20project%20manager.png" alt="Lina"></div>
+            <div class="tv-av-name">Lina<br>PM</div>
+          </div>
+          <div class="tv-av-wrap">
+            <div class="tv-av tv-rib"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/team/domi%20-%20copy.png" alt="Domi"></div>
+            <div class="tv-av-name">Domi<br>Copy</div>
+          </div>
+          <div class="tv-av-wrap">
+            <div class="tv-av tv-rib"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/team/francy%20-%20art.png" alt="Francy"></div>
+            <div class="tv-av-name">Francy<br>Art Dir.</div>
+          </div>
+          <div class="tv-av-wrap">
+            <div class="tv-av tv-rib"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/team/Anna%20-%20social%20media%20.png" alt="Anna"></div>
+            <div class="tv-av-name">Anna<br>Social</div>
+          </div>
+          <div class="tv-av-wrap">
+            <div class="tv-av tv-rib"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/team/salvio%20-%20adv%20specialist.png" alt="Salvio"></div>
+            <div class="tv-av-name">Salvio<br>ADV</div>
+          </div>
+          <div class="tv-av-wrap">
+            <div class="tv-av tv-rib"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/team/onofrio%20-%20dev.png" alt="Onofrio"></div>
+            <div class="tv-av-name">Onofrio<br>Dev</div>
+          </div>
         </div>
       </div>
       <div class="team-viz-bridge" aria-hidden="true">
@@ -380,10 +465,22 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
         <div class="tv-name">Snacky Agency</div>
         <div class="tv-count">4 persone</div>
         <div class="tv-grid tv-grid-snk">
-          <div class="tv-av tv-snk" title="Direzione foto"><span>DF</span></div>
-          <div class="tv-av tv-snk" title="Direzione video"><span>DV</span></div>
-          <div class="tv-av tv-snk" title="Produzione on-field"><span>PF</span></div>
-          <div class="tv-av tv-snk" title="Post-produzione"><span>PP</span></div>
+          <div class="tv-av-wrap">
+            <div class="tv-av tv-snk"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/team/fede%20-%20designer.png" alt="Fede"></div>
+            <div class="tv-av-name">Fede<br>Designer</div>
+          </div>
+          <div class="tv-av-wrap">
+            <div class="tv-av tv-snk"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/team/stefano%20-%20motion%20designer.png" alt="Stefano"></div>
+            <div class="tv-av-name">Stefano<br>Motion</div>
+          </div>
+          <div class="tv-av-wrap">
+            <div class="tv-av tv-snk"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/team/cristiano%20-%20videomaker.png" alt="Cristiano"></div>
+            <div class="tv-av-name">Cristiano<br>Video</div>
+          </div>
+          <div class="tv-av-wrap">
+            <div class="tv-av tv-snk"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/team/vittorio%20-%20fotografo.png" alt="Vittorio"></div>
+            <div class="tv-av-name">Vittorio<br>Foto</div>
+          </div>
         </div>
       </div>
     </div>
@@ -403,12 +500,12 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
       </div>
       <p class="team-mission">Pensa la voce, scrive il calendario, presidia i canali, ottimizza le ADV e legge i numeri. Stabilità del team per tutta la durata del contratto.</p>
       <div class="team-roles">
-        <div class="role"><div class="role-name">CEO &middot; ×2</div><div class="role-do">Direzione strategica, account ownership massimo livello, garanzia continuità partnership</div></div>
-        <div class="role"><div class="role-name">Account &amp; Project Manager &middot; ×2</div><div class="role-do">Single point of contact con Francesco M., owner del piano, project tracking, escalation</div></div>
-        <div class="role"><div class="role-name">Copywriter</div><div class="role-do">Tono di voce per account, caption, microcopy, naming campagne</div></div>
-        <div class="role"><div class="role-name">Art Director &middot; ×2</div><div class="role-do">Direzione creativa, mood, format design, supervisione output Snacky</div></div>
-        <div class="role"><div class="role-name">Social Media Manager</div><div class="role-do">PED esecutivo, scheduling, community management, listening competitor</div></div>
-        <div class="role"><div class="role-name">ADS Specialist</div><div class="role-do">Meta Ads, TikTok Ads, Google Ads &mdash; setup, budgeting, ottimizzazione mensile</div></div>
+        <div class="role"><div class="role-name">Michele &amp; Pasquale &middot; CEO</div><div class="role-do">Direzione strategica, account ownership massimo livello, garanzia continuità partnership</div></div>
+        <div class="role"><div class="role-name">Angelo &amp; Lina &middot; Project Manager</div><div class="role-do">Single point of contact con Francesco M., owner del piano, project tracking, escalation</div></div>
+        <div class="role"><div class="role-name">Domi &middot; Copywriter</div><div class="role-do">Tono di voce per account, caption, microcopy, naming campagne</div></div>
+        <div class="role"><div class="role-name">Francy &middot; Art Direction</div><div class="role-do">Direzione creativa, mood, format design, supervisione output Snacky</div></div>
+        <div class="role"><div class="role-name">Anna &middot; Social Media Manager</div><div class="role-do">PED esecutivo, scheduling, community management, listening competitor</div></div>
+        <div class="role"><div class="role-name">Salvio &middot; ADS Specialist</div><div class="role-do">Meta Ads, TikTok Ads, Google Ads &mdash; setup, budgeting, ottimizzazione mensile</div></div>
       </div>
     </div>
 
@@ -421,10 +518,10 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
       </div>
       <p class="team-mission">Va dentro le strutture, conosce gli staff per nome, gira il ritmo emotivo che la strategia chiede. Vicinanza fisica alle 32 sedi romane.</p>
       <div class="team-roles">
-        <div class="role"><div class="role-name">Direzione foto</div><div class="role-do">Mood book per struttura, direzione visiva, casting staff e ospiti</div></div>
-        <div class="role"><div class="role-name">Direzione video</div><div class="role-do">Reel hero, storyboard, ritmo narrativo, voice-over</div></div>
-        <div class="role"><div class="role-name">Produzione on-field</div><div class="role-do">Calendario shooting, scouting, liberatorie, coordinamento direttori hotel</div></div>
-        <div class="role"><div class="role-name">Post-produzione</div><div class="role-do">Editing, color, sub multilingua, adattamento per piattaforma e formato</div></div>
+        <div class="role"><div class="role-name">Vittorio &middot; Fotografia</div><div class="role-do">Mood book per struttura, direzione visiva, casting staff e ospiti</div></div>
+        <div class="role"><div class="role-name">Cristiano &middot; Video</div><div class="role-do">Reel hero, storyboard, ritmo narrativo, produzione on-field</div></div>
+        <div class="role"><div class="role-name">Stefano &middot; Motion Design</div><div class="role-do">Editing, color, motion graphics, adattamento per piattaforma e formato</div></div>
+        <div class="role"><div class="role-name">Fede &middot; Design</div><div class="role-do">Grafiche feed, template stories, brand consistency per ogni struttura</div></div>
       </div>
     </div>
   </div>
@@ -437,6 +534,89 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
     </div>
     <div></div>
     <div class="cb-note">Referente unico per tutti i 16 account. PED approvato a sett. 2 di ogni mese &middot; review mensile on-site &middot; review strategica trimestrale.</div>
+  </div>
+</section>
+
+<!-- ═════ S1-bis · IMPRENDITORI ═════ -->
+<section class="sec bg-alt">
+  <div class="s-num">01b / 08</div>
+  <div class="s-tag">Oltre l&rsquo;agenzia &middot; Skin in the game</div>
+  <h2 class="s-h">Quando vi consigliamo di investire,<br><em>è perché lo abbiamo già fatto noi per primi.</em></h2>
+
+  <div class="ent-wrap">
+
+    <!-- CLAIM PRINCIPALE -->
+    <div class="ent-claim">
+      <div class="ent-claim-txt">
+        <div class="ent-claim-tag">Perché questo cambia la conversazione con il management</div>
+        <h3 class="ent-claim-h">Non siamo solo un&rsquo;agenzia che consiglia.<br><em>Siamo imprenditori che capiscono cosa vuol dire</em> decidere un investimento.</h3>
+        <p class="ent-claim-body">Siamo co-fondatori e finanziatori di <strong>American Uncle</strong> &mdash; un gruppo consumer-food che abbiamo costruito da zero: HQ fisico, team proprietario, due brand su due mercati. Ogni cosa che vi suggeriamo di fare &mdash; investire in contenuti, presidiare i canali, costruire un asset editoriale nel tempo &mdash; <strong>l&rsquo;abbiamo già decisa su noi stessi</strong>, con i nostri soldi, prima ancora di sederci a questo tavolo.</p>
+      </div>
+
+      <div class="ent-brand-pair">
+        <div class="ent-brand b2c">
+          <span class="ent-brand-badge">B2C &middot; Consumer</span>
+          <div class="ent-brand-name">American Uncle</div>
+          <div class="ent-brand-url">americanuncle.it</div>
+          <div class="ent-brand-desc">E-commerce di snack e caramelle americane rivolto ai consumatori finali. Leader di categoria in Italia per assortimento e volume di ordini.</div>
+        </div>
+        <div class="ent-brand b2b">
+          <span class="ent-brand-badge">B2B &middot; Wholesale</span>
+          <div class="ent-brand-name">Uncle Food</div>
+          <div class="ent-brand-url">unclefood.com</div>
+          <div class="ent-brand-desc">Braccio wholesale del gruppo: distribuzione a +10.000 attivit&agrave; registrate tra bar, ristoranti, hotel e retail. Franchising attivo da 2026.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NUMERI B2C -->
+    <div class="ent-stats">
+      <div class="ent-stats-tit">Numeri American Uncle &middot; B2C</div>
+      <div class="ent-stat-grid">
+        <div class="ent-stat">
+          <div class="ent-stat-num">+350K</div>
+          <div class="ent-stat-l"><strong>Clienti felici</strong>Acquirenti attivi e ricorrenti sull&rsquo;e-commerce</div>
+        </div>
+        <div class="ent-stat">
+          <div class="ent-stat-num">+500K</div>
+          <div class="ent-stat-l"><strong>Ordini spediti</strong>Logistica proprietaria, gestione interna dei resi</div>
+        </div>
+        <div class="ent-stat">
+          <div class="ent-stat-num">+300K</div>
+          <div class="ent-stat-l"><strong>Iscritti newsletter</strong>Database email costruito in organico senza acquisti di lista</div>
+        </div>
+        <div class="ent-stat">
+          <div class="ent-stat-num">+1M</div>
+          <div class="ent-stat-l"><strong>Follower sui social</strong>Community cross-platform: IG, TikTok, FB &mdash; crescita organica</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HQ + INFRASTRUTTURA -->
+    <div class="ent-stats" style="margin-top:1.75rem">
+      <div class="ent-stats-tit">Infrastruttura di gruppo &middot; HQ + B2B</div>
+      <div class="ent-hq">
+        <div class="ent-hq-item">
+          <div class="ent-hq-num">3.000 m&sup2;</div>
+          <div class="ent-hq-l"><strong>Sede operativa propria</strong>HQ fisico con magazzino, uffici, area eventi &mdash; non un coworking</div>
+        </div>
+        <div class="ent-hq-item">
+          <div class="ent-hq-num">40+</div>
+          <div class="ent-hq-l"><strong>Persone nel gruppo</strong>Staff dipendente tra marketing, logistica, commerciale, IT e operations</div>
+        </div>
+        <div class="ent-hq-item">
+          <div class="ent-hq-num">10K+</div>
+          <div class="ent-hq-l"><strong>Attivit&agrave; B2B registrate</strong>Hotel, bar, ristoranti e retail serviti via Uncle Food &middot; franchising attivo da 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INSIGHT CHIUSURA -->
+    <div class="ent-insight">
+      <p class="ent-insight-q">&ldquo;Quando diciamo che un piano social &egrave; un investimento e non un costo, non lo diciamo perch&eacute; &egrave; il nostro lavoro dirlo. Lo diciamo perch&eacute; <em>abbiamo costruito 1 milione di follower senza comprare un singolo annuncio</em> nei primi due anni. Conosciamo quella pazienza. Sappiamo cosa produce.&rdquo;</p>
+      <p class="ent-insight-d">Portare questa prospettiva al vostro tavolo significa che ogni cosa che vi raccomandiamo passa prima da una domanda semplice che ci facciamo internamente: <strong>&ldquo;Lo faremmo sulla nostra azienda, con i nostri soldi?&rdquo;</strong> Se la risposta &egrave; s&igrave;, ve lo proponiamo. Se &egrave; no, non ve lo vendiamo.</p>
+    </div>
+
   </div>
 </section>
 
@@ -939,6 +1119,15 @@ gsap.fromTo('#teamSlide',{opacity:0,y:24},{
   opacity:1,y:0,duration:.9,ease:'power3.out',
   scrollTrigger:{trigger:'#teamSlide',start:'top 82%',once:true}
 });
+
+// Sezione imprenditori
+gsap.fromTo('.ent-claim',{opacity:0,y:28},{opacity:1,y:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:'.ent-claim',start:'top 80%',once:true}});
+gsap.fromTo('.ent-brand',{opacity:0,y:18},{opacity:1,y:0,duration:.65,stagger:.15,scrollTrigger:{trigger:'.ent-brand-pair',start:'top 82%',once:true}});
+gsap.fromTo('.ent-stat',{opacity:0,y:14},{opacity:1,y:0,duration:.55,stagger:.1,scrollTrigger:{trigger:'.ent-stat-grid',start:'top 82%',once:true}});
+gsap.fromTo('.ent-hq-item',{opacity:0,x:-16},{opacity:1,x:0,duration:.6,stagger:.12,scrollTrigger:{trigger:'.ent-hq',start:'top 84%',once:true}});
+gsap.fromTo('.ent-insight',{opacity:0,y:20},{opacity:1,y:0,duration:.9,scrollTrigger:{trigger:'.ent-insight',start:'top 85%',once:true}});
+
+
 gsap.utils.toArray('.team-col').forEach(function(col,i){
   var roles=col.querySelectorAll('.role');
   gsap.fromTo(roles,{opacity:0,y:14},{
@@ -1051,8 +1240,10 @@ var M=[
   {id:'m4',code:'04',label:'Personas',sub:'4 profili \u00b7 Trigger \u00b7 Social behavior',url:'m4.html',color:'#a08470'},
   {id:'m5',code:'05',label:'Mappa del Momento',sub:'Perch\u00e9 investire adesso',url:'m5.html',color:'#C8A88D'},
   {id:'m6',code:'06',label:'Benchmark Creativi',sub:'Il Pellicano \u00b7 Borgo S.Pietro \u00b7 The Pig',url:'m6.html',color:'#755847'},
-  {id:'m7',code:'07',label:'Brainstorming Strategico',sub:'Piano per struttura \u00b7 Mappe sinaptiche',url:'m7.html',color:'#9a7d6a'},
-  {id:'m8',code:'08',label:'Come Lavoriamo',sub:'Team \u00b7 Processo \u00b7 Cadenza \u00b7 Governance',url:'m8.html',color:'#C4ACA5'}
+  {id:'m7',code:'07',label:'Strategia',sub:'Piano per struttura \u00b7 Mappe sinaptiche',url:'m7.html',color:'#9a7d6a'},
+  {id:'m8',code:'08',label:'Come Lavoriamo',sub:'Team \u00b7 Processo \u00b7 Frequenze \u00b7 Patto',url:'m8.html',color:'#C4ACA5'},
+  {id:'m9',code:'09',label:'Casi Studio',sub:'Esempi di contenuto \u00b7 Mockup',url:'m9.html',color:'#a08470'},
+  {id:'m10',code:'10',label:'Economics',sub:'ROI \u00b7 Tier \u00b7 Disintermediazione OTA',url:'m10.html',color:'#C8A88D'}
 ];
 
 /* ── FONTI PER MODULO ───────────────────────────── */
@@ -1116,6 +1307,15 @@ var FONTI={
     {label:'Piano Operativo Social Media Multi-Account \u2013 Ribrain Deep Research',url:'https://bzarhotels.it/'},
     {label:'Cloudbeds \u2013 Hospitality Industry Operational Benchmarks 2026',url:'https://www.cloudbeds.com/'},
     {label:'Hospitality Net \u2013 Multi-property Social Media Management Best Practices',url:'https://www.hospitalitynet.org/'}
+  ],
+  m9:[],
+  m10:[
+    {label:'Cloudbeds \u2013 OTA Commission Rates 2026 (15-30%)',url:'https://www.cloudbeds.com/online-travel-agencies/commissions/'},
+    {label:'Search Engine Land \u2013 Google ad auction policy update 2025-2026',url:'https://searchengineland.com/google-double-serving-dilemma-who-wins-464233'},
+    {label:'Manoeuvre Group \u2013 Multi-brand Google Ads (fratricidal competition)',url:'https://manoeuvregroup.com/11-strategies-for-multi-brand-google-ads-advertisers/'},
+    {label:'Meta Business \u2013 Audience Overlap effect on CPM',url:'https://www.facebook.com/business/help/1679591828938781'},
+    {label:'Dati BZAR Hotels \u2013 Confermati da Francesco Mormile in call aprile 2026',url:'https://bzarhotels.it/'},
+    {label:'Modello ROI disintermediazione \u2013 Ribrain Deep Research aprile 2026',url:'https://bzarhotels.it/'}
   ]
 };
 
