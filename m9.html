@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M09: Casi Studio · BZAR Hotels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{--bg:#F1EFED;--ink:#755847;--brand:#C8A88D;--rose:#C4ACA5;--dark:#1E1410;--mid:#9a7d6a;--go:#5a7a4a;--warn:#c0572a}
+body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;font-size:15px;line-height:1.65;overflow-x:hidden;padding-top:52px;padding-bottom:48px;cursor:none}
+@media(hover:none){body{cursor:auto}#cur{display:none}}
+#cur{position:fixed;width:8px;height:8px;background:var(--brand);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:width .18s,height .18s}
+
+/* LOADER */
+#loader{position:fixed;inset:0;z-index:10000;background:var(--dark);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.25rem;transition:opacity .7s cubic-bezier(.16,1,.3,1),visibility .7s}
+#loader.is-out{opacity:0;visibility:hidden;pointer-events:none}
+.ldr-mark{font-family:"Afacad Flux",sans-serif;font-size:3.5rem;font-weight:300;color:rgba(200,168,141,.7);letter-spacing:-.04em;line-height:1}
+.ldr-mark .hn-dot{color:var(--brand)}
+.ldr-bar{width:120px;height:1px;background:rgba(200,168,141,.12);overflow:hidden;border-radius:1px}
+.ldr-bar::after{content:"";display:block;height:100%;background:var(--brand);transform:scaleX(0);transform-origin:left;animation:ldrFill 1.1s cubic-bezier(.65,0,.35,1) forwards .1s}
+@keyframes ldrFill{to{transform:scaleX(1)}}
+.ldr-cap{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(200,168,141,.25)}
+
+/* PAGE PROGRESS */
+#pgbar{position:fixed;top:52px;left:0;right:0;height:1px;z-index:790;pointer-events:none}
+#pgbar::after{content:"";position:absolute;inset:0;background:var(--brand);opacity:.55;width:var(--p,0%);transition:width .15s linear}
+
+/* VERTICAL NAV */
+#vnav{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:780;display:flex;flex-direction:column;gap:10px;mix-blend-mode:normal}
+@media(max-width:860px){#vnav{display:none}}
+.vn-item{background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:7px;padding:2px 0;justify-content:flex-end}
+.vn-dot{width:4px;height:4px;border-radius:50%;background:rgba(117,88,71,.22);transition:all .35s cubic-bezier(.16,1,.3,1);flex-shrink:0}
+.vn-item.is-active .vn-dot{background:var(--brand);transform:scale(1.5)}
+.vn-label{font-family:"Poppins",sans-serif;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:rgba(117,88,71,.3);opacity:0;transform:translateX(4px);transition:opacity .3s,transform .3s}
+.vn-item:hover .vn-label,.vn-item.is-active .vn-label{opacity:1;transform:translateX(0)}
+
+/* TOPBAR */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:800;height:52px;background:var(--dark);display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem 0 1.5rem;border-bottom:.5px solid rgba(200,168,141,.1)}
+.tb-l{display:flex;align-items:center;gap:.75rem}
+.tb-brand{font-family:"Afacad Flux",sans-serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.tb-sep{width:.5px;height:16px;background:rgba(255,255,255,.15)}
+.tb-rlogo{height:13px;filter:invert(1);opacity:.6}
+.tb-c{font-family:"Poppins",sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.2);position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap}
+@media(max-width:680px){.tb-c{display:none}}
+.tb-r{display:flex;align-items:center;gap:.75rem}
+.tb-date{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+.tb-conf{font-size:9px;letter-spacing:.14em;text-transform:uppercase;border:.5px solid rgba(200,168,141,.28);color:rgba(200,168,141,.45);padding:3px 8px;border-radius:3px}
+.rb-ham{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:5px;width:32px;height:32px;padding:5px;background:none;border:none;cursor:pointer;flex-shrink:0}
+.rb-ham span{display:block;height:1.5px;background:#F1EFED;border-radius:1px;transition:all .4s cubic-bezier(0.16,1,0.3,1);transform-origin:right center}
+.rb-ham .h1{width:20px}.rb-ham .h2{width:14px}.rb-ham .h3{width:20px}
+.rb-ham.open .h1{width:20px;transform:translateY(6.5px) rotate(-45deg)}
+.rb-ham.open .h2{opacity:0;width:0}
+.rb-ham.open .h3{width:20px;transform:translateY(-6.5px) rotate(45deg)}
+
+/* SEZIONI BASE */
+.sec{padding:4.5rem 1.5rem;border-top:.5px solid rgba(117,88,71,.1);position:relative}
+.sec.bg-alt{background:#FDFCFA}
+.sec.bg-dark{background:var(--dark);color:rgba(241,239,237,.85);border-top:none}
+.s-marker{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(117,88,71,.3);margin-bottom:.75rem}
+.bg-dark .s-marker{color:rgba(200,168,141,.2)}
+.s-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);margin-bottom:.5rem}
+.bg-dark .s-tag{color:rgba(200,168,141,.45)}
+.s-h{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.9rem,4vw,3rem);font-weight:400;line-height:1.08;letter-spacing:-.02em;margin-bottom:.75rem;max-width:820px}
+.bg-dark .s-h{color:rgba(241,239,237,.92)}
+.s-h em{font-style:italic;color:var(--ink);font-weight:300}
+.bg-dark .s-h em{color:var(--brand)}
+.s-lead{font-size:14px;color:var(--mid);max-width:580px;line-height:1.8}
+.bg-dark .s-lead{color:rgba(241,239,237,.5)}
+
+/* ═══════════════════ HERO ═══════════════════ */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;padding:5.5rem 1.5rem 2.5rem;position:relative;overflow:hidden;background:var(--dark);border-top:none}
+.hero-noise{position:absolute;inset:0;pointer-events:none;opacity:.018;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px}
+.hero-grid{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle at 1px 1px,rgba(200,168,141,.05) 1px,transparent 1px);background-size:32px 32px;mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.4) 20%,rgba(0,0,0,.4) 80%,transparent 100%)}
+.hero-numeral{position:absolute;right:-3vw;top:50%;transform:translateY(-50%);font-family:"Afacad Flux",sans-serif;font-size:clamp(20rem,52vw,48rem);font-weight:700;line-height:1;color:transparent;-webkit-text-stroke:.5px rgba(200,168,141,.07);pointer-events:none;user-select:none;letter-spacing:-.07em;transform-style:preserve-3d}
+.hero-numeral .hn-m{color:transparent;-webkit-text-stroke:.5px rgba(200,168,141,.06)}
+.hero-numeral .hn-dot{color:rgba(200,168,141,.12);-webkit-text-stroke:0}
+.hero-numeral .hn-n{color:transparent;-webkit-text-stroke:.5px rgba(200,168,141,.07)}
+
+.hero-top{display:flex;align-items:flex-start;justify-content:space-between}
+.hero-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(200,168,141,.5);display:flex;align-items:center;gap:.75rem}
+.hero-tag::before{content:"";width:28px;height:1px;background:rgba(200,168,141,.3)}
+.hero-top-r{font-family:"Poppins",sans-serif;font-size:10px;letter-spacing:.08em;text-align:right;color:rgba(200,168,141,.25);line-height:1.6}
+.hero-top-r b{display:block;color:rgba(200,168,141,.4);font-weight:500;letter-spacing:.12em;text-transform:uppercase;font-size:9px}
+
+.hero-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:2rem 0}
+.hl-mask{display:block;overflow:hidden;line-height:1.1}
+.hl-inner{display:inline-block;transform:translateY(100%);opacity:0;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .6s cubic-bezier(.16,1,.3,1)}
+.hl-inner.is-in{transform:translateY(0);opacity:1}
+.hero-h1{font-family:"Afacad Flux",sans-serif;font-size:clamp(2.8rem,7.5vw,6.2rem);font-weight:300;line-height:1.04;letter-spacing:-.04em;color:rgba(241,239,237,.92);max-width:900px}
+.hero-h1 em{font-style:italic;font-weight:300;color:var(--brand)}
+.hero-sub{margin-top:1.75rem;font-size:14px;color:rgba(241,239,237,.38);max-width:520px;line-height:1.85;font-weight:300}
+
+.hero-foot{padding-top:1.5rem}
+.hero-counts{display:flex;gap:2.5rem;flex-wrap:wrap}
+.hc-item{opacity:0;transform:translateY(16px)}
+.hc-item.is-in{opacity:1;transform:translateY(0);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.hc-rule{display:block;width:32px;height:1px;background:rgba(200,168,141,.25);margin-bottom:.6rem}
+.hc-v{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:300;color:rgba(241,239,237,.85);line-height:1;letter-spacing:-.03em}
+.hc-l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.3);margin-top:.25rem;max-width:180px;line-height:1.4}
+.hero-scroll{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(200,168,141,.2);display:flex;align-items:center;gap:.5rem;margin-top:2rem}
+.hero-scroll::after{content:"";width:48px;height:1px;background:rgba(200,168,141,.15)}
+
+/* ═══════════════════ CLIENT WALL ═══════════════════ */
+.cw-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:3rem}
+@media(max-width:900px){.cw-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:540px){.cw-grid{grid-template-columns:1fr 1fr}}
+.cw-item{padding:1.75rem 1.25rem 1.5rem;border-right:.5px solid rgba(117,88,71,.09);border-bottom:.5px solid rgba(117,88,71,.09);position:relative;overflow:hidden;cursor:default;transition:background .35s}
+.cw-item:hover{background:rgba(200,168,141,.04)}
+.cw-item::before{content:"";position:absolute;bottom:0;left:0;width:100%;height:1.5px;background:var(--brand);transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.cw-item:hover::before{transform:scaleX(1)}
+.cw-item:nth-child(4n){border-right:none}
+@media(max-width:900px){.cw-item:nth-child(2n){border-right:none}.cw-item:nth-child(4n){border-right:.5px solid rgba(117,88,71,.09)}.cw-item:nth-child(4n+2){border-right:none}}
+.cw-since{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,168,141,.4);margin-bottom:.6rem}
+.cw-name{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.1rem,2.2vw,1.5rem);font-weight:400;color:var(--dark);line-height:1.15;letter-spacing:-.02em;margin-bottom:.5rem}
+.cw-industry{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid)}
+.cw-item.is-revealed{opacity:1;transform:none}
+
+/* ═══════════════════ MOODBOARD / BENTO ═══════════════════ */
+/* ═══════════ LOGO WALL ═══════════ */
+.logo-wall{margin-top:2.5rem}
+.logo-wall-img{width:100%;max-width:960px;display:block;border-radius:10px;opacity:.85;filter:grayscale(.2);transition:opacity .4s,filter .4s}
+.logo-wall-img:hover{opacity:1;filter:grayscale(0)}
+.logo-more{margin-top:1.5rem;font-size:13px;color:var(--mid);line-height:1.8;max-width:680px}
+.logo-more strong{color:var(--dark);font-weight:500}
+
+/* ═══════════ FILTER ═══════════ */
+.filter-strip{display:flex;gap:.5rem;flex-wrap:wrap;margin:2rem 0 1.75rem}
+.fp-pill{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:5px 14px;border-radius:99px;border:.5px solid rgba(117,88,71,.18);background:none;color:var(--mid);cursor:pointer;transition:all .25s;white-space:nowrap}
+.fp-pill:hover{border-color:rgba(200,168,141,.5);color:var(--ink)}
+.fp-pill.is-active{background:var(--dark);border-color:var(--dark);color:rgba(241,239,237,.85)}
+
+/* ═══════════ BENTO MURALE ═══════════ */
+/* Masonry via CSS columns — nessun buco */
+.bento{columns:4;column-gap:10px;margin-top:.5rem}
+@media(max-width:860px){.bento{columns:2;column-gap:8px}}
+@media(max-width:480px){.bento{columns:2;column-gap:6px}}
+.bento-tile{display:block;break-inside:avoid;margin-bottom:10px;position:relative;border-radius:12px;overflow:hidden;background:var(--dark);border:.5px solid rgba(117,88,71,.08)}
+/* bt-w2/bt-w3 non usati con columns, ma li lasciamo neutri */
+.bento-tile.bt-w3,.bento-tile.bt-w2{display:block}
+.bento-tile.is-hidden{opacity:0;pointer-events:none}
+.bento-tile.is-visible{opacity:1;pointer-events:auto}
+
+/* Audio indicator per video tile */
+.bt-audio-btn{position:absolute;bottom:.85rem;right:.85rem;z-index:5;width:32px;height:32px;border-radius:50%;background:rgba(30,20,16,.7);backdrop-filter:blur(8px);border:.5px solid rgba(200,168,141,.25);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s,transform .15s}
+.bt-audio-btn:hover{background:rgba(30,20,16,.9);transform:scale(1.08)}
+.bt-audio-btn svg{width:14px;height:14px;fill:rgba(200,168,141,.75);pointer-events:none;transition:fill .2s}
+.bt-audio-btn.is-on{background:rgba(200,168,141,.2);border-color:rgba(200,168,141,.5)}
+.bt-audio-btn.is-on svg{fill:rgba(241,239,237,.9)}
+
+/* bt-img: relative + aspect-ratio driven */
+.bt-img{position:relative;overflow:hidden;width:100%}
+.bt-img img,.bt-img video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+/* Landscape 16:9 — cover */
+.bt-img.r-wide{aspect-ratio:16/9}
+.bt-img.r-wide img,.bt-img.r-wide video{object-fit:cover}
+/* Landscape 4:3 — cover */
+.bt-img.r-land{aspect-ratio:4/3}
+.bt-img.r-land img,.bt-img.r-land video{object-fit:cover}
+/* Square 1:1 — cover */
+.bt-img.r-sq{aspect-ratio:1}
+.bt-img.r-sq img,.bt-img.r-sq video{object-fit:cover}
+/* Portrait stories/reel 9:16 — contain, immagine intera */
+.bt-img.r-port{aspect-ratio:9/16}
+/* Portrait 4:5 feed verticale */
+.bt-img.r-feed{aspect-ratio:4/5}
+.bt-img.r-feed img{object-fit:cover}
+
+.bento-tile:hover .bt-img img,.bento-tile:hover .bt-img video{transform:none}
+.bt-placeholder{position:absolute;inset:0;background:linear-gradient(135deg,rgba(200,168,141,.08),rgba(117,88,71,.04));display:flex;align-items:center;justify-content:center;pointer-events:none}
+.bt-ph-label{font-family:"Afacad Flux",sans-serif;font-size:.85rem;color:rgba(117,88,71,.2);letter-spacing:.06em;text-align:center;line-height:1.5;padding:1rem}
+.bt-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(30,20,16,.88) 0%,rgba(30,20,16,.18) 55%,transparent 100%);padding:1.25rem;display:flex;flex-direction:column;justify-content:flex-end;gap:.4rem;opacity:0;transition:opacity .35s;z-index:3}
+.bento-tile:hover .bt-overlay{opacity:1}
+.bt-caption{font-family:"Afacad Flux",sans-serif;font-size:clamp(.95rem,1.8vw,1.15rem);font-weight:400;color:rgba(241,239,237,.9);line-height:1.3;letter-spacing:-.01em}
+.bt-desc{font-family:"Poppins",sans-serif;font-size:10px;color:rgba(241,239,237,.45);letter-spacing:.06em;line-height:1.5}
+.bt-brand-tag{position:absolute;top:.85rem;left:.85rem;background:rgba(30,20,16,.75);backdrop-filter:blur(8px);border:.5px solid rgba(200,168,141,.18);border-radius:99px;padding:4px 10px;font-family:"Poppins",sans-serif;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.7);z-index:4}
+.bt-type-tag{position:absolute;top:.85rem;right:.85rem;background:rgba(200,168,141,.15);backdrop-filter:blur(8px);border:.5px solid rgba(200,168,141,.25);border-radius:4px;padding:3px 8px;font-family:"Poppins",sans-serif;font-size:7px;letter-spacing:.12em;text-transform:uppercase;color:rgba(200,168,141,.6);z-index:4}
+.bento-tile{opacity:0;transform:translateY(16px)}
+.bento-tile.tile-in{opacity:1;transform:translateY(0)}
+@media(prefers-reduced-motion:reduce){.bento-tile{opacity:1;transform:none}}
+
+/* old cs-* CSS rimosso */
+
+/* 4 atti */
+.cs-acts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(200,168,141,.1);border-radius:14px;overflow:hidden;margin-bottom:3rem}
+@media(max-width:860px){.cs-acts{grid-template-columns:1fr 1fr}}
+@media(max-width:540px){.cs-acts{grid-template-columns:1fr}}
+.cs-act{padding:1.75rem 1.5rem;background:#1a1009;display:flex;flex-direction:column;gap:.6rem;position:relative}
+.cs-act::after{content:"";position:absolute;top:0;left:0;width:100%;height:2px}
+.cs-act.a1::after{background:var(--warn)}
+.cs-act.a2::after{background:var(--brand)}
+.cs-act.a3::after{background:var(--mid)}
+.cs-act.a4::after{background:var(--go)}
+.cs-act-num{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(200,168,141,.3);font-family:"Poppins",sans-serif;font-weight:500}
+.cs-act.a1 .cs-act-num{color:rgba(192,87,42,.5)}
+.cs-act.a4 .cs-act-num{color:rgba(90,122,74,.5)}
+.cs-act-h{font-family:"Afacad Flux",sans-serif;font-size:1.1rem;font-weight:500;color:rgba(241,239,237,.85);line-height:1.25;letter-spacing:-.01em}
+.cs-act-d{font-size:12px;color:rgba(241,239,237,.35);line-height:1.65;margin-top:auto}
+
+/* Numeri risultati */
+.cs-results{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2.5rem}
+@media(max-width:680px){.cs-results{grid-template-columns:1fr}}
+.cs-res{padding:1.5rem 1.4rem;border:.5px solid rgba(200,168,141,.1);border-radius:12px;display:flex;flex-direction:column;gap:.4rem}
+.cs-res-num{font-family:"Afacad Flux",sans-serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:300;color:rgba(241,239,237,.88);line-height:1;letter-spacing:-.04em}
+.cs-res-num span{font-size:.6em;color:var(--brand);font-weight:400}
+.cs-res-l{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(200,168,141,.45);font-family:"Poppins",sans-serif;margin-top:.2rem}
+.cs-res-sub{font-size:12px;color:rgba(241,239,237,.3);line-height:1.5;margin-top:.4rem}
+
+/* Sentiment bar */
+.cs-sentiment{padding:1.5rem 1.5rem;border:.5px solid rgba(200,168,141,.1);border-radius:12px;margin-bottom:2.5rem}
+.cs-sent-label{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(200,168,141,.35);margin-bottom:1rem;font-family:"Poppins",sans-serif}
+.cs-sent-bar{display:flex;height:10px;border-radius:99px;overflow:hidden;margin-bottom:.85rem;gap:2px}
+.cs-sent-pos{background:var(--go);flex-basis:76%}
+.cs-sent-neu{background:rgba(200,168,141,.35);flex-basis:24%}
+.cs-sent-neg{background:var(--warn);flex-basis:0%}
+.cs-sent-legend{display:flex;gap:1.5rem;font-size:11px;color:rgba(241,239,237,.4);flex-wrap:wrap}
+.cs-sent-legend span{display:flex;align-items:center;gap:.4rem}
+.cs-sent-legend span::before{content:"";width:8px;height:8px;border-radius:50%;display:inline-block}
+.cs-sent-legend .sl-pos::before{background:var(--go)}
+.cs-sent-legend .sl-neu::before{background:rgba(200,168,141,.35)}
+.cs-sent-legend .sl-neg::before{background:var(--warn)}
+
+/* Commenti reali */
+.cs-comments{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:2.5rem}
+@media(max-width:680px){.cs-comments{grid-template-columns:1fr}}
+.cs-comment{background:rgba(255,255,255,.03);border:.5px solid rgba(200,168,141,.08);border-radius:10px;padding:1rem 1.1rem;display:flex;gap:.75rem;align-items:flex-start}
+.cs-c-av{width:30px;height:30px;border-radius:50%;background:rgba(200,168,141,.15);display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(200,168,141,.6);flex-shrink:0;font-family:"Poppins",sans-serif;font-weight:600;letter-spacing:.02em}
+.cs-c-body{}
+.cs-c-user{font-size:10.5px;font-weight:600;color:rgba(241,239,237,.7);letter-spacing:.02em;margin-bottom:.25rem;font-family:"Poppins",sans-serif}
+.cs-c-text{font-size:12px;color:rgba(241,239,237,.4);line-height:1.55}
+
+/* Insight takeaway */
+.cs-takeaway{padding:2rem 2rem;background:linear-gradient(135deg,rgba(200,168,141,.06),rgba(200,168,141,.02));border:.5px solid rgba(200,168,141,.2);border-radius:14px}
+.cs-tw-q{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:400;color:rgba(241,239,237,.82);line-height:1.5;letter-spacing:-.015em;font-style:italic;margin-bottom:.85rem}
+.cs-tw-q em{font-style:normal;color:var(--brand);font-weight:500}
+.cs-tw-d{font-size:12px;color:rgba(241,239,237,.35);line-height:1.7}
+
+/* ═══ CASO STUDIO ISCHIA — visivo immersivo ═══ */
+#s-ischia{padding:0;overflow:hidden}
+
+/* HERO COVER */
+.ics-cover{position:relative;height:70vh;min-height:480px;display:flex;align-items:flex-end;overflow:hidden}
+.ics-cover-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.ics-cover-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,5,2,.97) 0%,rgba(10,5,2,.75) 40%,rgba(10,5,2,.60) 70%,rgba(10,5,2,.45) 100%)}
+.ics-cover-content{position:relative;z-index:2;padding:3rem 2rem 3.5rem;max-width:960px;margin:0 auto;width:100%}
+.ics-eyebrow{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(200,168,141,.5);font-family:"Poppins",sans-serif;font-weight:500;margin-bottom:1rem}
+.ics-title{font-family:"Afacad Flux",sans-serif;font-size:clamp(2.2rem,6vw,4.2rem);font-weight:300;color:rgba(241,239,237,.95);line-height:1.08;letter-spacing:-.035em;margin-bottom:.75rem}
+.ics-title em{font-style:italic;color:var(--brand);font-weight:300}
+.ics-subtitle{font-size:14px;color:rgba(241,239,237,.45);line-height:1.8;max-width:640px}
+
+/* NUMERI HERO */
+.ics-stats-bar{display:flex;gap:0;border-top:.5px solid rgba(200,168,141,.15);margin-top:2rem;padding-top:1.75rem;flex-wrap:wrap}
+.ics-stat{flex:1;min-width:120px;padding-right:2rem}
+.ics-stat-num{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:300;color:rgba(241,239,237,.9);line-height:1;letter-spacing:-.04em}
+.ics-stat-num sup{font-size:.55em;color:var(--brand);font-weight:400}
+.ics-stat-l{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(200,168,141,.4);font-family:"Poppins",sans-serif;margin-top:.4rem}
+
+/* SEZIONE INTERNA */
+.ics-body{padding:4rem 2rem;max-width:1100px;margin:0 auto}
+@media(max-width:680px){.ics-body{padding:3rem 1.25rem}}
+
+/* PROBLEMA — testo + sfondo */
+.ics-problem{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;margin-bottom:5rem}
+@media(max-width:780px){.ics-problem{grid-template-columns:1fr;gap:2rem}}
+.ics-section-tag{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(192,87,42,.6);font-family:"Poppins",sans-serif;font-weight:500;margin-bottom:.75rem}
+.ics-section-h{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:400;color:rgba(241,239,237,.9);line-height:1.2;letter-spacing:-.02em;margin-bottom:1rem}
+.ics-section-h em{font-style:italic;color:var(--brand);font-weight:300}
+.ics-section-p{font-size:13px;color:rgba(241,239,237,.4);line-height:1.85}
+.ics-section-p strong{color:rgba(241,239,237,.7);font-weight:500}
+
+/* GRIGLIA INFLUENCER 4+4+4 */
+.ics-influencer-section{margin-bottom:5rem}
+.ics-inf-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:1.5rem}
+@media(max-width:860px){.ics-inf-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:480px){.ics-inf-grid{grid-template-columns:repeat(3,1fr)}}
+.ics-inf-tile{aspect-ratio:1;border-radius:8px;overflow:hidden;position:relative;cursor:default}
+.ics-inf-tile img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .5s cubic-bezier(.16,1,.3,1);filter:brightness(.85)}
+.ics-inf-tile:hover img{transform:scale(1.06);filter:brightness(1)}
+.ics-inf-tile.featured{grid-column:span 2;grid-row:span 2;border-radius:12px}
+
+/* COLLAGE FULL */
+.ics-collage{border-radius:14px;overflow:hidden;margin-bottom:5rem;position:relative}
+.ics-collage img{width:100%;display:block;object-fit:cover}
+.ics-collage-caption{position:absolute;bottom:0;left:0;right:0;padding:1.5rem 1.75rem;background:linear-gradient(to top,rgba(15,8,3,.85),transparent);font-size:12px;color:rgba(241,239,237,.5);letter-spacing:.06em;font-family:"Poppins",sans-serif}
+
+/* ROUTE DRAWINGS */
+.ics-routes{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:5rem}
+@media(max-width:680px){.ics-routes{grid-template-columns:1fr}}
+.ics-route{border-radius:12px;overflow:hidden;position:relative}
+.ics-route img{width:100%;display:block}
+.ics-route-label{position:absolute;top:.85rem;left:.85rem;background:rgba(15,8,3,.7);backdrop-filter:blur(8px);padding:4px 12px;border-radius:99px;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,168,141,.7);font-family:"Poppins",sans-serif;border:.5px solid rgba(200,168,141,.2)}
+
+/* SENTIMENT VISUAL */
+.ics-sentiment{margin-bottom:5rem}
+.ics-sent-row{display:grid;grid-template-columns:auto 1fr auto;gap:1rem;align-items:center;margin-bottom:.6rem}
+.ics-sent-pct{font-family:"Afacad Flux",sans-serif;font-size:1.4rem;font-weight:300;color:rgba(241,239,237,.8);width:64px;text-align:right;line-height:1}
+.ics-sent-track{height:8px;border-radius:99px;background:rgba(255,255,255,.06);overflow:hidden}
+.ics-sent-fill{height:100%;border-radius:99px;transform-origin:left;transform:scaleX(0);transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
+.ics-sent-fill.pos{background:var(--go)}
+.ics-sent-fill.neu{background:rgba(200,168,141,.4)}
+.ics-sent-fill.neg{background:var(--warn)}
+.ics-sent-label{font-size:11px;color:rgba(241,239,237,.3);font-family:"Poppins",sans-serif;white-space:nowrap}
+
+/* COMMENTI SCROLLABILE */
+.ics-comments-section{margin-bottom:5rem}
+.ics-comment-scroll{display:flex;gap:10px;overflow-x:auto;padding-bottom:1rem;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.ics-comment-scroll::-webkit-scrollbar{height:3px}
+.ics-comment-scroll::-webkit-scrollbar-track{background:rgba(255,255,255,.04)}
+.ics-comment-scroll::-webkit-scrollbar-thumb{background:rgba(200,168,141,.3);border-radius:99px}
+.ics-comment-img{flex-shrink:0;width:420px;height:300px;object-fit:cover;object-position:top;border-radius:10px;scroll-snap-align:start;display:block}
+@media(max-width:680px){.ics-comment-img{width:320px;height:240px}}
+
+/* TAKEAWAY */
+.ics-takeaway{padding:2.5rem 2.5rem;background:rgba(200,168,141,.05);border:.5px solid rgba(200,168,141,.15);border-radius:16px;margin-top:0}
+.ics-tw-q{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.15rem,2.8vw,1.6rem);font-weight:300;color:rgba(241,239,237,.82);line-height:1.5;letter-spacing:-.015em;font-style:italic;margin-bottom:1.25rem}
+.ics-tw-q em{font-style:normal;color:var(--brand);font-weight:500}
+.ics-tw-d{font-size:13px;color:rgba(241,239,237,.35);line-height:1.8}
+.ics-tw-d strong{color:rgba(241,239,237,.6);font-weight:500}
+
+.recap-fin{padding:8rem 1.5rem;min-height:72vh;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1.5rem;position:relative;overflow:hidden}
+.recap-fin::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(200,168,141,.07),transparent 65%);animation:recapBreathe 8s ease-in-out infinite alternate;pointer-events:none}
+@keyframes recapBreathe{from{opacity:.6}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.recap-fin::after{animation:none}}
+.rf-tag{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(200,168,141,.3);text-align:center}
+.rf-h{font-family:"Afacad Flux",sans-serif;font-size:clamp(2rem,5.5vw,4.2rem);font-weight:300;line-height:1.08;letter-spacing:-.035em;text-align:center;color:rgba(241,239,237,.88);max-width:760px;position:relative;z-index:1}
+.rf-h em{font-style:italic;color:var(--brand);position:relative;display:inline-block}
+.rf-h em::after{content:"";position:absolute;left:0;bottom:-.05em;width:100%;height:1px;background:var(--brand);transform-origin:left;transform:scaleX(0);transition:transform 1.2s cubic-bezier(.16,1,.3,1) .8s}
+.rf-h.is-final em::after{transform:scaleX(1)}
+.rf-h .rfw{display:inline-block;opacity:0;transform:translateY(.6em);will-change:transform,opacity}
+.rf-h .rfw.is-in{opacity:1;transform:translateY(0);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+@media(prefers-reduced-motion:reduce){.rf-h .rfw{opacity:1;transform:none}.rf-h em::after{transition:none}}
+.rf-text{font-size:14px;color:rgba(241,239,237,.4);max-width:540px;line-height:1.9;text-align:center;font-weight:300;position:relative;z-index:1}
+
+/* SECTION SEPARATOR */
+.s-divider{display:flex;align-items:center;gap:1rem;margin-bottom:2rem}
+.s-divider::before,.s-divider::after{content:"";flex:1;height:.5px;background:rgba(117,88,71,.1)}
+.s-divider span{font-family:"Poppins",sans-serif;font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:rgba(117,88,71,.3);white-space:nowrap}
+
+/* COUNT ROW (hero stats) */
+.hero-stat-row{display:flex;gap:0;margin-top:2.5rem;flex-wrap:wrap;border-top:.5px solid rgba(200,168,141,.1);padding-top:2rem}
+.hsr-item{flex:1;min-width:120px;padding:0 1.5rem 0 0}
+.hsr-item:first-child{padding-left:0}
+
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader" aria-hidden="true">
+  <div class="ldr-mark"><span class="hn-m">M</span><span class="ldr-dot" style="color:var(--brand)">&middot;</span><span class="hn-n">09</span></div>
+  <div class="ldr-bar"></div>
+  <div class="ldr-cap">Casi Studio &middot; Cruscotto BZAR</div>
+</div>
+
+<!-- CURSORE CUSTOM -->
+<div id="cur" aria-hidden="true"></div>
+
+<!-- PAGE PROGRESS -->
+<div id="pgbar" aria-hidden="true"></div>
+
+<!-- VERTICAL NAV -->
+<nav id="vnav" aria-label="Sezioni">
+  <button class="vn-item is-active" data-target="hero" title="Hero"><span class="vn-dot"></span><span class="vn-label">S/00</span></button>
+  <button class="vn-item" data-target="s-clienti" title="Clienti"><span class="vn-dot"></span><span class="vn-label">S/01</span></button>
+  <button class="vn-item" data-target="s-moodboard" title="Contenuti"><span class="vn-dot"></span><span class="vn-label">S/02</span></button>
+  <button class="vn-item" data-target="recap" title="Sintesi"><span class="vn-dot"></span><span class="vn-label">S/03</span></button>
+</nav>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="tb-l">
+    <span class="tb-brand">BZAR Hotels</span>
+    <div class="tb-sep"></div>
+    <img src="https://www.ribrainstudio.com/wp-content/uploads/2025/01/Logo_ribrain_Nero.svg" alt="Ribrain" class="tb-rlogo">
+  </div>
+  <span class="tb-c">Cruscotto Strategico &middot; Casi Studio</span>
+  <div class="tb-r">
+    <span class="tb-date">Aprile 2026</span>
+    <span class="tb-conf">Confidenziale</span>
+    <button class="rb-ham" id="rbHamBtn" aria-label="Apri menu"><span class="h1"></span><span class="h2"></span><span class="h3"></span></button>
+  </div>
+</header>
+
+<!-- ════════════ HERO ════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-noise" aria-hidden="true"></div>
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-numeral" aria-hidden="true"><span class="hn-m">M</span><span class="hn-dot">&middot;</span><span class="hn-n">09</span></div>
+
+  <div class="hero-top">
+    <div class="hero-tag" id="htag"><span>Modulo 09 &middot; Casi Studio</span></div>
+    <div class="hero-top-r"><b>Ribrain &times; Snacky</b>per BZAR Hotels<br>Aprile 2026 &middot; Confidenziale</div>
+  </div>
+
+  <div class="hero-body">
+    <h1 class="hero-h1">
+      <span class="hl-mask"><span id="hl1" class="hl-inner">Un&rsquo;alchimia</span></span>
+      <span class="hl-mask"><span id="hl2" class="hl-inner">nata dal 2016</span></span>
+      <span class="hl-mask"><span id="hl3" class="hl-inner"><em>con l&rsquo;hospitality italiana.</em></span></span>
+    </h1>
+    <p class="hero-sub" id="hsub">Ribrain lavora con brand dell&rsquo;hospitality, del vino e del turismo che hanno scelto la qualit&agrave; narrativa come differenziale. Questa &egrave; una selezione del lavoro prodotto per loro.</p>
+  </div>
+
+  <div class="hero-foot">
+    <div class="hero-counts" id="hcounts">
+      <div class="hc-item">
+        <span class="hc-rule"></span>
+        <div class="hc-v" data-count="2016" data-prefix="">2016</div>
+        <div class="hc-l">Anno di fondazione</div>
+      </div>
+      <div class="hc-item">
+        <span class="hc-rule"></span>
+        <div class="hc-v" data-count="8">8+</div>
+        <div class="hc-l">Clienti attivi hospitality &amp; turismo</div>
+      </div>
+      <div class="hc-item">
+        <span class="hc-rule"></span>
+        <div class="hc-v" style="font-size:clamp(1rem,2.2vw,1.4rem);letter-spacing:-.01em;padding-top:.35rem">Hospitality &middot; Vino &middot; Turismo</div>
+        <div class="hc-l">Verticali di specializzazione</div>
+      </div>
+    </div>
+    <p class="hero-scroll">Esplora</p>
+  </div>
+</section>
+
+<!-- ════════════ SEZ 1: CLIENTI ════════════ -->
+<section class="sec" id="s-clienti">
+  <div class="s-marker">S/01 &middot; Portfolio</div>
+  <div class="s-tag">Con chi lavoriamo</div>
+  <h2 class="s-h">I clienti.<br><em>Hospitality, food, turismo esperienziale.</em></h2>
+  <p class="s-lead">Brand con storie diverse, mercati diversi, pubblici diversi. Hotel boutique, ristoranti, osterie, festival del vino, compagnie marittime. In comune: la convinzione che il contenuto non sia decorazione, ma architettura del valore percepito.</p>
+
+  <div class="logo-wall">
+    <img
+      class="logo-wall-img"
+      src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio-loghi.png"
+      alt="I brand con cui lavoriamo: Alilauro, Vitigno Italia, Magia Experiences, Imperatore Travel e altri"
+      loading="lazy">
+    <p class="logo-more">
+      Questi sono alcuni dei brand con cui abbiamo costruito strategie editoriali nel tempo. <strong>Il portfolio &egrave; pi&ugrave; ampio</strong> &mdash; copre oltre quaranta realt&agrave; tra hotel boutique, F&amp;B, ristoranti, osterie, bar, festival enogastronomici, turismo esperienziale e brand del territorio. Lavoriamo con strutture che hanno scelto di raccontarsi in modo riconoscibile e coerente &mdash; che siano un cinque stelle in costiera o un&rsquo;osteria di quartiere. Se volete vedere lavori specifici per settore, lo chiediamo direttamente.
+    </p>
+  </div>
+</section>
+
+<!-- ════════════ SEZ 2: MOODBOARD ════════════ -->
+<section class="sec bg-alt" id="s-moodboard">
+  <div class="s-marker">S/02 &middot; Contenuti</div>
+  <div class="s-tag">Il lavoro</div>
+  <h2 class="s-h">Una selezione.<br><em>Formato, voce, identit&agrave; visiva.</em></h2>
+  <p class="s-lead">Ogni brand ha un modo di essere nello spazio digitale. Quello che segue &egrave; una selezione di contenuti prodotti: foto editoriali, reel, grafiche, caption. Non template, non batch.</p>
+
+
+  <div class="bento" id="bento">
+
+    <!-- VITIGNO: featured wide -->
+    <div class="bento-tile bt-w3" data-brand="vitigno-italia">
+      <div class="bt-img r-wide"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/1.PS_ComeRaggiungerci_27.02.24_Vitigno.jpg" alt="Vitigno Italia" loading="lazy"><div class="bt-placeholder"><div class="bt-ph-label">Vitigno Italia</div></div></div>
+      <div class="bt-brand-tag">Vitigno Italia</div><div class="bt-type-tag">Feed</div>
+      <div class="bt-overlay"><div class="bt-caption">Come raggiungere il festival</div><div class="bt-desc">Post feed · Storytelling evento · Instagram</div></div>
+    </div>
+
+    <!-- ALILAURO: tall -->
+    <div class="bento-tile" data-brand="alilauro">
+      <div class="bt-img r-sq"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/1-itabus-alilauro.png" alt="Alilauro x Itabus" loading="lazy"><div class="bt-placeholder"><div class="bt-ph-label">Alilauro</div></div></div>
+      <div class="bt-brand-tag">Alilauro</div><div class="bt-type-tag">Partnership</div>
+      <div class="bt-overlay"><div class="bt-caption">Itabus × Alilauro</div><div class="bt-desc">Campagna co-branding · Instagram &amp; Facebook</div></div>
+    </div>
+
+    <!-- MAGIA: featured wide -->
+    <div class="bento-tile bt-w2" data-brand="magia">
+      <div class="bt-img r-land"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/4-transfer-tour-villa-magia.png" alt="Villa Magia Transfer" loading="lazy"><div class="bt-placeholder"><div class="bt-ph-label">Magia Experiences</div></div></div>
+      <div class="bt-brand-tag">Magia Experiences</div><div class="bt-type-tag">Campagna</div>
+      <div class="bt-overlay"><div class="bt-caption">Transfer Tour experience</div><div class="bt-desc">Campagna social · Turismo esperienziale</div></div>
+    </div>
+
+    <!-- VITIGNO: stories -->
+    <div class="bento-tile" data-brand="vitigno-italia">
+      <div class="bt-img r-port"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/1_Stories_VinoeDesign_Vitigno.png" alt="Vitigno Stories" loading="lazy"><div class="bt-placeholder"><div class="bt-ph-label">Vitigno Italia</div></div></div>
+      <div class="bt-brand-tag">Vitigno Italia</div><div class="bt-type-tag">Stories</div>
+      <div class="bt-overlay"><div class="bt-caption">Vino e Design</div><div class="bt-desc">Stories series · Behind the scenes</div></div>
+    </div>
+
+    <!-- DIARI DAL SUD: wide -->
+    <div class="bento-tile bt-w2" data-brand="diari-dal-sud">
+      <div class="bt-img r-land"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/2_Positano_postDiariDalSud_Imperatore.png" alt="Diari dal Sud Positano" loading="lazy"><div class="bt-placeholder"><div class="bt-ph-label">Diari dal Sud</div></div></div>
+      <div class="bt-brand-tag">Diari dal Sud</div><div class="bt-type-tag">Editoriale</div>
+      <div class="bt-overlay"><div class="bt-caption">Positano e il Sud a tavola</div><div class="bt-desc">Post editoriale · Food storytelling · Instagram</div></div>
+    </div>
+
+    <!-- VIDEO: lemon -->
+    <div class="bento-tile" data-brand="magia">
+      <div class="bt-img r-port">
+        <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover">
+          <source src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/lemon1.mp4" type="video/mp4">
+        </video>
+        <div class="bt-placeholder"><div class="bt-ph-label">Reel</div></div>
+        <button class="bt-audio-btn" aria-label="Attiva audio" title="Attiva audio">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path class="icon-muted" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+            <path class="icon-on" style="display:none" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="bt-brand-tag">Ribrain</div><div class="bt-type-tag">Reel</div>
+      <div class="bt-overlay"><div class="bt-caption">Reel: atmosfera e ritmo</div><div class="bt-desc">Video · 9:16 · Instagram Reels</div></div>
+    </div>
+
+    <!-- MEATIN: 3 piatti wide -->
+    <div class="bento-tile" data-brand="meatin">
+      <div class="bt-img r-sq"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/PS_Piatto_1-22_Meatin%20(1).jpg" alt="Meatin piatto" loading="lazy"><div class="bt-placeholder"><div class="bt-ph-label">Meatin</div></div></div>
+      <div class="bt-brand-tag">Meatin</div><div class="bt-type-tag">Feed</div>
+      <div class="bt-overlay"><div class="bt-caption">Il piatto come protagonista</div><div class="bt-desc">Food photography · Mood editoriale · Instagram</div></div>
+    </div>
+
+    <!-- ALILAURO: feed pulpito -->
+    <div class="bento-tile" data-brand="alilauro">
+      <div class="bt-img r-sq"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/feed-pulpito-dizionario-alilauro.png" alt="Alilauro Pulpito" loading="lazy"><div class="bt-placeholder"><div class="bt-ph-label">Alilauro</div></div></div>
+      <div class="bt-brand-tag">Alilauro</div><div class="bt-type-tag">Feed</div>
+      <div class="bt-overlay"><div class="bt-caption">Il Pulpito — dizionario del mare</div><div class="bt-desc">Serie editoriale · Storytelling marittimo</div></div>
+    </div>
+
+    <!-- VITIGNO: reel cover -->
+    <div class="bento-tile" data-brand="vitigno-italia">
+      <div class="bt-img r-port"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/PS_VitignoVeritas2_Reel_COVER_18.12.23_Vitigno.jpg" alt="Vitigno Veritas Reel" loading="lazy"><div class="bt-placeholder"><div class="bt-ph-label">Vitigno Italia</div></div></div>
+      <div class="bt-brand-tag">Vitigno Italia</div><div class="bt-type-tag">Reel</div>
+      <div class="bt-overlay"><div class="bt-caption">Vitigno Veritas</div><div class="bt-desc">Cover reel · Evento · Dicembre 2023</div></div>
+    </div>
+
+    <!-- MAGIA: 6-transfer wide -->
+    <div class="bento-tile bt-w2" data-brand="magia">
+      <div class="bt-img r-wide"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/6-transfer-tour-villa-magia.png" alt="Villa Magia evento" loading="lazy"><div class="bt-placeholder"><div class="bt-ph-label">Magia Experiences</div></div></div>
+      <div class="bt-brand-tag">Magia Experiences</div><div class="bt-type-tag">Evento</div>
+      <div class="bt-overlay"><div class="bt-caption">Villa Magia — un evento, una storia</div><div class="bt-desc">Post evento · Luxury hospitality</div></div>
+    </div>
+
+    <!-- DIARI: natale imperatore -->
+    <div class="bento-tile" data-brand="diari-dal-sud">
+      <div class="bt-img r-port"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/Ps_natale_imperatore.png" alt="Imperatore Natale" loading="lazy"><div class="bt-placeholder"><div class="bt-ph-label">Diari dal Sud</div></div></div>
+      <div class="bt-brand-tag">Diari dal Sud</div><div class="bt-type-tag">Stagionale</div>
+      <div class="bt-overlay"><div class="bt-caption">Natale all&rsquo;Imperatore</div><div class="bt-desc">Campagna stagionale · Hospitality</div></div>
+    </div>
+
+    <!-- MEATIN: piatto 3 -->
+    <div class="bento-tile" data-brand="meatin">
+      <div class="bt-img r-sq"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/PS_Piatto_3-22_Meatin.jpg" alt="Meatin piatto 3" loading="lazy"><div class="bt-placeholder"><div class="bt-ph-label">Meatin</div></div></div>
+      <div class="bt-brand-tag">Meatin</div><div class="bt-type-tag">Feed</div>
+      <div class="bt-overlay"><div class="bt-caption">Cottura e consistenza</div><div class="bt-desc">Food photography · Dettaglio</div></div>
+    </div>
+
+    <!-- ALILAURO: orsola reel -->
+    <div class="bento-tile" data-brand="alilauro">
+      <div class="bt-img r-port"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/orsola-reel-alilauro.png" alt="Alilauro Orsola Reel" loading="lazy"><div class="bt-placeholder"><div class="bt-ph-label">Alilauro</div></div></div>
+      <div class="bt-brand-tag">Alilauro</div><div class="bt-type-tag">Reel</div>
+      <div class="bt-overlay"><div class="bt-caption">Sant&rsquo;Orsola — il mare</div><div class="bt-desc">Reel · Travel mood · Instagram</div></div>
+    </div>
+
+    <!-- VITIGNO: feste natalizie -->
+    <div class="bento-tile" data-brand="vitigno-italia">
+      <div class="bt-img r-sq"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/Feste-Natalizie-2018_Vitigno.png" alt="Vitigno Natale" loading="lazy"><div class="bt-placeholder"><div class="bt-ph-label">Vitigno Italia</div></div></div>
+      <div class="bt-brand-tag">Vitigno Italia</div><div class="bt-type-tag">Stagionale</div>
+      <div class="bt-overlay"><div class="bt-caption">Feste Natalizie 2018</div><div class="bt-desc">Campagna stagionale · Facebook &amp; Instagram</div></div>
+    </div>
+
+    <!-- MAGIA: 10k milestone -->
+    <div class="bento-tile" data-brand="magia">
+      <div class="bt-img r-sq"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/10k-villa-magia.png" alt="Villa Magia 10k" loading="lazy"><div class="bt-placeholder"><div class="bt-ph-label">Magia Experiences</div></div></div>
+      <div class="bt-brand-tag">Magia Experiences</div><div class="bt-type-tag">Milestone</div>
+      <div class="bt-overlay"><div class="bt-caption">10K — un traguardo condiviso</div><div class="bt-desc">Community milestone · Instagram</div></div>
+    </div>
+
+    <!-- DIARI: compari pastory -->
+    <div class="bento-tile bt-w2" data-brand="diari-dal-sud">
+      <div class="bt-img r-wide"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/Compari_Pastory_Imperatore_FB.png" alt="Compari Pastory Imperatore" loading="lazy"><div class="bt-placeholder"><div class="bt-ph-label">Diari dal Sud</div></div></div>
+      <div class="bt-brand-tag">Diari dal Sud</div><div class="bt-type-tag">Facebook</div>
+      <div class="bt-overlay"><div class="bt-caption">Compari &amp; Pastory</div><div class="bt-desc">Post Facebook · Prodotto &amp; territorio</div></div>
+    </div>
+
+    <!-- ALILAURO: ferragosto stories -->
+    <div class="bento-tile" data-brand="alilauro">
+      <div class="bt-img r-port"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/storia-ferragosto-alilauro.png" alt="Alilauro Ferragosto" loading="lazy"><div class="bt-placeholder"><div class="bt-ph-label">Alilauro</div></div></div>
+      <div class="bt-brand-tag">Alilauro</div><div class="bt-type-tag">Stories</div>
+      <div class="bt-overlay"><div class="bt-caption">Ferragosto in mare</div><div class="bt-desc">Stories stagionale · Evento estate</div></div>
+    </div>
+
+    <!-- MEATIN: piatto 4 -->
+    <div class="bento-tile" data-brand="meatin">
+      <div class="bt-img r-sq"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/PS_Piatto_4-22_Meatin.jpg" alt="Meatin piatto 4" loading="lazy"><div class="bt-placeholder"><div class="bt-ph-label">Meatin</div></div></div>
+      <div class="bt-brand-tag">Meatin</div><div class="bt-type-tag">Feed</div>
+      <div class="bt-overlay"><div class="bt-caption">Il menu in scena</div><div class="bt-desc">Food photography · Editoriale</div></div>
+    </div>
+
+    <!-- VITIGNO: Di Martino sponsor -->
+    <div class="bento-tile" data-brand="vitigno-italia">
+      <div class="bt-img r-wide"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/MainSponsor_DiMartino_Vitigno.png" alt="Di Martino Vitigno" loading="lazy"><div class="bt-placeholder"><div class="bt-ph-label">Vitigno Italia</div></div></div>
+      <div class="bt-brand-tag">Vitigno Italia</div><div class="bt-type-tag">Sponsorship</div>
+      <div class="bt-overlay"><div class="bt-caption">Di Martino · Main Sponsor</div><div class="bt-desc">Partnership content · Brand integration</div></div>
+    </div>
+
+    <!-- ALILAURO: scoperta estate -->
+    <div class="bento-tile bt-w2" data-brand="alilauro">
+      <div class="bt-img r-land"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/th-scoperta-9lug19-2.png" alt="Alilauro Scoperta estate" loading="lazy"><div class="bt-placeholder"><div class="bt-ph-label">Alilauro</div></div></div>
+      <div class="bt-brand-tag">Alilauro</div><div class="bt-type-tag">Feed</div>
+      <div class="bt-overlay"><div class="bt-caption">La scoperta dell&rsquo;estate</div><div class="bt-desc">Post feed · Travel discovery · Instagram</div></div>
+    </div>
+
+    <!-- VITIGNO: anteprima sito -->
+    <div class="bento-tile" data-brand="vitigno-italia">
+      <div class="bt-img r-wide"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/Anteprima-Vitigno2-SitoWeb-ribrain.png" alt="Vitigno Web Preview" loading="lazy"><div class="bt-placeholder"><div class="bt-ph-label">Vitigno Italia</div></div></div>
+      <div class="bt-brand-tag">Vitigno Italia</div><div class="bt-type-tag">Web</div>
+      <div class="bt-overlay"><div class="bt-caption">Anteprima sito web festival</div><div class="bt-desc">Web design · Campaign landing</div></div>
+    </div>
+
+    <!-- MEATIN: piatto 2a -->
+    <div class="bento-tile" data-brand="meatin">
+      <div class="bt-img r-sq"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/PS_Piatto_2-22_Meatin%20(1).jpg" alt="Meatin piatto 2a" loading="lazy"><div class="bt-placeholder"><div class="bt-ph-label">Meatin</div></div></div>
+      <div class="bt-brand-tag">Meatin</div><div class="bt-type-tag">Feed</div>
+      <div class="bt-overlay"><div class="bt-caption">Dettaglio di piatto</div><div class="bt-desc">Food photography · Editoriale</div></div>
+    </div>
+
+    <!-- MEATIN: piatto 2b -->
+    <div class="bento-tile" data-brand="meatin">
+      <div class="bt-img r-sq"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/PS_Piatto_2-22_Meatin.jpg" alt="Meatin piatto 2b" loading="lazy"><div class="bt-placeholder"><div class="bt-ph-label">Meatin</div></div></div>
+      <div class="bt-brand-tag">Meatin</div><div class="bt-type-tag">Feed</div>
+      <div class="bt-overlay"><div class="bt-caption">Materia prima e tecnica</div><div class="bt-desc">Food photography · Dettaglio</div></div>
+    </div>
+
+    <!-- LEMON APPEAL: reel -->
+    <div class="bento-tile" data-brand="lemon-appeal">
+      <div class="bt-img r-port">
+        <video autoplay muted loop playsinline>
+          <source src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/lemon2.mp4" type="video/mp4">
+        </video>
+        <div class="bt-placeholder"><div class="bt-ph-label">Lemon Appeal</div></div>
+        <button class="bt-audio-btn" aria-label="Attiva audio" title="Attiva audio">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path class="icon-muted" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+            <path class="icon-on" style="display:none" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="bt-brand-tag">Lemon Appeal</div><div class="bt-type-tag">Reel</div>
+      <div class="bt-overlay"><div class="bt-caption">Costiera in un frame</div><div class="bt-desc">Reel · 9:16 · Instagram</div></div>
+    </div>
+
+    <!-- LEMON APPEAL: post -->
+    <div class="bento-tile" data-brand="lemon-appeal">
+      <div class="bt-img r-sq">
+        <video autoplay muted loop playsinline>
+          <source src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/lemonpost.mp4" type="video/mp4">
+        </video>
+        <div class="bt-placeholder"><div class="bt-ph-label">Lemon Appeal</div></div>
+        <button class="bt-audio-btn" aria-label="Attiva audio" title="Attiva audio">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path class="icon-muted" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+            <path class="icon-on" style="display:none" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="bt-brand-tag">Lemon Appeal</div><div class="bt-type-tag">Video Feed</div>
+      <div class="bt-overlay"><div class="bt-caption">Il prodotto in scena</div><div class="bt-desc">Video post · Feed · Instagram</div></div>
+    </div>
+
+    <!-- IL MOLINO -->
+    <div class="bento-tile" data-brand="molino">
+      <div class="bt-img r-port">
+        <video autoplay muted loop playsinline>
+          <source src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/molino1.mp4" type="video/mp4">
+        </video>
+        <div class="bt-placeholder"><div class="bt-ph-label">Il Molino</div></div>
+        <button class="bt-audio-btn" aria-label="Attiva audio" title="Attiva audio">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path class="icon-muted" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+            <path class="icon-on" style="display:none" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="bt-brand-tag">Il Molino</div><div class="bt-type-tag">Reel</div>
+      <div class="bt-overlay"><div class="bt-caption">Pasta, grano, tradizione</div><div class="bt-desc">Reel · Food storytelling · Instagram</div></div>
+    </div>
+
+    <!-- MEATIN: video reel -->
+    <div class="bento-tile" data-brand="meatin">
+      <div class="bt-img r-port">
+        <video autoplay muted loop playsinline>
+          <source src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/meatin1.mp4" type="video/mp4">
+        </video>
+        <div class="bt-placeholder"><div class="bt-ph-label">Meatin</div></div>
+        <button class="bt-audio-btn" aria-label="Attiva audio" title="Attiva audio">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path class="icon-muted" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+            <path class="icon-on" style="display:none" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="bt-brand-tag">Meatin</div><div class="bt-type-tag">Reel</div>
+      <div class="bt-overlay"><div class="bt-caption">La carne in scena</div><div class="bt-desc">Reel · 9:16 · Instagram</div></div>
+    </div>
+
+    <!-- MEATIN / PASTA: spaghetti twirling -->
+    <div class="bento-tile" data-brand="molino">
+      <div class="bt-img r-sq"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/%F0%9F%8D%9D%20Twirling%20spaghetti%20is%20a%20habit.%20Something%20you%20learn%20without%20being%20taught.%20You%20sit%20at%20the%20table.jpg" alt="Twirling spaghetti" loading="lazy"><div class="bt-placeholder"><div class="bt-ph-label">Il Molino</div></div></div>
+      <div class="bt-brand-tag">Il Molino</div><div class="bt-type-tag">Feed</div>
+      <div class="bt-overlay"><div class="bt-caption">Twirling spaghetti is a habit</div><div class="bt-desc">Post feed · Food mood · Instagram</div></div>
+    </div>
+
+  </div>
+
+  <p style="margin-top:2rem;font-size:12px;color:var(--mid);letter-spacing:.06em;line-height:1.7">
+    Ulteriori contenuti disponibili su richiesta &middot; Portfolio completo per categoria su <em style="color:var(--ink)">ribrain.com/lavori</em>
+  </p>
+</section>
+
+<!-- ════════════ CASO STUDIO: DISCOVERY ISCHIA ════════════ -->
+<section class="sec bg-dark" id="s-ischia">
+
+  <!-- COVER HERO -->
+  <div class="ics-cover">
+    <img class="ics-cover-img" src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/casostudio/01_cover_discovery_ischia.jpg" alt="Discovery Ischia — caso studio" loading="lazy">
+    <div class="ics-cover-overlay"></div>
+    <div class="ics-cover-content">
+      <div class="ics-eyebrow">Caso Studio &middot; Imperatore Travel &middot; 2017&ndash;2019</div>
+      <h2 class="ics-title">Un terremoto spaventa un&rsquo;isola.<br><em>Quindici voci la riportano in vita.</em></h2>
+      <p class="ics-subtitle">Quando i dati non bastano. Quando l&rsquo;advertising non convince. Quando solo le persone reali sanno dire la verit&agrave; con la credibilit&agrave; giusta.</p>
+      <div class="ics-stats-bar">
+        <div class="ics-stat">
+          <div class="ics-stat-num">241<sup>.</sup>728</div>
+          <div class="ics-stat-l">Mi piace</div>
+        </div>
+        <div class="ics-stat">
+          <div class="ics-stat-num">3<sup>.</sup>646</div>
+          <div class="ics-stat-l">Commenti</div>
+        </div>
+        <div class="ics-stat">
+          <div class="ics-stat-num">15</div>
+          <div class="ics-stat-l">Ambassador</div>
+        </div>
+        <div class="ics-stat">
+          <div class="ics-stat-num">0%</div>
+          <div class="ics-stat-l">Sentiment negativo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ics-body">
+
+    <!-- IL PROBLEMA -->
+    <div class="ics-problem">
+      <div>
+        <div class="ics-section-tag">01 &middot; Il problema</div>
+        <h3 class="ics-section-h">Il danno reale era<br><em>circoscritto.</em> Quello percepito no.</h3>
+        <p class="ics-section-p">Nel 2017 un terremoto colpisce Ischia. I danni sono localizzati in una piccola area dell&rsquo;isola. Ma sui social la narrazione si cristallizza in poche ore: <strong>&ldquo;Ischia &egrave; pericolosa.&rdquo;</strong><br><br>Le prenotazioni crollano. Il turismo si ferma. L&rsquo;isola intera paga il prezzo di una percezione sbagliata.<br><br>Imperatore Travel, il nostro cliente, ci chiama con un brief preciso: <strong>non fare advertising. Far vedere che Ischia &egrave; ancora Ischia.</strong> E che la vita &egrave; ripresa, com&rsquo;era prima.</p>
+      </div>
+      <div style="background:#fff;border-radius:14px;overflow:hidden;padding:1.5rem;box-shadow:0 2px 24px rgba(0,0,0,.18)">
+        <svg viewBox="0 0 420 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block">
+          <!-- Sfondo -->
+          <rect width="420" height="340" fill="#f8f9fb"/>
+          <!-- Pin location in alto a dx -->
+          <ellipse cx="370" cy="42" rx="14" ry="5" fill="rgba(200,80,80,.15)"/>
+          <path d="M370 12 C358 12 350 20 350 30 C350 44 370 62 370 62 C370 62 390 44 390 30 C390 20 382 12 370 12Z" fill="#e05555"/>
+          <circle cx="370" cy="30" r="7" fill="#fff"/>
+          <!-- Punto blu percorso -->
+          <circle cx="168" cy="220" r="7" fill="#1e3a5f"/>
+          <circle cx="168" cy="220" r="4" fill="#fff"/>
+          <!-- Linee tratteggiate percorso -->
+          <path d="M168 220 C180 180 230 160 270 120" stroke="#1e3a5f" stroke-width="1.8" stroke-dasharray="5,4" fill="none"/>
+          <path d="M270 120 C310 90 350 70 370 62" stroke="#1e3a5f" stroke-width="1.8" stroke-dasharray="5,4" fill="none"/>
+          <path d="M168 220 C140 230 100 240 70 270" stroke="#1e3a5f" stroke-width="1.8" stroke-dasharray="5,4" fill="none"/>
+          <path d="M270 120 C300 140 340 150 370 170" stroke="#1e3a5f" stroke-width="1.8" stroke-dasharray="5,4" fill="none"/>
+          <path d="M168 220 C168 250 168 280 168 310" stroke="#1e3a5f" stroke-width="1.8" stroke-dasharray="5,4" fill="none"/>
+          <!-- BENESSERE E SALUTE -->
+          <text x="200" y="74" font-size="18" fill="#e8a820" text-anchor="middle">♡</text>
+          <text x="250" y="72" font-size="11" fill="#1e3a5f" font-family="sans-serif" font-style="italic">benessere e salute</text>
+          <!-- ARTE E CULTURA -->
+          <text x="68" y="148" font-size="16" fill="#e8a820" text-anchor="middle">𝍸</text>
+          <text x="100" y="148" font-size="11" fill="#1e3a5f" font-family="sans-serif" font-style="italic">arte e cultura</text>
+          <!-- SVAGO E DIVERTIMENTO -->
+          <text x="280" y="140" font-size="15" fill="#e8a820" text-anchor="middle">🍸</text>
+          <text x="300" y="138" font-size="10.5" fill="#1e3a5f" font-family="sans-serif" font-style="italic">svago e</text>
+          <text x="300" y="152" font-size="10.5" fill="#1e3a5f" font-family="sans-serif" font-style="italic">divertimento</text>
+          <!-- ESCURSIONI E TOUR -->
+          <text x="50" y="228" font-size="14" fill="#e8a820" text-anchor="middle">⛵</text>
+          <text x="72" y="226" font-size="11" fill="#1e3a5f" font-family="sans-serif" font-style="italic">escursioni e tour</text>
+          <!-- LE SPIAGGE PIU' BELLE -->
+          <text x="320" y="210" font-size="14" fill="#e8a820" text-anchor="middle">🌊</text>
+          <text x="340" y="208" font-size="10.5" fill="#1e3a5f" font-family="sans-serif" font-style="italic">le spiagge</text>
+          <text x="340" y="222" font-size="10.5" fill="#1e3a5f" font-family="sans-serif" font-style="italic">più belle</text>
+          <!-- ENOGASTRONOMIA -->
+          <text x="80" y="295" font-size="14" fill="#e8a820" text-anchor="middle">🍽</text>
+          <text x="100" y="295" font-size="11" fill="#1e3a5f" font-family="sans-serif" font-style="italic">enogastronomia</text>
+          <!-- Titolo in basso -->
+          <rect x="12" y="312" width="200" height="22" rx="4" fill="#1e3a5f"/>
+          <text x="112" y="327" font-size="9" fill="#fff" text-anchor="middle" font-family="sans-serif" letter-spacing="1.5">DISCOVERY ISCHIA · MAPPA</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- GLI AMBASSADOR -->
+    <div class="ics-influencer-section">
+      <div class="ics-section-tag">02 &middot; La strategia</div>
+      <h3 class="ics-section-h">Non un annuncio.<br><em>Quindici esperienze autentiche.</em></h3>
+      <p class="ics-section-p" style="max-width:680px;margin-bottom:1.5rem">Selezionammo 15 ambassador per autenticit&agrave; e credibilit&agrave; sulla community travel &mdash; non solo per follower. Ognuno raccont&ograve; Ischia con la propria voce, nei propri formati, al proprio pubblico. Nessun brief di prodotto. Nessun claim rassicurante. Solo storie vere da una terra che non aveva mai smesso di essere meravigliosa.</p>
+
+      <div class="ics-inf-grid">
+        <div class="ics-inf-tile featured">
+          <img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/casostudio/05_influencer_collage_full.jpg" alt="Influencer collage Discovery Ischia" loading="lazy">
+        </div>
+        <div class="ics-inf-tile"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/casostudio/influencer_photo_01.jpg" alt="" loading="lazy"></div>
+        <div class="ics-inf-tile"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/casostudio/influencer_photo_02.jpg" alt="" loading="lazy"></div>
+        <div class="ics-inf-tile"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/casostudio/influencer_photo_03.jpg" alt="" loading="lazy"></div>
+        <div class="ics-inf-tile"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/casostudio/influencer_photo_04.jpg" alt="" loading="lazy"></div>
+        <div class="ics-inf-tile"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/casostudio/influencer_photo_05.jpg" alt="" loading="lazy"></div>
+        <div class="ics-inf-tile"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/casostudio/influencer_photo_06.jpg" alt="" loading="lazy"></div>
+        <div class="ics-inf-tile"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/casostudio/influencer_photo_07.jpg" alt="" loading="lazy"></div>
+        <div class="ics-inf-tile"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/casostudio/influencer_photo_08.jpg" alt="" loading="lazy"></div>
+        <div class="ics-inf-tile"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/casostudio/influencer_photo_09.jpg" alt="" loading="lazy"></div>
+        <div class="ics-inf-tile"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/casostudio/influencer_photo_10.jpg" alt="" loading="lazy"></div>
+        <div class="ics-inf-tile"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/casostudio/influencer_photo_11.jpg" alt="" loading="lazy"></div>
+        <div class="ics-inf-tile"><img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/casostudio/influencer_photo_12.jpg" alt="" loading="lazy"></div>
+      </div>
+    </div>
+
+
+    <!-- SENTIMENT -->
+    <div class="ics-sentiment">
+      <div class="ics-section-tag">03 &middot; I risultati</div>
+      <h3 class="ics-section-h" style="margin-bottom:1.75rem">3.646 commenti.<br><em>Nessuno negativo.</em></h3>
+      <div class="ics-sent-row">
+        <div class="ics-sent-pct" style="color:var(--go)">76%</div>
+        <div class="ics-sent-track"><div class="ics-sent-fill pos" style="width:76%"></div></div>
+        <div class="ics-sent-label">Positivi &mdash; desiderio di visita, piani di viaggio, entusiasmo</div>
+      </div>
+      <div class="ics-sent-row">
+        <div class="ics-sent-pct" style="color:rgba(200,168,141,.5)">24%</div>
+        <div class="ics-sent-track"><div class="ics-sent-fill neu" style="width:24%"></div></div>
+        <div class="ics-sent-label">Neutri &mdash; curiosit&agrave;, domande pratiche su dove andare</div>
+      </div>
+      <div class="ics-sent-row">
+        <div class="ics-sent-pct" style="color:var(--warn)">0%</div>
+        <div class="ics-sent-track"><div class="ics-sent-fill neg" style="width:0%"></div></div>
+        <div class="ics-sent-label">Negativi</div>
+      </div>
+    </div>
+
+    <!-- COMMENTI SCROLL -->
+    <div class="ics-comments-section">
+      <p class="ics-section-p" style="margin-bottom:1.25rem;font-size:12px">Scorri per leggere i commenti reali raccolti durante la campagna &rarr;</p>
+      <div class="ics-comment-scroll">
+        <img class="ics-comment-img" src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/casostudio/commenti_page_16.jpg" alt="Commenti 1" loading="lazy">
+        <img class="ics-comment-img" src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/casostudio/commenti_page_17.jpg" alt="Commenti 2" loading="lazy">
+        <img class="ics-comment-img" src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/casostudio/commenti_page_18.jpg" alt="Commenti 3" loading="lazy">
+        <img class="ics-comment-img" src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/casostudio/commenti_page_19.jpg" alt="Commenti 4" loading="lazy">
+        <img class="ics-comment-img" src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/casostudio/commenti_page_20.jpg" alt="Commenti 5" loading="lazy">
+        <img class="ics-comment-img" src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/casostudio/commenti_page_21.jpg" alt="Commenti 6" loading="lazy">
+        <img class="ics-comment-img" src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/portfolio/casostudio/commenti_page_22.jpg" alt="Commenti 7" loading="lazy">
+      </div>
+    </div>
+
+    <!-- TAKEAWAY -->
+    <div class="ics-takeaway">
+      <p class="ics-tw-q">&ldquo;Il punto non era convincere che Ischia fosse sicura. Era <em>far vedere</em> che quindici persone reali ci erano appena state &mdash; e stavano gi&agrave; pianificando di tornare. Nessun annuncio avrebbe detto quello con la stessa credibilit&agrave;.&rdquo;</p>
+      <p class="ics-tw-d">Questo &egrave; il modello che proponiamo a BZAR. Non advertising che parla di voi, ma <strong>contenuto autentico che fa parlare chi ha gi&agrave; scelto di stare da voi</strong>. La differenza tra &ldquo;venite da noi&rdquo; e &ldquo;ci sono appena stato e non vedevo l&rsquo;ora di tornarci&rdquo; non &egrave; di tono &mdash; &egrave; di credibilit&agrave;. E la credibilit&agrave; non si compra: si costruisce storia dopo storia, post dopo post.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════ RECAP ════════════ -->
+<section class="recap-fin bg-dark" id="recap">
+  <div class="s-marker" style="text-align:center">S/03 &middot; Sintesi</div>
+  <div class="rf-tag">Insight chiave &middot; M09</div>
+  <h2 class="rf-h" id="rfH">Non vendiamo servizi.<br><em>&Egrave; narrativa, non comunicazione.</em></h2>
+  <p class="rf-text" id="rfText">Dal 2016 lavoriamo con brand dell&rsquo;hospitality e del turismo che hanno scelto di distinguersi. Non per quanto producono, ma per come si raccontano. Ogni cliente ha una storia diversa. Il nostro lavoro &egrave; trovarla e darle la forma giusta &mdash; per ogni canale, ogni pubblico, ogni momento.</p>
+</section>
+
+<!-- ════════════ SCRIPT ════════════ -->
+<script>
+(function(){
+'use strict';
+
+if(typeof gsap==='undefined'){
+  setTimeout(function(){
+    var els=document.querySelectorAll('[id^="hl"],#hsub,#hcounts,#htag,.bento-tile,.cw-item');
+    for(var i=0;i<els.length;i++){els[i].style.opacity='1';els[i].style.transform='none';}
+  },1500);
+  return;
+}
+
+gsap.registerPlugin(ScrollTrigger);
+
+var prm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// ── LOADER ───────────────────────────────────────
+window.addEventListener('load',function(){
+  setTimeout(function(){
+    var ldr=document.getElementById('loader');
+    if(ldr) ldr.classList.add('is-out');
+    ['hl1','hl2','hl3'].forEach(function(id){
+      var el=document.getElementById(id);
+      if(el) el.classList.add('is-in');
+    });
+    document.querySelectorAll('#hcounts .hc-item').forEach(function(el,i){
+      setTimeout(function(){el.classList.add('is-in');},i*120);
+    });
+  },1100);
+});
+
+// Fallback safety
+setTimeout(function(){
+  var ldr=document.getElementById('loader');if(ldr) ldr.classList.add('is-out');
+  document.querySelectorAll('.hl-inner').forEach(function(el){el.classList.add('is-in');});
+  document.querySelectorAll('#hcounts .hc-item').forEach(function(el){el.classList.add('is-in');});
+  document.querySelectorAll('.bento-tile,.cw-item').forEach(function(el){el.style.opacity='1';el.style.transform='none';});
+},3000);
+
+// ── CURSOR ───────────────────────────────────────
+var cur=document.getElementById('cur');
+if(cur && window.matchMedia('(hover:hover)').matches){
+  document.addEventListener('mousemove',function(e){
+    cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';
+  });
+  document.querySelectorAll('a,button,.bento-tile,.cw-item,.fp-pill').forEach(function(el){
+    el.addEventListener('mouseenter',function(){cur.style.width='28px';cur.style.height='28px';});
+    el.addEventListener('mouseleave',function(){cur.style.width='8px';cur.style.height='8px';});
+  });
+}
+
+// ── PAGE PROGRESS ────────────────────────────────
+var pgbar=document.getElementById('pgbar');
+if(pgbar){
+  window.addEventListener('scroll',function(){
+    var sc=window.scrollY;
+    var max=document.body.scrollHeight-window.innerHeight;
+    pgbar.style.setProperty('--p',(max>0?sc/max*100:0)+'%');
+  },{passive:true});
+}
+
+// ── VERTICAL NAV ─────────────────────────────────
+var vnItems=document.querySelectorAll('.vn-item[data-target]');
+if(vnItems.length){
+  vnItems.forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var t=document.getElementById(btn.getAttribute('data-target'));
+      if(t) t.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  });
+  var sections=[];
+  vnItems.forEach(function(btn){
+    var el=document.getElementById(btn.getAttribute('data-target'));
+    if(el) sections.push({el:el,btn:btn});
+  });
+  var vnObs=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        sections.forEach(function(s){s.btn.classList.toggle('is-active',s.el===entry.target);});
+      }
+    });
+  },{rootMargin:'-40% 0px -50% 0px'});
+  sections.forEach(function(s){vnObs.observe(s.el);});
+}
+
+// ── HERO: MASK REVEAL ────────────────────────────
+if(!prm){
+  ['hl1','hl2','hl3'].forEach(function(id,i){
+    var el=document.getElementById(id);
+    if(el){setTimeout(function(){el.classList.add('is-in');},180+i*150);}
+  });
+}
+
+// ── HERO: NUMERAL PARALLAX + TILT ────────────────
+if(!prm){
+  gsap.to('.hero-numeral',{
+    yPercent:-18,xPercent:-2,scale:.94,ease:'none',
+    scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:.9}
+  });
+  var heroEl=document.querySelector('.hero');
+  var heroNum=document.querySelector('.hero-numeral');
+  if(heroEl&&heroNum&&window.matchMedia('(hover:hover)').matches){
+    heroEl.addEventListener('mousemove',function(e){
+      var r=heroEl.getBoundingClientRect();
+      var x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+      gsap.to(heroNum,{rotateY:x*4,rotateX:-y*3,duration:.9,ease:'power2.out',transformPerspective:1200,overwrite:'auto'});
+    });
+    heroEl.addEventListener('mouseleave',function(){
+      gsap.to(heroNum,{rotateY:0,rotateX:0,duration:1.2,ease:'power3.out'});
+    });
+  }
+}
+
+// ── HERO TAG ─────────────────────────────────────
+gsap.fromTo('#htag',{opacity:0,x:-20},{opacity:1,x:0,duration:.8,delay:.2,ease:'power2.out'});
+gsap.fromTo('#hsub',{opacity:0,y:16},{opacity:1,y:0,duration:.9,delay:1,ease:'power2.out'});
+
+// ── CLIENT WALL: STAGGER REVEAL ──────────────────
+(function(){
+  var items=document.querySelectorAll('.cw-item');
+  if(!items.length) return;
+  if(prm){items.forEach(function(el){el.style.opacity='1';el.style.transform='none';});return;}
+  items.forEach(function(el){el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='none';});
+  ScrollTrigger.create({
+    trigger:'#clientWall',start:'top 78%',once:true,
+    onEnter:function(){
+      items.forEach(function(el,i){
+        setTimeout(function(){
+          el.style.transition='opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1)';
+          el.style.opacity='1';el.style.transform='none';
+        },i*60);
+      });
+    }
+  });
+})();
+
+// ── BENTO: SCROLL REVEAL ─────────────────────────
+(function(){
+  var tiles=document.querySelectorAll('.bento-tile');
+  if(!tiles.length) return;
+  if(prm){tiles.forEach(function(t){t.style.opacity='1';t.style.transform='none';});return;}
+  ScrollTrigger.create({
+    trigger:'#bento',start:'top 82%',once:true,
+    onEnter:function(){
+      tiles.forEach(function(t,i){
+        setTimeout(function(){
+          gsap.to(t,{opacity:1,y:0,duration:.65,ease:'power2.out'});
+        },i*55);
+      });
+    }
+  });
+})();
+
+// ── CASO STUDIO ISCHIA ───────────────────────────
+gsap.fromTo('.ics-cover-content',{opacity:0,y:40},{opacity:1,y:0,duration:1.1,ease:'power3.out',
+  scrollTrigger:{trigger:'#s-ischia',start:'top 80%',once:true}});
+gsap.fromTo('.ics-stat',{opacity:0,y:15},{opacity:1,y:0,duration:.6,stagger:.1,delay:.4,
+  scrollTrigger:{trigger:'.ics-stats-bar',start:'top 85%',once:true}});
+gsap.fromTo('.ics-problem',{opacity:0,y:30},{opacity:1,y:0,duration:.9,
+  scrollTrigger:{trigger:'.ics-problem',start:'top 80%',once:true}});
+gsap.fromTo('.ics-inf-tile',{opacity:0,scale:.95},{opacity:1,scale:1,duration:.5,stagger:.04,
+  scrollTrigger:{trigger:'.ics-inf-grid',start:'top 82%',once:true}});
+// Sentiment bars animate on scroll
+ScrollTrigger.create({trigger:'.ics-sentiment',start:'top 82%',once:true,onEnter:function(){
+  document.querySelectorAll('.ics-sent-fill').forEach(function(el){
+    el.style.transition='transform 1.2s cubic-bezier(.16,1,.3,1)';
+    el.style.transform='scaleX(1)';
+  });
+}});
+gsap.fromTo('.ics-takeaway',{opacity:0,y:20},{opacity:1,y:0,duration:.9,
+  scrollTrigger:{trigger:'.ics-takeaway',start:'top 88%',once:true}});
+
+// ── AUDIO TOGGLE ─────────────────────────────────
+(function(){
+  document.querySelectorAll('.bt-audio-btn').forEach(function(btn){
+    var tile = btn.closest('.bento-tile');
+    var video = tile ? tile.querySelector('video') : null;
+    if(!video) return;
+
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var muted = !video.muted;
+      // Muta tutti gli altri
+      document.querySelectorAll('.bento-tile video').forEach(function(v){
+        v.muted = true;
+      });
+      document.querySelectorAll('.bt-audio-btn').forEach(function(b){
+        b.classList.remove('is-on');
+        var iconOn = b.querySelector('.icon-on');
+        var iconMuted = b.querySelector('.icon-muted');
+        if(iconOn) iconOn.style.display = 'none';
+        if(iconMuted) iconMuted.style.display = '';
+      });
+      // Attiva questo
+      if(!muted){
+        video.muted = false;
+        btn.classList.add('is-on');
+        btn.setAttribute('title','Disattiva audio');
+        var iconOn = btn.querySelector('.icon-on');
+        var iconMuted = btn.querySelector('.icon-muted');
+        if(iconOn) iconOn.style.display = '';
+        if(iconMuted) iconMuted.style.display = 'none';
+      }
+    });
+  });
+})();
+
+// ── FILTER PILLS (masonry) ────────────────────────
+(function(){
+  var pills=document.querySelectorAll('.fp-pill');
+  var tiles=document.querySelectorAll('.bento-tile');
+  pills.forEach(function(pill){
+    pill.addEventListener('click',function(){
+      pills.forEach(function(p){p.classList.remove('is-active');});
+      pill.classList.add('is-active');
+      var f=pill.getAttribute('data-filter');
+      tiles.forEach(function(t){
+        var match=(f==='all'||t.getAttribute('data-brand')===f);
+        t.style.display = match ? 'block' : 'none';
+      });
+    });
+  });
+})();
+
+// ── RECAP: WORD-BY-WORD ──────────────────────────
+(function(){
+  var h=document.getElementById('rfH');
+  if(!h) return;
+  var html=h.innerHTML,out='',re=/(<[^>]+>)|([^<]+)/g,mm;
+  while((mm=re.exec(html))){
+    if(mm[1]) out+=mm[1];
+    else if(mm[2]) out+=mm[2].replace(/\S+/g,function(w){return '<span class="rfw">'+w+'</span>';});
+  }
+  h.innerHTML=out;
+  if(prm){
+    h.querySelectorAll('.rfw').forEach(function(w){w.classList.add('is-in');});
+    h.classList.add('is-final');
+  } else {
+    ScrollTrigger.create({trigger:h,start:'top 80%',once:true,onEnter:function(){
+      var ws=h.querySelectorAll('.rfw');
+      ws.forEach(function(w,i){setTimeout(function(){w.classList.add('is-in');},i*75);});
+      setTimeout(function(){h.classList.add('is-final');},ws.length*75+450);
+    }});
+  }
+})();
+
+// ── RECAP TEXT FADE ──────────────────────────────
+gsap.fromTo('#rfText',{opacity:0,y:20},{opacity:1,y:0,duration:1.1,ease:'power2.out',
+  scrollTrigger:{trigger:'#rfText',start:'top 85%',toggleActions:'play none none none'}
+});
+
+// ── SECTION FADE-INS ─────────────────────────────
+document.querySelectorAll('.s-h,.s-lead,.s-tag,.s-marker').forEach(function(el){
+  if(prm) return;
+  gsap.fromTo(el,{opacity:0,y:18},{opacity:1,y:0,duration:.85,ease:'power2.out',
+    scrollTrigger:{trigger:el,start:'top 88%',toggleActions:'play none none none'}
+  });
+});
+
+})();
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     CRUSCOTTO BZAR · MENU + FONTI · IIFE v3 FINAL
+═══════════════════════════════════════════════════ -->
+<script>
+(function(){
+'use strict';
+
+/* ── MODULI ─────────────────────────────────────── */
+var M=[
+  {id:'m0',code:'00',label:'Executive Summary',sub:'Il gap · La proposta',url:'m0.html',color:'#C8A88D'},
+  {id:'m1',code:'01',label:'Mercato',sub:'Roma 2026 · OTA · Social discovery',url:'m1.html',color:'#755847'},
+  {id:'m2',code:'02',label:'Competitor Map',sub:'Hoxton · Chapter · Mama · Generator',url:'m2.html',color:'#9a7d6a'},
+  {id:'m3',code:'03',label:'Voce del Cliente',sub:'VOC · 14 account · Gap critico',url:'m3.html',color:'#C4ACA5'},
+  {id:'m4',code:'04',label:'Personas',sub:'4 profili · Trigger · Social behavior',url:'m4.html',color:'#a08470'},
+  {id:'m5',code:'05',label:'Mappa del Momento',sub:'Perché investire adesso',url:'m5.html',color:'#C8A88D'},
+  {id:'m6',code:'06',label:'Benchmark Creativi',sub:'Il Pellicano · Borgo S.Pietro · The Pig',url:'m6.html',color:'#755847'},
+  {id:'m7',code:'07',label:'Strategia',sub:'Piano per struttura · Mappe sinaptiche',url:'m7.html',color:'#9a7d6a'},
+  {id:'m8',code:'08',label:'Come Lavoriamo',sub:'Team · Processo · Frequenze · Patto',url:'m8.html',color:'#C4ACA5'},
+  {id:'m9',code:'09',label:'Casi Studio',sub:'Esempi di contenuto · Mockup',url:'m9.html',color:'#a08470'},
+  {id:'m10',code:'10',label:'Economics',sub:'ROI · Tier · Disintermediazione OTA',url:'m10.html',color:'#C8A88D'}
+];
+
+/* ── FONTI PER MODULO ───────────────────────────── */
+var FONTI={
+  m0:[],m1:[
+    {label:'ENIT – Turismo verso l\'Italia, arrivi 2025',url:'https://www.enit.it/'},
+    {label:'Federalberghi / L\'Agenzia di Viaggi – Occupazione hotel Roma estate 2025',url:'https://www.lagenziadiviaggimag.it/roma-cresce-loccupazione-degli-hotel-in-estate-i-dati-federalberghi/'},
+    {label:'Barchart – Rome Hotels Pricing Trends & Demand Forecast 2026',url:'https://www.barchart.com/story/news/36932939/'},
+    {label:'Cloudbeds – A Guide to OTA Commission Rates in 2026',url:'https://www.cloudbeds.com/online-travel-agencies/commissions/'},
+    {label:'TravelQuotidiano – TikTok supera Instagram nella scelta del viaggio',url:'https://www.travelquotidiano.com/mercato_e_tecnologie/tik-tok-supera-instagram/tqid-501494'},
+    {label:'Hospitality Net – How Hotels Can Harness Social Media',url:'https://www.hospitalitynet.org/news/4128795/'}
+  ],
+  m2:[
+    {label:'@generatorhostels – 560K follower · analisi aprile 2026',url:'https://www.instagram.com/generatorhostels/'},
+    {label:'@thehoxton – 427K follower · analisi aprile 2026',url:'https://www.instagram.com/thehoxton/'},
+    {label:'@chapterhostels – 45K follower · analisi aprile 2026',url:'https://www.instagram.com/chapterhostels/'},
+    {label:'@bzarhotels – 10K follower · analisi aprile 2026',url:'https://www.instagram.com/bzarhotels/'}
+  ],
+  m3:[
+    {label:'TripAdvisor Roma – Hotel Viminale #1/1153',url:'https://www.tripadvisor.it/Hotels-g187791-Rome_Lazio-Hotels.html'},
+    {label:'@hotelviminale – 678 follower IG · analisi diretta aprile 2026',url:'https://www.instagram.com/hotelviminale/'},
+    {label:'@dimoracoppelle – 172 follower IG · 5.0 TripAdvisor · aprile 2026',url:'https://www.instagram.com/dimoracoppelle/'},
+    {label:'@spritzeria_monti – 35K follower IG · TA 3.5 · aprile 2026',url:'https://www.instagram.com/spritzeria_monti/'},
+    {label:'@osteriaoliva.roma – 789 follower · 1130+ post · aprile 2026',url:'https://www.instagram.com/osteriaoliva.roma/'}
+  ],
+  m4:[
+    {label:'Think with Google – Travel Consumer Insights 2025',url:'https://www.thinkwithgoogle.com/'},
+    {label:'Meta – Travel Advertising Insights 2025',url:'https://www.facebook.com/business/industries/travel'},
+    {label:'Personas Social BZAR Hotels – Ribrain Deep Research aprile 2026',url:'https://bzarhotels.it/'}
+  ],
+  m5:[
+    {label:'ENIT – Turismo verso l\'Italia, arrivi e presenze 2025',url:'https://www.enit.it/'},
+    {label:'Federalberghi – Occupazione hotel Roma estate 2025',url:'https://www.lagenziadiviaggimag.it/roma-cresce-loccupazione-degli-hotel-in-estate-i-dati-federalberghi/'},
+    {label:'Barchart – Rome Hotels Pricing Trends & Demand Forecast 2026',url:'https://www.barchart.com/story/news/36932939/'},
+    {label:'Cloudbeds – OTA Commission Rates 2026',url:'https://www.cloudbeds.com/online-travel-agencies/commissions/'},
+    {label:'TravelQuotidiano – TikTok supera Instagram',url:'https://www.travelquotidiano.com/mercato_e_tecnologie/tik-tok-supera-instagram/tqid-501494'},
+    {label:'Hospitality Net – How Hotels Can Harness Social Media',url:'https://www.hospitalitynet.org/news/4128795/'}
+  ],
+  m6:[
+    {label:'@hotelilpellicano – 209K follower · aprile 2026',url:'https://www.instagram.com/hotelilpellicano/'},
+    {label:'@borgosantopietro – 562K follower · aprile 2026',url:'https://www.instagram.com/borgosantopietro/'},
+    {label:'@the_pig_hotels – 319K follower · Kitchen Gardener Nathan',url:'https://www.instagram.com/the_pig_hotels/'}
+  ],
+  m7:[
+    {label:'Brief Social Media BZAR Hotels 2026 – documento cliente',url:'https://bzarhotels.it/'},
+    {label:'Piano Operativo Social Media Multi-Account – Ribrain Deep Research',url:'https://bzarhotels.it/'}
+  ],
+  m8:[],
+  m9:[],
+  m10:[
+    {label:'Cloudbeds – A Guide to OTA Commission Rates in 2026',url:'https://www.cloudbeds.com/online-travel-agencies/commissions/'},
+    {label:'Manoeuvre Group – Multi-brand Google Ads strategies (fratricidal competition)',url:'https://manoeuvregroup.com/11-strategies-for-multi-brand-google-ads-advertisers/'},
+    {label:'Meta Business – Audience Overlap effect on CPM',url:'https://www.facebook.com/business/help/1679591828938781'},
+    {label:'Dati BZAR Hotels – Confermati da Francesco Mormile in call aprile 2026',url:'https://bzarhotels.it/'},
+    {label:'Modello ROI disintermediazione – Ribrain Deep Research aprile 2026',url:'https://bzarhotels.it/'}
+  ]
+};
+
+/* ── PATH DETECTION ─────────────────────────────── */
+var _href=window.location.href;
+var _pm=_href.match(/\/(m\d+)(?:\.html)?(?:[?#].*)?$/);
+var path=_pm?_pm[1]:'m0';
+
+var cur=M[0];
+for(var ci=0;ci<M.length;ci++){if(M[ci].id===path){cur=M[ci];break;}}
+var srcs=FONTI[path]||[];
+
+/* ── CSS ─────────────────────────────────────────── */
+var s=document.createElement('style');
+s.textContent=[
+  '.rbmenu-btn{position:fixed;top:8px;right:14px;z-index:9001;width:36px;height:36px;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:5px;padding:6px;opacity:1}',
+  '.rbmenu-btn span{display:block;height:1.5px;background:#F1EFED;border-radius:1px;transition:all .4s cubic-bezier(0.16,1,0.3,1);transform-origin:right center;opacity:1}',
+  '.rbmenu-btn.light span{background:#1E1410}',
+  '.rbmenu-btn.in-tb{position:relative!important;top:auto!important;right:auto!important;width:32px!important;height:32px!important;padding:5px!important;flex-shrink:0!important;opacity:1!important;visibility:visible!important}',
+  '.rbmenu-btn .l1{width:20px}.rbmenu-btn .l2{width:14px}.rbmenu-btn .l3{width:20px}',
+  '.rbmenu-btn.open .l1{width:20px;transform:translateY(6.5px) rotate(-45deg)}',
+  '.rbmenu-btn.open .l2{opacity:0;width:0}',
+  '.rbmenu-btn.open .l3{width:20px;transform:translateY(-6.5px) rotate(45deg)}',
+  '.rbmenu-overlay{position:fixed;inset:0;z-index:9000;background:#1E1410;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .45s cubic-bezier(0.16,1,0.3,1)}',
+  '.rbmenu-overlay.open{opacity:1;pointer-events:auto}',
+  '.rbmenu-top{display:flex;align-items:center;justify-content:space-between;padding:16px 40px;border-bottom:1px solid rgba(200,168,141,.07);flex-shrink:0}',
+  '.rbmenu-brand{display:flex;align-items:center;gap:10px}',
+  '.rbmenu-brand-logo{height:12px;filter:invert(1);opacity:.45}',
+  '.rbmenu-brand-sep{width:1px;height:14px;background:rgba(200,168,141,.18)}',
+  '.rbmenu-brand-label{font-family:"Poppins",sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(200,168,141,.28)}',
+  '.rbmenu-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:20px 40px 32px;overflow-y:auto}',
+  '.rbmenu-items{list-style:none}',
+  '.rbmenu-item{border-top:1px solid rgba(200,168,141,.06);opacity:0;transform:translateY(16px);position:relative}',
+  '.rbmenu-item:last-child{border-bottom:1px solid rgba(200,168,141,.06)}',
+  '.rbmenu-item a{display:grid;grid-template-columns:44px 1fr auto;gap:0 16px;align-items:center;padding:12px 0;text-decoration:none;color:inherit}',
+  '.rmi-code{font-family:"Poppins",monospace;font-size:10px;letter-spacing:.1em;color:rgba(200,168,141,.2)}',
+  '.rmi-left{display:flex;flex-direction:column;gap:2px}',
+  '.rmi-label{font-family:"Afacad Flux",Georgia,sans-serif;font-weight:300;font-size:clamp(20px,2.6vw,34px);line-height:1;color:rgba(241,239,237,.6);transition:color .25s;letter-spacing:-.01em}',
+  '.rbmenu-item.active .rmi-label{color:rgba(241,239,237,.9)}',
+  '.rbmenu-item a:hover .rmi-label{color:rgba(241,239,237,.9)}',
+  '.rmi-sub{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.2)}',
+  '.rmi-arrow{font-size:14px;color:rgba(200,168,141,.15);transition:transform .25s,color .25s}',
+  '.rbmenu-item a:hover .rmi-arrow{transform:translateX(4px);color:rgba(200,168,141,.5)}',
+  '.rbmenu-item.active .rmi-arrow{color:rgba(200,168,141,.4)}',
+  '.rbmenu-item-bar{position:absolute;top:0;left:0;right:0;height:2px;opacity:0}',
+  '.rbmenu-item.active .rbmenu-item-bar{opacity:1}',
+  '.rbmenu-footer{padding:14px 40px;border-top:1px solid rgba(200,168,141,.07);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}',
+  '.rbmenu-footer-l{font-family:"Afacad Flux",sans-serif;font-size:13px;color:rgba(200,168,141,.25)}',
+  '.rbmenu-footer-r{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.2)}',
+  '.src-toggle{position:fixed;bottom:64px;right:16px;z-index:7900;display:flex;align-items:center;gap:6px;background:rgba(30,20,16,.92);border:1px solid rgba(200,168,141,.15);backdrop-filter:blur(16px);padding:5px 10px;cursor:pointer;font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.4);transition:all .25s;border-radius:99px}',
+  '.src-toggle:hover{border-color:rgba(200,168,141,.35);color:rgba(200,168,141,.7)}',
+  '.src-toggle .st-dot{width:5px;height:5px;border-radius:50%;background:#C8A88D;flex-shrink:0}',
+  '.src-toggle .st-n{background:rgba(200,168,141,.15);color:#C8A88D;padding:1px 5px;border-radius:10px;font-size:8px}',
+  '.src-drawer{position:fixed;bottom:48px;left:0;right:0;z-index:7800;background:rgba(20,14,10,.97);backdrop-filter:blur(24px);border-top:1px solid rgba(200,168,141,.1);max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(0.16,1,0.3,1),opacity .35s;opacity:0;pointer-events:none}',
+  '.src-drawer.open{max-height:340px;opacity:1;pointer-events:auto}',
+  '.src-drawer-inner{padding:18px 40px 20px;overflow-y:auto;max-height:300px}',
+  '.src-drawer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}',
+  '.src-drawer-title{font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,168,141,.3)}',
+  '.src-close-btn{background:none;border:none;cursor:pointer;font-family:"Poppins",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.25);transition:color .2s}',
+  '.src-close-btn:hover{color:rgba(200,168,141,.6)}',
+  '.src-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:4px}',
+  '.src-item{display:flex;align-items:flex-start;gap:10px;padding:9px 11px;border:1px solid rgba(200,168,141,.06);border-radius:6px}',
+  '.src-item-num{font-family:"Poppins",sans-serif;font-size:8px;letter-spacing:.1em;color:rgba(200,168,141,.22);flex-shrink:0;min-width:18px;padding-top:1px}',
+  '.src-item-label{font-size:11px;color:rgba(241,239,237,.55);line-height:1.45;margin-bottom:2px}',
+  '.src-item-url{font-family:"Poppins",sans-serif;font-size:8px;color:rgba(200,168,141,.35);text-decoration:none;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
+  '@media(max-width:640px){.rbmenu-body{padding:16px 20px 24px}.rbmenu-top,.rbmenu-footer{padding-left:20px;padding-right:20px}.src-drawer-inner{padding:14px 16px}.src-list{grid-template-columns:1fr}}'
+].join('');
+document.head.appendChild(s);
+
+/* ── HAMBURGER BUTTON ────────────────────────────── */
+var btn=document.getElementById('rbHamBtn');
+if(!btn){btn=document.createElement('button');btn.className='rb-ham';document.body.appendChild(btn);}
+
+/* ── OVERLAY ─────────────────────────────────────── */
+var ov=document.createElement('div');
+ov.className='rbmenu-overlay';
+ov.id='rbmenu-ov';
+var itemsHtml='';
+for(var ni=0;ni<M.length;ni++){
+  var nm=M[ni],na=nm.id===path;
+  itemsHtml+='<li class="rbmenu-item'+(na?' active':'')+'">'
+    +'<div class="rbmenu-item-bar" style="background:'+nm.color+'"></div>'
+    +'<a href="'+nm.url+'">'
+    +'<span class="rmi-code">'+nm.code+'</span>'
+    +'<span class="rmi-left"><span class="rmi-label">'+nm.label+'</span><span class="rmi-sub">'+nm.sub+'</span></span>'
+    +'<span class="rmi-arrow">→</span>'
+    +'</a></li>';
+}
+ov.innerHTML='<div class="rbmenu-top">'
+  +'<div class="rbmenu-brand">'
+  +'<img src="https://www.ribrainstudio.com/wp-content/uploads/2025/01/Logo_ribrain_Nero.svg" class="rbmenu-brand-logo" alt="Ribrain">'
+  +'<div class="rbmenu-brand-sep"></div>'
+  +'<span class="rbmenu-brand-label">BZAR Hotels × Ribrain</span>'
+  +'</div>'
+  +'</div>'
+  +'<div class="rbmenu-body"><ul class="rbmenu-items">'+itemsHtml+'</ul></div>'
+  +'<div class="rbmenu-footer">'
+  +'<span class="rbmenu-footer-l">Cruscotto Strategico</span>'
+  +'<span class="rbmenu-footer-r">Aprile 2026 · Confidenziale</span>'
+  +'</div>';
+document.body.appendChild(ov);
+
+/* ── MENU LOGIC ──────────────────────────────────── */
+var menuOpen=false;
+function openMenu(){
+  menuOpen=true;btn.classList.add('open');ov.classList.add('open');
+  document.body.style.overflow='hidden';
+  var its=ov.querySelectorAll('.rbmenu-item');
+  for(var ii=0;ii<its.length;ii++){
+    (function(el,i){
+      el.style.opacity='0';el.style.transform='translateY(16px)';
+      el.style.transition='opacity .4s '+(.06+i*.05)+'s,transform .4s '+(.06+i*.05)+'s cubic-bezier(0.16,1,0.3,1)';
+      setTimeout(function(){el.style.opacity='1';el.style.transform='translateY(0)';},10);
+    })(its[ii],ii);
+  }
+}
+function closeMenu(){
+  menuOpen=false;btn.classList.remove('open');ov.classList.remove('open');
+  document.body.style.overflow='';
+}
+btn.addEventListener('click',function(){if(menuOpen)closeMenu();else openMenu();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menuOpen)closeMenu();});
+ov.addEventListener('click',function(e){if(e.target===ov)closeMenu();});
+
+/* ── NAVBAR BOTTOM ───────────────────────────────── */
+var nb=document.createElement('nav');
+nb.id='rbnav';
+var nbCSS=document.createElement('style');
+nbCSS.textContent=[
+  '#rbnav{position:fixed;bottom:0;left:0;right:0;z-index:8000;pointer-events:auto;background:rgba(30,20,16,.96);backdrop-filter:blur(20px);border-top:.5px solid rgba(200,168,141,.08);display:flex;height:48px;overflow:visible}',
+  '.rbnav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;color:rgba(200,168,141,.3);font-family:"Poppins",sans-serif;font-size:8px;letter-spacing:.08em;text-transform:uppercase;gap:2px;transition:color .2s;position:relative;min-width:0;overflow:visible;pointer-events:auto;cursor:pointer}',
+  '.rbnav-item:hover{color:rgba(200,168,141,.65)}',
+  '.rbnav-item.active{color:rgba(200,168,141,.8)}',
+  '.rbnav-item-dot{width:3px;height:3px;border-radius:50%;background:currentColor;opacity:0}',
+  '.rbnav-item.active .rbnav-item-dot{opacity:1}',
+  '.rbnav-item-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:90%}'
+].join('');
+document.head.appendChild(nbCSS);
+var nbH='';
+for(var ni2=0;ni2<M.length;ni2++){
+  var nm2=M[ni2],na2=nm2.id===path;
+  nbH+='<a href="'+nm2.url+'" class="rbnav-item'+(na2?' active':'')+'">'
+    +'<div class="rbnav-item-dot"></div>'
+    +'<span class="rbnav-item-label">'+nm2.code+' '+nm2.label.split(' ')[0]+'</span>'
+    +'</a>';
+}
+nb.innerHTML=nbH;
+document.body.appendChild(nb);
+
+/* ── FONTI DRAWER ────────────────────────────────── */
+if(srcs.length>0){
+  var drawer=document.createElement('div');
+  drawer.className='src-drawer';
+  var ih='';
+  for(var i=0;i<srcs.length;i++){
+    ih+='<div class="src-item">'
+      +'<span class="src-item-num">'+String(i+1).padStart(2,'0')+'</span>'
+      +'<div><div class="src-item-label">'+srcs[i].label+'</div>'
+      +'<a href="'+srcs[i].url+'" target="_blank" rel="noopener noreferrer" class="src-item-url">'+srcs[i].url+'</a>'
+      +'</div></div>';
+  }
+  drawer.innerHTML='<div class="src-drawer-inner">'
+    +'<div class="src-drawer-head">'
+    +'<span class="src-drawer-title">Fonti · '+srcs.length+' riferimenti · '+path.toUpperCase()+'</span>'
+    +'<button class="src-close-btn" id="srcCloseBtn">Chiudi ×</button>'
+    +'</div>'
+    +'<div class="src-list">'+ih+'</div>'
+    +'</div>';
+  document.body.appendChild(drawer);
+
+  var toggle=document.createElement('button');
+  toggle.className='src-toggle';
+  toggle.innerHTML='<span class="st-dot"></span>Fonti <span class="st-n">'+srcs.length+'</span>';
+  document.body.appendChild(toggle);
+
+  var fdOpen=false;
+  function toggleDrawer(){
+    fdOpen=!fdOpen;
+    drawer.classList.toggle('open',fdOpen);
+    toggle.style.borderColor=fdOpen?'rgba(200,168,141,.3)':'';
+    toggle.style.color=fdOpen?'rgba(200,168,141,.7)':'';
+  }
+  toggle.addEventListener('click',toggleDrawer);
+  var closeBtn=document.getElementById('srcCloseBtn');
+  if(closeBtn){closeBtn.addEventListener('click',function(){if(fdOpen)toggleDrawer();});}
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&fdOpen)toggleDrawer();});
+}
+
+})();
+</script>
+</body>
+</html>
