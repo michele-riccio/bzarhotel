@@ -108,15 +108,15 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
 .hi-desc{font-size:11px;color:var(--mid);line-height:1.55}
 
 /* ═══ SEZIONE MOCKUP AI — Creatività Viminale ═══ */
-.mock-section{margin-top:3rem;padding:2.5rem 0 0}
+.mock-section{margin-top:3rem;padding:2.5rem 0 0;overflow:hidden}
 .mock-section-tag{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--brand);font-weight:500;margin-bottom:.5rem;font-family:"Poppins",sans-serif}
 .mock-section-h{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.3rem,2.8vw,1.8rem);font-weight:400;color:var(--dark);line-height:1.2;letter-spacing:-.02em;margin-bottom:.6rem}
 .mock-section-h em{font-style:italic;color:var(--ink);font-weight:300}
 .mock-section-lead{font-size:13px;color:var(--mid);line-height:1.75;max-width:640px;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:.5px solid rgba(117,88,71,.1)}
-.mock-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;align-items:start}
+.mock-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;align-items:start;min-width:0}
 @media(max-width:1024px){.mock-grid{grid-template-columns:1fr 1fr;gap:1rem}}
 @media(max-width:600px){.mock-grid{grid-template-columns:1fr}}
-.mock-card{display:flex;flex-direction:column;gap:.75rem}
+.mock-card{display:flex;flex-direction:column;gap:.75rem;min-width:0;overflow:hidden}
 .mock-phone{
   background:#fff;border-radius:22px;overflow:hidden;
   box-shadow:0 0 0 1px rgba(0,0,0,.07),0 4px 16px rgba(0,0,0,.09),0 16px 40px rgba(0,0,0,.06);
