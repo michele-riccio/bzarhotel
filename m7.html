@@ -23,6 +23,15 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
 .tb-rlogo{height:13px;filter:invert(1);opacity:.6}
 .tb-c{font-family:"Poppins",sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.2);position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap}
 @media(max-width:680px){.tb-c{display:none}}
+/* BZAR madre responsive */
+@media(max-width:900px){
+  #bzar-pillars{grid-template-columns:1fr 1fr !important}
+  #bzar-madre [style*="grid-template-columns:auto 1fr"]{grid-template-columns:1fr !important;gap:1.5rem !important;justify-items:center !important}
+}
+@media(max-width:580px){
+  #bzar-pillars{grid-template-columns:1fr !important}
+  #bzar-madre [style*="grid-template-columns:repeat(3,1fr)"]{grid-template-columns:1fr !important}
+}
 .tb-r{display:flex;align-items:center;gap:.75rem}
 .tb-date{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25)}
 .tb-conf{font-size:9px;letter-spacing:.14em;text-transform:uppercase;border:.5px solid rgba(200,168,141,.28);color:rgba(200,168,141,.45);padding:3px 8px;border-radius:3px}
@@ -373,6 +382,73 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
   <h2 class="s-h">La logica del piano.<br>Perché ci muoviamo così.</h2>
   <p class="s-lead">Non si attivano tutti gli account insieme. Non si produce lo stesso contenuto per tutti. Non si parte con la stessa frequenza su ogni struttura. Ecco la logica che sta dietro ogni decisione.</p>
 
+  <!-- BZAR HOTELS — LA NARRATIVA MADRE -->
+  <div style="margin-top:3.5rem;padding:3rem 2.5rem;background:linear-gradient(135deg,#1a1410 0%,#2a1d18 100%);border-radius:18px;position:relative;overflow:hidden" id="bzar-madre">
+    <div style="position:absolute;top:-20%;right:-5%;font-family:'Afacad Flux',sans-serif;font-size:clamp(20rem,40vw,32rem);font-weight:700;color:rgba(200,168,141,.025);line-height:1;letter-spacing:-.08em;pointer-events:none;user-select:none">BZAR</div>
+    <div style="position:relative;z-index:2">
+      <div style="font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(200,168,141,.45);font-family:'Poppins',sans-serif;font-weight:500;margin-bottom:.85rem">BZAR Hotels &middot; La narrativa madre</div>
+      <h3 style="font-family:'Afacad Flux',sans-serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:300;color:rgba(241,239,237,.95);line-height:1.1;letter-spacing:-.025em;margin-bottom:.85rem;max-width:780px">Prima delle strutture,<br><em style="font-style:italic;color:var(--brand);font-weight:300">c&rsquo;&egrave; il gruppo che le tiene insieme.</em></h3>
+      <p style="font-size:14px;color:rgba(241,239,237,.45);line-height:1.85;max-width:680px;margin-bottom:2.5rem">L&rsquo;account <strong style="color:rgba(241,239,237,.7)">BZAR Hotels</strong> non &egrave; uno dei 13 &mdash; &egrave; il <strong style="color:rgba(241,239,237,.7)">tredicesimo che li definisce tutti</strong>. &Egrave; il canale corporate che racconta la filosofia del gruppo: la firma editoriale che attraversa Roma e la Toscana, la grammatica visiva che ogni hotel e ogni F&amp;B adatta alla propria voce. Senza questo, le strutture si raccontano ognuna per s&eacute;. Con questo, il gruppo emerge come sistema riconoscibile.</p>
+
+      <!-- 4 PILLAR DEL BRAND MADRE -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2.5rem" id="bzar-pillars">
+        <div style="background:rgba(255,255,255,.03);border:.5px solid rgba(200,168,141,.12);border-radius:12px;padding:1.5rem 1.4rem">
+          <div style="font-family:'Afacad Flux',sans-serif;font-size:1.85rem;font-weight:300;color:var(--brand);line-height:1;margin-bottom:.6rem">01</div>
+          <div style="font-family:'Afacad Flux',sans-serif;font-size:.95rem;font-weight:500;color:rgba(241,239,237,.88);line-height:1.3;margin-bottom:.5rem">Eccellenza<br>dimessa</div>
+          <div style="font-size:11px;color:rgba(241,239,237,.4);line-height:1.65">Mai gridato. Mai affettato. La qualit&agrave; si mostra nei dettagli, non negli aggettivi.</div>
+        </div>
+        <div style="background:rgba(255,255,255,.03);border:.5px solid rgba(200,168,141,.12);border-radius:12px;padding:1.5rem 1.4rem">
+          <div style="font-family:'Afacad Flux',sans-serif;font-size:1.85rem;font-weight:300;color:var(--brand);line-height:1;margin-bottom:.6rem">02</div>
+          <div style="font-family:'Afacad Flux',sans-serif;font-size:.95rem;font-weight:500;color:rgba(241,239,237,.88);line-height:1.3;margin-bottom:.5rem">Roma<br>insider</div>
+          <div style="font-size:11px;color:rgba(241,239,237,.4);line-height:1.65">Non la Roma da cartolina, ma quella che conoscono i romani. Il quartiere, il rito, il dettaglio.</div>
+        </div>
+        <div style="background:rgba(255,255,255,.03);border:.5px solid rgba(200,168,141,.12);border-radius:12px;padding:1.5rem 1.4rem">
+          <div style="font-family:'Afacad Flux',sans-serif;font-size:1.85rem;font-weight:300;color:var(--brand);line-height:1;margin-bottom:.6rem">03</div>
+          <div style="font-family:'Afacad Flux',sans-serif;font-size:.95rem;font-weight:500;color:rgba(241,239,237,.88);line-height:1.3;margin-bottom:.5rem">Voce<br>umana</div>
+          <div style="font-size:11px;color:rgba(241,239,237,.4);line-height:1.65">Lo staff non &egrave; sfondo: &egrave; il filtro attraverso cui Roma si racconta. Visi, mani, gesti.</div>
+        </div>
+        <div style="background:rgba(255,255,255,.03);border:.5px solid rgba(200,168,141,.12);border-radius:12px;padding:1.5rem 1.4rem">
+          <div style="font-family:'Afacad Flux',sans-serif;font-size:1.85rem;font-weight:300;color:var(--brand);line-height:1;margin-bottom:.6rem">04</div>
+          <div style="font-family:'Afacad Flux',sans-serif;font-size:.95rem;font-weight:500;color:rgba(241,239,237,.88);line-height:1.3;margin-bottom:.5rem">Sistema,<br>non collezione</div>
+          <div style="font-size:11px;color:rgba(241,239,237,.4);line-height:1.65">Cinque indirizzi diversi. Una mano sola. Chi prenota uno, sente che esiste anche l&rsquo;altro.</div>
+        </div>
+      </div>
+
+      <!-- DIAGRAMMA: BZAR si dirama -->
+      <div style="padding-top:2rem;border-top:.5px solid rgba(200,168,141,.1)">
+        <div style="font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(200,168,141,.4);font-family:'Poppins',sans-serif;margin-bottom:1.25rem">Come la grammatica madre si dirama</div>
+
+        <div style="display:grid;grid-template-columns:auto 1fr;gap:2.5rem;align-items:center">
+          <!-- Pallino BZAR -->
+          <div style="text-align:center">
+            <div style="width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,var(--brand),rgba(139,111,71,.4));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.35rem;font-weight:400;color:rgba(241,239,237,.95);box-shadow:0 0 32px rgba(200,168,141,.25)">BZAR</div>
+            <div style="font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(200,168,141,.45);margin-top:.5rem;font-family:'Poppins',sans-serif">chain madre</div>
+          </div>
+
+          <!-- 13 strutture figlie -->
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem">
+            <div style="background:rgba(255,255,255,.025);border-left:2px solid rgba(200,168,141,.4);border-radius:0 8px 8px 0;padding:.65rem .85rem">
+              <div style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,168,141,.5);font-family:'Poppins',sans-serif;margin-bottom:.2rem">5 hotel Roma</div>
+              <div style="font-size:11.5px;color:rgba(241,239,237,.6);line-height:1.5">Viminale &middot; Condominio Monti &middot; Dimora Coppelle &middot; Adoro &middot; La Griffe</div>
+            </div>
+            <div style="background:rgba(255,255,255,.025);border-left:2px solid rgba(154,125,106,.4);border-radius:0 8px 8px 0;padding:.65rem .85rem">
+              <div style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(154,125,106,.55);font-family:'Poppins',sans-serif;margin-bottom:.2rem">5 F&amp;B standalone</div>
+              <div style="font-size:11.5px;color:rgba(241,239,237,.6);line-height:1.5">Spritzeria &middot; Osteria Oliva &middot; Moderno Bakery &middot; A Mano &middot; Elisia</div>
+            </div>
+            <div style="background:rgba(255,255,255,.025);border-left:2px solid rgba(117,88,71,.4);border-radius:0 8px 8px 0;padding:.65rem .85rem">
+              <div style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(117,88,71,.6);font-family:'Poppins',sans-serif;margin-bottom:.2rem">2 Toscana</div>
+              <div style="font-size:11.5px;color:rgba(241,239,237,.6);line-height:1.5">La Collegiata &middot; Castello di Leonina</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:rgba(200,168,141,.04);border-radius:10px;font-size:12px;color:rgba(241,239,237,.55);line-height:1.7;font-style:italic">
+          La narrativa madre <strong style="color:rgba(241,239,237,.8);font-style:normal">non sostituisce le voci figlie</strong>. Le tiene insieme. Su BZAR Hotels chain raccontiamo la filosofia trasversale, le aperture, i grandi momenti del gruppo. Su ogni struttura figlia, la stessa grammatica si declina nella voce specifica &mdash; il quartiere, il momento, l&rsquo;ospite tipo.
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- TRE LIVELLI -->
   <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:2.5rem;border-radius:14px;overflow:hidden" id="tre-livelli">
     <div style="background:var(--dark);padding:1.75rem 1.5rem;position:relative;overflow:hidden;opacity:0" id="lv1">
@@ -518,7 +594,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
   </div>
   <div class="hs-canali" id="hcan1">
     <strong style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-family:Poppins,sans-serif;color:var(--mid)">Canali:</strong>
-    <div class="hs-can priority">Instagram</div><div class="hs-can priority">TikTok</div><div class="hs-can">Google Business</div><div class="hs-can">Facebook</div>
+    <div class="hs-can priority">Instagram</div><div class="hs-can">TikTok smart</div><div class="hs-can">Google Business</div><div class="hs-can">Facebook</div>
   </div>
   <!-- SEZIONE MOCKUP AI — inserita prima della mappa sinaptica -->
   <div class="mock-section">
@@ -784,7 +860,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
   <div class="sin-s-label">Pillars attivati</div>
   <div class="sin-pillars"><span class="sin-pillar" style="background:rgba(117,88,71,.2);color:#755847;border-color:#75584740">Staff stories</span><span class="sin-pillar" style="background:rgba(117,88,71,.15);color:#755847;border-color:#75584740">Location insider</span><span class="sin-pillar" style="background:rgba(117,88,71,.15);color:#755847;border-color:#75584740">#1 paradox</span></div>
   <div class="sin-s-label">Canali chiave</div>
-  <div class="sin-channels"><span class="sin-chan  priority">Instagram</span><span class="sin-chan  priority">TikTok</span><span class="sin-chan">Pinterest</span></div>
+  <div class="sin-channels"><span class="sin-chan  priority">Instagram</span><span class="sin-chan">TikTok smart</span><span class="sin-chan">Pinterest</span></div>
   <div class="sin-s-label">Contenuto pilota</div>
   <div class="sin-content-idea" style="border-color:#755847;color:rgba(241,239,237,.75)">"Non cercavi il Viminale. Ma adesso non puoi non volerci dormire."</div>
 </div><div class="sin-strategy" id="hs-1-p-soph-strat"
@@ -899,7 +975,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
   </div>
   <div class="hs-canali" id="hcan2">
     <strong style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-family:Poppins,sans-serif;color:var(--mid)">Canali:</strong>
-    <div class="hs-can priority">Instagram</div><div class="hs-can priority">TikTok</div><div class="hs-can">Facebook</div><div class="hs-can">Meta ADV</div>
+    <div class="hs-can priority">Instagram</div><div class="hs-can">TikTok smart</div><div class="hs-can">Facebook</div>
   </div>
   <!-- MAPPA SINAPTICA CONDOMINIO MONTI -->
   <div class="sin-wrap" id="sin-hs-2" style="opacity:0;margin-top:3.5rem">
@@ -940,7 +1016,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
   <div class="sin-s-label">Pillars attivati</div>
   <div class="sin-pillars"><span class="sin-pillar" style="background:rgba(107,143,168,.2);color:#6b8fa8;border-color:#6b8fa840">Hype → Conversion</span><span class="sin-pillar" style="background:rgba(107,143,168,.15);color:#6b8fa8;border-color:#6b8fa840">UGC activation</span><span class="sin-pillar" style="background:rgba(107,143,168,.15);color:#6b8fa8;border-color:#6b8fa840">ADV retargeting</span></div>
   <div class="sin-s-label">Canali chiave</div>
-  <div class="sin-channels"><span class="sin-chan  priority">TikTok</span><span class="sin-chan  priority">Instagram</span><span class="sin-chan  priority">Meta ADV</span></div>
+  <div class="sin-channels"><span class="sin-chan  priority">TikTok smart</span><span class="sin-chan  priority">Instagram</span></div>
   <div class="sin-s-label">Contenuto pilota</div>
   <div class="sin-content-idea" style="border-color:#6b8fa8;color:rgba(241,239,237,.75)">"35K ti seguono. Adesso vengono anche."</div>
 </div><div class="sin-strategy" id="hs-2-p-oliv-strat"
@@ -1202,7 +1278,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
   </div>
   <div class="hs-canali" id="hcan4">
     <strong style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-family:Poppins,sans-serif;color:var(--mid)">Canali:</strong>
-    <div class="hs-can priority">Instagram</div><div class="hs-can">TikTok</div><div class="hs-can">Meta ADV</div>
+    <div class="hs-can priority">Instagram</div><div class="hs-can">TikTok smart</div>
   </div>
   <!-- MAPPA SINAPTICA HOTEL ADORO -->
   <div class="sin-wrap" id="sin-hs-4" style="opacity:0;margin-top:3.5rem">
@@ -1236,7 +1312,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
   <div class="sin-s-label">Pillars attivati</div>
   <div class="sin-pillars"><span class="sin-pillar" style="background:rgba(107,143,168,.2);color:#6b8fa8;border-color:#6b8fa840">Elisia rito fisso</span><span class="sin-pillar" style="background:rgba(107,143,168,.15);color:#6b8fa8;border-color:#6b8fa840">Urban lifestyle</span><span class="sin-pillar" style="background:rgba(107,143,168,.15);color:#6b8fa8;border-color:#6b8fa840">Mobile-first</span></div>
   <div class="sin-s-label">Canali chiave</div>
-  <div class="sin-channels"><span class="sin-chan  priority">TikTok</span><span class="sin-chan  priority">Instagram</span><span class="sin-chan">Meta ADV</span></div>
+  <div class="sin-channels"><span class="sin-chan  priority">TikTok smart</span><span class="sin-chan  priority">Instagram</span></div>
   <div class="sin-s-label">Contenuto pilota</div>
   <div class="sin-content-idea" style="border-color:#6b8fa8;color:rgba(241,239,237,.75)">"Work. Aperitivo. Dormi qui. Non in quest'ordine."</div>
 </div><div class="sin-strategy" id="hs-4-p-oliv-strat"
@@ -1342,7 +1418,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
   </div>
   <div class="hs-canali" id="hcan5">
     <strong style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-family:Poppins,sans-serif;color:var(--mid)">Canali:</strong>
-    <div class="hs-can priority">Instagram</div><div class="hs-can priority">TikTok</div><div class="hs-can">Facebook</div>
+    <div class="hs-can priority">Instagram</div><div class="hs-can">TikTok smart</div><div class="hs-can">Facebook</div>
   </div>
   <!-- MAPPA SINAPTICA HOTEL LA GRIFFE -->
   <div class="sin-wrap" id="sin-hs-5" style="opacity:0;margin-top:3.5rem">
@@ -1376,7 +1452,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
   <div class="sin-s-label">Pillars attivati</div>
   <div class="sin-pillars"><span class="sin-pillar" style="background:rgba(107,143,168,.2);color:#6b8fa8;border-color:#6b8fa840">Manifesto culturale</span><span class="sin-pillar" style="background:rgba(107,143,168,.15);color:#6b8fa8;border-color:#6b8fa840">Origin story</span><span class="sin-pillar" style="background:rgba(107,143,168,.15);color:#6b8fa8;border-color:#6b8fa840">Creator collab</span></div>
   <div class="sin-s-label">Canali chiave</div>
-  <div class="sin-channels"><span class="sin-chan  priority">TikTok</span><span class="sin-chan  priority">Instagram</span></div>
+  <div class="sin-channels"><span class="sin-chan">TikTok smart</span><span class="sin-chan  priority">Instagram</span></div>
   <div class="sin-s-label">Contenuto pilota</div>
   <div class="sin-content-idea" style="border-color:#6b8fa8;color:rgba(241,239,237,.75)">"Perché si chiama La Griffe? Il primo video che pubblica risponde a questa domanda."</div>
 </div><div class="sin-strategy" id="hs-5-p-oliv-strat"
@@ -1557,7 +1633,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
     <div class="mo-card" id="mo1">
       <div class="mo-icon">&#x1F3AF;</div>
       <div class="mo-title">Ribrain: Strategia &amp; Content</div>
-      <div class="mo-body">Piano editoriale per ogni account. Copywriting e direzione creativa. Gestione approvazioni con <strong>Francesco Mormile</strong> come referente unico. Reporting periodico pre/post Ribrain con confronto KPI. Gestione campagne ADV (Meta Ads, TikTok Ads) per amplificare i contenuti strategici prioritari.</div>
+      <div class="mo-body">Piano editoriale per ogni account. Copywriting e direzione creativa. Gestione approvazioni con <strong>Francesco Mormile</strong> come referente unico. Reporting periodico pre/post Ribrain con confronto KPI. Coordinamento dei <strong>4 TikTok Lift programmati nell&rsquo;anno</strong> con la persona interna BZAR che gestisce l&rsquo;ADV (Meta + Google).</div>
     </div>
     <div class="mo-card" id="mo2">
       <div class="mo-icon">&#x1F3A5;</div>
@@ -1600,7 +1676,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
         <div class="freq-val">5-7/sett</div>
       </div>
       <div class="freq-row">
-        <div><div class="freq-label">TikTok</div><div class="freq-sub">profili priority</div></div>
+        <div><div class="freq-label">TikTok</div><div class="freq-sub">smart entry &middot; 4 lift / anno</div></div>
         <div class="freq-bar-wrap"><div class="freq-bar" data-w="48" style="background:#6b5a8a"></div></div>
         <div class="freq-val">2-3/sett</div>
       </div>
@@ -1667,7 +1743,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
     <div class="kpi-card" id="kpi4">
       <div class="kpi-period">Quantitativo · Mesi 3-6</div>
       <div class="kpi-metric">Traffico social → sito diretto</div>
-      <div class="kpi-desc">Click link in bio, UTM tracking campagne ADV, visite sito da IG/TikTok. Leading indicator della domanda, i segnali che precedono la prenotazione.</div>
+      <div class="kpi-desc">Click link in bio, UTM tracking dei TikTok Lift e delle campagne BZAR coordinate, visite sito da IG/TikTok. Leading indicator della domanda, i segnali che precedono la prenotazione.</div>
       <div class="kpi-pill kpi-quant">Quantitativo</div>
     </div>
     <div class="kpi-card" id="kpi5">

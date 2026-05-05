@@ -340,34 +340,61 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
 .patto-list li strong{color:var(--ink);font-weight:600}
 .patto-list li em{color:var(--mid);font-style:italic;font-weight:400}
 
-/* === SEZ MOTORE: COSA FA FUNZIONARE 16 ACCOUNT === */
+/* === SEZ MOTORE: HERO NUMERICO + BREAKDOWN ORE === */
 @media(max-width:780px){.diff-grid{grid-template-columns:1fr !important}}
-.motore-wrap{margin-top:2.5rem;background:#fff;border:.5px solid rgba(117,88,71,.1);border-radius:18px;padding:2rem 1.75rem;overflow:hidden}
-.motore-head{display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap;margin-bottom:1.75rem;padding-bottom:1.25rem;border-bottom:.5px solid rgba(117,88,71,.08)}
-.motore-tot{font-family:"Afacad Flux",sans-serif;font-size:clamp(2.4rem,5vw,3.4rem);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.03em}
-.motore-tot-l{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);max-width:200px;line-height:1.5}
-.motore-tot-l strong{color:var(--ink);font-weight:500}
-.motore-table{display:grid;grid-template-columns:1.5fr auto 2fr auto;gap:.75rem 1.25rem;align-items:start}
-@media(max-width:780px){.motore-table{grid-template-columns:1fr;gap:0}}
-.mt-row{display:contents}
-@media(max-width:780px){
-  .mt-row{display:block;padding:1rem 0;border-bottom:.5px solid rgba(117,88,71,.08)}
-  .mt-row:last-of-type{border-bottom:none}
-}
-.mt-area{font-family:"Afacad Flux",sans-serif;font-size:.95rem;font-weight:500;color:var(--dark);line-height:1.3;padding:.85rem 0;border-bottom:.5px solid rgba(117,88,71,.06)}
-@media(max-width:780px){.mt-area{padding:0;border:none;margin-bottom:.4rem;font-size:1.05rem}}
-.mt-h{font-family:"Afacad Flux",sans-serif;font-size:1.1rem;font-weight:500;color:var(--ink);line-height:1;padding:.85rem 0;border-bottom:.5px solid rgba(117,88,71,.06);text-align:center;letter-spacing:-.02em}
-@media(max-width:780px){.mt-h{padding:0;border:none;display:inline;text-align:left}.mt-h::before{content:"· ";color:var(--mid)}}
-.mt-h-u{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);font-family:"Poppins",sans-serif;font-weight:400;display:block;margin-top:1px}
-@media(max-width:780px){.mt-h-u{display:inline}.mt-h-u::before{content:" "}}
-.mt-d{font-size:12px;color:var(--mid);line-height:1.55;padding:.85rem 0;border-bottom:.5px solid rgba(117,88,71,.06)}
-@media(max-width:780px){.mt-d{padding:.4rem 0 0;border:none}}
-.mt-x{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1.05rem 0 .85rem;border-bottom:.5px solid rgba(117,88,71,.06);text-align:right;white-space:nowrap}
-@media(max-width:780px){.mt-x{padding:.5rem 0 0;border:none;text-align:left;display:block}}
-.mt-x.snk{color:#9a6b3a}
-.mt-x.cm{color:var(--brand)}
-.motore-foot{margin-top:1.5rem;padding-top:1.25rem;border-top:.5px solid rgba(117,88,71,.08);font-size:12px;color:var(--mid);line-height:1.7}
-.motore-foot strong{color:var(--ink);font-weight:500}
+
+/* Hero numerico 4 colonne */
+.motore-hero{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;gap:0;align-items:center;margin-top:3rem;padding:2.5rem 1.5rem;background:linear-gradient(135deg,#fff 0%,#fdfcfa 100%);border:.5px solid rgba(117,88,71,.12);border-radius:18px;box-shadow:0 1px 3px rgba(117,88,71,.04),0 12px 32px rgba(117,88,71,.05)}
+@media(max-width:880px){.motore-hero{grid-template-columns:1fr 1fr;gap:1.5rem 0;padding:2rem 1.25rem}.motore-hero .mh-divider{display:none}}
+@media(max-width:540px){.motore-hero{grid-template-columns:1fr;gap:1.5rem}}
+.mh-item{text-align:center;padding:0 .75rem}
+.mh-num{font-family:"Afacad Flux",sans-serif;font-size:clamp(2.6rem,5.5vw,3.8rem);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.04em;margin-bottom:.6rem;display:flex;align-items:baseline;justify-content:center;gap:.05em}
+.mh-prefix{font-size:.5em;color:var(--brand);font-weight:400;align-self:flex-start;margin-top:.45em}
+.mh-suffix{font-size:.55em;color:var(--mid);font-weight:400}
+.mh-label{font-family:"Afacad Flux",sans-serif;font-size:1.05rem;font-weight:500;color:var(--dark);line-height:1.25;margin-bottom:.45rem;letter-spacing:-.015em}
+.mh-sub{font-size:11px;color:var(--mid);line-height:1.55;max-width:200px;margin:0 auto;font-family:"Poppins",sans-serif}
+.mh-divider{width:1px;height:60px;background:linear-gradient(to bottom,transparent,rgba(117,88,71,.18),transparent);margin:0 auto}
+
+/* Breakdown ore per area */
+.motore-breakdown{margin-top:2.5rem;background:#fff;border:.5px solid rgba(117,88,71,.1);border-radius:18px;padding:2rem 1.75rem;overflow:hidden}
+.mb-head{margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:.5px solid rgba(117,88,71,.08)}
+.mb-title{font-family:"Afacad Flux",sans-serif;font-size:1.15rem;font-weight:500;color:var(--dark);line-height:1.3;margin-bottom:.3rem;letter-spacing:-.015em}
+.mb-sub{font-size:11.5px;color:var(--mid);line-height:1.55;font-style:italic}
+.mb-grid{display:flex;flex-direction:column;gap:.6rem}
+.mb-row{display:grid;grid-template-columns:2.2fr 3fr auto;gap:1rem;align-items:center;padding:.55rem 0}
+@media(max-width:680px){.mb-row{grid-template-columns:1fr auto;gap:.4rem .8rem}.mb-row .mb-bar{grid-column:1 / -1}}
+.mb-area{}
+.mb-name{font-family:"Afacad Flux",sans-serif;font-size:.92rem;font-weight:500;color:var(--dark);line-height:1.3;margin-bottom:.15rem;letter-spacing:-.005em}
+.mb-desc{font-size:11px;color:var(--mid);line-height:1.55}
+.mb-bar{height:6px;background:rgba(117,88,71,.06);border-radius:99px;overflow:hidden;position:relative}
+.mb-fill{height:100%;border-radius:99px;transition:width 1.4s cubic-bezier(.16,1,.3,1)}
+.mb-h{font-family:"Afacad Flux",sans-serif;font-size:1.05rem;font-weight:500;color:var(--ink);min-width:38px;text-align:right;letter-spacing:-.01em}
+
+/* Footer breakdown - legenda totali */
+.mb-foot{margin-top:1.75rem;padding-top:1.25rem;border-top:.5px solid rgba(117,88,71,.08);display:grid;grid-template-columns:1fr 1fr;gap:.55rem .85rem}
+@media(max-width:680px){.mb-foot{grid-template-columns:1fr}}
+.mb-foot-row{display:flex;align-items:center;gap:.6rem;padding:.45rem .75rem;background:rgba(117,88,71,.025);border-radius:8px}
+.mb-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.mb-foot-l{flex:1;font-size:11.5px;color:var(--dark);line-height:1.4}
+.mb-foot-v{font-family:"Afacad Flux",sans-serif;font-size:.95rem;font-weight:500;color:var(--ink);min-width:38px;text-align:right;letter-spacing:-.01em}
+
+/* ADV Clarification block */
+.motore-adv-clarification{margin-top:2.5rem;padding:2.25rem 2rem;background:linear-gradient(135deg,#1a1410 0%,#2a1d18 100%);border-radius:18px;color:rgba(241,239,237,.88);position:relative;overflow:hidden}
+.motore-adv-clarification::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,rgba(200,168,141,.06) 0%,transparent 60%);pointer-events:none}
+.mac-tag{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(200,168,141,.5);font-family:"Poppins",sans-serif;font-weight:500;margin-bottom:.7rem;position:relative;z-index:1}
+.mac-h{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.4rem,3vw,1.85rem);font-weight:300;color:rgba(241,239,237,.95);line-height:1.2;letter-spacing:-.02em;margin-bottom:1.75rem;position:relative;z-index:1}
+.mac-h em{font-style:italic;color:var(--brand);font-weight:300}
+.mac-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;position:relative;z-index:1}
+@media(max-width:780px){.mac-grid{grid-template-columns:1fr}}
+.mac-card{padding:1.5rem 1.4rem;border-radius:12px;border:.5px solid;position:relative}
+.mac-card.us{background:rgba(200,168,141,.08);border-color:rgba(200,168,141,.3)}
+.mac-card.them{background:rgba(255,255,255,.025);border-color:rgba(255,255,255,.08)}
+.mac-card-tag{font-size:9px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;margin-bottom:.5rem;font-family:"Poppins",sans-serif}
+.mac-card.us .mac-card-tag{color:var(--brand)}
+.mac-card.them .mac-card-tag{color:rgba(241,239,237,.4)}
+.mac-card-h{font-family:"Afacad Flux",sans-serif;font-size:1.15rem;font-weight:500;color:rgba(241,239,237,.95);line-height:1.25;margin-bottom:.65rem;letter-spacing:-.01em}
+.mac-card-d{font-size:12.5px;color:rgba(241,239,237,.55);line-height:1.7}
+.mac-card-d strong{color:rgba(241,239,237,.85);font-weight:500}
 
 /* === CM AI ESPANSA === */
 .cmai-scenario{background:var(--dark);color:rgba(241,239,237,.85);border-radius:18px;padding:2rem 1.75rem;margin-top:2.5rem;position:relative;overflow:hidden}
@@ -528,7 +555,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
     </div>
     <div style="background:#fff;border:.5px solid rgba(117,88,71,.1);border-radius:10px;padding:1.25rem 1.25rem">
       <div style="font-family:'Afacad Flux',sans-serif;font-size:1.6rem;font-weight:300;color:var(--brand);line-height:1;margin-bottom:.5rem">02</div>
-      <div style="font-size:13px;color:var(--dark);line-height:1.6"><strong style="color:var(--ink)">ADV unificato a livello gruppo.</strong> Le precedenti gestioni separate per account hanno alimentato la concorrenza interna. Una strategia centrale recupera marginalit&agrave; sul budget media gi&agrave; speso.</div>
+      <div style="font-size:13px;color:var(--dark);line-height:1.6"><strong style="color:var(--ink)">TikTok Lift sinergici a livello gruppo.</strong> L&rsquo;ADV resta in capo al team interno BZAR (Meta, Google, budget allocation). Noi entriamo solo sui <strong>4 TikTok Lift programmati / anno</strong>, dove la nostra expertise di formato amplifica il contenuto editoriale &mdash; in coordinamento, non in sostituzione.</div>
     </div>
     <div style="background:#fff;border:.5px solid rgba(117,88,71,.1);border-radius:10px;padding:1.25rem 1.25rem">
       <div style="font-family:'Afacad Flux',sans-serif;font-size:1.6rem;font-weight:300;color:var(--brand);line-height:1;margin-bottom:.5rem">03</div>
@@ -646,7 +673,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
     <div class="pb-text">
       <div class="pb-tag">Payback nello scenario realistico</div>
       <div class="pb-h">Se il modello regge, il pareggio arriva al decimo mese.</div>
-      <div class="pb-d">Considerando insieme retainer, setup Mese 0 e budget media, il punto di pareggio si raggiunge intorno al decimo mese. <strong>Se</strong> la disintermediazione procede secondo l&rsquo;ipotesi conservativa. <strong>Se</strong> il piano ADV unificato performa come stimato. <strong>Se</strong> la macchina editoriale costruisce il brand-recall che ci aspettiamo. Sono ipotesi, non garanzie &mdash; ma sono ipotesi misurabili mese per mese, e <em>ricalibrate trimestralmente</em> insieme a Francesco.</div>
+      <div class="pb-d">Considerando insieme retainer, setup Mese 0 e budget TikTok Lift, il punto di pareggio si raggiunge intorno al decimo mese. <strong>Se</strong> la disintermediazione procede secondo l&rsquo;ipotesi conservativa. <strong>Se</strong> i 4 TikTok Lift performano come stimato. <strong>Se</strong> la macchina editoriale costruisce il brand-recall che ci aspettiamo. Sono ipotesi, non garanzie &mdash; ma sono ipotesi misurabili mese per mese, e <em>ricalibrate trimestralmente</em> insieme a Francesco.</div>
     </div>
   </div>
 
@@ -782,11 +809,215 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
   </div>
 </section>
 
+<!-- ═══════════════════════════════════ SEZ MOTORE: COSA C'È SOTTO IL COFANO ═══════════════════════════════════ -->
+<section class="sec" id="s-motore">
+  <div class="s-tag"><span style="color:var(--brand);font-weight:500">07</span> &middot; Sotto il cofano &middot; Il motore Ribrain</div>
+  <h2 class="s-h">La macchina che gira ogni mese.<br><em>Cosa c&rsquo;&egrave; davvero dietro un retainer.</em></h2>
+  <p class="s-lead">Prima di parlare di prezzi, vale la pena guardare il volume effettivo di lavoro. Non per giustificare il costo, ma per dare a Francesco un&rsquo;idea concreta della macchina che si attiva ogni mese. <strong style="color:var(--dark)">Quattordici aree operative attive in parallelo. Tredici account social coordinati. Quasi cinquecento contenuti pubblicati al mese.</strong> Ecco il dettaglio di cosa fa girare tutto questo.</p>
+
+  <!-- HERO NUMERICO 4 NUMERI GRANDI -->
+  <div class="motore-hero" id="motore-hero">
+    <div class="mh-item">
+      <div class="mh-num"><span class="mh-prefix">~</span>330<span class="mh-suffix">h</span></div>
+      <div class="mh-label">Ore Ribrain<br>al mese</div>
+      <div class="mh-sub">Strategia, copy, community, supervisione, reporting</div>
+    </div>
+    <div class="mh-divider"></div>
+    <div class="mh-item">
+      <div class="mh-num"><span class="mh-prefix">~</span>478</div>
+      <div class="mh-label">Contenuti<br>al mese</div>
+      <div class="mh-sub">117 post + 278 stories + 11 reel hero + 72 cross-post FB</div>
+    </div>
+    <div class="mh-divider"></div>
+    <div class="mh-item">
+      <div class="mh-num">13</div>
+      <div class="mh-label">Account social<br>coordinati</div>
+      <div class="mh-sub">5 hotel Roma + 5 F&amp;B + 2 Toscana + 1 chain madre BZAR</div>
+    </div>
+    <div class="mh-divider"></div>
+    <div class="mh-item">
+      <div class="mh-num">14</div>
+      <div class="mh-label">Aree operative<br>in parallelo</div>
+      <div class="mh-sub">Dalla strategia al QA pubblicazione, dal CM all&rsquo;analytics</div>
+    </div>
+  </div>
+
+  <!-- BREAKDOWN ORE PER AREA -->
+  <div class="motore-breakdown">
+    <div class="mb-head">
+      <div class="mb-title">Le 14 aree operative &middot; ore stimate al mese</div>
+      <div class="mb-sub">Distribuzione approssimativa, varia stagionalmente. La somma fa ~330h.</div>
+    </div>
+
+    <div class="mb-grid">
+      <!-- Area: Strategia & Direzione -->
+      <div class="mb-row">
+        <div class="mb-area">
+          <div class="mb-name">Strategia editoriale &amp; direzione creativa</div>
+          <div class="mb-desc">Tema mensile, mood per struttura, supervisione output Snacky</div>
+        </div>
+        <div class="mb-bar"><div class="mb-fill" data-w="42" style="background:#755847;width:42%"></div></div>
+        <div class="mb-h">42h</div>
+      </div>
+      <div class="mb-row">
+        <div class="mb-area">
+          <div class="mb-name">Copywriting post + stories + reel</div>
+          <div class="mb-desc">~478 contenuti / mese, copy + caption + sticker stories</div>
+        </div>
+        <div class="mb-bar"><div class="mb-fill" data-w="58" style="background:#9a7d6a;width:58%"></div></div>
+        <div class="mb-h">58h</div>
+      </div>
+      <div class="mb-row">
+        <div class="mb-area">
+          <div class="mb-name">Direzione grafica &amp; trattamento foto</div>
+          <div class="mb-desc">Headline su immagini, brand layer, rifinitura post-shooting</div>
+        </div>
+        <div class="mb-bar"><div class="mb-fill" data-w="36" style="background:#9a7d6a;width:36%"></div></div>
+        <div class="mb-h">36h</div>
+      </div>
+      <div class="mb-row">
+        <div class="mb-area">
+          <div class="mb-name">Community management &middot; SLA H+24</div>
+          <div class="mb-desc">5gg/7 sui 13 account &middot; modello evolutivo verso AI dal mese 4</div>
+        </div>
+        <div class="mb-bar"><div class="mb-fill" data-w="48" style="background:#755847;width:48%"></div></div>
+        <div class="mb-h">48h</div>
+      </div>
+      <div class="mb-row">
+        <div class="mb-area">
+          <div class="mb-name">Brief shooting &amp; coordinamento Snacky</div>
+          <div class="mb-desc">~9 giornate / mese on-location, brief, location scouting</div>
+        </div>
+        <div class="mb-bar"><div class="mb-fill" data-w="22" style="background:#9a7d6a;width:22%"></div></div>
+        <div class="mb-h">22h</div>
+      </div>
+      <div class="mb-row">
+        <div class="mb-area">
+          <div class="mb-name">Editing video &amp; post-produzione reel</div>
+          <div class="mb-desc">11 reel hero / mese, color grade, music sync, ritmo editoriale</div>
+        </div>
+        <div class="mb-bar"><div class="mb-fill" data-w="32" style="background:#9a7d6a;width:32%"></div></div>
+        <div class="mb-h">32h</div>
+      </div>
+      <div class="mb-row">
+        <div class="mb-area">
+          <div class="mb-name">Scheduling &amp; QA pubblicazione</div>
+          <div class="mb-desc">Pianificazione cross-canale, controllo qualità pre-pubblicazione</div>
+        </div>
+        <div class="mb-bar"><div class="mb-fill" data-w="14" style="background:#C8A88D;width:14%"></div></div>
+        <div class="mb-h">14h</div>
+      </div>
+      <div class="mb-row">
+        <div class="mb-area">
+          <div class="mb-name">Concept &amp; setup TikTok Lift</div>
+          <div class="mb-desc">4 lift / anno &middot; concept, ottimizzazione, coordinamento BZAR</div>
+        </div>
+        <div class="mb-bar"><div class="mb-fill" data-w="8" style="background:#C8A88D;width:8%"></div></div>
+        <div class="mb-h">8h</div>
+      </div>
+      <div class="mb-row">
+        <div class="mb-area">
+          <div class="mb-name">Listening competitor &amp; benchmarking</div>
+          <div class="mb-desc">Hoxton, Mama, Generator, Chapter &middot; analisi mensile</div>
+        </div>
+        <div class="mb-bar"><div class="mb-fill" data-w="10" style="background:#C8A88D;width:10%"></div></div>
+        <div class="mb-h">10h</div>
+      </div>
+      <div class="mb-row">
+        <div class="mb-area">
+          <div class="mb-name">Reporting mensile + analytics</div>
+          <div class="mb-desc">Dashboard KPI, performance per struttura, leading indicator</div>
+        </div>
+        <div class="mb-bar"><div class="mb-fill" data-w="18" style="background:#C8A88D;width:18%"></div></div>
+        <div class="mb-h">18h</div>
+      </div>
+      <div class="mb-row">
+        <div class="mb-area">
+          <div class="mb-name">Account management &middot; Francesco SPOC</div>
+          <div class="mb-desc">Allineamenti, batch approvazioni, coordinamento direttori</div>
+        </div>
+        <div class="mb-bar"><div class="mb-fill" data-w="16" style="background:#C8A88D;width:16%"></div></div>
+        <div class="mb-h">16h</div>
+      </div>
+      <div class="mb-row">
+        <div class="mb-area">
+          <div class="mb-name">Crisis protocol presidiato H+2</div>
+          <div class="mb-desc">Bozza risposta in tempo reale per situazioni delicate</div>
+        </div>
+        <div class="mb-bar"><div class="mb-fill" data-w="8" style="background:#c0572a;width:8%"></div></div>
+        <div class="mb-h">8h</div>
+      </div>
+      <div class="mb-row">
+        <div class="mb-area">
+          <div class="mb-name">Coordinamento ADV con team interno BZAR</div>
+          <div class="mb-desc">Allineamento creativit&agrave;, copy, landing &mdash; ADV gestito da BZAR</div>
+        </div>
+        <div class="mb-bar"><div class="mb-fill" data-w="6" style="background:#C8A88D;width:6%"></div></div>
+        <div class="mb-h">6h</div>
+      </div>
+      <div class="mb-row">
+        <div class="mb-area">
+          <div class="mb-name">Setup AI Community &middot; cycle dal Mese 4</div>
+          <div class="mb-desc">Implementazione modello evolutivo CM con AI</div>
+        </div>
+        <div class="mb-bar"><div class="mb-fill" data-w="12" style="background:#5a7a4a;width:12%"></div></div>
+        <div class="mb-h">12h</div>
+      </div>
+    </div>
+
+    <div class="mb-foot">
+      <div class="mb-foot-row">
+        <span class="mb-dot" style="background:#755847"></span>
+        <span class="mb-foot-l">Pensiero strategico &amp; direzione</span>
+        <span class="mb-foot-v">~90h</span>
+      </div>
+      <div class="mb-foot-row">
+        <span class="mb-dot" style="background:#9a7d6a"></span>
+        <span class="mb-foot-l">Esecuzione editoriale &amp; produzione</span>
+        <span class="mb-foot-v">~148h</span>
+      </div>
+      <div class="mb-foot-row">
+        <span class="mb-dot" style="background:#C8A88D"></span>
+        <span class="mb-foot-l">Operations, analytics, coordinamento</span>
+        <span class="mb-foot-v">~72h</span>
+      </div>
+      <div class="mb-foot-row">
+        <span class="mb-dot" style="background:#5a7a4a"></span>
+        <span class="mb-foot-l">Innovazione &middot; AI Community dal M4</span>
+        <span class="mb-foot-v">~12h</span>
+      </div>
+      <div class="mb-foot-row">
+        <span class="mb-dot" style="background:#c0572a"></span>
+        <span class="mb-foot-l">Crisis protocol &middot; presidio reattivo</span>
+        <span class="mb-foot-v">~8h</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOCCO ADV CHIARIMENTO -->
+  <div class="motore-adv-clarification">
+    <div class="mac-tag">Sui canali ADV &middot; chi fa cosa</div>
+    <h3 class="mac-h">Una linea netta sull&rsquo;ADV.<br><em>Per evitare ambiguit&agrave; che costano marginalit&agrave;.</em></h3>
+    <div class="mac-grid">
+      <div class="mac-card us">
+        <div class="mac-card-tag">Ribrain &middot; Anno 1</div>
+        <div class="mac-card-h">4 TikTok Lift programmati</div>
+        <div class="mac-card-d">Concept, setup operativo, ottimizzazione dei 4 lift trimestrali. La nostra expertise di formato amplifica il contenuto editoriale che funziona. <strong>In coordinamento con la persona interna BZAR che gestisce l&rsquo;ADV</strong>, mai in sostituzione.</div>
+      </div>
+      <div class="mac-card them">
+        <div class="mac-card-tag">BZAR interno</div>
+        <div class="mac-card-h">Meta + Google + budget allocation</div>
+        <div class="mac-card-d">Account ADV, gestione campagne, ottimizzazione, allocazione budget media. Restano in capo al team interno BZAR. <strong>Noi forniamo concept, copy e creativit&agrave;</strong> quando richiesto, allineati con la narrativa editoriale che costruiamo sui canali nativi.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════════════════════════════════ SEZ 8: I DUE TIER (spostata dopo cumulativo) ═══════════════════════════════════ -->
 <section class="sec bg-alt" id="s-tier">
   <div class="s-tag"><span style="color:var(--brand);font-weight:500">08</span> &middot; La proposta &middot; Due tier</div>
   <h2 class="s-h">Adesso che avete visto il motore.<br><em>Ecco quanto costa farlo girare.</em></h2>
-  <p class="s-lead">A questo punto del documento avete visto: <strong style="color:var(--dark)">~330 ore di lavoro Ribrain al mese</strong>, distribuite su 14 aree operative. <strong style="color:var(--dark)">~478 contenuti prodotti mensilmente</strong>, su 16 account coordinati. Il modello evolutivo di community management con AI. ADV unificato che recupera marginalit&agrave; sui CPM. Un calcolo di disintermediazione progressiva delle OTA con payback al decimo mese. Ecco cosa serve, in termini di investimento, per attivare tutto questo.</p>
+  <p class="s-lead">A questo punto del documento avete visto: <strong style="color:var(--dark)">~330 ore di lavoro Ribrain al mese</strong>, distribuite su 14 aree operative. <strong style="color:var(--dark)">~478 contenuti prodotti mensilmente</strong>, su 13 account coordinati. Il modello evolutivo di community management con AI. <strong style="color:var(--dark)">4 TikTok Lift programmati nell&rsquo;anno</strong>, gestiti insieme alla persona interna BZAR che coordina l&rsquo;ADV. Un calcolo di disintermediazione progressiva delle OTA con payback al decimo mese. Ecco cosa serve, in termini di investimento, per attivare tutto questo.</p>
   <p class="s-lead" style="margin-top:.75rem;font-size:13px;color:var(--mid);max-width:680px"><em style="font-style:italic">Due tier, stesso metodo. La differenza sta nell&rsquo;intensit&agrave; della produzione video e nella profondit&agrave; dei cicli creativi. Per dare una scala immediata: il piano gestisce 13 entit&agrave; editoriali distinte (5 hotel Liv. A &middot; 5 F&amp;B Liv. B &middot; 2 Toscana Liv. C &middot; 1 chain corporate). Sotto ogni tier trovi anche il costo medio per struttura, calcolato su questa base.</em></p>
 
   <div class="tier-grid" id="tgrid">
@@ -807,7 +1038,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
 
       <div class="tier-section">Strategia &amp; pensiero</div>
       <ul class="tier-list">
-        <li>Piano editoriale mensile per <strong>16 account</strong> &mdash; 5 hotel + 5 F&amp;B + 2 Toscana + chain BZAR + cross-post FB Liv. A</li>
+        <li>Piano editoriale mensile per <strong>13 account</strong> &mdash; 5 hotel Liv. A + 5 F&amp;B Liv. B + 2 Toscana Liv. C + 1 chain madre BZAR (cross-post FB inclusi)</li>
         <li>Direzione creativa, mood per struttura, supervisione output produzione</li>
         <li>Brief shooting strutturati per ogni struttura attiva nel mese</li>
       </ul>
@@ -830,7 +1061,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
       <div class="tier-section">Sempre on</div>
       <ul class="tier-list">
         <li><strong>Community management 5 giorni su 7</strong> &middot; SLA H+24</li>
-        <li><strong>ADV unificato</strong> Meta + Google + TikTok</li>
+        <li><strong>4 TikTok Lift programmati / anno</strong> &middot; supporto strategico e operativo alla persona interna BZAR che coordina l&rsquo;ADV</li>
         <li>Account management single-point-of-contact</li>
         <li>Report mensile + review trimestrale on-site</li>
       </ul>
@@ -892,12 +1123,12 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
         <div class="mz-price-l">una tantum, prima del Mese 1</div>
       </div>
       <ul class="mz-list">
-        <li>Audit completo dei 16 account esistenti, raccolta accessi, mappa stakeholder</li>
+        <li>Audit completo dei 13 account social esistenti + cross-post FB Liv. A, raccolta accessi, mappa stakeholder</li>
         <li>Brand book operativo per ogni struttura (3 hotel Liv. A + 5 F&amp;B + chain)</li>
         <li>Calendario shooting Q1 concordato con direttori hotel</li>
         <li><strong>Stock shooting raddoppiato</strong> &mdash; ~14 giornate Snacky per costituire la libreria foto/video iniziale di tutte le strutture</li>
         <li>Brief book editoriale per persona, pillar, tono di voce per account</li>
-        <li>Setup piattaforme: ad accounts unificati, Meta Business Suite, scheduling tool, dashboard analytics</li>
+        <li>Setup piattaforme: Meta Business Suite, scheduling tool, dashboard analytics &middot; <em>credenziali ADV Meta/Google in carico al team interno BZAR</em></li>
         <li>Kick-off call estesa con Francesco e direttori per allineamento operativo</li>
       </ul>
     </div>
@@ -915,13 +1146,13 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
       <div class="patto-tag">+ Incluso nel retainer mensile</div>
       <div class="patto-h">La macchina sempre attiva</div>
       <ul class="patto-list">
-        <li>Strategia editoriale per <strong>16 account</strong> &mdash; PED mensile, mood per struttura, brief shooting</li>
+        <li>Strategia editoriale per <strong>13 account</strong> &mdash; PED mensile, mood per struttura, brief shooting</li>
         <li><strong>117 post originali</strong> + 72 cross-post FB Liv. A &middot; copy + grafica</li>
         <li><strong>278 stories/mese</strong> &middot; copy, sticker, sondaggi, CTA</li>
         <li><strong>11 reel hero/mese</strong> &middot; uno per ogni struttura attiva, prodotti da Snacky</li>
         <li>Trattamento grafico foto, scheduling, QA pubblicazione</li>
-        <li><strong>Community management 5gg/7 H+24</strong> sui 16 account</li>
-        <li><strong>ADV unificato</strong> Meta + Google + TikTok &middot; setup, ottimizzazione, monitoraggio</li>
+        <li><strong>Community management 5gg/7 H+24</strong> sui 13 account</li>
+        <li><strong>4 TikTok Lift programmati / anno</strong> &middot; concept, setup operativo, ottimizzazione &mdash; <em>in coordinamento con la persona interna BZAR che gestisce l&rsquo;ADV</em></li>
         <li>Brief operativo per nuove aperture (es. A Mano giugno 2026)</li>
         <li>Report mensile + review trimestrale on-site Roma</li>
         <li>Account manager dedicato &middot; single point of contact con Francesco</li>
@@ -933,7 +1164,8 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
       <div class="patto-h">Voci dedicate o in capo ad altri partner</div>
       <ul class="patto-list">
         <li><strong>Mese 0 onboarding</strong> &middot; setup, audit, brand book, stock shooting iniziale &mdash; <em>una tantum &euro;17K</em></li>
-        <li><strong>Budget media ADV</strong> (cash effettivo speso su Meta, Google, TikTok) &middot; voce trasparente al cliente</li>
+        <li><strong>Gestione ADV Meta + Google</strong> (account setup, budget allocation, ottimizzazione campagne) &middot; <em>in carico al team interno BZAR &mdash; noi forniamo concept e creativit&agrave; quando richiesto</em></li>
+        <li><strong>Budget media TikTok Lift</strong> (cash effettivo speso sui 4 lift programmati) &middot; <em>voce trasparente al cliente, fuori dal retainer</em></li>
         <li><strong>Upsell AI Community</strong> da Mese 4 &middot; <em>setup &euro;1.500 + check &euro;750/mese + tool AI &euro;100&ndash;300/mese</em></li>
         <li>Influencer marketing &gt;10K follower &middot; <em>quotato a progetto</em></li>
         <li>Account brand non concordati nel piano iniziale &middot; <em>scope expansion da definire</em></li>
@@ -1020,8 +1252,17 @@ gsap.fromTo('#tier-s',{opacity:0,y:30},{opacity:1,y:0,duration:.9,delay:.15,scro
 gsap.fromTo('.mz-card',{opacity:0,y:20},{opacity:1,y:0,duration:.8,scrollTrigger:{trigger:'#s-onboarding',start:'top 75%',toggleActions:'play none none none'}});
 
 // SEZ MOTORE
-gsap.fromTo('.motore-wrap',{opacity:0,y:30},{opacity:1,y:0,duration:1,scrollTrigger:{trigger:'#s-motore',start:'top 75%',toggleActions:'play none none none'}});
-gsap.fromTo('.mt-row',{opacity:0,y:10},{opacity:1,y:0,duration:.5,stagger:.05,scrollTrigger:{trigger:'.motore-table',start:'top 75%',toggleActions:'play none none none'}});
+gsap.fromTo('.motore-hero .mh-item',{opacity:0,y:25},{opacity:1,y:0,duration:.7,stagger:.1,scrollTrigger:{trigger:'#s-motore',start:'top 80%',once:true}});
+gsap.fromTo('.motore-breakdown',{opacity:0,y:30},{opacity:1,y:0,duration:1,scrollTrigger:{trigger:'.motore-breakdown',start:'top 78%',once:true}});
+// Anima le barre delle ore
+ScrollTrigger.create({trigger:'.mb-grid',start:'top 80%',once:true,onEnter:function(){
+  document.querySelectorAll('.mb-fill').forEach(function(el){
+    var w=el.getAttribute('data-w');
+    if(w){el.style.width='0%';requestAnimationFrame(function(){requestAnimationFrame(function(){el.style.width=w+'%';});});}
+  });
+}});
+gsap.fromTo('.mb-foot-row',{opacity:0,y:8},{opacity:1,y:0,duration:.5,stagger:.08,delay:.6,scrollTrigger:{trigger:'.mb-foot',start:'top 85%',once:true}});
+gsap.fromTo('.motore-adv-clarification',{opacity:0,y:25},{opacity:1,y:0,duration:.9,scrollTrigger:{trigger:'.motore-adv-clarification',start:'top 82%',once:true}});
 
 // Grafico contenuti mensili (dentro sez Motore)
 gsap.fromTo('.cnt-wrap',{opacity:0,y:25},{opacity:1,y:0,duration:.9,scrollTrigger:{trigger:'.cnt-wrap',start:'top 78%',toggleActions:'play none none none'}});
