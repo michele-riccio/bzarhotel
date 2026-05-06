@@ -308,7 +308,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
 .bi-total-l{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);font-weight:500;max-width:380px;line-height:1.55}
 .bi-total-v{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.8rem,4vw,2.4rem);font-weight:400;color:var(--ink);line-height:1;letter-spacing:-.03em}
 
-/* === SEZ 7: CUMULATIVO 24 MESI === */
+/* === SEZ 7: CUMULATIVO 12 MESI + PROIEZIONE === */
 .cum-wrap{margin-top:2.5rem;background:#fff;border:.5px solid rgba(117,88,71,.1);border-radius:18px;padding:2rem 1.75rem}
 .cum-chart{position:relative;height:340px;margin:1.5rem 0}
 .cum-svg{width:100%;height:100%;overflow:visible}
@@ -545,6 +545,42 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
 
 
 @media(max-width:880px){.roi-context-grid{grid-template-columns:1fr !important}}</style>
+</head>
+<body>
+<div id="cur"></div>
+<header class="topbar">
+  <div class="tb-l">
+    <span class="tb-brand">BZAR Hotels</span>
+    <div class="tb-sep"></div>
+    <img src="https://www.ribrainstudio.com/wp-content/uploads/2025/01/Logo_ribrain_Nero.svg" alt="Ribrain" class="tb-rlogo">
+  </div>
+  <span class="tb-c">Cruscotto Strategico &middot; Economics &amp; ROI</span>
+  <div class="tb-r">
+    <span class="tb-date">Aprile 2026</span>
+    <span class="tb-conf">Confidenziale</span>
+    <button class="rb-ham" id="rbHamBtn" aria-label="Apri menu"><span class="h1"></span><span class="h2"></span><span class="h3"></span></button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-noise" aria-hidden="true"></div>
+  <div class="hero-ghost" aria-hidden="true">M10</div>
+  <div class="hero-body">
+    <div class="hero-tag" id="htag">M10 &mdash; Economics &amp; ROI</div>
+    <h1 class="hero-h1">
+      <span id="hl1">Quanto costa.</span><br>
+      <span id="hl2">Quanto rende.</span><br>
+      <span id="hl3"><em>Quando rientra.</em></span>
+    </h1>
+    <p class="hero-sub" id="hsub">Il piano economico tradotto in numeri concreti. Retainer, setup, payback, scenari di disintermediazione delle OTA. Non promesse: ipotesi misurabili, ricalibrate trimestralmente con Francesco.</p>
+    <div class="hero-counts" id="hcounts">
+      <div><div class="hc-v">~330h</div><div class="hc-l">Ore Ribrain / mese</div></div>
+      <div><div class="hc-v">478</div><div class="hc-l">Contenuti / mese</div></div>
+      <div><div class="hc-v">13</div><div class="hc-l">Account coordinati</div></div>
+      <div><div class="hc-v">M10</div><div class="hc-l">Payback stimato</div></div>
+    </div>
+  </div>
+</section>
 
 <section class="sec" id="s-roi">
   <h3 style="font-family:'Afacad Flux',sans-serif;font-size:clamp(1.3rem,2.5vw,1.7rem);font-weight:500;color:var(--dark);margin-top:3rem;margin-bottom:.75rem;line-height:1.25">Tre cose concretamente diverse nel nostro piano:</h3>
@@ -584,10 +620,10 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
 
       <!-- 02: Spostamento target -->
       <div class="tip-cell">
-        <div class="tip-cell-step">02 &middot; Fine anno 1</div>
+        <div class="tip-cell-step">02 &middot; Fine piano 12 mesi</div>
         <div class="tip-cell-num">~750</div>
         <div class="tip-cell-l">prenotazioni/mese spostate</div>
-        <div class="tip-cell-d">A regime fine anno: 4 punti % di mix spostato da OTA a canale diretto. <strong>Mix futuro</strong>: 64% diretto / 36% OTA (oggi 60/40).</div>
+        <div class="tip-cell-d">A regime fine piano: 4 punti % di mix spostato da OTA a canale diretto. <strong>Mix futuro</strong>: 64% diretto / 36% OTA (oggi 60/40).</div>
       </div>
 
       <!-- 03: Tradotto al giorno -->
@@ -600,7 +636,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
 
       <!-- 04: Risparmio -->
       <div class="tip-cell">
-        <div class="tip-cell-step">04 &middot; Risparmio anno 1</div>
+        <div class="tip-cell-step">04 &middot; Risparmio 12 mesi</div>
         <div class="tip-cell-num">~&euro;569K</div>
         <div class="tip-cell-l">commissioni risparmiate</div>
         <div class="tip-cell-d"><strong>5.443 prenotazioni</strong> totali spostate cumulativamente nei 12 mesi (rampa progressiva), per <strong>~&euro;104 di commissione media</strong> per prenotazione (€220 ADR × 2,5 notti × 19%).</div>
@@ -608,7 +644,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
     </div>
 
     <div class="tip-foot">
-      <strong>Sanity check:</strong> 5 prenotazioni dirette in pi&ugrave; al giorno per un hotel boutique 4* a Roma in posizione #1 TripAdvisor &egrave; un obiettivo morbido, non aggressivo. Le agenzie aggressive promettono spesso 8&ndash;10 punti % anno 1; noi ne stimiamo 4 a fine anno 1 e 6,8 medi anno 2 perch&eacute; preferiamo essere conservativi che ottimisti. <strong>Il modello dipende anche da fattori che non controlliamo direttamente:</strong> stagionalit&agrave;, ranking SEO, competitivit&agrave; del mercato, abitudini consolidate dei viaggiatori. Per questo prevediamo review trimestrale di ricalibrazione.
+      <strong>Sanity check:</strong> 5 prenotazioni dirette in pi&ugrave; al giorno per un hotel boutique 4* a Roma in posizione #1 TripAdvisor &egrave; un obiettivo morbido, non aggressivo. Le agenzie aggressive promettono spesso 8&ndash;10 punti % nel primo anno; noi ne stimiamo 4 a fine piano 12 mesi e <em>6,8 medi nei 12 mesi successivi</em> (se il piano viene rinnovato), perch&eacute; preferiamo essere conservativi che ottimisti. <strong>Il modello dipende anche da fattori che non controlliamo direttamente:</strong> stagionalit&agrave;, ranking SEO, competitivit&agrave; del mercato, abitudini consolidate dei viaggiatori. Per questo prevediamo review trimestrale di ricalibrazione.
     </div>
   </div>
 
@@ -732,11 +768,11 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
   </div>
 </section>
 
-<!-- ═══════════════════════════════════ SEZ 7: CUMULATIVO 24 MESI ═══════════════════════════════════ -->
+<!-- ═══════════════════════════════════ SEZ 7: CUMULATIVO 12 MESI + PROIEZIONE ═══════════════════════════════════ -->
 <section class="sec" id="s-cum">
   <div class="s-tag"><span style="color:var(--brand);font-weight:500">07</span> &middot; Investimento vs ritorno</div>
-  <h2 class="s-h">24 mesi cumulativi.<br>La <em>traiettoria del piano in un grafico.</em></h2>
-  <p class="s-lead">Il modo pi&ugrave; onesto di guardare i numeri non &egrave; un singolo anno. &Egrave; il cumulativo. Investimento che cresce in modo lineare, ritorno che cresce in modo crescente, payback che si raggiunge nel punto in cui le due curve si incrociano.</p>
+  <h2 class="s-h">12 mesi cumulativi.<br>La <em>traiettoria del piano in un grafico.</em></h2>
+  <p class="s-lead">Il modo pi&ugrave; onesto di guardare i numeri non &egrave; un singolo mese: &egrave; il cumulativo dell&rsquo;intero anno operativo. Investimento che cresce in modo lineare, ritorno che cresce in modo crescente, payback che si raggiunge al decimo mese &mdash; due mesi prima della fine del piano. La proiezione tratteggiata sui 12 mesi successivi mostra cosa accadrebbe se il modello venisse rinnovato per un secondo anno: senza nuovi investimenti incrementali oltre il retainer, la disintermediazione gi&agrave; avviata continua a generare valore.</p>
 
   <div class="cum-wrap">
     <div class="cum-legend">
@@ -768,19 +804,22 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
         <text x="656" y="304" text-anchor="middle" font-family="Poppins,sans-serif" font-size="9" fill="rgba(117,88,71,.4)">M12</text>
         <text x="780" y="304" text-anchor="middle" font-family="Poppins,sans-serif" font-size="9" fill="rgba(117,88,71,.4)">M24</text>
 
-        <!-- separatore anno 1 / anno 2 -->
+        <!-- separatore fine piano -->
         <line x1="656" y1="20" x2="656" y2="285" stroke="rgba(117,88,71,.18)" stroke-width="0.5" stroke-dasharray="2,3"/>
-        <text x="656" y="14" text-anchor="middle" font-family="Poppins,sans-serif" font-size="8" fill="rgba(117,88,71,.4)" letter-spacing="0.06em">FINE ANNO 1</text>
+        <text x="656" y="14" text-anchor="middle" font-family="Poppins,sans-serif" font-size="8" fill="rgba(117,88,71,.5)" letter-spacing="0.06em">FINE PIANO 12 MESI</text>
+        <text x="718" y="22" text-anchor="middle" font-family="Poppins,sans-serif" font-size="7.5" fill="rgba(117,88,71,.35)" letter-spacing="0.06em" font-style="italic">Proiezione anno 2</text>
 
-        <!-- INVESTIMENTO (rosso/warn) - cresce linearmente -->
-        <!-- y = 280 - (val/2400000)*240 -->
-        <path id="invPath" d="M 40,278.3 L 91.4,275.3 L 142.7,271.7 L 194.1,268.1 L 245.4,264.5 L 296.8,260.9 L 348.2,257.3 L 399.5,253.7 L 450.9,250.1 L 502.2,246.5 L 553.6,242.9 L 605,239.3 L 656.3,235.7 L 668,234.6 L 679.7,233.5 L 691.4,232.4 L 703.2,231.3 L 714.9,230.2 L 726.6,229.1 L 738.3,228 L 750,226.9 L 761.7,225.8 L 773.5,224.7 L 780,224" 
+        <!-- INVESTIMENTO (rosso/warn) - cresce linearmente. Anno 2 tratteggiato -->
+        <path id="invPath" d="M 40,278.3 L 91.4,275.3 L 142.7,271.7 L 194.1,268.1 L 245.4,264.5 L 296.8,260.9 L 348.2,257.3 L 399.5,253.7 L 450.9,250.1 L 502.2,246.5 L 553.6,242.9 L 605,239.3 L 656.3,235.7"
               fill="none" stroke="#c0572a" stroke-width="2" stroke-linecap="round" stroke-dasharray="0 2000"/>
+        <path d="M 656.3,235.7 L 668,234.6 L 679.7,233.5 L 691.4,232.4 L 703.2,231.3 L 714.9,230.2 L 726.6,229.1 L 738.3,228 L 750,226.9 L 761.7,225.8 L 773.5,224.7 L 780,224"
+              fill="none" stroke="#c0572a" stroke-width="2" stroke-linecap="round" stroke-dasharray="4,3" opacity="0.5"/>
 
-        <!-- RISPARMIO (verde/go) - parte da 0 e cresce con curva crescente -->
-        <!-- M0=0, M1=0, M2=15K, M3=30K, M4=45K, M5=75K... -->
-        <path id="savPath" d="M 40,280 L 91.4,280 L 142.7,276.3 L 194.1,272.5 L 245.4,265.1 L 296.8,257.6 L 348.2,250.2 L 399.5,239 L 450.9,227.7 L 502.2,216.5 L 553.6,201.5 L 605,186.5 L 656.3,171.5 L 668,162.5 L 679.7,153.5 L 691.4,144.5 L 703.2,135.5 L 714.9,123.5 L 726.6,111.5 L 738.3,99.5 L 750,87.5 L 761.7,72.7 L 773.5,57.9 L 780,49"
+        <!-- RISPARMIO (verde/go) - parte da 0 e cresce con curva. Anno 2 tratteggiato -->
+        <path id="savPath" d="M 40,280 L 91.4,280 L 142.7,276.3 L 194.1,272.5 L 245.4,265.1 L 296.8,257.6 L 348.2,250.2 L 399.5,239 L 450.9,227.7 L 502.2,216.5 L 553.6,201.5 L 605,186.5 L 656.3,171.5"
               fill="none" stroke="#5a7a4a" stroke-width="2" stroke-linecap="round" stroke-dasharray="0 2000"/>
+        <path d="M 656.3,171.5 L 668,162.5 L 679.7,153.5 L 691.4,144.5 L 703.2,135.5 L 714.9,123.5 L 726.6,111.5 L 738.3,99.5 L 750,87.5 L 761.7,72.7 L 773.5,57.9 L 780,49"
+              fill="none" stroke="#5a7a4a" stroke-width="2" stroke-linecap="round" stroke-dasharray="4,3" opacity="0.5"/>
 
         <!-- punto payback verticale Mese 10 -->
         <line id="paybackLine" x1="553.6" y1="20" x2="553.6" y2="285" stroke="#C8A88D" stroke-width="1" stroke-dasharray="3,3" opacity="0"/>
@@ -791,19 +830,19 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
 
     <div class="cum-summary">
       <div class="cum-sum" style="border-left-color:#c0572a">
-        <div class="cum-sum-l">Investimento 24 mesi</div>
-        <div class="cum-sum-v">&euro;867K</div>
-        <div class="cum-sum-d">Retainer + setup Mese 0 + budget media stimato</div>
+        <div class="cum-sum-l">Investimento 12 mesi</div>
+        <div class="cum-sum-v">~&euro;360K</div>
+        <div class="cum-sum-d">Retainer 12 mesi (Foundation) + setup Mese 0 + budget TikTok Lift stimato</div>
       </div>
       <div class="cum-sum" style="border-left-color:#5a7a4a">
-        <div class="cum-sum-l">Risparmio 24 mesi</div>
-        <div class="cum-sum-v">&euro;2,16M</div>
-        <div class="cum-sum-d">Solo da disintermediazione progressiva OTA</div>
+        <div class="cum-sum-l">Risparmio 12 mesi</div>
+        <div class="cum-sum-v">~&euro;569K</div>
+        <div class="cum-sum-d">Solo da disintermediazione progressiva OTA &mdash; conservativo</div>
       </div>
       <div class="cum-sum" style="border-left-color:var(--brand)">
-        <div class="cum-sum-l">Net cumulativo</div>
-        <div class="cum-sum-v">+&euro;1,29M</div>
-        <div class="cum-sum-d">Senza contare benefici indiretti (+€745K su 2 anni)</div>
+        <div class="cum-sum-l">Net cumulativo a fine piano</div>
+        <div class="cum-sum-v">+&euro;209K</div>
+        <div class="cum-sum-d">Senza contare benefici indiretti (~&euro;372K/anno aggiuntivi). <em>Proiezione anno 2: net &gt; +&euro;1M se il piano continua.</em></div>
       </div>
     </div>
   </div>
@@ -1139,7 +1178,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
 <section class="sec bg-alt" id="s-patto">
   <div class="s-tag"><span style="color:var(--brand);font-weight:500">10</span> &middot; Trasparenza</div>
   <h2 class="s-h">Cosa &egrave; incluso, <em>cosa &egrave; fuori scope.</em></h2>
-  <p class="s-lead">La condizione perch&eacute; una partnership funzioni per due anni e oltre &egrave; una sola: nessuna ambiguit&agrave; iniziale. Ecco esattamente cosa entra nel retainer mensile e cosa, per scelta esplicita, resta fuori &mdash; o perch&eacute; &egrave; competenza di altri partner BZAR, o perch&eacute; ha natura progettuale e va quotata a parte.</p>
+  <p class="s-lead">La condizione perch&eacute; una partnership funzioni per 12 mesi e oltre &egrave; una sola: nessuna ambiguit&agrave; iniziale. Ecco esattamente cosa entra nel retainer mensile e cosa, per scelta esplicita, resta fuori &mdash; o perch&eacute; &egrave; competenza di altri partner BZAR, o perch&eacute; ha natura progettuale e va quotata a parte.</p>
 
   <div class="patto-grid">
     <div class="patto-side in">

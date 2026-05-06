@@ -161,7 +161,46 @@ body{background:var(--bg);color:var(--dark);font-family:'Poppins',sans-serif;fon
 .ci-icon{font-size:1.1rem;color:var(--brand);flex-shrink:0;margin-top:1px}
 .ci-text{font-size:12px;color:var(--mid);line-height:1.65}
 .ci-text strong{color:var(--ink)}
+.hero-counts{display:flex;gap:2.5rem;margin-top:2.5rem;flex-wrap:wrap}
+.hc-v{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.03em}
+.hc-l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-top:.2rem;max-width:160px;line-height:1.4}
 </style>
+</head>
+<body>
+<div id="cur"></div>
+<header class="topbar">
+  <div class="tb-l">
+    <span class="tb-brand">BZAR Hotels</span>
+    <div class="tb-sep"></div>
+    <img src="https://www.ribrainstudio.com/wp-content/uploads/2025/01/Logo_ribrain_Nero.svg" alt="Ribrain" class="tb-rlogo">
+  </div>
+  <span class="tb-c">Cruscotto Strategico &middot; Mappa del Momento</span>
+  <div class="tb-r">
+    <span class="tb-date">Aprile 2026</span>
+    <span class="tb-conf">Confidenziale</span>
+    <button class="rb-ham" id="rbHamBtn" aria-label="Apri menu"><span class="h1"></span><span class="h2"></span><span class="h3"></span></button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-noise" aria-hidden="true"></div>
+  <div class="hero-ghost" aria-hidden="true">M5</div>
+  <div class="hero-body">
+    <div class="hero-tag" id="htag">M5 &mdash; Mappa del Momento</div>
+    <h1 class="hero-h1">
+      <span id="hl1">Quattro condizioni</span><br>
+      <span id="hl2">allineate.</span><br>
+      <span id="hl3"><em>Adesso.</em></span>
+    </h1>
+    <p class="hero-sub" id="hsub">Mercato in crescita. Brand con identit&agrave; definita. Digitale ancora vergine. Risorse operative pronte. Maggio 2026 &egrave; il punto di convergenza che non si presenta due volte nella stessa forma.</p>
+    <div class="hero-counts" id="hcounts">
+      <div><div class="hc-v">4</div><div class="hc-l">Condizioni allineate</div></div>
+      <div><div class="hc-v">1</div><div class="hc-l">Finestra temporale</div></div>
+      <div><div class="hc-v">0</div><div class="hc-l">Ragioni per aspettare</div></div>
+      <div><div class="hc-v">M5</div><div class="hc-l">Configuratore OTA</div></div>
+    </div>
+  </div>
+</section>
 
 <script>
 (function(){

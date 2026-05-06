@@ -338,6 +338,20 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
 /* Stats grid */
 .ent-stats{margin-top:2rem}
 .ent-stats-tit{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);font-weight:500;margin-bottom:1.1rem}
+
+/* ═══ AU MEDIA GALLERY ═══ */
+.au-media{margin-top:2.5rem;margin-bottom:2.5rem}
+.au-media-tit{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);font-weight:500;margin-bottom:1.1rem}
+.au-media-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:220px 220px;gap:.85rem}
+@media(max-width:880px){.au-media-grid{grid-template-columns:1fr 1fr;grid-template-rows:200px 200px 200px}}
+@media(max-width:540px){.au-media-grid{grid-template-columns:1fr;grid-template-rows:repeat(5,180px)}}
+.au-tile{position:relative;border-radius:12px;overflow:hidden;background:#1a1410;border:.5px solid rgba(117,88,71,.1)}
+.au-tile.tile-hero{grid-column:1;grid-row:1 / 3}
+@media(max-width:880px){.au-tile.tile-hero{grid-column:1 / -1;grid-row:1}}
+@media(max-width:540px){.au-tile.tile-hero{grid-column:1;grid-row:1}}
+.au-tile img,.au-tile video{width:100%;height:100%;object-fit:cover;display:block}
+.au-tile-cap{position:absolute;bottom:0;left:0;right:0;padding:.95rem 1rem .85rem;background:linear-gradient(to top,rgba(0,0,0,.78) 0%,rgba(0,0,0,.55) 50%,transparent 100%);color:#fff;font-size:11px;line-height:1.45;letter-spacing:.01em;font-family:"Poppins",sans-serif;font-weight:400;pointer-events:none}
+.au-tile-cap strong{color:rgba(200,168,141,.95);font-weight:600;display:block;font-size:9px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.2rem;font-family:"Poppins",sans-serif}
 .ent-stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem}
 @media(max-width:780px){.ent-stat-grid{grid-template-columns:1fr 1fr}}
 .ent-stat{padding:1.1rem 1.1rem;background:#fff;border:.5px solid rgba(117,88,71,.1);border-radius:10px;display:flex;flex-direction:column;gap:.4rem}
@@ -359,6 +373,18 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
 .ent-insight-q em{font-style:normal;color:var(--ink);font-weight:500}
 .ent-insight-d{font-size:12.5px;color:var(--mid);line-height:1.7}
 .ent-insight-d strong{color:var(--dark);font-weight:500}
+
+/* Dato shock 330h dentro insight */
+.ent-insight-shock{margin-top:1.5rem;padding-top:1.5rem;border-top:.5px dashed rgba(200,168,141,.4);display:grid;grid-template-columns:auto 1fr;gap:1.75rem;align-items:center}
+@media(max-width:680px){.ent-insight-shock{grid-template-columns:1fr;gap:1rem;text-align:center}}
+.eis-num{font-family:"Afacad Flux",sans-serif;font-weight:300;color:var(--ink);line-height:.85;letter-spacing:-.05em;display:flex;align-items:flex-start;gap:.05em}
+.eis-num::before{content:"~";font-size:clamp(1.6rem,3vw,2.2rem);color:var(--brand);font-weight:400;align-self:flex-start;margin-top:.5em}
+.eis-big{font-size:clamp(4.5rem,10vw,7rem);line-height:.85}
+.eis-unit{font-size:clamp(1.8rem,3.5vw,2.6rem);color:var(--mid);font-weight:400;align-self:flex-end;margin-bottom:.3em;margin-left:.05em}
+.eis-body{}
+.eis-h{font-family:"Afacad Flux",sans-serif;font-size:clamp(1.05rem,2.2vw,1.25rem);font-weight:500;color:var(--dark);line-height:1.3;margin-bottom:.55rem;letter-spacing:-.015em}
+.eis-d{font-size:12.5px;color:var(--mid);line-height:1.7}
+.eis-d strong{color:var(--dark);font-weight:500}
 
 </style>
 </head>
@@ -408,7 +434,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
   <div class="s-num">01 / 08</div>
   <div class="s-tag">Il team</div>
   <h2 class="s-h">Due unità, <em>un solo team</em>. Strategia da Napoli, produzione da Roma.</h2>
-  <p class="s-lead">Ribrain Studio gestisce strategia, copy, community e <strong>4 TikTok Lift programmati nell&rsquo;anno</strong>; Snacky Agency &mdash; la nostra unit romana &mdash; produce foto e video sul campo, struttura per struttura, con vicinanza fisica alle 32 sedi di Roma. <strong>L&rsquo;ADV resta in capo al team interno BZAR</strong> (Meta, Google, budget allocation): ci coordiniamo con la persona interna che lo gestisce. Nessun handover esterno, nessun freelance volante: lo stesso team per 24 mesi.</p>
+  <p class="s-lead">Ribrain Studio gestisce strategia, copy, community e <strong>4 TikTok Lift programmati nell&rsquo;anno</strong>; Snacky Agency &mdash; la nostra unit romana &mdash; produce foto e video sul campo, struttura per struttura, con vicinanza fisica alle 32 sedi di Roma. <strong>L&rsquo;ADV resta in capo al team interno BZAR</strong> (Meta, Google, budget allocation): ci coordiniamo con la persona interna che lo gestisce. Nessun handover esterno, nessun freelance volante: lo stesso team per 12 mesi.</p>
 
   <div class="team-slide-wrap" id="teamSlide">
     <div class="team-viz">
@@ -486,7 +512,7 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
     </div>
     <div class="team-slide-cap">
       <span class="team-slide-l">Team operativo &middot; 13 persone dedicate</span>
-      <span class="team-slide-t">Stabili per 24 mesi &mdash; nessun handover, nessun freelance volante</span>
+      <span class="team-slide-t">Stabili per 12 mesi &mdash; nessun handover, nessun freelance volante</span>
     </div>
   </div>
 
@@ -569,6 +595,63 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
       </div>
     </div>
 
+    <!-- AU MEDIA GALLERY -->
+    <div class="au-media">
+      <div class="au-media-tit">Dentro American Uncle &middot; Foto, video, team</div>
+      <div class="au-media-grid">
+
+        <!-- HERO: GIF team grande a sinistra -->
+        <div class="au-tile tile-hero">
+          <img src="https://americanuncle.it/cdn/shop/files/Gif_Team_Chi_Siamo.gif?v=1717423001&width=1080" alt="American Uncle team">
+          <div class="au-tile-cap">
+            <strong>Il team al lavoro</strong>
+            La squadra che ha costruito il brand &mdash; in HQ a Frosolone, ogni giorno
+          </div>
+        </div>
+
+        <!-- Video 1: dietro le quinte -->
+        <div class="au-tile">
+          <video autoplay muted loop playsinline>
+            <source src="https://americanuncle.it/cdn/shop/videos/c/vp/b0e6842543c64b9c8257857ad1a02fca/b0e6842543c64b9c8257857ad1a02fca.HD-1080p-3.3Mbps-82080850.mp4?v=0" type="video/mp4">
+          </video>
+          <div class="au-tile-cap">
+            <strong>Logistica proprietaria</strong>
+            500K ordini spediti dalla nostra sede
+          </div>
+        </div>
+
+        <!-- Foto packaging Wunnie -->
+        <div class="au-tile">
+          <img src="https://raw.githubusercontent.com/michele-riccio/bzarhotel/main/AU/au1.jpg" alt="American Uncle product">
+          <div class="au-tile-cap">
+            <strong>Linea Wunnie</strong>
+            Brand proprietario &middot; design e art direction interna
+          </div>
+        </div>
+
+        <!-- Foto franchising -->
+        <div class="au-tile">
+          <img src="https://americanuncle.it/cdn/shop/files/Foto_Franchising_2.jpg?v=1776417005" alt="American Uncle franchising">
+          <div class="au-tile-cap">
+            <strong>Franchising 2026</strong>
+            Espansione retail con format dedicato
+          </div>
+        </div>
+
+        <!-- Video 2: prodotto -->
+        <div class="au-tile">
+          <video autoplay muted loop playsinline>
+            <source src="https://americanuncle.it/cdn/shop/videos/c/vp/e0c5e441f4cd4f00b149f2d8e51852a4/e0c5e441f4cd4f00b149f2d8e51852a4.HD-1080p-3.3Mbps-82080851.mp4?v=0" type="video/mp4">
+          </video>
+          <div class="au-tile-cap">
+            <strong>Content first</strong>
+            +1M follower costruiti senza un solo annuncio acquistato
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <!-- NUMERI B2C -->
     <div class="ent-stats">
       <div class="ent-stats-tit">Numeri American Uncle &middot; B2C</div>
@@ -613,8 +696,17 @@ body{background:var(--bg);color:var(--dark);font-family:"Poppins",sans-serif;fon
 
     <!-- INSIGHT CHIUSURA -->
     <div class="ent-insight">
-      <p class="ent-insight-q">&ldquo;Quando diciamo che un piano social &egrave; un investimento e non un costo, non lo diciamo perch&eacute; &egrave; il nostro lavoro dirlo. Lo diciamo perch&eacute; <em>abbiamo costruito 1 milione di follower senza comprare un singolo annuncio</em> nei primi due anni. Conosciamo quella pazienza. Sappiamo cosa produce.&rdquo;</p>
-      <p class="ent-insight-d">Portare questa prospettiva al vostro tavolo significa che ogni cosa che vi raccomandiamo passa prima da una domanda semplice che ci facciamo internamente: <strong>&ldquo;Lo faremmo sulla nostra azienda, con i nostri soldi?&rdquo;</strong> Se la risposta &egrave; s&igrave;, ve lo proponiamo. Se &egrave; no, non ve lo vendiamo.</p>
+      <p class="ent-insight-q">&ldquo;Quando vi diciamo che un piano social &egrave; un investimento, sappiamo cosa significa. Su American Uncle abbiamo investito mattone su mattone, con la nostra pazienza e i nostri soldi, per anni prima di vedere il ritorno. <em>Non &egrave; teoria. &Egrave; quello che ci ha portato qui.&rdquo;</em></p>
+      <p class="ent-insight-d">Ogni cosa che vi raccomandiamo passa prima da una domanda che ci facciamo internamente: <strong>&ldquo;Lo faremmo sulla nostra azienda, con i nostri soldi?&rdquo;</strong> Se la risposta &egrave; s&igrave;, ve lo proponiamo. Se &egrave; no, non ve lo vendiamo.</p>
+
+      <!-- DATO SHOCK ORE -->
+      <div class="ent-insight-shock">
+        <div class="eis-num"><span class="eis-big">330</span><span class="eis-unit">h</span></div>
+        <div class="eis-body">
+          <div class="eis-h">Per metterla a regime, ogni mese.</div>
+          <div class="eis-d">Non &egrave; un retainer su carta &mdash; &egrave; <strong>la mole reale di lavoro</strong> che si attiva ogni mese: strategia, copy su 13 account, community 5gg/7, brief shooting, editing, scheduling, analytics, crisis presidio, AI cycle. Per dare un riferimento, &egrave; <strong>l&rsquo;equivalente di due full-time dedicati esclusivamente a BZAR</strong> &mdash; ma distribuiti su un team di nove specialisti, ognuno nel suo verticale. La macchina non gira da sola. La facciamo girare.</div>
+        </div>
+      </div>
     </div>
 
   </div>
